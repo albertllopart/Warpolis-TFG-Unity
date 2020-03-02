@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Base_cani
   - Base_hipster
+  - Factory_cani
+  - Factory_hipster
+  - Factory_neutral
   layers:
   - Default
   - TransparentFX
