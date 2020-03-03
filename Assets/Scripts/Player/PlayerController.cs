@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SubscribeToEvents();
+
         keyDownCounterW = 0.0f;
         keyDownCounterA = 0.0f;
         keyDownCounterS = 0.0f;
@@ -43,34 +45,19 @@ public class PlayerController : MonoBehaviour
         Quit();
     }
 
+    void OnEnable()
+    {
+
+    }
+    void OnDisable()
+    {
+        
+    }
+
     // Moviment
     void Move()
     {
-        // moviment simple
-
-        if (Input.GetKeyDown("w"))
-        {
-            MovePlayerUp();
-        }
-        if (Input.GetKeyDown("a"))
-        {
-            MovePlayerLeft();
-        }
-        if (Input.GetKeyDown("s"))
-        {
-            MovePlayerDown();
-        }
-        if (Input.GetKeyDown("d"))
-        {
-            MovePlayerRight();
-        }
-
-        // moviment millorat
-
-        checkEnhancedW();
-        checkEnhancedA();
-        checkEnhancedS();
-        checkEnhancedD();
+        //he traslladat la major part del moviment a events. El que hi he deixat no pot escoltar events perquè rep paràmetres
 
         if (Input.GetKeyUp("w"))
         {
@@ -281,8 +268,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown("o"))
         {
-            Vector2 from = gameObject.transform.position;
-            Vector3 to = gameObject.transform.position;
+            Vector2 from = transform.position;
+            Vector2 to = transform.position;
 
             RaycastHit2D result = Physics2D.Linecast(from, to);
 
@@ -307,5 +294,20 @@ public class PlayerController : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+
+    void SubscribeToEvents()
+    {
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w.AddListener(checkEnhancedW);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(MovePlayerUp);
+
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a.AddListener(checkEnhancedA);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.AddListener(MovePlayerLeft);
+
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s.AddListener(checkEnhancedS);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(MovePlayerDown);
+
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d.AddListener(checkEnhancedD);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.AddListener(MovePlayerRight);
     }
 }
