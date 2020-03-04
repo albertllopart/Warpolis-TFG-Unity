@@ -42,16 +42,15 @@ public class PlayerController : MonoBehaviour
         Move();
         Interact();
         LogPosition();
-        Quit();
     }
 
-    void OnEnable()
+    public void MyOnEnable()
     {
-
+        SubscribeToEvents();
     }
-    void OnDisable()
+    public void MyOnDisable()
     {
-        
+        UnsubscribeFromEvents();
     }
 
     // Moviment
@@ -288,26 +287,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Quit()
-    {
-        if (Input.GetKeyDown("escape"))
-        {
-            Application.Quit();
-        }
-    }
-
     void SubscribeToEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w.AddListener(checkEnhancedW);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(MovePlayerUp);
+        GetComponentInParent<Controls>().keyboard_w.AddListener(checkEnhancedW);
+        GetComponentInParent<Controls>().keyboard_w_down.AddListener(MovePlayerUp);
 
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a.AddListener(checkEnhancedA);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.AddListener(MovePlayerLeft);
+        GetComponentInParent<Controls>().keyboard_a.AddListener(checkEnhancedA);
+        GetComponentInParent<Controls>().keyboard_a_down.AddListener(MovePlayerLeft);
 
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s.AddListener(checkEnhancedS);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(MovePlayerDown);
+        GetComponentInParent<Controls>().keyboard_s.AddListener(checkEnhancedS);
+        GetComponentInParent<Controls>().keyboard_s_down.AddListener(MovePlayerDown);
 
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d.AddListener(checkEnhancedD);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.AddListener(MovePlayerRight);
+        GetComponentInParent<Controls>().keyboard_d.AddListener(checkEnhancedD);
+        GetComponentInParent<Controls>().keyboard_d_down.AddListener(MovePlayerRight);
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        GetComponentInParent<Controls>().keyboard_w.RemoveListener(checkEnhancedW);
+        GetComponentInParent<Controls>().keyboard_w_down.RemoveListener(MovePlayerUp);
+
+        GetComponentInParent<Controls>().keyboard_a.RemoveListener(checkEnhancedA);
+        GetComponentInParent<Controls>().keyboard_a_down.RemoveListener(MovePlayerLeft);
+
+        GetComponentInParent<Controls>().keyboard_s.RemoveListener(checkEnhancedS);
+        GetComponentInParent<Controls>().keyboard_s_down.RemoveListener(MovePlayerDown);
+
+        GetComponentInParent<Controls>().keyboard_d.RemoveListener(checkEnhancedD);
+        GetComponentInParent<Controls>().keyboard_d_down.RemoveListener(MovePlayerRight);
     }
 }

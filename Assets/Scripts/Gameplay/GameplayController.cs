@@ -52,8 +52,16 @@ public class GameplayController : MonoBehaviour
         {
             case PlayerState.NAVIGATING:
                 //interactuar amb la casella
+
+                //player
+                transform.Find("Player").GetComponent<PlayerController>().MyOnDisable();
                 transform.Find("Player").gameObject.SetActive(false);
+
+                //menú
                 GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(true);
+                GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
+
+                //propi
                 OpenMenuOptions.Invoke();
                 playerState = PlayerState.OPTIONS;
                 break;
@@ -82,8 +90,16 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.OPTIONS:
                 //interactuar amb el menú
+
+                //menú
+                GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
                 GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(false);
+
+                //player
                 transform.Find("Player").gameObject.SetActive(true);
+                transform.Find("Player").GetComponent<PlayerController>().MyOnEnable();
+
+                //propi
                 CloseMenuOptions.Invoke();
                 playerState = PlayerState.NAVIGATING;
                 break;

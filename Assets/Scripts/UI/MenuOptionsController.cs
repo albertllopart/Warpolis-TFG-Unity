@@ -8,21 +8,20 @@ public class MenuOptionsController : MonoBehaviour
     public GameObject buttonQuit;
     public GameObject buttonEndTurn;
 
-    private List<GameObject> buttons;
+    public List<GameObject> buttons;
 
     private uint xOffset = 2;
     private uint yOffset = 1;
 
-    private GameObject selectedButton;
+    public GameObject selectedButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        SubscribeToEvents();
         AddButtons();
         Collapse();
-        SelectButton(buttonOptions);
-        OnActivate();
+
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,7 +30,7 @@ public class MenuOptionsController : MonoBehaviour
         
     }
 
-    void OnActivate()
+    public void MyOnEnable()
     {
         //actualitzar la posició segons la càmera
         Vector2 cameraTopLeft = Camera.main.GetComponent<CameraController>().GetTopLeftCorner();
@@ -39,15 +38,36 @@ public class MenuOptionsController : MonoBehaviour
 
         //seleccionar primer botó de la llista
         SelectButton(0);
+
+        //cridar tots els MyOnEnable dels fills que ho necessitin
+        transform.Find("Cursor").GetComponent<Cursor>().MyOnEnable();
+
+        SubscribeToEvents();
+    }
+
+    public void MyOnDisable()
+    {
+        UnsubscribeFromEvents();
+
+        //cridar tots els MyOnDisable dels fills que ho necessitin
+        transform.Find("Cursor").GetComponent<Cursor>().MyOnDisable();
     }
 
     void AddButtons()
     {
-        buttons = new List<GameObject>();
+        if (buttons.Count == 0)
+        {
+            buttons = new List<GameObject>();
 
-        buttons.Add(buttonOptions);
-        buttons.Add(buttonQuit);
-        buttons.Add(buttonEndTurn);
+            buttons.Add(buttonOptions);
+            buttonOptions.GetComponent<MyButton>().button = new MyButtonOptions();
+
+            buttons.Add(buttonQuit);
+            buttonQuit.GetComponent<MyButton>().button = new MyButtonQuit();
+
+            buttons.Add(buttonEndTurn);
+            buttonEndTurn.GetComponent<MyButton>().button = new MyButtonEndTurn();
+        }
     }
 
     void Collapse()
@@ -98,8 +118,18 @@ public class MenuOptionsController : MonoBehaviour
         return selectedButton;
     }
 
+    public void PressSelectedButton()
+    {
+        selectedButton.GetComponent<MyButton>().button.OnClick();
+    }
+
     void SubscribeToEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().OpenMenuOptions.AddListener(OnActivate);
+        transform.Find("Cursor").GetComponent<Cursor>().sendO.AddListener(PressSelectedButton);
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        transform.Find("Cursor").GetComponent<Cursor>().sendO.RemoveListener(PressSelectedButton);
     }
 }

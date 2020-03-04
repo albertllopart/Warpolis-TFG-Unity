@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Cursor : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class Cursor : MonoBehaviour
     float animationTimer = 0.0f;
     uint currentFrame = 0;
 
+    public UnityEvent sendO;
+
     // Start is called before the first frame update
     void Start()
     {
-        AdjustOffset();
+        sendO = new UnityEvent();
     }
 
     // Update is called once per frame
@@ -24,16 +27,18 @@ public class Cursor : MonoBehaviour
             Animate();
         }
 
-        if (Input.GetKeyDown("r"))
-        {
-            MoveUp();
-        }
-        if (Input.GetKeyDown("f"))
-        {
-            MoveDown();
-        }
-
         DrawLines();
+    }
+
+    public void MyOnEnable()
+    {
+        Reposition();
+        SubscribeToEvents();
+    }
+
+    public void MyOnDisable()
+    {
+        UnsubscribeFromEvents();
     }
 
     void Animate()
@@ -163,12 +168,25 @@ public class Cursor : MonoBehaviour
     void DrawLines()
     {
         Vector2 from = transform.position;
-        Vector2 up = from + new Vector2(0, 1);
         Vector2 right = from + new Vector2(2, 0);
-        Vector2 down = from + new Vector2(0, -1);
-
-        Debug.DrawLine(from, up, Color.green);
         Debug.DrawLine(from, right, Color.green);
-        Debug.DrawLine(from, down, Color.green);
+    }
+
+    void SendO()
+    {
+        sendO.Invoke();
+    }
+    void SubscribeToEvents()
+    {
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(MoveUp); // W
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(MoveDown); // S
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_o_down.AddListener(SendO); // O
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.RemoveListener(MoveUp); // W
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.RemoveListener(MoveDown); // S
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_o_down.RemoveListener(SendO); // O
     }
 }
