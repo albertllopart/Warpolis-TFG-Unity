@@ -14,6 +14,9 @@ public class MyButton : MonoBehaviour
 {
     public MyButtonTemplate button;
 
+    public Sprite idle;
+    public Sprite highlighted;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +29,13 @@ public class MyButton : MonoBehaviour
 
     }
 
-    public virtual void OnHighlight()
+    public void OnHighlight()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = highlighted;
+    }
 
+    public void OnIdle()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = idle;
     }
 }

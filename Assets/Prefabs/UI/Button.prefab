@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7925741534278167026}
   - component: {fileID: 7925741534278167027}
   - component: {fileID: 5442257848759404307}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22d43da88a7b7441944980ba5d79317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idle: {fileID: 2573505477054156750, guid: 55dfd2b975da79042a869a93dc09798f, type: 3}
-  highlighted: {fileID: -2387036605835335327, guid: fab4ab9c1885437499353b33eff1f6c5,
-    type: 3}
+  idle: {fileID: 0}
+  highlighted: {fileID: 0}
 --- !u!61 &5442257848759404307
 BoxCollider2D:
   m_ObjectHideFlags: 0

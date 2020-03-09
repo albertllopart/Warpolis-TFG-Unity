@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        Interact();
         LogPosition();
     }
 
@@ -263,18 +262,25 @@ public class PlayerController : MonoBehaviour
 
     // Interacció
 
-    void Interact()
+    public bool Interact()
     {
-        if (Input.GetKeyDown("o"))
+        Vector2 from = transform.position + new Vector3(0.5f, -0.5f, 0);
+        Vector2 to = from;
+
+        RaycastHit2D result;
+
+        if (GetComponentInParent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
+            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_buildings"));
+        else
+            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_buildings"));
+
+        if (result.collider != null)
         {
-            Vector2 from = transform.position;
-            Vector2 to = transform.position;
-
-            RaycastHit2D result = Physics2D.Linecast(from, to);
-
-            if (result.collider != null)
-                Debug.Log(result.collider.gameObject.name);
+            Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
+            return true;
         }
+
+        return false;
     }
 
     // Debug

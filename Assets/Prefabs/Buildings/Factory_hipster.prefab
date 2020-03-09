@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5439610511243797024}
   - component: {fileID: 5439610511243797031}
   - component: {fileID: 5439610511243797030}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Factory_hipster
   m_TagString: Factory_hipster
   m_Icon: {fileID: 0}

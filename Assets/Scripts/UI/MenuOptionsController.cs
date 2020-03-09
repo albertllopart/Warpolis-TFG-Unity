@@ -40,7 +40,7 @@ public class MenuOptionsController : MonoBehaviour
         SelectButton(0);
 
         //cridar tots els MyOnEnable dels fills que ho necessitin
-        transform.Find("Cursor").GetComponent<Cursor>().MyOnEnable();
+        transform.Find("Cursor_options").GetComponent<CursorOptions>().MyOnEnable();
 
         SubscribeToEvents();
     }
@@ -50,7 +50,7 @@ public class MenuOptionsController : MonoBehaviour
         UnsubscribeFromEvents();
 
         //cridar tots els MyOnDisable dels fills que ho necessitin
-        transform.Find("Cursor").GetComponent<Cursor>().MyOnDisable();
+        transform.Find("Cursor_options").GetComponent<CursorOptions>().MyOnDisable();
     }
 
     void AddButtons()
@@ -125,11 +125,11 @@ public class MenuOptionsController : MonoBehaviour
 
     void SubscribeToEvents()
     {
-        transform.Find("Cursor").GetComponent<Cursor>().sendO.AddListener(PressSelectedButton);
+        transform.Find("Cursor_options").GetComponent<CursorOptions>().sendO.AddListener(PressSelectedButton);
     }
 
     void UnsubscribeFromEvents()
     {
-        transform.Find("Cursor").GetComponent<Cursor>().sendO.RemoveListener(PressSelectedButton);
+        transform.Find("Cursor_options").GetComponent<CursorOptions>().sendO.RemoveListener(PressSelectedButton);
     }
 }

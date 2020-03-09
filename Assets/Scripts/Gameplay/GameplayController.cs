@@ -7,7 +7,7 @@ public class GameplayController : MonoBehaviour
 {
     public enum PlayerState
     {
-        NAVIGATING, OPTIONS, INTERACTING
+        NAVIGATING, OPTIONS, INTERACTING, SHOP
     };
 
     public enum Turn
@@ -17,6 +17,7 @@ public class GameplayController : MonoBehaviour
 
     private PlayerState playerState;
     private Turn turn;
+    public uint pseudoTurn = 0;
 
     //events
     public UnityEvent OpenMenuOptions;
@@ -37,7 +38,14 @@ public class GameplayController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (pseudoTurn == 0)
+            turn = Turn.CANI;
+        else
+            turn = Turn.HIPSTER;
+    }
+    public Turn GetTurn()
+    {
+        return turn;
     }
 
     void SubscribeToEvents()
@@ -51,19 +59,25 @@ public class GameplayController : MonoBehaviour
         switch(playerState)
         {
             case PlayerState.NAVIGATING:
-                //interactuar amb la casella
+                //cridar funcio interact de player i mirar què retorna
+                if (transform.Find("Player").GetComponent<PlayerController>().Interact())
+                {
+                    DisablePlayer();
+                    EnableMenuShop();
+                    playerState = PlayerState.SHOP;
+                }
+                else
+                {
+                    //player
+                    DisablePlayer();
 
-                //player
-                transform.Find("Player").GetComponent<PlayerController>().MyOnDisable();
-                transform.Find("Player").gameObject.SetActive(false);
+                    //menú
+                    EnableMenuOptions();
 
-                //menú
-                GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(true);
-                GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
+                    //propi
+                    playerState = PlayerState.OPTIONS;
+                }
 
-                //propi
-                OpenMenuOptions.Invoke();
-                playerState = PlayerState.OPTIONS;
                 break;
 
             case PlayerState.INTERACTING:
@@ -89,20 +103,59 @@ public class GameplayController : MonoBehaviour
                 break;
 
             case PlayerState.OPTIONS:
-                //interactuar amb el menú
-
-                //menú
-                GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
-                GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(false);
-
-                //player
-                transform.Find("Player").gameObject.SetActive(true);
-                transform.Find("Player").GetComponent<PlayerController>().MyOnEnable();
+                
+                DisableMenuOptions();
+                EnablePlayer();
 
                 //propi
-                CloseMenuOptions.Invoke();
                 playerState = PlayerState.NAVIGATING;
                 break;
+
+            case PlayerState.SHOP:
+
+                DisableMenuShop();
+                EnablePlayer();
+
+                //propi
+                playerState = PlayerState.NAVIGATING;
+
+                break;
         }
+    }
+
+    void EnablePlayer()
+    {
+        transform.Find("Player").gameObject.SetActive(true);
+        transform.Find("Player").GetComponent<PlayerController>().MyOnEnable();
+    }
+
+    void DisablePlayer()
+    {
+        transform.Find("Player").GetComponent<PlayerController>().MyOnDisable();
+        transform.Find("Player").gameObject.SetActive(false);
+    }
+
+    void EnableMenuOptions()
+    {
+        GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(true);
+        GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
+    }
+
+    void DisableMenuOptions()
+    {
+        GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
+        GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(false);
+    }
+
+    void EnableMenuShop()
+    {
+        GameObject.Find("UI Controller").transform.Find("Menu_shop").gameObject.SetActive(true);
+        GameObject.Find("UI Controller").transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnEnable();
+    }
+
+    void DisableMenuShop()
+    {
+        GameObject.Find("UI Controller").transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnDisable();
+        GameObject.Find("UI Controller").transform.Find("Menu_shop").gameObject.SetActive(false);
     }
 }

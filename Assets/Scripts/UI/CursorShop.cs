@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Cursor : MonoBehaviour
+public class CursorShop : MonoBehaviour
 {
-    public float animationOffset = 1/16; // es mourà 1 píxel ja que treballem amb unitats de 16 (16 píxels són 1 a la transform)
+    public float animationOffset = 1.0f / 16.0f; // es mourà 1 píxel ja que treballem amb unitats de 16 (16 píxels són 1 a la transform)
     public float animationSpeed = 0.25f;
 
     float animationTimer = 0.0f;
@@ -22,7 +22,7 @@ public class Cursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isActiveAndEnabled)
+        if (isActiveAndEnabled)
         {
             Animate();
         }
@@ -65,19 +65,19 @@ public class Cursor : MonoBehaviour
     public void MoveUp()
     {
         bool moved = false;
-        int index = transform.GetComponentInParent<MenuOptionsController>().GetButtonList().IndexOf(transform.GetComponentInParent<MenuOptionsController>().GetSelectedButton());
+        int index = transform.GetComponentInParent<MenuShopController>().GetButtonList().IndexOf(transform.GetComponentInParent<MenuShopController>().GetSelectedButton());
 
         if (index != -1)
         {
             if (index == 0) // el botó és el de dalt de tot
             {
-                transform.GetComponentInParent<MenuOptionsController>().SelectButton(
-                    transform.GetComponentInParent<MenuOptionsController>().GetButtonList().Count - 1);
+                transform.GetComponentInParent<MenuShopController>().SelectButton(
+                    transform.GetComponentInParent<MenuShopController>().GetButtonList().Count - 1);
                 moved = true;
             }
             else
             {
-                transform.GetComponentInParent<MenuOptionsController>().SelectButton(index - 1);
+                transform.GetComponentInParent<MenuShopController>().SelectButton(index - 1);
                 moved = true;
             }
         }
@@ -91,18 +91,18 @@ public class Cursor : MonoBehaviour
     public void MoveDown()
     {
         bool moved = false;
-        int index = transform.GetComponentInParent<MenuOptionsController>().GetButtonList().IndexOf(transform.GetComponentInParent<MenuOptionsController>().GetSelectedButton());
+        int index = transform.GetComponentInParent<MenuShopController>().GetButtonList().IndexOf(transform.GetComponentInParent<MenuShopController>().GetSelectedButton());
 
         if (index != -1)
         {
-            if (index == transform.GetComponentInParent<MenuOptionsController>().GetButtonList().Count - 1) // el botó és el de baix de tot
+            if (index == transform.GetComponentInParent<MenuShopController>().GetButtonList().Count - 1) // el botó és el de baix de tot
             {
-                transform.GetComponentInParent<MenuOptionsController>().SelectButton(0);
+                transform.GetComponentInParent<MenuShopController>().SelectButton(0);
                 moved = true;
             }
             else
             {
-                transform.GetComponentInParent<MenuOptionsController>().SelectButton(index + 1);
+                transform.GetComponentInParent<MenuShopController>().SelectButton(index + 1);
                 moved = true;
             }
         }
@@ -156,13 +156,13 @@ public class Cursor : MonoBehaviour
 
     void Reposition()
     {
-        transform.position = transform.GetComponentInParent<MenuOptionsController>().GetSelectedButton().transform.position + new Vector3(-1, 0, 0);
+        transform.position = transform.GetComponentInParent<MenuShopController>().GetSelectedButton().transform.position + new Vector3(-14f/16f, 0, 0);
         AdjustOffset();
     }
 
     void AdjustOffset()
     {
-        transform.position += new Vector3(0, -13f / 16f, 0);
+        transform.position += new Vector3(0, -10f / 16f, 0);
     }
 
     void DrawLines()
