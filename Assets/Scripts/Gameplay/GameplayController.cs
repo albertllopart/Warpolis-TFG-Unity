@@ -20,16 +20,18 @@ public class GameplayController : MonoBehaviour
     public uint pseudoTurn = 0;
 
     //events
-    public UnityEvent OpenMenuOptions;
-    public UnityEvent CloseMenuOptions;
+    public UnityEvent openMenuOptions;
+    public UnityEvent closeMenuOptions;
+    public UnityEvent deselectUnit;
 
     // Start is called before the first frame update
     void Start()
     {
         SubscribeToEvents();
 
-        OpenMenuOptions = new UnityEvent();
-        CloseMenuOptions = new UnityEvent();
+        openMenuOptions = new UnityEvent();
+        closeMenuOptions = new UnityEvent();
+        deselectUnit = new UnityEvent();
 
         playerState = PlayerState.NAVIGATING;
         turn = Turn.CANI;
@@ -60,7 +62,11 @@ public class GameplayController : MonoBehaviour
         {
             case PlayerState.NAVIGATING:
                 //cridar funcio interact de player i mirar què retorna
-                if (transform.Find("Player").GetComponent<PlayerController>().Interact())
+                if (transform.Find("Player").GetComponent<PlayerController>().InteractUnits())
+                {
+                    playerState = PlayerState.INTERACTING;
+                }
+                else if(transform.Find("Player").GetComponent<PlayerController>().InteractBuildings())
                 {
                     DisablePlayer();
                     EnableMenuShop();
@@ -99,7 +105,11 @@ public class GameplayController : MonoBehaviour
                 break;
 
             case PlayerState.INTERACTING:
-                //interactuar amb la unitat
+
+                deselectUnit.Invoke();
+
+                //propi
+                playerState = PlayerState.NAVIGATING;
                 break;
 
             case PlayerState.OPTIONS:

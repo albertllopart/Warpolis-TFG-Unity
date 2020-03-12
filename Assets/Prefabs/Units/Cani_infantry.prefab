@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 666185830536341484}
   - component: {fileID: 666185830536341485}
   - component: {fileID: 666185830536341482}
+  - component: {fileID: 2265483240074278110}
   m_Layer: 11
   m_Name: Cani_infantry
-  m_TagString: Untagged
+  m_TagString: Unit_cani
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,3 +130,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2265483240074278110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666185830536341486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbad752209987f146bac4dc407e31ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementRange: 5
+  neutralCost: 1
+  containerCost: 1
+  lampCost: 2

@@ -9,6 +9,8 @@ TagManager:
   - Factory_cani
   - Factory_hipster
   - Factory_neutral
+  - Unit_cani
+  - Hipster_unit
   layers:
   - Default
   - TransparentFX

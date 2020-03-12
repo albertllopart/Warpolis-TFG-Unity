@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject selectedUnit;
+
     private float keyDownCounterW; //per calcular el temps que el botó porta premut
     private float keyDownCounterA;
     private float keyDownCounterS;
@@ -262,7 +264,34 @@ public class PlayerController : MonoBehaviour
 
     // Interacció
 
-    public bool Interact()
+    public bool InteractUnits()
+    {
+        Vector2 from = transform.position + new Vector3(0.5f, -0.5f, 0);
+        Vector2 to = from;
+
+        RaycastHit2D result;
+
+        if (GetComponentInParent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
+            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_units"));
+        else
+            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_units"));
+
+        if (result.collider != null)
+        {
+            Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
+
+            //seleccionar unitat
+            selectedUnit = result.collider.gameObject;
+
+            //cridar mètode OnSelected
+            selectedUnit.GetComponent<Unit>().OnSelected();
+
+            return true;
+        }
+
+        return false;
+    }
+    public bool InteractBuildings()
     {
         Vector2 from = transform.position + new Vector3(0.5f, -0.5f, 0);
         Vector2 to = from;
@@ -283,18 +312,50 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    void DeselectUnit()
+    {
+        selectedUnit.GetComponent<Unit>().OnDeselected();
+        selectedUnit = null;
+    }
+
     // Debug
 
     void LogPosition()
     {
         if (Input.GetKeyDown("f1"))
         {
-            Debug.Log(gameObject.transform.position);
+            MyTile tile = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y];
+            string tileType = "null";
+
+            switch(tile.type)
+            {
+                case MyTileType.NEUTRAL:
+                    tileType = "Neutral";
+                    break;
+
+                case MyTileType.ROAD:
+                    tileType = "Road";
+                    break;
+
+                case MyTileType.CONTAINER:
+                    tileType = "Container";
+                    break;
+
+                case MyTileType.LAMP:
+                    tileType = "Lamp";
+                    break;
+
+                case MyTileType.BUILDING:
+                    tileType = "Building";
+                    break;
+            }
+            Debug.Log("PlayerController::LogPosition - " + transform.position + " Tile info: " + tileType);
         }
     }
 
     void SubscribeToEvents()
     {
+        //controls
         GetComponentInParent<Controls>().keyboard_w.AddListener(checkEnhancedW);
         GetComponentInParent<Controls>().keyboard_w_down.AddListener(MovePlayerUp);
 
@@ -306,10 +367,14 @@ public class PlayerController : MonoBehaviour
 
         GetComponentInParent<Controls>().keyboard_d.AddListener(checkEnhancedD);
         GetComponentInParent<Controls>().keyboard_d_down.AddListener(MovePlayerRight);
+
+        //gameplay
+        GetComponentInParent<GameplayController>().deselectUnit.AddListener(DeselectUnit);
     }
 
     void UnsubscribeFromEvents()
     {
+        //controls
         GetComponentInParent<Controls>().keyboard_w.RemoveListener(checkEnhancedW);
         GetComponentInParent<Controls>().keyboard_w_down.RemoveListener(MovePlayerUp);
 
@@ -321,5 +386,8 @@ public class PlayerController : MonoBehaviour
 
         GetComponentInParent<Controls>().keyboard_d.RemoveListener(checkEnhancedD);
         GetComponentInParent<Controls>().keyboard_d_down.RemoveListener(MovePlayerRight);
+
+        //gameplay
+        GetComponentInParent<GameplayController>().deselectUnit.RemoveListener(DeselectUnit);
     }
 }
