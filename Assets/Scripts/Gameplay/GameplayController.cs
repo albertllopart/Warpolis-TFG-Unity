@@ -7,7 +7,7 @@ public class GameplayController : MonoBehaviour
 {
     public enum PlayerState
     {
-        NAVIGATING, OPTIONS, INTERACTING, SHOP
+        NAVIGATING, OPTIONS, INTERACTING, SHOP, WAITING
     };
 
     public enum Turn
@@ -15,7 +15,7 @@ public class GameplayController : MonoBehaviour
         CANI, HIPSTER
     };
 
-    private PlayerState playerState;
+    public PlayerState playerState;
     private Turn turn;
     public uint pseudoTurn = 0;
 
@@ -23,6 +23,7 @@ public class GameplayController : MonoBehaviour
     public UnityEvent openMenuOptions;
     public UnityEvent closeMenuOptions;
     public UnityEvent deselectUnit;
+    public UnityEvent moveUnit;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class GameplayController : MonoBehaviour
         openMenuOptions = new UnityEvent();
         closeMenuOptions = new UnityEvent();
         deselectUnit = new UnityEvent();
+        moveUnit = new UnityEvent();
 
         playerState = PlayerState.NAVIGATING;
         turn = Turn.CANI;
@@ -88,10 +90,16 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.INTERACTING:
                 //interactuar amb la unitat
+                moveUnit.Invoke();
+
                 break;
 
             case PlayerState.OPTIONS:
                 //interactuar amb el menú
+                break;
+
+            case PlayerState.WAITING:
+                
                 break;
         }
     }
@@ -130,16 +138,26 @@ public class GameplayController : MonoBehaviour
                 playerState = PlayerState.NAVIGATING;
 
                 break;
+
+            case PlayerState.WAITING:
+
+                CancelMenuUnit();
+                EnablePlayer();
+
+                //propi
+                playerState = PlayerState.INTERACTING;
+
+                break;
         }
     }
 
-    void EnablePlayer()
+    public void EnablePlayer()
     {
         transform.Find("Player").gameObject.SetActive(true);
         transform.Find("Player").GetComponent<PlayerController>().MyOnEnable();
     }
 
-    void DisablePlayer()
+    public void DisablePlayer()
     {
         transform.Find("Player").GetComponent<PlayerController>().MyOnDisable();
         transform.Find("Player").gameObject.SetActive(false);
@@ -167,5 +185,25 @@ public class GameplayController : MonoBehaviour
     {
         GameObject.Find("UI Controller").transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnDisable();
         GameObject.Find("UI Controller").transform.Find("Menu_shop").gameObject.SetActive(false);
+    }
+
+    public void DisableMenuUnit()
+    {
+        //d'aquest no hi ha enable perquè qui l'activa és la unitat
+
+        MenuUnitController menu = GameObject.Find("UI Controller").transform.Find("Menu_unit").GetComponent<MenuUnitController>();
+        menu.MyOnDisable();
+        menu.gameObject.SetActive(false);
+
+        EnablePlayer();
+        transform.Find("Player").GetComponent<PlayerController>().selectedUnit = null;
+
+        playerState = PlayerState.NAVIGATING;
+    }
+
+    void CancelMenuUnit()
+    {
+        GameObject.Find("UI Controller").transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnCancel();
+        GameObject.Find("UI Controller").transform.Find("Menu_unit").gameObject.SetActive(false);
     }
 }

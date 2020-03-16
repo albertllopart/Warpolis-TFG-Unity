@@ -244,5 +244,102 @@ public class Pathfinding
         //si no és ni neutral, ni contenidor ni fanal, retornem 1
         return 1;
     }
+
+    public List<Vector2Int> GetReversePath(Vector2Int goal)
+    {
+        //aquest mètode retorna una llista de posicions ordenades des de la casella objectiu fins l'origen del pathfinding
+
+        List<Vector2Int> path = new List<Vector2Int>();
+
+        int goalIndex = 0;
+
+        if (backtrack.Count > 0)
+        {
+            BFS_Node lastAdded = backtrack[0];
+
+            foreach (BFS_Node node in backtrack)
+            {
+                if (node.data == goal)
+                {
+                    lastAdded = node;
+                    path.Add(node.data);
+                    break;
+                }
+
+                goalIndex++;
+            }
+
+            while (lastAdded != backtrack[0])
+            {
+                foreach(BFS_Node node in backtrack)
+                {
+                    if(node.data == lastAdded.parent)
+                    {
+                        lastAdded = node;
+                        path.Add(node.data);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return path;
+    }
+
+    public List<BFS_Node> GetReversePath(BFS_Node goal)
+    {
+        //aquest mètode retorna una llista de posicions ordenades des de la casella objectiu fins l'origen del pathfinding
+
+        List<BFS_Node> path = new List<BFS_Node>();
+
+        int goalIndex = 0;
+
+        if (backtrack.Count > 0)
+        {
+            BFS_Node lastAdded = backtrack[0];
+
+            foreach (BFS_Node node in backtrack)
+            {
+                if (node.data == goal.data)
+                {
+                    lastAdded = node;
+                    path.Add(node);
+                    break;
+                }
+
+                goalIndex++;
+            }
+
+            while (lastAdded != backtrack[0])
+            {
+                foreach (BFS_Node node in backtrack)
+                {
+                    if (node.data == lastAdded.parent)
+                    {
+                        lastAdded = node;
+                        path.Add(node);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return path;
+    }
+
+    public List<Vector2Int> GetPath(Vector2Int goal)
+    {
+        //aquest mètode retorna una llista de posicions ordenades des de l'origen fins la casella objectiu del pathfinding
+
+        List<Vector2Int> reversePath = GetReversePath(goal);
+        List<Vector2Int> path = new List<Vector2Int>();
+
+        for (int i = reversePath.Count - 1; i >= 0; i--)
+        {
+            path.Add(reversePath[i]);
+        }
+
+        return path;
+    }
 }
 

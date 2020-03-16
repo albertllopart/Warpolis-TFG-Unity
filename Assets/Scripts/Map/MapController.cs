@@ -18,6 +18,7 @@ public class MapController : MonoBehaviour
     public Tilemap tilemapHazards;
     public Tilemap tilemapWalkability;
     public Tilemap tilemapPathfinding;
+    public Tilemap tilemapPlayer;
 
     [Header("Prefabs")]
     public GameObject baseCaniPrefab;
@@ -41,6 +42,16 @@ public class MapController : MonoBehaviour
     [Header("Pathfinding")]
     public Tile blueTile;
     public Tile redTile;
+    public Tile arrowRight;
+    public Tile arrowLeft;
+    public Tile arrowUp;
+    public Tile arrowDown;
+    public Tile arrowVertical;
+    public Tile arrowHorizontal;
+    public Tile arrowTopRight;
+    public Tile arrowTopLeft;
+    public Tile arrowBottomRight;
+    public Tile arrowBottomLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +72,7 @@ public class MapController : MonoBehaviour
         BuildDictionary();
         SpawnBuildings();
         InitializePathfinding();
+        SubscribeToEvents();
     }
 
     // Update is called once per frame
@@ -228,6 +240,11 @@ public class MapController : MonoBehaviour
         return new Vector3Int((int)pos.x, (int)(pos.y - 1), 0); // per algun motiu estrany que desconec el tilemap sempre comença a (0, -1) quan el top left està al (0, 0)
     }
 
+    Vector3Int WorldToTilemap(Vector2Int pos)
+    {
+        return new Vector3Int(pos.x, (pos.y - 1), 0); // per algun motiu estrany que desconec el tilemap sempre comença a (0, -1) quan el top left està al (0, 0)
+    }
+
     //pathfinding
 
     void InitializePathfinding()
@@ -361,5 +378,134 @@ public class MapController : MonoBehaviour
         pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
         pathfinding.PropagateBFS(unit);
         DrawPathfinding(true);
+    }
+
+    public void DrawArrow()
+    {
+        UndrawArrow();
+
+        Vector3 player = GameObject.Find("Player").transform.position;
+        Vector2Int playerPos = new Vector2Int((int)player.x, (int)player.y);
+        BFS_Node playerNode = new BFS_Node(playerPos, playerPos); //tota aquesta parafernàlia és per tenir un BFS_Node amb la posició del player i facilitat la vida amb el GetPath()
+
+        if (pathfinding.backtrack.Count > 0)
+        {
+            List<BFS_Node> path = pathfinding.GetReversePath(playerNode);
+            Tile lastTile = null;
+
+            //fletxa final
+            if (path[0].parent.x < path[0].data.x)
+                lastTile = arrowLeft;
+            else if (path[0].parent.x > path[0].data.x)
+                lastTile = arrowRight;
+            else if (path[0].parent.y < path[0].data.y)
+                lastTile = arrowDown;
+            else if (path[0].parent.y > path[0].data.y)
+                lastTile = arrowUp;
+
+            tilemapPlayer.SetTile(WorldToTilemap(path[0].data), lastTile);
+
+            if (pathfinding.backtrack.Count > 1)
+            { 
+                for (int i = 1; i < path.Count - 1; i++) // el -1 és per descartar l'origen i així no hi pinti flexta
+                {
+                    //mirar anterior i pare per saber tile
+
+                    // l'anterior és a l'esquerra
+                    if (path[i - 1].data.x < path[i].data.x)
+                    {
+                        // la següent és a la dreta
+                        if (path[i].parent.x > path[i].data.x)
+                        {
+                            lastTile = arrowHorizontal;
+                        }
+                        // la següent és avall
+                        else if (path[i].parent.y < path[i].data.y)
+                        {
+                            lastTile = arrowBottomLeft;
+                        }
+                        //la següent és amunt
+                        else if (path[i].parent.y > path[i].data.y)
+                        {
+                            lastTile = arrowTopLeft;
+                        }
+                    }
+
+                    // l'anterior és a la dreta
+                    else if (path[i - 1].data.x > path[i].data.x)
+                    {
+                        // la següent és a l'esquerra
+                        if (path[i].parent.x < path[i].data.x)
+                        {
+                            lastTile = arrowHorizontal;
+                        }
+                        // la següent és avall
+                        else if (path[i].parent.y < path[i].data.y)
+                        {
+                            lastTile = arrowBottomRight;
+                        }
+                        //la següent és amunt
+                        else if (path[i].parent.y > path[i].data.y)
+                        {
+                            lastTile = arrowTopRight;
+                        }
+                    }
+
+                    // l'anterior és avall
+                    else if (path[i - 1].data.y < path[i].data.y)
+                    {
+                        // la següent és a la dreta
+                        if (path[i].parent.x > path[i].data.x)
+                        {
+                            lastTile = arrowBottomRight;
+                        }
+                        // la següent és a l'esquerra
+                        else if (path[i].parent.x < path[i].data.x)
+                        {
+                            lastTile = arrowBottomLeft;
+                        }
+                        //la següent és amunt
+                        else if (path[i].parent.y > path[i].data.y)
+                        {
+                            lastTile = arrowVertical;
+                        }
+                    }
+
+                    // l'anterior és amunt
+                    else if (path[i - 1].data.y > path[i].data.y)
+                    {
+                        // la següent és a la dreta
+                        if (path[i].parent.x > path[i].data.x)
+                        {
+                            lastTile = arrowTopRight;
+                        }
+                        // la següent és a l'esquerra
+                        else if (path[i].parent.x < path[i].data.x)
+                        {
+                            lastTile = arrowTopLeft;
+                        }
+                        //la següent és avall
+                        else if (path[i].parent.y < path[i].data.y)
+                        {
+                            lastTile = arrowVertical;
+                        }
+                    }
+
+                    tilemapPlayer.SetTile(WorldToTilemap(path[i].data), lastTile);
+                }
+            }
+        }
+    }
+
+    public void UndrawArrow()
+    {
+        tilemapPlayer.ClearAllTiles();
+    }
+
+    //events
+
+    void SubscribeToEvents()
+    {
+
     }
 }

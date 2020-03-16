@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public void MyOnEnable()
     {
         SubscribeToEvents();
+        CheckArrow();
     }
     public void MyOnDisable()
     {
@@ -189,6 +191,8 @@ public class PlayerController : MonoBehaviour
 
             if (CheckCameraBoundaries(0))
                 Camera.main.GetComponent<CameraController>().MoveCameraUp();
+
+            CheckArrow();
         }
     }
 
@@ -200,6 +204,8 @@ public class PlayerController : MonoBehaviour
 
             if (CheckCameraBoundaries(1))
                 Camera.main.GetComponent<CameraController>().MoveCameraLeft();
+
+            CheckArrow();
         }
     }
 
@@ -211,6 +217,8 @@ public class PlayerController : MonoBehaviour
 
             if (CheckCameraBoundaries(2))
                 Camera.main.GetComponent<CameraController>().MoveCameraDown();
+
+            CheckArrow();
         }
     }
 
@@ -222,6 +230,20 @@ public class PlayerController : MonoBehaviour
 
             if (CheckCameraBoundaries(3))
                 Camera.main.GetComponent<CameraController>().MoveCameraRight();
+
+            CheckArrow();
+        }
+    }
+
+    public void CheckArrow()
+    {
+        Vector2Int myPos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+
+        if (selectedUnit != null &&
+            selectedUnit.GetComponent<Unit>().GetState() == UnitState.SELECTED &&
+            GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.visited.Contains(myPos))
+        {
+            GameObject.Find("Map Controller").GetComponent<MapController>().DrawArrow();
         }
     }
 
@@ -276,7 +298,7 @@ public class PlayerController : MonoBehaviour
         else
             result = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_units"));
 
-        if (result.collider != null)
+        if (result.collider != null && result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAIT)
         {
             Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
 
@@ -314,8 +336,20 @@ public class PlayerController : MonoBehaviour
 
     void DeselectUnit()
     {
+        GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
         selectedUnit.GetComponent<Unit>().OnDeselected();
         selectedUnit = null;
+    }
+
+    void MoveUnit()
+    {
+        Vector2Int goal = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+
+        if (selectedUnit != null)
+        {
+            GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
+            selectedUnit.GetComponent<Unit>().OnMove(goal);
+        }
     }
 
     // Debug
@@ -370,6 +404,7 @@ public class PlayerController : MonoBehaviour
 
         //gameplay
         GetComponentInParent<GameplayController>().deselectUnit.AddListener(DeselectUnit);
+        GetComponentInParent<GameplayController>().moveUnit.AddListener(MoveUnit);
     }
 
     void UnsubscribeFromEvents()
@@ -389,5 +424,6 @@ public class PlayerController : MonoBehaviour
 
         //gameplay
         GetComponentInParent<GameplayController>().deselectUnit.RemoveListener(DeselectUnit);
+        GetComponentInParent<GameplayController>().moveUnit.RemoveListener(MoveUnit);
     }
 }
