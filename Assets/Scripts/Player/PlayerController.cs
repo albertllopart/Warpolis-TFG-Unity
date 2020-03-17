@@ -298,7 +298,7 @@ public class PlayerController : MonoBehaviour
         else
             result = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_units"));
 
-        if (result.collider != null && result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAIT)
+        if (result.collider != null && result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING)
         {
             Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
 
@@ -345,7 +345,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2Int goal = new Vector2Int((int)transform.position.x, (int)transform.position.y);
 
-        if (selectedUnit != null)
+        if (selectedUnit != null && GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.visited.Contains(goal))
         {
             GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
             selectedUnit.GetComponent<Unit>().OnMove(goal);
@@ -383,7 +383,7 @@ public class PlayerController : MonoBehaviour
                     tileType = "Building";
                     break;
             }
-            Debug.Log("PlayerController::LogPosition - " + transform.position + " Tile info: " + tileType);
+            Debug.Log("PlayerController::LogPosition - " + transform.position + " Tile info: " + tileType + "Contains Cani: " + tile.containsCani + ", Contains Hipster: " + tile.containsHipster);
         }
     }
 

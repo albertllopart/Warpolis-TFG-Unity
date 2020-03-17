@@ -120,7 +120,14 @@ public class MenuOptionsController : MonoBehaviour
 
     public void PressSelectedButton()
     {
-        selectedButton.GetComponent<MyButton>().button.OnClick();
+        if (selectedButton.name == "Button_quit")
+        {
+            Application.Quit();
+        }
+        else if (selectedButton.name == "Button_endturn")
+        {
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().EndTurn(); // TODO: invocar un event del gameplay controller en comptes del mètode directament
+        }
     }
 
     void SubscribeToEvents()

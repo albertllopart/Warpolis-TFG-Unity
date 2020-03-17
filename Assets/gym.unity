@@ -375,15 +375,6 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: 11, y: -12, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
   - first: {x: 13, y: -12, z: 0}
     second:
       serializedVersion: 2
@@ -403,15 +394,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
   - first: {x: 7, y: -11, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 12, y: -11, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 2
@@ -543,7 +525,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 51dc98834b87e5948a8d1962c9ecb085, type: 2}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 7d30f00feaeba0946822501da4b65dbc, type: 2}
-  - m_RefCount: 10
+  - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: f5423064850545b40bd0da01cba15b1b, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: f9479b81d80ae1149ae3fc9c6d0efcdb, type: 2}
@@ -553,14 +535,14 @@ Tilemap:
   - m_RefCount: 4
     m_Data: {fileID: 7477116942032994148, guid: a60de30a910d51e4eba12e1e321ac8c3,
       type: 3}
-  - m_RefCount: 10
+  - m_RefCount: 8
     m_Data: {fileID: 9061651696941551919, guid: a60de30a910d51e4eba12e1e321ac8c3,
       type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 8233071653059976297, guid: a60de30a910d51e4eba12e1e321ac8c3,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 26
+  - m_RefCount: 24
     m_Data:
       e00: 1
       e01: 0
@@ -579,7 +561,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 26
+  - m_RefCount: 24
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -6690,7 +6672,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: 0
-  pseudoTurn: 0
   openMenuOptions:
     m_PersistentCalls:
       m_Calls: []

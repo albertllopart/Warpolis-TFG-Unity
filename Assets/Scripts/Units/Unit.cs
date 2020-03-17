@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum UnitState
 {
-    IDLE, SELECTED, MOVING, DECIDING, WAIT
+    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING
 };
 
 public enum UnitDirection
@@ -12,20 +12,45 @@ public enum UnitDirection
     RIGHT, LEFT, UP, DOWN
 };
 
+public enum UnitType
+{
+    INFANTRY
+};
+
+public enum UnitArmy
+{
+    CANI, HIPSTER
+};
+
 public class Unit : MonoBehaviour
 {
     private UnitState state;
     private UnitDirection direction;
+    public UnitArmy army;
 
     private Animator animator;
     private SpriteRenderer renderer;
     private int layerDifference = 2;
 
     //stats
+    [Header("Info")]
+    public uint unitType;
     public uint movementRange;
     public uint neutralCost;
     public uint containerCost;
     public uint lampCost;
+
+    [Header("Stats")]
+    public uint hitPoints;
+    public uint basePower; //el basePower és el mal que faran a una unitat enemiga de la mateixa categoria. Després se li aplicaran multiplicadors en funció de a què s'enfrontin
+    public uint defense; //la defensa base sempre serà 0 i estarà determinada per la casella
+
+    [Header("Multipliers")]
+    public float vsInfantry;
+
+    [Header("Interaction")]
+    public List<GameObject> targets;
+    public GameObject currentTarget;
 
     //movement
     List<Vector2Int> path = new List<Vector2Int>();
@@ -36,7 +61,13 @@ public class Unit : MonoBehaviour
     float moveTimer = 0.0f;
     float moveSpeed = 0.25f;
 
+    //targeting
+    float switchTargetTimer = 0.0f;
+    float switchTargetInterval = 0.1f;
+
+    [HideInInspector]
     public Vector3 lastPosition;
+    [HideInInspector]
     public Vector2Int lastGoal;
 
     //menu
@@ -60,6 +91,8 @@ public class Unit : MonoBehaviour
         activeButtons[0] = false; //capture
         activeButtons[1] = false; //attack
         activeButtons[2] = true; //wait sempre és true perquè sempre hi haurà la opció
+
+        UpdateStatsBasedOnTile();
     }
 
     void Update()
@@ -69,18 +102,32 @@ public class Unit : MonoBehaviour
             moveTimer += Time.deltaTime;
             Move();
         }
+        else if (state == UnitState.TARGETING)
+        {
+            switchTargetTimer += Time.deltaTime;
+        }
+
+        DrawLines();
     }
 
     void SetCani()
     {
         direction = UnitDirection.RIGHT;
+        army = UnitArmy.CANI;
         GetComponentInParent<UnitsController>().caniUnits.Add(gameObject);
+
+        //li hem de dir al myTilemap que som allà
+        GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsCani = true;
     }
 
     void SetHipster()
     {
         direction = UnitDirection.LEFT;
+        army = UnitArmy.HIPSTER;
         GetComponentInParent<UnitsController>().hipsterUnits.Add(gameObject);
+
+        //li hem de dir al myTilemap que som allà
+        GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsHipster = true;
     }
 
     public UnitState GetState()
@@ -130,6 +177,8 @@ public class Unit : MonoBehaviour
 
     public void OnMenu()
     {
+        SearchForTargets();
+
         state = UnitState.DECIDING;
 
         //canviar l'estat del gameplay oju
@@ -178,8 +227,13 @@ public class Unit : MonoBehaviour
     {
         Highlight(false);
 
-        state = UnitState.WAIT;
+        state = UnitState.WAITING;
 
+        UpdateTileInfo();
+
+        lastPosition = transform.position;
+
+        UpdateStatsBasedOnTile();
         ResetDirection();
         UpdateAnimator();
     }
@@ -194,6 +248,18 @@ public class Unit : MonoBehaviour
 
         //mapa
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+    }
+
+    public void OnTargeting()
+    {
+        state = UnitState.TARGETING;
+
+        if (targets.Count > 0)
+            currentTarget = targets[0];
+
+        UpdateAnimator();
+
+        SubscribeToEvents(); //necessito saber quan s'apreten les direccions
     }
 
     void UpdateAnimator()
@@ -214,8 +280,10 @@ public class Unit : MonoBehaviour
 
         this.goal = goal;
         path = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.GetPath(goal);
+        
         nextPosIndex = 1;
-        nextPos = path[nextPosIndex];
+        if(path.Count > 1)
+            nextPos = path[nextPosIndex];
     }
 
     void Move()
@@ -265,17 +333,248 @@ public class Unit : MonoBehaviour
                 else
                 {
                     //aquí s'entrarà quan ja s'hagi arribat a la següent posició del path
-                    nextPos = path[++nextPosIndex];
+                    if (path.Count >= nextPosIndex)
+                        nextPos = path[++nextPosIndex];
                 }
             }
 
             if (myPos == goal)
             {
-                // buscar targets
-                // actualitzar estat
-
                 OnMenu();
             }
         }
+    }
+
+    void UpdateTileInfo()
+    {
+        if (army == UnitArmy.CANI)
+        {
+            MapController map = GameObject.Find("Map Controller").GetComponent<MapController>();
+
+            map.pathfinding.MyTilemap[(int)lastPosition.x, -(int)lastPosition.y].containsCani = false;
+            map.pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsCani = true;
+        }
+        
+        if (army == UnitArmy.HIPSTER)
+        {
+            MapController map = GameObject.Find("Map Controller").GetComponent<MapController>();
+
+            map.pathfinding.MyTilemap[(int)lastPosition.x, -(int)lastPosition.y].containsHipster = false;
+            map.pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsHipster = true;
+        }
+    }
+
+    void UpdateStatsBasedOnTile()
+    {
+        switch(GetMyTileType(transform.position))
+        {
+            case MyTileType.ROAD:
+                defense = 0;
+                break;
+
+            case MyTileType.NEUTRAL:
+                defense = 1;
+                break;
+
+            case MyTileType.CONTAINER:
+                defense = 2;
+                break;
+
+            case MyTileType.BUILDING:
+                defense = 3;
+                break;
+
+            case MyTileType.LAMP:
+                defense = 4;
+                break;
+        }
+    }
+
+    MyTileType GetMyTileType(Vector2 pos)
+    {
+        MapController map = GameObject.Find("Map Controller").GetComponent<MapController>();
+
+        return map.GetMyTile(pos).type;
+    }
+
+    void SearchForTargets()
+    {
+        targets = new List<GameObject>();
+
+        Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
+
+        Vector2 north = from + new Vector2(0, 1); // clockwise
+        Vector2 east = from + new Vector2(1, 0);
+        Vector2 south = from + new Vector2(0, -1);
+        Vector2 west = from + new Vector2(-1, 0);
+
+        int layer = 0;
+
+        if (army == UnitArmy.CANI)
+        {
+            layer = LayerMask.GetMask("Hipster_units");
+        }
+        else if (army == UnitArmy.HIPSTER)
+        {
+            layer = LayerMask.GetMask("Cani_units");
+        }
+
+        RaycastHit2D result = Physics2D.Linecast(from, north, layer);
+        if (result.collider != null)
+        {
+            targets.Add(result.collider.gameObject);
+            Debug.Log("Unit::SearchForTargets - Found target: " + result.collider.gameObject.name + " in north position: " + result.collider.transform.position);
+        }
+
+        result = Physics2D.Linecast(from, east, layer);
+        if (result.collider != null)
+        {
+            targets.Add(result.collider.gameObject);
+            Debug.Log("Unit::SearchForTargets - Found target: " + result.collider.gameObject.name + " in east position: " + result.collider.transform.position);
+        }
+
+        result = Physics2D.Linecast(from, south, layer);
+        if (result.collider != null)
+        {
+            targets.Add(result.collider.gameObject);
+            Debug.Log("Unit::SearchForTargets - Found target: " + result.collider.gameObject.name + " in south position: " + result.collider.transform.position);
+        }
+
+        result = Physics2D.Linecast(from, west, layer);
+        if (result.collider != null)
+        {
+            targets.Add(result.collider.gameObject);
+            Debug.Log("Unit::SearchForTargets - Found target: " + result.collider.gameObject.name + " in west position: " + result.collider.transform.position);
+        }
+
+        //si hem trobat algun target activem el botó d'atacar
+        if (targets.Count > 0)
+            activeButtons[1] = true;
+        else
+            activeButtons[1] = false;
+    }
+
+    void DrawLines()
+    {
+        Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
+
+        Vector2 north = from + new Vector2(0, 1);
+        Vector2 south = from + new Vector2(0, -1);
+        Vector2 east = from + new Vector2(1, 0);
+        Vector2 west = from + new Vector2(-1, 0);
+
+        Debug.DrawLine(from, north, Color.green);
+        Debug.DrawLine(from, south, Color.green);
+        Debug.DrawLine(from, east, Color.green);
+        Debug.DrawLine(from, west, Color.green);
+    }
+
+    float DamageFormula(GameObject enemy)
+    {
+        float damage = (float)basePower * 0.01f; // convertim 50 en 0.5
+
+        //establim multiplicador de defensa segons la casella
+        float defenseMultiplier = 1.0f - enemy.GetComponent<Unit>().defense * 0.1f; // 1 de defensa resta 0.1 al multiplicador
+        
+        //establim multiplicador segons a quina unitat ens enfrontem
+        float typeMultiplier = 0.0f;
+        switch(enemy.GetComponent<Unit>().unitType)
+        {
+            case (uint)UnitType.INFANTRY:
+                typeMultiplier = 1.0f * vsInfantry;
+                break;
+        }
+
+        //establim multiplicador segons la vida que tingui l'atacant
+        float hpMultiplier = (hitPoints * 2) * 0.01f; //multiplico la vida x2 perquè el màxim és 50 i m'interessa tenir-la en base 100 per calcular el %
+
+        //fórmula final amb tots els paràmetres
+        damage = damage * defenseMultiplier * typeMultiplier * hpMultiplier;
+
+        Debug.Log("Unit::DamageFormula - Damage = " + damage);
+
+        return damage;
+    }
+
+    void SelectNextTarget()
+    {
+        if (switchTargetTimer >= switchTargetInterval)
+        {
+            if (targets.Count > 0)
+            {
+                int currentTargetIndex = targets.IndexOf(currentTarget);
+
+                if (currentTargetIndex == targets.Count - 1)
+                    currentTarget = targets[0];
+                else
+                    currentTarget = targets[++currentTargetIndex];
+            }
+
+            //actualitzem la direcció
+            if (currentTarget != null)
+            {
+                direction = GetDirectionTo(currentTarget.transform.position);
+            }
+
+            UpdateAnimator();
+
+            switchTargetTimer = 0.0f;
+        }
+    }
+
+    void SelectPreviousTarget()
+    {
+        if (switchTargetTimer >= switchTargetInterval)
+        {
+            if (targets.Count > 0)
+            {
+                int currentTargetIndex = targets.IndexOf(currentTarget);
+
+                if (currentTargetIndex == 0)
+                    currentTarget = targets[targets.Count - 1];
+                else
+                    currentTarget = targets[--currentTargetIndex];
+            }
+
+            //actualitzem la direcció
+            if (currentTarget != null)
+            {
+                direction = GetDirectionTo(currentTarget.transform.position);
+            }
+
+            UpdateAnimator();
+
+            switchTargetTimer = 0.0f;
+        }
+    }
+
+    UnitDirection GetDirectionTo(Vector2 pos)
+    {
+        if (pos.x > transform.position.x)
+            return UnitDirection.RIGHT;
+        else if (pos.x < transform.position.x)
+            return UnitDirection.LEFT;
+        else if (pos.y < transform.position.y)
+            return UnitDirection.DOWN;
+        else if (pos.y > transform.position.y)
+            return UnitDirection.UP;
+
+        return UnitDirection.RIGHT;
+    }
+
+    void SubscribeToEvents()
+    {
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(SelectNextTarget);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.AddListener(SelectPreviousTarget);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(SelectPreviousTarget);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.AddListener(SelectNextTarget);
+    }
+
+    public void UnsubscribeFromEvents()
+    {
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.RemoveListener(SelectNextTarget);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.RemoveListener(SelectPreviousTarget);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.RemoveListener(SelectPreviousTarget);
+        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.RemoveListener(SelectNextTarget);
     }
 }

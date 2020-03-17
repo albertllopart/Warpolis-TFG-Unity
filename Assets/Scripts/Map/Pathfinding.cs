@@ -29,16 +29,25 @@ public enum MyTileType
 
 public class MyTile
 {
-    public MyTile(Vector2Int position, bool isWalkable, MyTileType type)
+    public MyTile(Vector2Int position, bool isWalkable, MyTileType type, uint maxWidth, uint maxHeight)
     {
         this.position = position;
         this.isWalkable = isWalkable;
         this.type = type;
+        this.maxWidth = maxWidth;
+        this.maxHeight = maxHeight;
     }
+
+    //info
+    public uint maxWidth;
+    public uint maxHeight;
 
     public Vector2Int position;
     public bool isWalkable;
     public MyTileType type;
+
+    public bool containsCani;
+    public bool containsHipster;
 }
 
 public class Pathfinding
@@ -72,34 +81,49 @@ public class Pathfinding
         {
             BFS_Node popped = frontier.Dequeue();
 
-            if (MyTilemap[popped.data.x, -popped.data.y].isWalkable)
+            if (MyTilemap[popped.data.x, -popped.data.y] != null)
             {
-                BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
-                BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
-                BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
-                BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
-
-                List<BFS_Node> unorderedNodes = new List<BFS_Node>();
-                unorderedNodes.Add(north);
-                unorderedNodes.Add(south);
-                unorderedNodes.Add(east);
-                unorderedNodes.Add(west);
-
-                List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
-
-                foreach(BFS_Node node in orderedNodes)
+                if (MyTilemap[popped.data.x, -popped.data.y].isWalkable)
                 {
-                    if (IsInMoveRange(unitScript, visited[0], node))
-                        CheckNode(node);
+                    BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
+                    BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
+                    BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
+                    BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
+
+                    List<BFS_Node> unorderedNodes = new List<BFS_Node>();
+
+                    if (CheckMapLimits(north.data))
+                        unorderedNodes.Add(north);
+                    if (CheckMapLimits(south.data))
+                        unorderedNodes.Add(south);
+                    if (CheckMapLimits(east.data))
+                        unorderedNodes.Add(east);
+                    if (CheckMapLimits(west.data))
+                        unorderedNodes.Add(west);
+
+                    List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
+
+                    foreach (BFS_Node node in orderedNodes)
+                    {
+                        if (!CheckEnemyInPos(node.data, unit)) //primer mira si hi ha un enemic a la casella i després si està a rang i és walkable
+                        {
+                            if (IsInMoveRange(unitScript, visited[0], node))
+                                CheckNode(node);
+                        }
+                    }
                 }
-                // TODO: mirar si la casella se surt del mapa per descartar-la
             }
 
-            if (safety++ >= 500)
+            if (safety++ >= 10000)
                 break;
         }
     }
 
+    bool CheckMapLimits(Vector2Int pos)
+    {
+        return (pos.x <= MyTilemap[0, 0].maxWidth && pos.x >= 0 &&
+                -pos.y <= MyTilemap[0, 0].maxHeight && -pos.y >= 0);
+    }
     List<BFS_Node> OrderBFS_Nodes(List<BFS_Node> unorderedNodes)
     {
         //aquesta funció ordena els nodes segons el cost per evitar fer camins subòptims
@@ -109,11 +133,14 @@ public class Pathfinding
         {
             foreach (BFS_Node node in unorderedNodes)
             {
-                if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.NEUTRAL ||
-                    MyTilemap[node.data.x, -node.data.y].type == MyTileType.ROAD ||
-                    MyTilemap[node.data.x, -node.data.y].type == MyTileType.BUILDING)
+                if (MyTilemap[node.data.x, -node.data.y] != null)
                 {
-                    orderedNodes.Add(node);
+                    if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.NEUTRAL ||
+                        MyTilemap[node.data.x, -node.data.y].type == MyTileType.ROAD ||
+                        MyTilemap[node.data.x, -node.data.y].type == MyTileType.BUILDING)
+                    {
+                        orderedNodes.Add(node);
+                    }
                 }
             }
 
@@ -127,9 +154,12 @@ public class Pathfinding
         {
             foreach (BFS_Node node in unorderedNodes)
             {
-                if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.CONTAINER)
+                if (MyTilemap[node.data.x, -node.data.y] != null)
                 {
-                    orderedNodes.Add(node);
+                    if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.CONTAINER)
+                    {
+                        orderedNodes.Add(node);
+                    }
                 }
             }
 
@@ -143,9 +173,12 @@ public class Pathfinding
         {
             foreach (BFS_Node node in unorderedNodes)
             {
-                if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.LAMP)
+                if (MyTilemap[node.data.x, -node.data.y] != null)
                 {
-                    orderedNodes.Add(node);
+                    if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.LAMP)
+                    {
+                        orderedNodes.Add(node);
+                    }
                 }
             }
 
@@ -162,6 +195,8 @@ public class Pathfinding
     {
         if (!visited.Contains(node.data))
         {
+            //mirar que no hi hagi una unitat enemiga
+
             if (MyTilemap[node.data.x, -node.data.y].isWalkable)
             {
                 frontier.Enqueue(node);
@@ -169,6 +204,14 @@ public class Pathfinding
                 backtrack.Add(node);
             }
         }
+    }
+
+    bool CheckEnemyInPos(Vector2Int pos, GameObject unit)
+    {
+        if (unit.GetComponent<Unit>().army == UnitArmy.CANI)
+            return MyTilemap[pos.x, -pos.y].containsHipster;
+        else
+            return MyTilemap[pos.x, -pos.y].containsCani;
     }
 
     public bool IsInMoveRange(Unit unitScript, Vector2Int origin, BFS_Node goal)

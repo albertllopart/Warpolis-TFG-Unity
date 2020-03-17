@@ -260,7 +260,7 @@ public class MapController : MonoBehaviour
                 bool isWalkable = IsWalkable(pos);
                 MyTileType type = DetermineMyTileType(pos);
 
-                pathfinding.MyTilemap[i, -j] = new MyTile(pos, isWalkable, type);
+                pathfinding.MyTilemap[i, -j] = new MyTile(pos, isWalkable, type, width - 1, height - 1);
 
                 /*if(!isWalkable)
                     Debug.Log("MapController::InitializePathfinding - MyTile: " + pos + ", " + isWalkable + ", " + type);*/
@@ -281,6 +281,11 @@ public class MapController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public MyTile GetMyTile(Vector2 pos)
+    {
+        return pathfinding.MyTilemap[(int)pos.x, -(int)pos.y];
     }
 
     MyTileType DetermineMyTileType(Vector2Int pos)
@@ -388,7 +393,7 @@ public class MapController : MonoBehaviour
         Vector2Int playerPos = new Vector2Int((int)player.x, (int)player.y);
         BFS_Node playerNode = new BFS_Node(playerPos, playerPos); //tota aquesta parafernàlia és per tenir un BFS_Node amb la posició del player i facilitat la vida amb el GetPath()
 
-        if (pathfinding.backtrack.Count > 0)
+        if (pathfinding.backtrack.Count > 0 && playerPos != pathfinding.visited[0])
         {
             List<BFS_Node> path = pathfinding.GetReversePath(playerNode);
             Tile lastTile = null;

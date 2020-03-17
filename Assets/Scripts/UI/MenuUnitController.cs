@@ -71,6 +71,16 @@ public class MenuUnitController : MonoBehaviour
         transform.Find("Cursor_unit").GetComponent<CursorUnit>().MyOnDisable();
     }
 
+    public void MyOnHide()
+    {
+        selectedButton = null;
+
+        UnsubscribeFromEvents();
+
+        //cridar tots els MyOnDisable dels fills que ho necessitin
+        transform.Find("Cursor_unit").GetComponent<CursorUnit>().MyOnDisable();
+    }
+
     void AddButtons(bool[] activeButtons)
     {
         buttons = new List<GameObject>();
@@ -163,6 +173,11 @@ public class MenuUnitController : MonoBehaviour
         {
             selectedUnit.GetComponent<Unit>().OnWait();
             GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+        }
+        else if (selectedButton.name == "Button_attack")
+        {
+            selectedUnit.GetComponent<Unit>().OnTargeting();
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().HideMenuUnit();
         }
     }
 
