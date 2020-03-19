@@ -327,13 +327,20 @@ public class PlayerController : MonoBehaviour
     public bool InteractBuildings()
     {
         RaycastHit2D result;
+        string tag = null;
 
         if (GetComponentInParent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
+        {
             result = RayCast(LayerMask.GetMask("Cani_buildings"));
+            tag = "Factory_cani";
+        }
         else
+        {
             result = RayCast(LayerMask.GetMask("Hipster_buildings"));
+            tag = "Factory_hipster";
+        }
 
-        if (result.collider != null)
+        if (result.collider != null && result.collider.gameObject.CompareTag(tag))
         {
             Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
             return true;

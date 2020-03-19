@@ -179,6 +179,11 @@ public class MenuUnitController : MonoBehaviour
             selectedUnit.GetComponent<Unit>().OnTargeting();
             GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().HideMenuUnit();
         }
+        else if (selectedButton.name == "Button_capture")
+        {
+            selectedUnit.GetComponent<UnitInfantry>().OnCapture();
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+        }
     }
 
     void SubscribeToEvents()

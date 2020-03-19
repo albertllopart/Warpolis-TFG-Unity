@@ -55,7 +55,6 @@ public class Unit : MonoBehaviour
     [Header("Interaction")]
     public List<GameObject> targets;
     public GameObject currentTarget;
-    public GameObject currentCapture;
 
     //movement
     List<Vector2Int> path = new List<Vector2Int>();
@@ -100,8 +99,9 @@ public class Unit : MonoBehaviour
         activeButtons[2] = true; //wait sempre és true perquè sempre hi haurà la opció
 
         UITarget = transform.Find("Targeting").gameObject;
-        UITarget.SetActive(false);
+        EnableUITarget(false);
         UIHitPoints = transform.Find("Hitpoints").gameObject;
+        EnableUIHitPoints(true);
 
         UpdateStatsBasedOnTile();
     }
@@ -184,6 +184,16 @@ public class Unit : MonoBehaviour
             renderer.sortingOrder -= layerDifference;
     }
 
+    void EnableUITarget(bool enable)
+    {
+        UITarget.SetActive(enable);
+    }
+
+    void EnableUIHitPoints(bool enable)
+    {
+        UIHitPoints.SetActive(enable);
+    }
+
     public void OnIdle()
     {
         state = UnitState.IDLE;
@@ -195,6 +205,12 @@ public class Unit : MonoBehaviour
         Highlight(true);
 
         state = UnitState.SELECTED;
+
+        EnableUIHitPoints(false);
+
+        if (unitType == (uint)UnitType.INFANTRY)
+            GetComponent<UnitInfantry>().EnableUICaptureSign(false);
+
         UpdateAnimator();
 
         //mapa
@@ -226,6 +242,12 @@ public class Unit : MonoBehaviour
         Highlight(false);
 
         state = UnitState.IDLE;
+
+        EnableUIHitPoints(true);
+
+        if (unitType == (uint)UnitType.INFANTRY && GetComponent<UnitInfantry>().currentCapture != null)
+            GetComponent<UnitInfantry>().EnableUICaptureSign(true);
+
         UpdateAnimator();
 
         //mapa
@@ -238,7 +260,10 @@ public class Unit : MonoBehaviour
 
         if (unitType == (uint)UnitType.INFANTRY)
         {
-            SearchForOtherBuilding(); // això és per la captura
+            if (GetComponent<UnitInfantry>().SearchForOtherBuilding() != null) // això és per la captura
+                EnableCaptureButton(true);
+            else
+                EnableCaptureButton(false);
         }
 
         UpdateStatsBasedOnTile();
@@ -302,10 +327,33 @@ public class Unit : MonoBehaviour
 
         state = UnitState.WAITING;
 
+        if (unitType == (uint)UnitType.INFANTRY)
+            GetComponent<UnitInfantry>().toStopCapture = true;
+
         UpdateTileInfo();
 
         lastPosition = transform.position;
 
+        EnableUIHitPoints(true);
+        ResetTargeting();
+        ResetDirection();
+        UpdateAnimator();
+
+        UnsubscribeFromEvents();
+    }
+
+    public void OnWaitWithCapture() //aquesta funció es crida per conservar la captura en comptes de OnWait que li restableix la vida màxima
+    {
+        Highlight(false);
+
+        state = UnitState.WAITING;
+
+        UpdateTileInfo();
+
+        lastPosition = transform.position;
+
+        EnableUIHitPoints(true);
+        GetComponent<UnitInfantry>().EnableUICaptureSign(true);
         ResetTargeting();
         ResetDirection();
         UpdateAnimator();
@@ -558,47 +606,7 @@ public class Unit : MonoBehaviour
         activeButtons[1] = enable;
     }
 
-    GameObject SearchForOtherBuilding()
-    {
-        //aquest mètode retorna el building enemic o neutral que hi ha a la casella de la unitat
-
-        Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
-        Vector2 to = from;
-
-        RaycastHit2D neutral = Physics2D.Linecast(from, to, LayerMask.GetMask("Neutral_buildings")); ;
-
-        if (neutral.collider != null)
-        {
-            EnableCaptureButton(true);
-            return neutral.collider.gameObject;
-        }
-        else
-        {
-            if (army == UnitArmy.CANI)
-            {
-                RaycastHit2D hipster = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_buildings"));
-                if (hipster.collider != null)
-                {
-                    EnableCaptureButton(true);
-                    return hipster.collider.gameObject;
-                }
-            }
-            else if (army == UnitArmy.HIPSTER)
-            {
-                RaycastHit2D cani = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_buildings"));
-                if (cani.collider != null)
-                {
-                    EnableCaptureButton(true);
-                    return cani.collider.gameObject;
-                }
-            }
-        }
-
-        EnableCaptureButton(false);
-        return null;
-    }
-
-    void EnableCaptureButton(bool enable)
+    public void EnableCaptureButton(bool enable)
     {
         activeButtons[0] = enable;
     }
@@ -776,7 +784,7 @@ public class Unit : MonoBehaviour
         return Mathf.RoundToInt(ret);
     }
 
-    uint CalculateUIHitpoints()
+    public uint CalculateUIHitpoints()
     {
         if (hitPoints > 45)
             return 5;

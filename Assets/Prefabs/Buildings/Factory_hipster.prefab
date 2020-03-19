@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5439610511243797024}
   - component: {fileID: 5439610511243797031}
   - component: {fileID: 5439610511243797030}
+  - component: {fileID: 5473675124101819200}
   m_Layer: 9
   m_Name: Factory_hipster
   m_TagString: Factory_hipster
@@ -109,3 +110,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5473675124101819200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5439610511243797029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3e957c177ad2d47ae62ce846d12d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 10
+  currentHP: 10
