@@ -6672,6 +6672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: 0
+  UIController: {fileID: 0}
+  unitsController: {fileID: 0}
   openMenuOptions:
     m_PersistentCalls:
       m_Calls: []
@@ -6682,6 +6684,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   moveUnit:
+    m_PersistentCalls:
+      m_Calls: []
+  attackUnit:
+    m_PersistentCalls:
+      m_Calls: []
+  endTurnCani:
+    m_PersistentCalls:
+      m_Calls: []
+  endTurnHipster:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1404702678

@@ -18,21 +18,33 @@ public class GameplayController : MonoBehaviour
     public PlayerState playerState;
     private Turn turn;
 
+    //controllers
+    public GameObject UIController;
+    public GameObject unitsController;
+
     //events
     public UnityEvent openMenuOptions;
     public UnityEvent closeMenuOptions;
     public UnityEvent deselectUnit;
     public UnityEvent moveUnit;
+    public UnityEvent attackUnit;
+    public UnityEvent endTurnCani;
+    public UnityEvent endTurnHipster;
 
     // Start is called before the first frame update
     void Start()
     {
         SubscribeToEvents();
 
+        GetControllers();
+
         openMenuOptions = new UnityEvent();
         closeMenuOptions = new UnityEvent();
         deselectUnit = new UnityEvent();
         moveUnit = new UnityEvent();
+        attackUnit = new UnityEvent();
+        endTurnCani = new UnityEvent();
+        endTurnHipster = new UnityEvent();
 
         playerState = PlayerState.NAVIGATING;
         turn = Turn.CANI;
@@ -42,6 +54,12 @@ public class GameplayController : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void GetControllers()
+    {
+        UIController = GameObject.Find("UI Controller");
+        unitsController = GameObject.Find("Units Controller");
     }
 
     public Turn GetTurn()
@@ -54,10 +72,14 @@ public class GameplayController : MonoBehaviour
         switch (turn)
         {
             case Turn.CANI:
+                //posar en idle els canis
+                endTurnCani.Invoke();
                 turn = Turn.HIPSTER;
                 break;
 
             case Turn.HIPSTER:
+                //posar en idle els hipsters
+                endTurnHipster.Invoke();
                 turn = Turn.CANI;
                 break;
         }
@@ -82,25 +104,29 @@ public class GameplayController : MonoBehaviour
                 //cridar funcio interact de player i mirar què retorna
                 if (transform.Find("Player").GetComponent<PlayerController>().InteractUnits())
                 {
-                    playerState = PlayerState.INTERACTING;
+                    if (transform.Find("Player").GetComponent<PlayerController>().selectedUnit != null)
+                    {
+                        playerState = PlayerState.INTERACTING;
+                    }
+                    else
+                    {
+                        TransitionToOptionsMenu();
+                        playerState = PlayerState.OPTIONS;
+                    }
+
+                    break;
                 }
                 else if(transform.Find("Player").GetComponent<PlayerController>().InteractBuildings())
                 {
                     DisablePlayer();
                     EnableMenuShop();
                     playerState = PlayerState.SHOP;
-                }
-                else
-                {
-                    //player
-                    DisablePlayer();
 
-                    //menú
-                    EnableMenuOptions();
-
-                    //propi
-                    playerState = PlayerState.OPTIONS;
+                    break;
                 }
+
+                TransitionToOptionsMenu();
+                playerState = PlayerState.OPTIONS;
 
                 break;
 
@@ -119,6 +145,12 @@ public class GameplayController : MonoBehaviour
                 break;
 
             case PlayerState.TARGETING:
+
+                attackUnit.Invoke();
+                DisableMenuUnit();
+
+                playerState = PlayerState.NAVIGATING;
+
                 break;
         }
     }
@@ -176,6 +208,12 @@ public class GameplayController : MonoBehaviour
         }
     }
 
+    void TransitionToOptionsMenu()
+    {
+        DisablePlayer();
+        EnableMenuOptions();
+    }
+
     public void EnablePlayer()
     {
         transform.Find("Player").gameObject.SetActive(true);
@@ -190,33 +228,33 @@ public class GameplayController : MonoBehaviour
 
     void EnableMenuOptions()
     {
-        GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(true);
-        GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
+        UIController.transform.Find("Menu_options").gameObject.SetActive(true);
+        UIController.transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
     }
 
     void DisableMenuOptions()
     {
-        GameObject.Find("UI Controller").transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
-        GameObject.Find("UI Controller").transform.Find("Menu_options").gameObject.SetActive(false);
+        UIController.transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
+        UIController.transform.Find("Menu_options").gameObject.SetActive(false);
     }
 
     void EnableMenuShop()
     {
-        GameObject.Find("UI Controller").transform.Find("Menu_shop").gameObject.SetActive(true);
-        GameObject.Find("UI Controller").transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnEnable();
+        UIController.transform.Find("Menu_shop").gameObject.SetActive(true);
+        UIController.transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnEnable();
     }
 
     void DisableMenuShop()
     {
-        GameObject.Find("UI Controller").transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnDisable();
-        GameObject.Find("UI Controller").transform.Find("Menu_shop").gameObject.SetActive(false);
+        UIController.transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnDisable();
+        UIController.transform.Find("Menu_shop").gameObject.SetActive(false);
     }
 
     public void DisableMenuUnit()
     {
         //d'aquest no hi ha enable perquè qui l'activa és la unitat
 
-        MenuUnitController menu = GameObject.Find("UI Controller").transform.Find("Menu_unit").GetComponent<MenuUnitController>();
+        MenuUnitController menu = UIController.transform.Find("Menu_unit").GetComponent<MenuUnitController>();
         menu.MyOnDisable();
         menu.gameObject.SetActive(false);
 
@@ -228,7 +266,7 @@ public class GameplayController : MonoBehaviour
 
     public void ShowMenuUnit() // as opposed to hide
     {
-        GameObject menu = GameObject.Find("UI Controller").transform.Find("Menu_unit").gameObject;
+        GameObject menu = UIController.transform.Find("Menu_unit").gameObject;
         MenuUnitController menuController = menu.GetComponent<MenuUnitController>();
 
         menu.SetActive(true);
@@ -241,15 +279,15 @@ public class GameplayController : MonoBehaviour
     public void HideMenuUnit()
     {
         //per quan la unitat hagi d'atacar
-        GameObject.Find("UI Controller").transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnHide();
-        GameObject.Find("UI Controller").transform.Find("Menu_unit").gameObject.SetActive(false);
+        UIController.transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnHide();
+        UIController.transform.Find("Menu_unit").gameObject.SetActive(false);
 
         playerState = PlayerState.TARGETING;
     }
 
     void CancelMenuUnit()
     {
-        GameObject.Find("UI Controller").transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnCancel();
-        GameObject.Find("UI Controller").transform.Find("Menu_unit").gameObject.SetActive(false);
+        UIController.transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnCancel();
+        UIController.transform.Find("Menu_unit").gameObject.SetActive(false);
     }
 }

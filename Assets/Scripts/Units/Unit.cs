@@ -32,16 +32,20 @@ public class Unit : MonoBehaviour
     private SpriteRenderer renderer;
     private int layerDifference = 2;
 
+    //important
+    [HideInInspector]
+    public bool myTurn; // per saber si la unitat ha estat seleccionada al torn del seu exèrcit o no
+
     //stats
     [Header("Info")]
-    public uint unitType;
+    public uint unitType; //el tipus d'unitat s'assigna des de l'inspector
     public uint movementRange;
     public uint neutralCost;
     public uint containerCost;
     public uint lampCost;
 
     [Header("Stats")]
-    public uint hitPoints;
+    public int hitPoints;
     public uint basePower; //el basePower és el mal que faran a una unitat enemiga de la mateixa categoria. Després se li aplicaran multiplicadors en funció de a què s'enfrontin
     public uint defense; //la defensa base sempre serà 0 i estarà determinada per la casella
 
@@ -51,6 +55,7 @@ public class Unit : MonoBehaviour
     [Header("Interaction")]
     public List<GameObject> targets;
     public GameObject currentTarget;
+    public GameObject currentCapture;
 
     //movement
     List<Vector2Int> path = new List<Vector2Int>();
@@ -70,8 +75,10 @@ public class Unit : MonoBehaviour
     [HideInInspector]
     public Vector2Int lastGoal;
 
-    //menu
+    //UI
     private bool[] activeButtons;
+    GameObject UITarget;
+    GameObject UIHitPoints;
 
     void Start()
     {
@@ -92,6 +99,10 @@ public class Unit : MonoBehaviour
         activeButtons[1] = false; //attack
         activeButtons[2] = true; //wait sempre és true perquè sempre hi haurà la opció
 
+        UITarget = transform.Find("Targeting").gameObject;
+        UITarget.SetActive(false);
+        UIHitPoints = transform.Find("Hitpoints").gameObject;
+
         UpdateStatsBasedOnTile();
     }
 
@@ -108,6 +119,26 @@ public class Unit : MonoBehaviour
         }
 
         DrawLines();
+
+        if (Input.GetKeyDown("m"))
+        {
+            UpdateTileForDeath();
+        }
+    }
+
+    void MyOnDestroy()
+    {
+        Debug.Log("Unit::MyOnDestroy - Died in position: " + transform.position);
+
+        UpdateTileInfo();
+        UpdateTileForDeath();
+
+        if (army == UnitArmy.CANI)
+            GetComponentInParent<UnitsController>().caniUnits.Remove(gameObject);
+        else
+            GetComponentInParent<UnitsController>().hipsterUnits.Remove(gameObject);
+
+        Destroy(gameObject);
     }
 
     void SetCani()
@@ -153,6 +184,12 @@ public class Unit : MonoBehaviour
             renderer.sortingOrder -= layerDifference;
     }
 
+    public void OnIdle()
+    {
+        state = UnitState.IDLE;
+        UpdateAnimator();
+    }
+
     public void OnSelected()
     {
         Highlight(true);
@@ -162,6 +199,26 @@ public class Unit : MonoBehaviour
 
         //mapa
         GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfinding(gameObject);
+
+        SetMyTurn();
+    }
+
+    void SetMyTurn()
+    {
+        if (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
+        {
+            if (army == UnitArmy.CANI)
+                myTurn = true;
+            else
+                myTurn = false;
+        }
+        else
+        {
+            if (army == UnitArmy.HIPSTER)
+                myTurn = true;
+            else
+                myTurn = false;
+        }
     }
 
     public void OnDeselected()
@@ -179,6 +236,13 @@ public class Unit : MonoBehaviour
     {
         SearchForTargets();
 
+        if (unitType == (uint)UnitType.INFANTRY)
+        {
+            SearchForOtherBuilding(); // això és per la captura
+        }
+
+        UpdateStatsBasedOnTile();
+
         state = UnitState.DECIDING;
 
         //canviar l'estat del gameplay oju
@@ -189,18 +253,27 @@ public class Unit : MonoBehaviour
 
         //obrir el menú oju
         EnableMenuUnit();
+        Untarget();
     }
 
     public void OnCancelMovement()
     {
         transform.position = lastPosition;
+        UpdateStatsBasedOnTile();
 
         state = UnitState.SELECTED;
+        ResetTargeting();
         ResetDirection();
         UpdateAnimator();
 
         //mapa
         GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfinding(gameObject);
+    }
+
+    void ResetTargeting()
+    {
+        targets.Clear();
+        currentTarget = null;
     }
 
     void ResetDirection()
@@ -233,9 +306,11 @@ public class Unit : MonoBehaviour
 
         lastPosition = transform.position;
 
-        UpdateStatsBasedOnTile();
+        ResetTargeting();
         ResetDirection();
         UpdateAnimator();
+
+        UnsubscribeFromEvents();
     }
 
     public void OnMove(Vector2Int goal)
@@ -255,22 +330,30 @@ public class Unit : MonoBehaviour
         state = UnitState.TARGETING;
 
         if (targets.Count > 0)
+        {
             currentTarget = targets[0];
+            Target(currentTarget);
+            UITarget.SetActive(true);
+        }
 
         UpdateAnimator();
 
         SubscribeToEvents(); //necessito saber quan s'apreten les direccions
     }
 
+    public void OnAttack()
+    {
+        AttackTarget();
+        Untarget();
+
+        if (hitPoints > 0)
+            OnWait();
+    }
+
     void UpdateAnimator()
     {
         animator.SetInteger("state", (int)state);
         animator.SetInteger("direction", (int)direction);
-    }
-
-    void UpdateActiveButtons()
-    {
-
     }
 
     void GetPath(Vector2Int goal)
@@ -364,6 +447,22 @@ public class Unit : MonoBehaviour
         }
     }
 
+    void UpdateTileForDeath()
+    {
+        if (army == UnitArmy.CANI)
+        {
+            GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsCani = false;
+
+            Debug.Log("Unit::UpdateTileForDeath - Setting MyTilemap.containsCani to " + 
+                GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsCani);
+        }
+
+        if (army == UnitArmy.HIPSTER)
+        {
+            GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsHipster = false;
+        }
+    }
+
     void UpdateStatsBasedOnTile()
     {
         switch(GetMyTileType(transform.position))
@@ -449,9 +548,59 @@ public class Unit : MonoBehaviour
 
         //si hem trobat algun target activem el botó d'atacar
         if (targets.Count > 0)
-            activeButtons[1] = true;
+            EnableAttackButton(true);
         else
-            activeButtons[1] = false;
+            EnableAttackButton(false);
+    }
+
+    void EnableAttackButton(bool enable)
+    {
+        activeButtons[1] = enable;
+    }
+
+    GameObject SearchForOtherBuilding()
+    {
+        //aquest mètode retorna el building enemic o neutral que hi ha a la casella de la unitat
+
+        Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
+        Vector2 to = from;
+
+        RaycastHit2D neutral = Physics2D.Linecast(from, to, LayerMask.GetMask("Neutral_buildings")); ;
+
+        if (neutral.collider != null)
+        {
+            EnableCaptureButton(true);
+            return neutral.collider.gameObject;
+        }
+        else
+        {
+            if (army == UnitArmy.CANI)
+            {
+                RaycastHit2D hipster = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_buildings"));
+                if (hipster.collider != null)
+                {
+                    EnableCaptureButton(true);
+                    return hipster.collider.gameObject;
+                }
+            }
+            else if (army == UnitArmy.HIPSTER)
+            {
+                RaycastHit2D cani = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_buildings"));
+                if (cani.collider != null)
+                {
+                    EnableCaptureButton(true);
+                    return cani.collider.gameObject;
+                }
+            }
+        }
+
+        EnableCaptureButton(false);
+        return null;
+    }
+
+    void EnableCaptureButton(bool enable)
+    {
+        activeButtons[0] = enable;
     }
 
     void DrawLines()
@@ -469,33 +618,6 @@ public class Unit : MonoBehaviour
         Debug.DrawLine(from, west, Color.green);
     }
 
-    float DamageFormula(GameObject enemy)
-    {
-        float damage = (float)basePower * 0.01f; // convertim 50 en 0.5
-
-        //establim multiplicador de defensa segons la casella
-        float defenseMultiplier = 1.0f - enemy.GetComponent<Unit>().defense * 0.1f; // 1 de defensa resta 0.1 al multiplicador
-        
-        //establim multiplicador segons a quina unitat ens enfrontem
-        float typeMultiplier = 0.0f;
-        switch(enemy.GetComponent<Unit>().unitType)
-        {
-            case (uint)UnitType.INFANTRY:
-                typeMultiplier = 1.0f * vsInfantry;
-                break;
-        }
-
-        //establim multiplicador segons la vida que tingui l'atacant
-        float hpMultiplier = (hitPoints * 2) * 0.01f; //multiplico la vida x2 perquè el màxim és 50 i m'interessa tenir-la en base 100 per calcular el %
-
-        //fórmula final amb tots els paràmetres
-        damage = damage * defenseMultiplier * typeMultiplier * hpMultiplier;
-
-        Debug.Log("Unit::DamageFormula - Damage = " + damage);
-
-        return damage;
-    }
-
     void SelectNextTarget()
     {
         if (switchTargetTimer >= switchTargetInterval)
@@ -510,13 +632,15 @@ public class Unit : MonoBehaviour
                     currentTarget = targets[++currentTargetIndex];
             }
 
-            //actualitzem la direcció
-            if (currentTarget != null)
-            {
-                direction = GetDirectionTo(currentTarget.transform.position);
-            }
+            Target(currentTarget);
 
-            UpdateAnimator();
+            //actualitzem la direcció
+            //if (currentTarget != null)
+            //{
+            //    direction = GetDirectionTo(currentTarget.transform.position);
+            //}
+
+            //UpdateAnimator();
 
             switchTargetTimer = 0.0f;
         }
@@ -536,13 +660,15 @@ public class Unit : MonoBehaviour
                     currentTarget = targets[--currentTargetIndex];
             }
 
-            //actualitzem la direcció
-            if (currentTarget != null)
-            {
-                direction = GetDirectionTo(currentTarget.transform.position);
-            }
+            Target(currentTarget);
 
-            UpdateAnimator();
+            //actualitzem la direcció
+            //if (currentTarget != null)
+            //{
+            //    direction = GetDirectionTo(currentTarget.transform.position);
+            //}
+
+            //UpdateAnimator();
 
             switchTargetTimer = 0.0f;
         }
@@ -562,12 +688,118 @@ public class Unit : MonoBehaviour
         return UnitDirection.RIGHT;
     }
 
+    void Target(GameObject target)
+    {
+        if (target != null)
+        {
+            UITarget.transform.position = target.transform.position;
+
+            float estimateDamage = DamageFormula(target);
+            Debug.Log("Unit::Target - Estimate damage: " + estimateDamage);
+        }
+    }
+
+    void Untarget()
+    {
+        UITarget.transform.position = transform.position;
+        UITarget.SetActive(false);
+    }
+
+    void AttackTarget()
+    {
+        //atacant
+        float offensiveDamage = DamageFormula(currentTarget);
+        currentTarget.GetComponent<Unit>().hitPoints -= RatioToInt(offensiveDamage);
+
+        Debug.Log("Unit::AttackTarget - Enemy Hitpoints = " + currentTarget.GetComponent<Unit>().hitPoints);
+
+        if (currentTarget.GetComponent<Unit>().hitPoints > 0)
+        {
+            UpdateHitpoints(currentTarget);
+
+            float defensiveDamage = currentTarget.GetComponent<Unit>().DamageFormula(gameObject);
+            hitPoints -= RatioToInt(defensiveDamage);
+
+            if (hitPoints <= 0)
+            {
+                MyOnDestroy();
+            }
+        }
+        else
+        {
+            currentTarget.GetComponent<Unit>().MyOnDestroy();
+        }
+
+        UpdateHitpoints(gameObject);
+    }
+
+    void UpdateHitpoints(GameObject unit)
+    {
+        if (unit != gameObject)
+            unit.GetComponent<Unit>().UIHitPoints.GetComponent<Hitpoints>().SetSprite(unit.GetComponent<Unit>().CalculateUIHitpoints());
+        else
+            UIHitPoints.GetComponent<Hitpoints>().SetSprite(CalculateUIHitpoints());
+    }
+
+    float DamageFormula(GameObject enemy)
+    {
+        float damage = (float)basePower * 0.01f; // convertim 50 en 0.5
+
+        //establim multiplicador de defensa segons la casella
+        float defenseMultiplier = 1.0f - enemy.GetComponent<Unit>().defense * 0.1f; // 1 de defensa resta 0.1 al multiplicador
+
+        //establim multiplicador segons a quina unitat ens enfrontem
+        float typeMultiplier = 0.0f;
+        switch (enemy.GetComponent<Unit>().unitType)
+        {
+            case (uint)UnitType.INFANTRY:
+                typeMultiplier = 1.0f * vsInfantry;
+                break;
+        }
+
+        //establim multiplicador segons la vida que tingui l'atacant
+        float hpMultiplier = (hitPoints * 2) * 0.01f; //multiplico la vida x2 perquè el màxim és 50 i m'interessa tenir-la en base 100 per calcular el %
+
+        //fórmula final amb tots els paràmetres
+        damage = damage * defenseMultiplier * typeMultiplier * hpMultiplier;
+
+        return damage;
+    }
+
+    int RatioToInt(float ratio)
+    {
+        //aquest mètode retorna el dany en forma de hitpoints
+
+        float ret = 50.0f; // 50 és la vida màxima
+        ret = ret * ratio;
+
+        return Mathf.RoundToInt(ret);
+    }
+
+    uint CalculateUIHitpoints()
+    {
+        if (hitPoints > 45)
+            return 5;
+        else if (hitPoints <= 45 && hitPoints > 35)
+            return 4;
+        else if (hitPoints <= 35 && hitPoints > 25)
+            return 3;
+        else if (hitPoints <= 25 && hitPoints > 15)
+            return 2;
+        else if (hitPoints <= 15)
+            return 1;
+
+        return 5;
+    }
+
     void SubscribeToEvents()
     {
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(SelectNextTarget);
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.AddListener(SelectPreviousTarget);
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(SelectPreviousTarget);
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.AddListener(SelectNextTarget);
+
+        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().attackUnit.AddListener(OnAttack);
     }
 
     public void UnsubscribeFromEvents()
@@ -576,5 +808,7 @@ public class Unit : MonoBehaviour
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.RemoveListener(SelectPreviousTarget);
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.RemoveListener(SelectPreviousTarget);
         GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.RemoveListener(SelectNextTarget);
+
+        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().attackUnit.RemoveListener(OnAttack);
     }
 }

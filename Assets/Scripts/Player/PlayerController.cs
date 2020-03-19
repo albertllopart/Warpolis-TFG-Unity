@@ -241,6 +241,7 @@ public class PlayerController : MonoBehaviour
 
         if (selectedUnit != null &&
             selectedUnit.GetComponent<Unit>().GetState() == UnitState.SELECTED &&
+            selectedUnit.GetComponent<Unit>().myTurn &&
             GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.visited.Contains(myPos))
         {
             GameObject.Find("Map Controller").GetComponent<MapController>().DrawArrow();
@@ -288,42 +289,49 @@ public class PlayerController : MonoBehaviour
 
     public bool InteractUnits()
     {
-        Vector2 from = transform.position + new Vector3(0.5f, -0.5f, 0);
-        Vector2 to = from;
+        List<RaycastHit2D> results = new List<RaycastHit2D>();
 
-        RaycastHit2D result;
+        RaycastHit2D resultCani = RayCast(LayerMask.GetMask("Cani_units"));
+        if (resultCani.collider != null)
+            results.Add(resultCani);
 
-        if (GetComponentInParent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
-            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_units"));
-        else
-            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_units"));
+        RaycastHit2D resultHipster = RayCast(LayerMask.GetMask("Hipster_units"));
+        if (resultHipster.collider != null)
+            results.Add(resultHipster);
 
-        if (result.collider != null && result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING)
+        foreach (RaycastHit2D result in results)
         {
-            Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
+            if (result.collider != null)
+            {
+                if (result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING)
+                {
+                    Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
 
-            //seleccionar unitat
-            selectedUnit = result.collider.gameObject;
+                    //seleccionar unitat
+                    selectedUnit = result.collider.gameObject;
 
-            //cridar mètode OnSelected
-            selectedUnit.GetComponent<Unit>().OnSelected();
+                    //cridar mètode OnSelected
+                    selectedUnit.GetComponent<Unit>().OnSelected();
 
-            return true;
+                    return true;
+                }
+                else if (result.collider.gameObject.GetComponent<Unit>().GetState() == UnitState.WAITING) //perquè el gameplay controller sàpiga que hi ha una unitat a la casella tot i no ser seleccionable
+                {
+                    return true;
+                }
+            }
         }
 
         return false;
     }
     public bool InteractBuildings()
     {
-        Vector2 from = transform.position + new Vector3(0.5f, -0.5f, 0);
-        Vector2 to = from;
-
         RaycastHit2D result;
 
         if (GetComponentInParent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
-            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_buildings"));
+            result = RayCast(LayerMask.GetMask("Cani_buildings"));
         else
-            result = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_buildings"));
+            result = RayCast(LayerMask.GetMask("Hipster_buildings"));
 
         if (result.collider != null)
         {
@@ -332,6 +340,14 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public RaycastHit2D RayCast(int layer)
+    {
+        Vector2 from = transform.position + new Vector3(0.5f, -0.5f, 0);
+        Vector2 to = from;
+
+        return Physics2D.Linecast(from, to, layer);
     }
 
     void DeselectUnit()
@@ -343,12 +359,26 @@ public class PlayerController : MonoBehaviour
 
     void MoveUnit()
     {
-        Vector2Int goal = new Vector2Int((int)transform.position.x, (int)transform.position.y);
-
-        if (selectedUnit != null && GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.visited.Contains(goal))
+        if (selectedUnit != null && selectedUnit.GetComponent<Unit>().myTurn)
         {
-            GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
-            selectedUnit.GetComponent<Unit>().OnMove(goal);
+            Vector2Int goal = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+
+            //faig un raig per mirar si hi ha una unitat per saber si podem moure allà
+            RaycastHit2D result;
+
+            if (GetComponentInParent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
+                result = RayCast(LayerMask.GetMask("Cani_units"));
+            else
+                result = RayCast(LayerMask.GetMask("Hipster_units"));
+
+            if (result.collider == null || result.collider.gameObject == selectedUnit) //la segona comprovació és per poder fer una acció al mateix lloc on la unitat era
+            {
+                if (selectedUnit != null && GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.visited.Contains(goal))
+                {
+                    GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
+                    selectedUnit.GetComponent<Unit>().OnMove(goal);
+                }
+            }
         }
     }
 
