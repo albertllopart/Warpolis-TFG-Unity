@@ -10,12 +10,18 @@ public class GameplayController : MonoBehaviour
         NAVIGATING, OPTIONS, INTERACTING, SHOP, WAITING, TARGETING
     };
 
+    public enum PlayerLocation
+    {
+        LEFT, RIGHT
+    };
+
     public enum Turn
     {
         CANI, HIPSTER
     };
 
     public PlayerState playerState;
+    public PlayerLocation playerLocation;
     private Turn turn;
 
     //controllers
@@ -23,11 +29,18 @@ public class GameplayController : MonoBehaviour
     public GameObject unitsController;
 
     //events
-    public UnityEvent openMenuOptions;
-    public UnityEvent closeMenuOptions;
+    //ui
+    public UnityEvent enableMenuOptions;
+    public UnityEvent disableMenuOptions;
+    public UnityEvent enableMenuShop;
+    public UnityEvent disableMenuShop;
+
+    //unit
     public UnityEvent deselectUnit;
     public UnityEvent moveUnit;
     public UnityEvent attackUnit;
+
+    //gameplay
     public UnityEvent endTurnCani;
     public UnityEvent endTurnHipster;
 
@@ -36,13 +49,21 @@ public class GameplayController : MonoBehaviour
     {
         SubscribeToEvents();
 
-        GetControllers();
+        SetControllers();
 
-        openMenuOptions = new UnityEvent();
-        closeMenuOptions = new UnityEvent();
+        //events
+        //ui
+        enableMenuOptions = new UnityEvent();
+        disableMenuOptions = new UnityEvent();
+        enableMenuShop = new UnityEvent();
+        disableMenuShop = new UnityEvent();
+
+        //unit
         deselectUnit = new UnityEvent();
         moveUnit = new UnityEvent();
         attackUnit = new UnityEvent();
+
+        //gameplay
         endTurnCani = new UnityEvent();
         endTurnHipster = new UnityEvent();
 
@@ -53,10 +74,10 @@ public class GameplayController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    void GetControllers()
+    void SetControllers()
     {
         UIController = GameObject.Find("UI Controller");
         unitsController = GameObject.Find("Units Controller");
@@ -228,28 +249,25 @@ public class GameplayController : MonoBehaviour
 
     void EnableMenuOptions()
     {
-        UIController.transform.Find("Menu_options").gameObject.SetActive(true);
-        UIController.transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
+        enableMenuOptions.Invoke();
     }
 
     void DisableMenuOptions()
     {
-        UIController.transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
-        UIController.transform.Find("Menu_options").gameObject.SetActive(false);
+        disableMenuOptions.Invoke();
     }
 
     void EnableMenuShop()
     {
-        UIController.transform.Find("Menu_shop").gameObject.SetActive(true);
-        UIController.transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnEnable();
+        enableMenuShop.Invoke();
     }
 
     void DisableMenuShop()
     {
-        UIController.transform.Find("Menu_shop").GetComponent<MenuShopController>().MyOnDisable();
-        UIController.transform.Find("Menu_shop").gameObject.SetActive(false);
+        disableMenuShop.Invoke();
     }
 
+    //TODO fer que totes aquestes funcions es cridin des del UI Controller
     public void DisableMenuUnit()
     {
         //d'aquest no hi ha enable perquè qui l'activa és la unitat

@@ -32,9 +32,14 @@ public class MenuUnitController : MonoBehaviour
 
     public void MyOnEnable(GameObject unit)
     {
-        //actualitzar la posició segons la càmera
+        //actualitzar la posició segons la càmera i el player
         Vector2 cameraTopLeft = Camera.main.GetComponent<CameraController>().GetTopLeftCorner();
         transform.position = new Vector3(cameraTopLeft.x + xOffset, cameraTopLeft.y - yOffset, 0);
+
+        if (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().playerLocation == GameplayController.PlayerLocation.LEFT)
+        {
+            transform.position += new Vector3(13, 0, 0); // magic number :(
+        }
 
         //afegir botons actius i posar-los en ordre en collapse
         selectedUnit = unit;

@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
         nextMoveCounterA = 0.0f;
         nextMoveCounterS = 0.0f;
         nextMoveCounterD = 0.0f;
+
+        DeterminePlayerLocation();
     }
 
     // Update is called once per frame
@@ -54,6 +56,17 @@ public class PlayerController : MonoBehaviour
     public void MyOnDisable()
     {
         UnsubscribeFromEvents();
+    }
+
+    void DeterminePlayerLocation()
+    {
+        uint cameraMiddle = (uint)Camera.main.gameObject.GetComponent<CameraController>().GetTopLeftCorner().x +
+                                  Camera.main.gameObject.GetComponent<CameraController>().GetCameraWidth() / 2;
+
+        if (transform.position.x < cameraMiddle)
+            GetComponentInParent<GameplayController>().playerLocation = GameplayController.PlayerLocation.LEFT;
+        else
+            GetComponentInParent<GameplayController>().playerLocation = GameplayController.PlayerLocation.RIGHT;
     }
 
     // Moviment
@@ -192,7 +205,7 @@ public class PlayerController : MonoBehaviour
             if (CheckCameraBoundaries(0))
                 Camera.main.GetComponent<CameraController>().MoveCameraUp();
 
-            CheckArrow();
+            OnMove();
         }
     }
 
@@ -205,7 +218,7 @@ public class PlayerController : MonoBehaviour
             if (CheckCameraBoundaries(1))
                 Camera.main.GetComponent<CameraController>().MoveCameraLeft();
 
-            CheckArrow();
+            OnMove();
         }
     }
 
@@ -218,7 +231,7 @@ public class PlayerController : MonoBehaviour
             if (CheckCameraBoundaries(2))
                 Camera.main.GetComponent<CameraController>().MoveCameraDown();
 
-            CheckArrow();
+            OnMove();
         }
     }
 
@@ -231,8 +244,15 @@ public class PlayerController : MonoBehaviour
             if (CheckCameraBoundaries(3))
                 Camera.main.GetComponent<CameraController>().MoveCameraRight();
 
-            CheckArrow();
+            OnMove();
         }
+    }
+
+    void OnMove()
+    {
+        CheckArrow();
+        DeterminePlayerLocation();
+        GameObject.Find("UI Controller").transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo();
     }
 
     public void CheckArrow()
@@ -395,10 +415,23 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown("f1"))
         {
+            string locationString = null;
+
+            switch (GetComponentInParent<GameplayController>().playerLocation)
+            {
+                case GameplayController.PlayerLocation.LEFT:
+                    locationString = "Left";
+                    break;
+
+                case GameplayController.PlayerLocation.RIGHT:
+                    locationString = "Right";
+                    break;
+            }
+
             MyTile tile = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y];
             string tileType = "null";
 
-            switch(tile.type)
+            switch (tile.type)
             {
                 case MyTileType.NEUTRAL:
                     tileType = "Neutral";
@@ -420,7 +453,10 @@ public class PlayerController : MonoBehaviour
                     tileType = "Building";
                     break;
             }
-            Debug.Log("PlayerController::LogPosition - " + transform.position + " Tile info: " + tileType + "Contains Cani: " + tile.containsCani + ", Contains Hipster: " + tile.containsHipster);
+            Debug.Log("PlayerController::LogPosition - " + transform.position + 
+                      ", Player Location = " + locationString + 
+                      ", Tile info: " + tileType + 
+                      ", Contains Cani: " + tile.containsCani + ", Contains Hipster: " + tile.containsHipster);
         }
     }
 

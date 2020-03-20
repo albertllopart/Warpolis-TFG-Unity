@@ -10,7 +10,9 @@ public class CameraController : MonoBehaviour
     private Vector2 bottomLeftCorner;
     private Vector2 bottomRightCorner;
 
-    UnityEvent cameraMoved;
+    private uint cameraWidth;
+
+    public UnityEvent cameraMoved;
     
     // Start is called before the first frame update
     void Start()
@@ -19,13 +21,15 @@ public class CameraController : MonoBehaviour
         cameraMoved.AddListener(CalculateCameraCorners);
 
         CalculateCameraCorners();
+        CalculateCameraWidth();
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        
     }
+
     public void CalculateCameraCorners()
     {
         topLeftCorner = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, Camera.main.nearClipPlane));
@@ -54,6 +58,19 @@ public class CameraController : MonoBehaviour
                                                             " , Top Right = " + topRightCorner +
                                                             " , Bottom Left = " + bottomLeftCorner +
                                                             " , Bottom Right = " + bottomRightCorner);*/
+    }
+
+    void CalculateCameraWidth()
+    {
+        if (topLeftCorner.x >= 0)
+        {
+            cameraWidth = (uint)topRightCorner.x - (uint)topLeftCorner.x + 1; // +1 perquè el top right corner no arriba a la casella següent
+            Debug.Log("CameraController::CalculateCameraWidth - Camera Width = " + cameraWidth);
+        }
+        else
+        {
+            Debug.LogError("CameraController::CalculateCameraWidth - TopLeftCorner.x < 0");
+        }
     }
 
     public void MoveCameraUp()
@@ -88,5 +105,10 @@ public class CameraController : MonoBehaviour
     public Vector2 GetBottomRightCorner()
     {
         return bottomRightCorner;
+    }
+
+    public uint GetCameraWidth()
+    {
+        return cameraWidth;
     }
 }
