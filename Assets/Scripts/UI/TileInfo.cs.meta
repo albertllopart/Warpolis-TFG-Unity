@@ -21,9 +21,21 @@ MonoImporter:
       type: 3}
   - container: {fileID: -4815885190406460031, guid: a60de30a910d51e4eba12e1e321ac8c3,
       type: 3}
-  - building: {fileID: 3985221016008397036, guid: a60de30a910d51e4eba12e1e321ac8c3,
-      type: 3}
   - lamp: {fileID: 9061651696941551919, guid: a60de30a910d51e4eba12e1e321ac8c3, type: 3}
+  - cani_base: {fileID: 8642771837104280003, guid: a60de30a910d51e4eba12e1e321ac8c3,
+      type: 3}
+  - hipster_base: {fileID: -1762573714345474896, guid: a60de30a910d51e4eba12e1e321ac8c3,
+      type: 3}
+  - neutral_factory: {fileID: 3985221016008397036, guid: a60de30a910d51e4eba12e1e321ac8c3,
+      type: 3}
+  - cani_factory: {fileID: -2426843357703420916, guid: a60de30a910d51e4eba12e1e321ac8c3,
+      type: 3}
+  - hipster_factory: {fileID: -3642208251427772964, guid: a60de30a910d51e4eba12e1e321ac8c3,
+      type: 3}
+  - cani_infantry: {fileID: -1303616962300165533, guid: 55fdfc8ba1262d644b7fee0d3096ed6c,
+      type: 3}
+  - hipster_infantry: {fileID: -7599493879623155883, guid: 55fdfc8ba1262d644b7fee0d3096ed6c,
+      type: 3}
   - map: {instanceID: 0}
   - unit: {instanceID: 0}
   executionOrder: 0

@@ -30,7 +30,7 @@ public class UnitInfantry : MonoBehaviour
         }
     }
 
-    void StopCapture()
+    public void StopCapture()
     {
         if (currentCapture != null)
         {
@@ -38,7 +38,7 @@ public class UnitInfantry : MonoBehaviour
             currentCapture = null;
         }
 
-        UICaptureSign.SetActive(false);
+        EnableUICaptureSign(false);
 
         toStopCapture = false;
     }
@@ -62,8 +62,9 @@ public class UnitInfantry : MonoBehaviour
             if(currentCapture.GetComponent<Building>().ApplyCapture(capturePower))
             {
                 DestroyAndCreate();
-                EnableUICaptureSign(false);
                 currentCapture = null;
+                GetComponent<Unit>().OnWait();
+                return; // això és perquè un cop ha acabat la captura no segueixi en estat de captura
             }
         }
 

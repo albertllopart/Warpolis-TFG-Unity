@@ -78,6 +78,7 @@ public class Unit : MonoBehaviour
     private bool[] activeButtons;
     GameObject UITarget;
     GameObject UIHitPoints;
+    GameObject UIDamageInfo;
 
     void Start()
     {
@@ -102,8 +103,11 @@ public class Unit : MonoBehaviour
         EnableUITarget(false);
         UIHitPoints = transform.Find("Hitpoints").gameObject;
         EnableUIHitPoints(true);
+        UIDamageInfo = transform.Find("Damage_info").gameObject;
+        EnableUIDamageInfo(false);
 
         UpdateStatsBasedOnTile();
+        GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
     }
 
     void Update()
@@ -137,6 +141,9 @@ public class Unit : MonoBehaviour
             GetComponentInParent<UnitsController>().caniUnits.Remove(gameObject);
         else
             GetComponentInParent<UnitsController>().hipsterUnits.Remove(gameObject);
+
+        if (unitType == (uint)UnitType.INFANTRY)
+            GetComponent<UnitInfantry>().StopCapture(); // s'ha de fer ja perquè no hi haurà update
 
         Destroy(gameObject);
     }
@@ -192,6 +199,42 @@ public class Unit : MonoBehaviour
     void EnableUIHitPoints(bool enable)
     {
         UIHitPoints.SetActive(enable);
+    }
+
+    void EnableUIDamageInfo(bool enable)
+    {
+        if (!enable)
+            UIDamageInfo.transform.position = transform.position;
+
+        UIDamageInfo.SetActive(enable);
+
+        if (enable)
+        {
+            UIDamageInfo.transform.Find("Number").transform.Find("Integer").GetComponent<Number>().SetupNumbers();
+            UIDamageInfo.transform.Find("Number").transform.Find("Float").GetComponent<Number>().SetupNumbers();
+
+            //reposicionar segons Tile_info de la UI
+            if (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().playerLocation == GameplayController.PlayerLocation.LEFT)
+            {
+                UIDamageInfo.transform.position = Camera.main.transform.Find("UI Controller").transform.position + new Vector3(4.5f, -3, 0);
+            }
+            else
+            {
+                UIDamageInfo.transform.position = Camera.main.transform.Find("UI Controller").transform.position + new Vector3(-6, -3, 0);
+            }
+        }
+    }
+
+    void UpdateUIDamageInfo(GameObject target)
+    {
+        float estimateRatio = DamageFormula(target);
+        int estimateDamage = RatioToInt(estimateRatio);
+
+        int integer = estimateDamage / 10; //obtenim l'enter de mal
+        int myFloat = estimateDamage % 10; //obtenim el decimal de mal
+
+        UIDamageInfo.transform.Find("Number").transform.Find("Integer").GetComponent<Number>().SetNumber(integer);
+        UIDamageInfo.transform.Find("Number").transform.Find("Float").GetComponent<Number>().SetNumber(myFloat);
     }
 
     public void OnIdle()
@@ -267,6 +310,7 @@ public class Unit : MonoBehaviour
         }
 
         UpdateStatsBasedOnTile();
+        EnableUIDamageInfo(false);
 
         state = UnitState.DECIDING;
 
@@ -311,8 +355,7 @@ public class Unit : MonoBehaviour
 
     void EnableMenuUnit()
     {
-        GameObject.Find("UI Controller").transform.Find("Menu_unit").gameObject.SetActive(true);
-        GameObject.Find("UI Controller").transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnEnable(gameObject);
+        GameObject.Find("UI Controller").GetComponent<UIController>().EnableMenuUnit(gameObject);
     }
 
     void DisableMenuUnit()
@@ -377,6 +420,9 @@ public class Unit : MonoBehaviour
     {
         state = UnitState.TARGETING;
 
+        EnableUIDamageInfo(true);
+        UIDamageInfo.transform.Find("Number").transform.Find("Integer").GetComponent<Number>().SetNumber(7);
+
         if (targets.Count > 0)
         {
             currentTarget = targets[0];
@@ -384,13 +430,12 @@ public class Unit : MonoBehaviour
             UITarget.SetActive(true);
         }
 
-        UpdateAnimator();
-
         SubscribeToEvents(); //necessito saber quan s'apreten les direccions
     }
 
     public void OnAttack()
     {
+        EnableUIDamageInfo(false);
         AttackTarget();
         Untarget();
 
@@ -642,14 +687,6 @@ public class Unit : MonoBehaviour
 
             Target(currentTarget);
 
-            //actualitzem la direcció
-            //if (currentTarget != null)
-            //{
-            //    direction = GetDirectionTo(currentTarget.transform.position);
-            //}
-
-            //UpdateAnimator();
-
             switchTargetTimer = 0.0f;
         }
     }
@@ -669,14 +706,6 @@ public class Unit : MonoBehaviour
             }
 
             Target(currentTarget);
-
-            //actualitzem la direcció
-            //if (currentTarget != null)
-            //{
-            //    direction = GetDirectionTo(currentTarget.transform.position);
-            //}
-
-            //UpdateAnimator();
 
             switchTargetTimer = 0.0f;
         }
@@ -704,6 +733,11 @@ public class Unit : MonoBehaviour
 
             float estimateDamage = DamageFormula(target);
             Debug.Log("Unit::Target - Estimate damage: " + estimateDamage);
+
+            UpdateUIDamageInfo(target);
+
+            GameObject.Find("UI Controller").GetComponent<UIController>().EnableTileInfo();
+            GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(currentTarget.transform.position);
         }
     }
 

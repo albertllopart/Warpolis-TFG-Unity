@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckArrow();
         DeterminePlayerLocation();
-        GameObject.Find("UI Controller").transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo();
+        GameObject.Find("UI Controller").transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
     }
 
     public void CheckArrow()

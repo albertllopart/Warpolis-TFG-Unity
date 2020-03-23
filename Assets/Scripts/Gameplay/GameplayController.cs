@@ -34,6 +34,10 @@ public class GameplayController : MonoBehaviour
     public UnityEvent disableMenuOptions;
     public UnityEvent enableMenuShop;
     public UnityEvent disableMenuShop;
+    public UnityEvent disableMenuUnit;
+    public UnityEvent showMenuUnit;
+    public UnityEvent hideMenuUnit;
+    public UnityEvent cancelMenuUnit;
 
     //unit
     public UnityEvent deselectUnit;
@@ -57,6 +61,10 @@ public class GameplayController : MonoBehaviour
         disableMenuOptions = new UnityEvent();
         enableMenuShop = new UnityEvent();
         disableMenuShop = new UnityEvent();
+        disableMenuUnit = new UnityEvent();
+        showMenuUnit = new UnityEvent();
+        hideMenuUnit = new UnityEvent();
+        cancelMenuUnit = new UnityEvent();
 
         //unit
         deselectUnit = new UnityEvent();
@@ -213,6 +221,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.WAITING:
 
+                transform.Find("Player").gameObject.SetActive(true); //alerta, codi brut però necessito activar el player perquè cancelMenuUnit necessita la seva posició
                 CancelMenuUnit();
                 EnablePlayer();
 
@@ -270,26 +279,17 @@ public class GameplayController : MonoBehaviour
     //TODO fer que totes aquestes funcions es cridin des del UI Controller
     public void DisableMenuUnit()
     {
-        //d'aquest no hi ha enable perquè qui l'activa és la unitat
-
-        MenuUnitController menu = UIController.transform.Find("Menu_unit").GetComponent<MenuUnitController>();
-        menu.MyOnDisable();
-        menu.gameObject.SetActive(false);
-
         EnablePlayer();
         transform.Find("Player").GetComponent<PlayerController>().selectedUnit = null;
+
+        disableMenuUnit.Invoke();
 
         playerState = PlayerState.NAVIGATING;
     }
 
     public void ShowMenuUnit() // as opposed to hide
     {
-        GameObject menu = UIController.transform.Find("Menu_unit").gameObject;
-        MenuUnitController menuController = menu.GetComponent<MenuUnitController>();
-
-        menu.SetActive(true);
-        menuController.selectedUnit.GetComponent<Unit>().OnMenu();
-        menuController.selectedUnit.GetComponent<Unit>().UnsubscribeFromEvents();
+        showMenuUnit.Invoke();
 
         playerState = PlayerState.WAITING;
     }
@@ -297,15 +297,13 @@ public class GameplayController : MonoBehaviour
     public void HideMenuUnit()
     {
         //per quan la unitat hagi d'atacar
-        UIController.transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnHide();
-        UIController.transform.Find("Menu_unit").gameObject.SetActive(false);
+        hideMenuUnit.Invoke();
 
         playerState = PlayerState.TARGETING;
     }
 
     void CancelMenuUnit()
     {
-        UIController.transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnCancel();
-        UIController.transform.Find("Menu_unit").gameObject.SetActive(false);
+        cancelMenuUnit.Invoke();
     }
 }

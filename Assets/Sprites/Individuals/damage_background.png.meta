@@ -1,0 +1,1291 @@
+fileFormatVersion: 2
+guid: f403aa5cca728d4408f2aa02ca70d0cd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3473145356773723104
+    second: damage_background_0
+  - first:
+      213: -5174633357799968495
+    second: damage_background_1
+  - first:
+      213: -8875216041439462063
+    second: damage_background_2
+  - first:
+      213: -2420898315666761871
+    second: damage_background_3
+  - first:
+      213: -6697185576154778169
+    second: damage_background_4
+  - first:
+      213: -3146734923241025499
+    second: damage_background_5
+  - first:
+      213: 6086239403577273662
+    second: damage_background_6
+  - first:
+      213: 8032968611693351850
+    second: damage_background_7
+  - first:
+      213: -6574027629619495788
+    second: damage_background_8
+  - first:
+      213: -6067595368290712213
+    second: damage_background_9
+  - first:
+      213: -2988101327134532736
+    second: damage_background_10
+  - first:
+      213: -651124951006421298
+    second: damage_background_11
+  - first:
+      213: -5454260082128181124
+    second: damage_background_12
+  - first:
+      213: -68310712586184876
+    second: damage_background_13
+  - first:
+      213: -1216967123790230003
+    second: damage_background_14
+  - first:
+      213: -6912157027383466711
+    second: damage_background_15
+  - first:
+      213: -8890419601684073290
+    second: damage_background_16
+  - first:
+      213: -2638206883553372235
+    second: damage_background_17
+  - first:
+      213: -7514726118123043844
+    second: damage_background_18
+  - first:
+      213: 1862349135287142423
+    second: damage_background_19
+  - first:
+      213: -7691441564504218769
+    second: damage_background_20
+  - first:
+      213: 244705141357205563
+    second: damage_background_21
+  - first:
+      213: -1553349760201432518
+    second: damage_background_22
+  - first:
+      213: 4780530599991036473
+    second: damage_background_23
+  - first:
+      213: 4918882501615314141
+    second: damage_background_24
+  - first:
+      213: 3244166470799852709
+    second: damage_background_25
+  - first:
+      213: 2705641213582680040
+    second: damage_background_26
+  - first:
+      213: -6146262279936410211
+    second: damage_background_27
+  - first:
+      213: 687514573686009754
+    second: damage_background_28
+  - first:
+      213: -420556380405615857
+    second: damage_background_29
+  - first:
+      213: 5091289079914563012
+    second: damage_background_30
+  - first:
+      213: -7364173769962363773
+    second: damage_background_31
+  - first:
+      213: 5696349679323450533
+    second: damage_background_32
+  - first:
+      213: -5632403847970999878
+    second: damage_background_33
+  - first:
+      213: 886048462481411412
+    second: damage_background_34
+  - first:
+      213: 6650521753513550156
+    second: damage_background_35
+  - first:
+      213: -5343358040220634901
+    second: damage_background_36
+  - first:
+      213: 6337832058086024381
+    second: damage_background_37
+  - first:
+      213: -5365127359221041321
+    second: damage_background_38
+  - first:
+      213: 5191526665054664429
+    second: damage_background_39
+  - first:
+      213: -4597576153691027538
+    second: damage_background_40
+  - first:
+      213: 6859141176996413864
+    second: damage_background_41
+  - first:
+      213: 5100454175845665618
+    second: damage_background_42
+  - first:
+      213: -7140072657813385465
+    second: damage_background_43
+  - first:
+      213: -4322815221097093666
+    second: damage_background_44
+  - first:
+      213: -5977332507743037818
+    second: damage_background_45
+  - first:
+      213: 9135620675540142137
+    second: damage_background_46
+  - first:
+      213: -3527678751377573778
+    second: damage_background_47
+  - first:
+      213: -8664860131240081546
+    second: damage_background_48
+  - first:
+      213: 1296317511039765064
+    second: damage_background_49
+  - first:
+      213: -1934709409340314034
+    second: damage_background_50
+  - first:
+      213: -6668373636294593344
+    second: damage_background_51
+  - first:
+      213: -931235285811242079
+    second: damage_background_52
+  - first:
+      213: 3588783992954872679
+    second: damage_background_53
+  - first:
+      213: 6138717040572897112
+    second: damage_background_54
+  - first:
+      213: 7755037832013974915
+    second: damage_background_55
+  - first:
+      213: 2871715355577274495
+    second: damage_background_56
+  - first:
+      213: -8365327918955295380
+    second: damage_background_57
+  - first:
+      213: -6097679646486883019
+    second: damage_background_58
+  - first:
+      213: -9009420886485463816
+    second: damage_background_59
+  - first:
+      213: 3969840571361051533
+    second: damage_background_60
+  - first:
+      213: 1143851801198290815
+    second: damage_background_61
+  - first:
+      213: -5674208350874223113
+    second: damage_background_62
+  - first:
+      213: -4230288162993335575
+    second: damage_background_63
+  - first:
+      213: -3712332358718168620
+    second: damage_background_64
+  - first:
+      213: -6806334040206234194
+    second: damage_background_65
+  - first:
+      213: 2405627974318050115
+    second: damage_background_66
+  - first:
+      213: 1445027079761857845
+    second: damage_background_67
+  - first:
+      213: 4655998461646873637
+    second: damage_background_68
+  - first:
+      213: -1537846004468391064
+    second: damage_background_69
+  - first:
+      213: 4685894991211767497
+    second: damage_background_70
+  - first:
+      213: 6247254912053277628
+    second: damage_background_71
+  - first:
+      213: 8951296256450423898
+    second: damage_background_32
+  - first:
+      213: 8210450628550048546
+    second: damage_background_33
+  - first:
+      213: 6802089608947240018
+    second: damage_background_34
+  - first:
+      213: 1774785469346917397
+    second: damage_background_35
+  - first:
+      213: -5599708185329850878
+    second: damage_background_36
+  - first:
+      213: -4032803234165802535
+    second: damage_background_37
+  - first:
+      213: -8909790632412686648
+    second: damage_background_38
+  - first:
+      213: 5885475428197753590
+    second: damage_background_39
+  - first:
+      213: 7116570254031548111
+    second: damage_background_0
+  - first:
+      213: 2319893809358868046
+    second: damage_background_1
+  - first:
+      213: 1810999726687534588
+    second: damage_background_2
+  - first:
+      213: 7250476865510925523
+    second: damage_background_3
+  - first:
+      213: 8684137317944882541
+    second: damage_background_4
+  - first:
+      213: 8043047252998592253
+    second: damage_background_5
+  - first:
+      213: -615703921199906763
+    second: damage_background_6
+  - first:
+      213: 7627215049673200063
+    second: damage_background_7
+  - first:
+      213: 676278555212219349
+    second: damage_background_8
+  - first:
+      213: 2513473684962337069
+    second: damage_background_9
+  - first:
+      213: 7430169693503251362
+    second: damage_background_10
+  - first:
+      213: 1967495921949863220
+    second: damage_background_11
+  - first:
+      213: -4694623906495225280
+    second: damage_background_12
+  - first:
+      213: 4297518711277217652
+    second: damage_background_13
+  - first:
+      213: 870675910591440415
+    second: damage_background_14
+  - first:
+      213: -1752639700166316680
+    second: damage_background_15
+  - first:
+      213: -1339725930486566514
+    second: damage_background_16
+  - first:
+      213: -2085237869770432263
+    second: damage_background_17
+  - first:
+      213: -1238406014523335185
+    second: damage_background_18
+  - first:
+      213: 5076656970347652130
+    second: damage_background_19
+  - first:
+      213: 3698021702928306657
+    second: damage_background_20
+  - first:
+      213: -8251569620722575147
+    second: damage_background_21
+  - first:
+      213: 1219626125840597911
+    second: damage_background_22
+  - first:
+      213: 1668669500908104840
+    second: damage_background_23
+  - first:
+      213: 6803129469675810845
+    second: damage_background_24
+  - first:
+      213: -1444965270818028056
+    second: damage_background_25
+  - first:
+      213: -6122728110284137509
+    second: damage_background_26
+  - first:
+      213: -373346204956145448
+    second: damage_background_27
+  - first:
+      213: 5485136891129786480
+    second: damage_background_28
+  - first:
+      213: 6845261683198605740
+    second: damage_background_29
+  - first:
+      213: 964640152054944548
+    second: damage_background_30
+  - first:
+      213: -4743292142091987013
+    second: damage_background_31
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: damage_background_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5ce20de484693c70800000000000000
+      internalID: 8951296256450423898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_33
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22bbb98885161f170800000000000000
+      internalID: 8210450628550048546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_34
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25c0da7d570e56e50800000000000000
+      internalID: 6802089608947240018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_35
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ca2fc2bfd41a810800000000000000
+      internalID: 1774785469346917397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_36
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 206219fe217d942b0800000000000000
+      internalID: -5599708185329850878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_37
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9308243da9808c0800000000000000
+      internalID: -4032803234165802535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_38
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c650fb30a01a5480800000000000000
+      internalID: -8909790632412686648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_39
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f2640828b86da150800000000000000
+      internalID: 5885475428197753590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fce69aad0f223c260800000000000000
+      internalID: 7116570254031548111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e8677d02be13020800000000000000
+      internalID: 2319893809358868046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd3a8508a6f12910800000000000000
+      internalID: 1810999726687534588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d467f46b4ede9460800000000000000
+      internalID: 7250476865510925523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6571d051e0448870800000000000000
+      internalID: 8684137317944882541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_5
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df699aadcd4ae9f60800000000000000
+      internalID: 8043047252998592253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_6
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 530801abb849477f0800000000000000
+      internalID: -615703921199906763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_7
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 64
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1d84d4daf49d960800000000000000
+      internalID: 7627215049673200063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d383ac43cf926900800000000000000
+      internalID: 676278555212219349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_9
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d21e870eff6a1e220800000000000000
+      internalID: 2513473684962337069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_10
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3622238f34d1760800000000000000
+      internalID: 7430169693503251362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_11
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43de9d4ed13fd4b10800000000000000
+      internalID: 1967495921949863220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 042ab432e6859deb0800000000000000
+      internalID: -4694623906495225280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_13
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 477e549af7ad3ab30800000000000000
+      internalID: 4297518711277217652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_14
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f16ea4da023451c00800000000000000
+      internalID: 870675910591440415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_15
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 48
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87de6548a7f5da7e0800000000000000
+      internalID: -1752639700166316680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e81f7f84d56586de0800000000000000
+      internalID: -1339725930486566514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_17
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f0242c943fbf03e0800000000000000
+      internalID: -2085237869770432263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_18
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fed11a88a4c40dee0800000000000000
+      internalID: -1238406014523335185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_19
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22425140e98e37640800000000000000
+      internalID: 5076656970347652130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_20
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e11ab65523025330800000000000000
+      internalID: 3698021702928306657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_21
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d81d6d06298c7d80800000000000000
+      internalID: -8251569620722575147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_22
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793c385ef7bfce010800000000000000
+      internalID: 1219626125840597911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_23
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 32
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88ce721f11e482710800000000000000
+      internalID: 1668669500908104840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d10b4094532996e50800000000000000
+      internalID: 6803129469675810845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_25
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e58d10fdb372fbe0800000000000000
+      internalID: -1444965270818028056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_26
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdb173a2933b70ba0800000000000000
+      internalID: -6122728110284137509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_27
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d8495bca9b91daf0800000000000000
+      internalID: -373346204956145448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_28
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0707e24e0fe1f1c40800000000000000
+      internalID: 5485136891129786480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_29
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca935adab314ffe50800000000000000
+      internalID: 6845261683198605740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_30
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 423505f7b17136d00800000000000000
+      internalID: 964640152054944548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_background_31
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 16
+        width: 24
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb794b48de07c2eb0800000000000000
+      internalID: -4743292142091987013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

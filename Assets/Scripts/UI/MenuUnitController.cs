@@ -191,6 +191,12 @@ public class MenuUnitController : MonoBehaviour
         }
     }
 
+    void UpdateTileInfo()
+    {
+        //actualitzar tileinfo
+        transform.parent.transform.Find("Tile_info").GetComponent<TileInfo>().CheckBuilding(GameObject.Find("Player").transform.position);
+    }
+
     void SubscribeToEvents()
     {
         transform.Find("Cursor_unit").GetComponent<CursorUnit>().sendO.AddListener(PressSelectedButton);

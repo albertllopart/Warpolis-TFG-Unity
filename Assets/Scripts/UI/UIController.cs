@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     {
         SubscribeToEvents();
 
-        transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo();
+        transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
         afterStart = false;
     }
 
@@ -28,7 +28,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    void EnableTileInfo()
+    public void EnableTileInfo()
     {
         transform.Find("Tile_info").gameObject.SetActive(true);
     }
@@ -70,11 +70,63 @@ public class UIController : MonoBehaviour
         transform.Find("Menu_shop").gameObject.SetActive(false);
     }
 
+    public void EnableMenuUnit(GameObject unit)
+    {
+        DisableTileInfo();
+
+        transform.Find("Menu_unit").gameObject.SetActive(true);
+        transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnEnable(unit);
+    }
+
+    void DisableMenuUnit()
+    {
+        EnableTileInfo();
+        transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
+
+        MenuUnitController menu = transform.Find("Menu_unit").GetComponent<MenuUnitController>();
+        menu.MyOnDisable();
+        menu.gameObject.SetActive(false);
+    }
+
+    void ShowMenuUnit()
+    {
+        DisableTileInfo();
+
+        GameObject menu = transform.Find("Menu_unit").gameObject;
+        MenuUnitController menuController = menu.GetComponent<MenuUnitController>();
+
+        menu.SetActive(true);
+        menuController.selectedUnit.GetComponent<Unit>().OnMenu();
+        menuController.selectedUnit.GetComponent<Unit>().UnsubscribeFromEvents();
+    }
+
+    void HideMenuUnit()
+    {
+        EnableTileInfo();
+
+        transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnHide();
+        transform.Find("Menu_unit").gameObject.SetActive(false);
+    }
+
+    void CancelMenuUnit() // això es crida al cancel·lar el moviment
+    {
+        transform.Find("Menu_unit").GetComponent<MenuUnitController>().MyOnCancel();
+        transform.Find("Menu_unit").gameObject.SetActive(false);
+
+        EnableTileInfo();
+        transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
+    }
+
     void SubscribeToEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().enableMenuOptions.AddListener(EnableMenuOptions);
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().disableMenuOptions.AddListener(DisableMenuOptions);
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().enableMenuShop.AddListener(EnableMenuShop);
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().disableMenuShop.AddListener(DisableMenuShop);
+        GameObject gameplay = GameObject.Find("Gameplay Controller");
+        gameplay.GetComponent<GameplayController>().enableMenuOptions.AddListener(EnableMenuOptions);
+        gameplay.GetComponent<GameplayController>().disableMenuOptions.AddListener(DisableMenuOptions);
+        gameplay.GetComponent<GameplayController>().enableMenuShop.AddListener(EnableMenuShop);
+        gameplay.GetComponent<GameplayController>().disableMenuShop.AddListener(DisableMenuShop);
+        gameplay.GetComponent<GameplayController>().disableMenuUnit.AddListener(DisableMenuUnit);
+        gameplay.GetComponent<GameplayController>().showMenuUnit.AddListener(ShowMenuUnit);
+        gameplay.GetComponent<GameplayController>().hideMenuUnit.AddListener(HideMenuUnit);
+        gameplay.GetComponent<GameplayController>().cancelMenuUnit.AddListener(CancelMenuUnit);
     }
 }

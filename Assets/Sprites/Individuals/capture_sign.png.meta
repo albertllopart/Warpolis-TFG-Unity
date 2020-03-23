@@ -8,6 +8,15 @@ TextureImporter:
   - first:
       213: -7061829658160502029
     second: capture_sign_1
+  - first:
+      213: -2629703927949921351
+    second: capture_sign_0
+  - first:
+      213: -5214866284762602489
+    second: capture_sign_1
+  - first:
+      213: -2104227892791265160
+    second: capture_sign_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -118,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c84fa0bf08e0c6a0800000000000000
-      internalID: -6430885113798637367
+      spriteID: 9b37816d53a618bd0800000000000000
+      internalID: -2629703927949921351
       vertices: []
       indices: 
       edges: []
@@ -139,8 +148,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fa660157575ffd90800000000000000
-      internalID: -7061829658160502029
+      spriteID: 70460995eb211a7b0800000000000000
+      internalID: -5214866284762602489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capture_sign_2
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 6
+        height: 6
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87835b351e74cc2e0800000000000000
+      internalID: -2104227892791265160
       vertices: []
       indices: 
       edges: []
