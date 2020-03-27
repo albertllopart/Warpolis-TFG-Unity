@@ -107,6 +107,11 @@ public class CameraController : MonoBehaviour
         return bottomRightCorner;
     }
 
+    public Vector2 GetTopRightCorner()
+    {
+        return topRightCorner;
+    }
+
     public uint GetCameraWidth()
     {
         return cameraWidth;

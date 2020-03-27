@@ -38,6 +38,8 @@ public class GameplayController : MonoBehaviour
     public UnityEvent showMenuUnit;
     public UnityEvent hideMenuUnit;
     public UnityEvent cancelMenuUnit;
+    public UnityEvent enableMoneyInfo;
+    public UnityEvent disableMoneyInfo;
 
     //unit
     public UnityEvent deselectUnit;
@@ -65,6 +67,8 @@ public class GameplayController : MonoBehaviour
         showMenuUnit = new UnityEvent();
         hideMenuUnit = new UnityEvent();
         cancelMenuUnit = new UnityEvent();
+        enableMoneyInfo = new UnityEvent();
+        disableMoneyInfo = new UnityEvent();
 
         //unit
         deselectUnit = new UnityEvent();
@@ -135,6 +139,7 @@ public class GameplayController : MonoBehaviour
                 {
                     if (transform.Find("Player").GetComponent<PlayerController>().selectedUnit != null)
                     {
+                        DisableMoneyInfo();
                         playerState = PlayerState.INTERACTING;
                     }
                     else
@@ -195,6 +200,7 @@ public class GameplayController : MonoBehaviour
             case PlayerState.INTERACTING:
 
                 deselectUnit.Invoke();
+                EnableMoneyInfo();
 
                 //propi
                 playerState = PlayerState.NAVIGATING;
@@ -305,5 +311,15 @@ public class GameplayController : MonoBehaviour
     void CancelMenuUnit()
     {
         cancelMenuUnit.Invoke();
+    }
+
+    void EnableMoneyInfo()
+    {
+        enableMoneyInfo.Invoke();
+    }
+
+    void DisableMoneyInfo()
+    {
+        disableMoneyInfo.Invoke();
     }
 }

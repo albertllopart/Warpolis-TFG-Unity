@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Number : MonoBehaviour
 {
+    //xifres
+    [Header("Xifres")]
+    public GameObject numberInstance;
+    public Sprite dot;
+    private uint counter = 0;
+    private float spacing = -7/16f;
+    private float dotSpacing = 0.0f;
+
+    //individual
+    [Header("Individual")]
     public Sprite zero;
     public Sprite one;
     public Sprite two;
@@ -48,5 +58,53 @@ public class Number : MonoBehaviour
     {
         if (numbers.Count > num)
             GetComponent<SpriteRenderer>().sprite = numbers[num];
+    }
+
+    public void CreateNumber(int num)
+    {
+        DeleteNumber();
+
+        List<int> listOfInt = GetNumbersFromInt(num);
+
+        foreach(int number in listOfInt)
+        {
+            if (counter == 3)
+            {
+                dotSpacing = -4 / 16f;
+
+                GameObject dotInstance = Instantiate(numberInstance, transform.position + new Vector3(spacing * counter - spacing - 3/16f, 0, 0), Quaternion.identity);
+                dotInstance.transform.parent = transform;
+                dotInstance.GetComponent<SpriteRenderer>().sprite = dot;
+            }
+
+            GameObject currentInstance = Instantiate(numberInstance, transform.position + new Vector3(spacing * counter + dotSpacing, 0, 0), Quaternion.identity);
+            currentInstance.transform.parent = transform;
+            currentInstance.GetComponent<SpriteRenderer>().sprite = numbers[number];
+
+            counter++;
+        }
+
+        counter = 0;
+    }
+
+    List<int> GetNumbersFromInt(int num)
+    {
+        List<int> listOfInt = new List<int>();
+
+        while (num > 0)
+        {
+            listOfInt.Add(num % 10);
+            num = num / 10;
+        }
+
+        return listOfInt;
+    }
+
+    void DeleteNumber()
+    {
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

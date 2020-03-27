@@ -252,7 +252,10 @@ public class PlayerController : MonoBehaviour
     {
         CheckArrow();
         DeterminePlayerLocation();
+
+        //TODO: fer que això es cridi amb event
         GameObject.Find("UI Controller").transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
+        GameObject.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdatePosition();
     }
 
     public void CheckArrow()

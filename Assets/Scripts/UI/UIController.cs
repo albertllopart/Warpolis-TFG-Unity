@@ -16,6 +16,9 @@ public class UIController : MonoBehaviour
         SubscribeToEvents();
 
         transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
+
+        transform.Find("Money_info").GetComponent<MoneyInfo>().AfterStart();
+
         afterStart = false;
     }
 
@@ -38,9 +41,20 @@ public class UIController : MonoBehaviour
         transform.Find("Tile_info").gameObject.SetActive(false);
     }
 
+    public void EnableMoneyInfo()
+    {
+        transform.Find("Money_info").gameObject.SetActive(true);
+    }
+
+    void DisableMoneyInfo()
+    {
+        transform.Find("Money_info").gameObject.SetActive(false);
+    }
+
     void EnableMenuOptions()
     {
         DisableTileInfo();
+        DisableMoneyInfo();
 
         transform.Find("Menu_options").gameObject.SetActive(true);
         transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
@@ -49,6 +63,7 @@ public class UIController : MonoBehaviour
     void DisableMenuOptions()
     {
         EnableTileInfo();
+        EnableMoneyInfo();
 
         transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
         transform.Find("Menu_options").gameObject.SetActive(false);
@@ -81,6 +96,8 @@ public class UIController : MonoBehaviour
     void DisableMenuUnit()
     {
         EnableTileInfo();
+        EnableMoneyInfo();
+
         transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
 
         MenuUnitController menu = transform.Find("Menu_unit").GetComponent<MenuUnitController>();
@@ -128,5 +145,7 @@ public class UIController : MonoBehaviour
         gameplay.GetComponent<GameplayController>().showMenuUnit.AddListener(ShowMenuUnit);
         gameplay.GetComponent<GameplayController>().hideMenuUnit.AddListener(HideMenuUnit);
         gameplay.GetComponent<GameplayController>().cancelMenuUnit.AddListener(CancelMenuUnit);
+        gameplay.GetComponent<GameplayController>().enableMoneyInfo.AddListener(EnableMoneyInfo);
+        gameplay.GetComponent<GameplayController>().disableMoneyInfo.AddListener(DisableMoneyInfo);
     }
 }

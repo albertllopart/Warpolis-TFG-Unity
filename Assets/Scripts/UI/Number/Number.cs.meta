@@ -4,6 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - numberInstance: {fileID: 4249412137838877586, guid: dc94ed6b8d6d66a4286b989830e7cf57,
+      type: 3}
+  - dot: {fileID: -8614588297904505233, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   - zero: {fileID: -3295778609609746925, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   - one: {fileID: -9174533908493705734, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   - two: {fileID: 4584472800584304161, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
