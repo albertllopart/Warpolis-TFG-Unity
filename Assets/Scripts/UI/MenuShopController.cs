@@ -73,9 +73,11 @@ public class MenuShopController : MonoBehaviour
         {
             caniButtons = new List<GameObject>();
             caniButtons.Add(buttonCaniInfantry);
+            buttonCaniInfantry.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniInfantry.GetComponent<MyButton>().shopValue);
 
             hipsterButtons = new List<GameObject>();
             hipsterButtons.Add(buttonHipsterInfantry);
+            buttonHipsterInfantry.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterInfantry.GetComponent<MyButton>().shopValue);
         }
     }
 
@@ -134,32 +136,28 @@ public class MenuShopController : MonoBehaviour
 
     public void PressSelectedButton()
     {
-        GameObject gameplayController = GameObject.Find("Gameplay Controller");
-
-        if (selectedButton.name == "Button_cani_infantry")
+        if (selectedButton.GetComponent<MyButton>().isEnabled)
         {
-            Instantiate(caniInfantry, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+            GameObject gameplayController = GameObject.Find("Gameplay Controller");
+
+            if (selectedButton.name == "Button_cani_infantry")
+            {
+                Instantiate(caniInfantry, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddCaniMoney(-selectedButton.GetComponent<MyButton>().shopValue);
+            }
+            else if (selectedButton.name == "Button_hipster_infantry")
+            {
+                Instantiate(hipsterInfantry, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
+            }
+
+            gameplayController.GetComponent<Controls>().keyboard_k_down.Invoke();
         }
-        else if (selectedButton.name == "Button_hipster_infantry")
-        {
-            Instantiate(hipsterInfantry, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
-        }
-
-        gameplayController.GetComponent<Controls>().keyboard_k_down.Invoke();
-    }
-
-    void SubscribeToEvents()
-    {
-        transform.Find("Cursor_shop").GetComponent<CursorShop>().sendO.AddListener(PressSelectedButton);
-    }
-
-    void UnsubscribeFromEvents()
-    {
-        transform.Find("Cursor_shop").GetComponent<CursorShop>().sendO.RemoveListener(PressSelectedButton);
     }
 
     void DisableInactiveButtons()
     {
+        //aquest mètode desactiva els botons de l'exèrcit que no mou i fa enable o disable en funció del preu
         if (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
         {
             foreach (GameObject button in hipsterButtons)
@@ -169,6 +167,11 @@ public class MenuShopController : MonoBehaviour
             foreach (GameObject button in caniButtons)
             {
                 button.SetActive(true);
+
+                if (GameObject.Find("Data Controller").GetComponent<DataController>().caniMoney >= button.GetComponent<MyButton>().shopValue)
+                    button.GetComponent<MyButton>().OnEnabled();
+                else
+                    button.GetComponent<MyButton>().OnDisabled();
             }
         }
         else
@@ -180,7 +183,22 @@ public class MenuShopController : MonoBehaviour
             foreach (GameObject button in hipsterButtons)
             {
                 button.SetActive(true);
+
+                if (GameObject.Find("Data Controller").GetComponent<DataController>().hipsterMoney >= button.GetComponent<MyButton>().shopValue)
+                    button.GetComponent<MyButton>().OnEnabled();
+                else
+                    button.GetComponent<MyButton>().OnDisabled();
             }
         }
+    }
+
+    void SubscribeToEvents()
+    {
+        transform.Find("Cursor_shop").GetComponent<CursorShop>().sendO.AddListener(PressSelectedButton);
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        transform.Find("Cursor_shop").GetComponent<CursorShop>().sendO.RemoveListener(PressSelectedButton);
     }
 }

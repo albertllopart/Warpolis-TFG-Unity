@@ -386,6 +386,24 @@ TextureImporter:
   - first:
       213: -1048322410774602023
     second: infantry_63
+  - first:
+      213: 6214421394683331277
+    second: infantry_64
+  - first:
+      213: 1198851603529419058
+    second: infantry_65
+  - first:
+      213: -8524690565052779998
+    second: infantry_64
+  - first:
+      213: 1534059194100768068
+    second: infantry_65
+  - first:
+      213: 6663446790945018537
+    second: infantry_66
+  - first:
+      213: -8860019274875453087
+    second: infantry_67
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -1821,6 +1839,90 @@ TextureImporter:
       bones: []
       spriteID: 9ded2b7525c9371f0800000000000000
       internalID: -1048322410774602023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infantry_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 222b7e9c81732b980800000000000000
+      internalID: -8524690565052779998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infantry_65
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 7
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d5cc095b21a4510800000000000000
+      internalID: 1534059194100768068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infantry_66
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 7
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a29ef94d81597c50800000000000000
+      internalID: 6663446790945018537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infantry_67
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 7
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1614fe17963ea0580800000000000000
+      internalID: -8860019274875453087
       vertices: []
       indices: 
       edges: []

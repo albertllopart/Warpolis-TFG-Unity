@@ -9,7 +9,13 @@ public class MoneyInfo : MonoBehaviour
         CANI, HIPSTER
     };
 
+    enum Location
+    {
+        RIGHT, LEFT
+    };
+
     Turn turn;
+    Location location;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +28,6 @@ public class MoneyInfo : MonoBehaviour
         SubscribeToEvents();
         UpdateTurn();
         UpdatePosition();
-        UpdateMoney();
     }
 
     // Update is called once per frame
@@ -55,7 +60,7 @@ public class MoneyInfo : MonoBehaviour
         transform.Find("Background_hipster").gameObject.SetActive(true);
 
         turn = Turn.HIPSTER;
-        UpdatePosition();
+        UpdateLogoPosition();
 
         //actualitzar diners
     }
@@ -66,14 +71,25 @@ public class MoneyInfo : MonoBehaviour
         transform.Find("Background_cani").gameObject.SetActive(true);
 
         turn = Turn.CANI;
-        UpdatePosition();
+        UpdateLogoPosition();
 
         //actualitzar diners
     }
 
     public void UpdatePosition()
     {
-        if (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().playerLocation == GameplayController.PlayerLocation.RIGHT)
+        switch (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().playerLocation)
+        {
+            case GameplayController.PlayerLocation.RIGHT:
+                location = Location.RIGHT;
+                break;
+
+            case GameplayController.PlayerLocation.LEFT:
+                location = Location.LEFT;
+                break;
+        }
+
+        if (location == Location.RIGHT)
         {
             transform.position = new Vector3((int)Camera.main.GetComponent<CameraController>().GetTopLeftCorner().x + 1.5f,
                                              (int)Camera.main.GetComponent<CameraController>().GetTopLeftCorner().y - 0.5f, 0);
@@ -86,6 +102,20 @@ public class MoneyInfo : MonoBehaviour
                                              (int)Camera.main.GetComponent<CameraController>().GetTopRightCorner().y - 0.5f, 0);
 
             UpdateLogo(false);
+        }
+    }
+
+    void UpdateLogoPosition()
+    {
+        switch(location)
+        {
+            case Location.RIGHT:
+                UpdateLogo(true);
+                break;
+
+            case Location.LEFT:
+                UpdateLogo(false);
+                break;
         }
     }
 
@@ -127,8 +157,8 @@ public class MoneyInfo : MonoBehaviour
         gameplay.GetComponent<GameplayController>().disableMenuShop.AddListener(UpdatePosition);
     }
 
-    void UpdateMoney()
+    public void UpdateMoney(uint amount)
     {
-        transform.Find("Money").GetComponent<Number>().CreateNumber(12300);
+        transform.Find("Money").GetComponent<Number>().CreateNumber((int)amount);
     }
 }

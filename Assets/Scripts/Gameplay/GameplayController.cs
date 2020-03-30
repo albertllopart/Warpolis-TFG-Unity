@@ -89,6 +89,12 @@ public class GameplayController : MonoBehaviour
         
     }
 
+    public void MyOnEnable()
+    {
+        EnablePlayer();
+        playerState = PlayerState.NAVIGATING;
+    }
+
     void SetControllers()
     {
         UIController = GameObject.Find("UI Controller");
@@ -102,25 +108,23 @@ public class GameplayController : MonoBehaviour
 
     public void EndTurn()
     {
+        DisableMenuOptions();
+
         switch (turn)
         {
             case Turn.CANI:
                 //posar en idle els canis
-                endTurnCani.Invoke();
                 turn = Turn.HIPSTER;
+                endTurnCani.Invoke();
                 break;
 
             case Turn.HIPSTER:
                 //posar en idle els hipsters
-                endTurnHipster.Invoke();
                 turn = Turn.CANI;
+                endTurnHipster.Invoke();         
                 break;
         }
-
-        DisableMenuOptions();
-        EnablePlayer();
-
-        playerState = PlayerState.NAVIGATING;
+       
     }
 
     void SubscribeToEvents()
@@ -181,9 +185,6 @@ public class GameplayController : MonoBehaviour
             case PlayerState.TARGETING:
 
                 attackUnit.Invoke();
-                DisableMenuUnit();
-
-                playerState = PlayerState.NAVIGATING;
 
                 break;
         }

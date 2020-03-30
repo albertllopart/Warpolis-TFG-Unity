@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum UnitState
 {
-    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING
+    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING, DYING
 };
 
 public enum UnitDirection
@@ -126,7 +126,8 @@ public class Unit : MonoBehaviour
 
         if (Input.GetKeyDown("m"))
         {
-            UpdateTileForDeath();
+            state = UnitState.DYING;
+            UpdateAnimator();
         }
     }
 
@@ -136,6 +137,7 @@ public class Unit : MonoBehaviour
 
         UpdateTileInfo();
         UpdateTileForDeath();
+        EnableUIHitPoints(false);
 
         if (army == UnitArmy.CANI)
             GetComponentInParent<UnitsController>().caniUnits.Remove(gameObject);
@@ -145,7 +147,12 @@ public class Unit : MonoBehaviour
         if (unitType == (uint)UnitType.INFANTRY)
             GetComponent<UnitInfantry>().StopCapture(); // s'ha de fer ja perquè no hi haurà update
 
-        Destroy(gameObject);
+        //cutscene!!
+        state = UnitState.DYING;
+        UpdateAnimator();
+        GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().DyingSetup(gameObject);
+
+        //finally destroy <<<<---- des del cutscene controller
     }
 
     void SetCani()
@@ -366,6 +373,7 @@ public class Unit : MonoBehaviour
 
     public void OnWait()
     {
+        Debug.Log("mira mira");
         Highlight(false);
 
         state = UnitState.WAITING;
@@ -383,6 +391,9 @@ public class Unit : MonoBehaviour
         UpdateAnimator();
 
         UnsubscribeFromEvents();
+
+        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().playerState = GameplayController.PlayerState.NAVIGATING;
     }
 
     public void OnWaitWithCapture() //aquesta funció es crida per conservar la captura en comptes de OnWait que li restableix la vida màxima
@@ -437,10 +448,11 @@ public class Unit : MonoBehaviour
     {
         EnableUIDamageInfo(false);
         AttackTarget();
-        Untarget();
 
-        if (hitPoints > 0)
+        if (hitPoints > 0 && currentTarget.GetComponent<Unit>().hitPoints > 0)
             OnWait();
+
+        Untarget();
     }
 
     void UpdateAnimator()
@@ -769,6 +781,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
+            GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per poder cridar OnWait
             currentTarget.GetComponent<Unit>().MyOnDestroy();
         }
 

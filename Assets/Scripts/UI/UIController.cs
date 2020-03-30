@@ -4,31 +4,25 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    bool afterStart = true;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    void AfterStart()
+    public void AfterStart()
     {
         SubscribeToEvents();
 
         transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
 
         transform.Find("Money_info").GetComponent<MoneyInfo>().AfterStart();
-
-        afterStart = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (afterStart)
-        {
-            AfterStart();
-        }
+
     }
 
     public void EnableTileInfo()

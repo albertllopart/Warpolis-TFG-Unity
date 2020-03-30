@@ -84,12 +84,19 @@ public class Number : MonoBehaviour
             counter++;
         }
 
+        dotSpacing = 0.0f;
         counter = 0;
     }
 
     List<int> GetNumbersFromInt(int num)
     {
         List<int> listOfInt = new List<int>();
+
+        if (num == 0)
+        {
+            listOfInt.Add(0);
+            return listOfInt;
+        }
 
         while (num > 0)
         {

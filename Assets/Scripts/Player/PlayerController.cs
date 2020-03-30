@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SubscribeToEvents();
-
         keyDownCounterW = 0.0f;
         keyDownCounterA = 0.0f;
         keyDownCounterS = 0.0f;

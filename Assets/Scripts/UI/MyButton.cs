@@ -17,6 +17,9 @@ public class MyButton : MonoBehaviour
     public Sprite idle;
     public Sprite highlighted;
 
+    public bool isEnabled;
+    public int shopValue = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +40,33 @@ public class MyButton : MonoBehaviour
     public void OnIdle()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = idle;
+    }
+
+    public void OnDisabled()
+    {
+        //aplicar capa de color gris
+        Color color = new Color(128 / 255f, 128 / 255f, 128 / 255f, 90 / 255f);
+        GetComponent<SpriteRenderer>().color = color;
+
+        foreach (Transform child in transform.Find("Number").transform)
+        {
+            child.GetComponent<SpriteRenderer>().color = color;
+        }
+
+        isEnabled = false;
+    }
+
+    public void OnEnabled()
+    {
+        //aplicar capa de color blanc
+        Color color = new Color(1, 1, 1, 1);
+        GetComponent<SpriteRenderer>().color = color;
+
+        foreach (Transform child in transform.Find("Number").transform)
+        {
+            child.GetComponent<SpriteRenderer>().color = color;
+        }
+
+        isEnabled = true;
     }
 }
