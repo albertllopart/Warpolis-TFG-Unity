@@ -12,22 +12,51 @@ public class CameraController : MonoBehaviour
 
     private uint cameraWidth;
 
+    float timer = 0.0f;
+
+    //transitions
+    bool fadeToWhite = false;
+    float ftwTime = 0.025f;
+    float ftwAlpha = 0.0f;
+    bool ftwReturn = false;
+    bool ftwToRest = false;
+    float restingTime = 0.0f;
+    float restingTimer = 0.0f;
+
+    //events
     public UnityEvent cameraMoved;
-    
+    public UnityEvent fadeToWhiteEnd;
+    public UnityEvent fadeToWhiteRest;
+
     // Start is called before the first frame update
     void Start()
     {
+        fadeToWhiteEnd = new UnityEvent();
+        fadeToWhiteRest = new UnityEvent();
         cameraMoved = new UnityEvent();
-        cameraMoved.AddListener(CalculateCameraCorners);
 
         CalculateCameraCorners();
         CalculateCameraWidth();
     }
 
+    public void AfterStart()
+    {
+        SubscribeToEvents();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (fadeToWhite && !ftwToRest)
+            FadeToWhite();
+
+        if (ftwToRest)
+            FtwRest();
+
+        if (Input.GetKeyDown("f3"))
+        {
+            FadeToWhiteSetup(1.0f);
+        }
     }
 
     public void CalculateCameraCorners()
@@ -115,5 +144,102 @@ public class CameraController : MonoBehaviour
     public uint GetCameraWidth()
     {
         return cameraWidth;
+    }
+
+    void OnEndGame()
+    {
+        FadeToWhiteSetup(1.0f);
+
+        fadeToWhiteRest.AddListener(GameObject.Find("Map Controller").GetComponent<MapController>().UnloadMap);
+        fadeToWhiteRest.AddListener(GameObject.Find("Menu Controller").GetComponent<MenuController>().OnGameEnded);
+        fadeToWhiteEnd.AddListener(GameObject.Find("Menu Controller").GetComponent<MenuController>().CompleteGameLoop);
+    }
+
+    public void FadeToWhiteSetup(float restingTime)
+    {
+        fadeToWhite = true;
+        timer = 0.0f;
+        ftwReturn = false;
+        this.restingTime = restingTime;
+        restingTimer = 0.0f;
+
+        transform.Find("Fade To White").gameObject.SetActive(true);
+    }
+
+    void FadeToWhite()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= ftwTime)
+        {
+            switch (ftwReturn)
+            {
+                case false:
+                    FtwIncreaseAlpha();
+                    break;
+
+                case true:
+                    FtwDecreaseAlpha();
+                    break;
+            }
+        }
+
+        if (ftwReturn && ftwAlpha <= 0.0f)
+        {
+            //finish
+            transform.Find("Fade To White").gameObject.SetActive(false);
+            fadeToWhite = false;
+            fadeToWhiteEnd.Invoke();
+        }
+    }
+
+    void FtwIncreaseAlpha()
+    {
+        if (ftwAlpha >= 1.0f)
+        {
+            Debug.Log("CameraController::FtwIncreaseAlpha - Starting to Rest");
+            ftwToRest = true;
+            fadeToWhiteRest.Invoke();
+            return;
+        }
+
+        timer = 0.0f;
+
+        Color color = new Color(1, 1, 1, ftwAlpha);
+
+        transform.Find("Fade To White").GetComponent<SpriteRenderer>().color = color;
+
+        ftwAlpha += 0.025f;
+    }
+
+    void FtwDecreaseAlpha()
+    {
+        timer = 0.0f;
+
+        Color color = new Color(1, 1, 1, ftwAlpha);
+
+        transform.Find("Fade To White").GetComponent<SpriteRenderer>().color = color;
+
+        ftwAlpha -= 0.025f;
+    }
+
+    void FtwRest()
+    {
+        restingTimer += Time.deltaTime;
+
+        if (restingTimer >= restingTime)
+        {
+            Debug.Log("CameraController::FtwRest - Finished Resting");
+            ftwToRest = false;
+            ftwReturn = true;
+            restingTimer = 0.0f;
+        }
+    }
+
+    void SubscribeToEvents()
+    {
+        cameraMoved.AddListener(CalculateCameraCorners);
+
+        GameObject.Find("Menu Controller").GetComponent<MenuController>().endGame.AddListener(OnEndGame);
     }
 }

@@ -61,9 +61,17 @@ public class UnitInfantry : MonoBehaviour
             //restar vida al building i mirar si s'ha capturat
             if(currentCapture.GetComponent<Building>().ApplyCapture(capturePower))
             {
+                GetComponent<Unit>().OnWait();
+
+                if (currentCapture.name.Contains("Base"))
+                {
+                    GetComponent<Unit>().OnWinCon();
+                    GameObject.Find("Data Controller").GetComponent<DataController>().baseCaptured.Invoke();
+                }
+
                 DestroyAndCreate();
                 currentCapture = null;
-                GetComponent<Unit>().OnWait();
+
                 return; // això és perquè un cop ha acabat la captura no segueixi en estat de captura
             }
         }

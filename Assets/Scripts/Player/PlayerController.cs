@@ -256,6 +256,24 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdatePosition();
     }
 
+    public void Reposition()
+    {
+        GameplayController.Turn turn = GetComponentInParent<GameplayController>().GetTurn();
+
+        switch (turn)
+        {
+            case GameplayController.Turn.CANI:
+                transform.position = GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBase.transform.position;
+                OnMove();
+                break;
+
+            case GameplayController.Turn.HIPSTER:
+                transform.position = GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBase.transform.position;
+                OnMove();
+                break;
+        }
+    }
+
     public void CheckArrow()
     {
         Vector2Int myPos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
@@ -464,40 +482,46 @@ public class PlayerController : MonoBehaviour
     void SubscribeToEvents()
     {
         //controls
-        GetComponentInParent<Controls>().keyboard_w.AddListener(checkEnhancedW);
-        GetComponentInParent<Controls>().keyboard_w_down.AddListener(MovePlayerUp);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w.AddListener(checkEnhancedW);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.AddListener(MovePlayerUp);
 
-        GetComponentInParent<Controls>().keyboard_a.AddListener(checkEnhancedA);
-        GetComponentInParent<Controls>().keyboard_a_down.AddListener(MovePlayerLeft);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a.AddListener(checkEnhancedA);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.AddListener(MovePlayerLeft);
 
-        GetComponentInParent<Controls>().keyboard_s.AddListener(checkEnhancedS);
-        GetComponentInParent<Controls>().keyboard_s_down.AddListener(MovePlayerDown);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s.AddListener(checkEnhancedS);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.AddListener(MovePlayerDown);
 
-        GetComponentInParent<Controls>().keyboard_d.AddListener(checkEnhancedD);
-        GetComponentInParent<Controls>().keyboard_d_down.AddListener(MovePlayerRight);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d.AddListener(checkEnhancedD);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.AddListener(MovePlayerRight);
 
         //gameplay
         GetComponentInParent<GameplayController>().deselectUnit.AddListener(DeselectUnit);
         GetComponentInParent<GameplayController>().moveUnit.AddListener(MoveUnit);
+
+        //cutscene
+        GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().repositionPlayer.AddListener(Reposition);
     }
 
     void UnsubscribeFromEvents()
     {
         //controls
-        GetComponentInParent<Controls>().keyboard_w.RemoveListener(checkEnhancedW);
-        GetComponentInParent<Controls>().keyboard_w_down.RemoveListener(MovePlayerUp);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w.RemoveListener(checkEnhancedW);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.RemoveListener(MovePlayerUp);
 
-        GetComponentInParent<Controls>().keyboard_a.RemoveListener(checkEnhancedA);
-        GetComponentInParent<Controls>().keyboard_a_down.RemoveListener(MovePlayerLeft);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a.RemoveListener(checkEnhancedA);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.RemoveListener(MovePlayerLeft);
 
-        GetComponentInParent<Controls>().keyboard_s.RemoveListener(checkEnhancedS);
-        GetComponentInParent<Controls>().keyboard_s_down.RemoveListener(MovePlayerDown);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s.RemoveListener(checkEnhancedS);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.RemoveListener(MovePlayerDown);
 
-        GetComponentInParent<Controls>().keyboard_d.RemoveListener(checkEnhancedD);
-        GetComponentInParent<Controls>().keyboard_d_down.RemoveListener(MovePlayerRight);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d.RemoveListener(checkEnhancedD);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.RemoveListener(MovePlayerRight);
 
         //gameplay
         GetComponentInParent<GameplayController>().deselectUnit.RemoveListener(DeselectUnit);
         GetComponentInParent<GameplayController>().moveUnit.RemoveListener(MoveUnit);
+
+        //cutscene
+        GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().repositionPlayer.RemoveListener(Reposition);
     }
 }

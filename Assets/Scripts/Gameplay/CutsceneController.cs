@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CutsceneController : MonoBehaviour
 {
     bool afterStart = true;
     GameObject gameplayController;
     GameObject dataController;
-    GameplayController.Turn currentTurn;
+    GameplayController.Turn currentTurn = GameplayController.Turn.CANI;
 
     float timer = 0.0f;
 
@@ -23,9 +24,21 @@ public class CutsceneController : MonoBehaviour
     float dyingAlpha = 0.0f;
     float dyingTimer = 0.1f;
 
+    //extermination
+    bool exterminating = false;
+    UnitArmy exterminatedArmy;
+    GameObject nextToExterminate;
+
+    //events
+    public UnityEvent unitDied;
+    public UnityEvent repositionPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        unitDied = new UnityEvent();
+        repositionPlayer = new UnityEvent();
+
         gameplayController = GameObject.Find("Gameplay Controller");
         dataController = GameObject.Find("Data Controller");
     }
@@ -34,9 +47,15 @@ public class CutsceneController : MonoBehaviour
     {
         //aquí s'han de cridar tots els AfterStart perquè s'inicialitzin bé tots els controladors que depenguin de coses que el cutscene controller manipularà
         GameObject.Find("UI Controller").GetComponent<UIController>().AfterStart();
+        GameObject.Find("Data Controller").GetComponent<DataController>().AfterStart();
+        GameObject.Find("Camera").GetComponent<CameraController>().AfterStart();
 
         SubscribeToEvents();
-        NewTurnCani();
+        //NewTurnCani(); Això s'ha de cridar quan comenci la partida
+
+        //per últim cridem l'after start del Menu Controller que s'encarregarà de desactivar tots els gameobjects necessaris, cancel·lar subscripció a events, etc
+        GameObject.Find("Menu Controller").GetComponent<MenuController>().AfterStart();
+
         afterStart = false;
     }
 
@@ -51,20 +70,42 @@ public class CutsceneController : MonoBehaviour
 
         if (dying)
             UnitDeath();
+
+        if (exterminating)
+            ExterminateArmy(); 
+    }
+
+    public void NewGame()
+    {
+        GameObject cameraController = GameObject.Find("Camera");
+
+        cameraController.GetComponent<CameraController>().fadeToWhiteEnd.RemoveListener(NewGame);
+
+        cameraController.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
+        cameraController.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
+        FirstTurn((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
     }
 
     void NewTurnCani()
     {
+        Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
     }
 
     void NewTurnHipster()
     {
+        Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().hipsterMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
     }
 
+    public void FirstTurn(uint amount)
+    {
+        moneyToAdd = amount;
+        addMoney = true;
+        timer = 0.0f;
+    }
     public void MoneySetup(uint amount)
     {
         moneyToAdd = amount;
@@ -101,6 +142,7 @@ public class CutsceneController : MonoBehaviour
         {
             addMoney = false;
             EnableGameplay();
+            repositionPlayer.Invoke();
         }
     }
 
@@ -120,6 +162,7 @@ public class CutsceneController : MonoBehaviour
         if (dyingAlpha < 0)
         {
             Destroy(dyingUnit);
+            unitDied.Invoke();
 
             if (attackingUnit != null)
             { 
@@ -146,6 +189,133 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
+    public void ExterminationSetup(UnitArmy army)
+    {
+        exterminating = true;
+        exterminatedArmy = army;
+        timer = 0.0f;
+        dyingAlpha = 1.0f;
+
+        gameplayController.GetComponent<GameplayController>().ResetParameters();
+        DisableGameplay(); //últim moment en el qual el gameplay està actiu durant la partida
+    }
+
+    void ExterminateArmy()
+    {
+        timer += Time.deltaTime;
+
+        switch (exterminatedArmy)
+        {
+            case UnitArmy.CANI:
+                ExterminateCaniArmy();
+                break;
+
+            case UnitArmy.HIPSTER:
+                ExterminateHipsterArmy();
+                break;
+        }
+    }
+
+    void ExterminateCaniArmy()
+    {
+        if (nextToExterminate == null && dataController.transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits.Count > 0)
+        {
+            nextToExterminate = dataController.transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits[0];
+        }
+
+        if (nextToExterminate == null) // en cas que hi hagi 0 unitats a eliminar - és un cas que no es donarà mai en gameplay normal, però s'ha de cobrir
+        {
+            if (dataController.transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits.Count == 0)
+            {
+                Debug.Log("CutsceneController::ExterminateCaniArmy - Extermination completed");
+                exterminating = false;
+
+                //GameObject.Find("Camera").GetComponent<CameraController>().FadeToWhiteSetup(1.0f);
+                GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
+            }
+
+            return;
+        }
+
+        if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING)
+            nextToExterminate.GetComponent<Unit>().MyOnExterminate(); //cridem aquesta funcio per canviar estat de la unitat, animació etc
+
+        if (dyingAlpha < 0)
+        {
+            Destroy(nextToExterminate);
+
+            nextToExterminate = null;
+            dyingAlpha = 1.0f;
+            timer = 0.0f;
+
+            if (dataController.transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits.Count == 0)
+            {
+                Debug.Log("CutsceneController::ExterminateCaniArmy - Extermination completed");
+                exterminating = false;
+                GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
+            }
+
+            return;
+        }
+
+        if (timer >= dyingTimer && dyingAlpha != 0.0f)
+        {
+            nextToExterminate.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dyingAlpha);
+            dyingAlpha -= 0.1f;
+            timer = 0.0f;
+        }
+    }
+
+    void ExterminateHipsterArmy()
+    {
+        if (nextToExterminate == null && dataController.transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits.Count > 0)
+        {
+            nextToExterminate = dataController.transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits[0];
+        }
+
+        if (nextToExterminate == null) // en cas que hi hagi 0 unitats a eliminar - és un cas que no es donarà mai en gameplay normal, però s'ha de cobrir
+        {
+            if (dataController.transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits.Count == 0)
+            {
+                Debug.Log("CutsceneController::ExterminateCaniArmy - Extermination completed");
+                exterminating = false;
+
+                //GameObject.Find("Camera").GetComponent<CameraController>().FadeToWhiteSetup(1.0f);
+                GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
+            }
+
+            return;
+        }
+
+        if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING)
+            nextToExterminate.GetComponent<Unit>().MyOnExterminate(); //cridem aquesta funcio per canviar estat de la unitat, animació etc
+
+        if (dyingAlpha < 0)
+        {
+            Destroy(nextToExterminate);
+
+            nextToExterminate = null;
+            dyingAlpha = 1.0f;
+            timer = 0.0f;
+
+            if (dataController.transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits.Count == 0)
+            {
+                Debug.Log("CutsceneController::ExterminateCaniArmy - Extermination completed");
+                exterminating = false;
+                GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
+            }
+
+            return;
+        }
+
+        if (timer >= dyingTimer && dyingAlpha != 0.0f)
+        {
+            nextToExterminate.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dyingAlpha);
+            dyingAlpha -= 0.1f;
+            timer = 0.0f;
+        }
+    }
+
     void EnableGameplay()
     {
         gameplayController.SetActive(true);
@@ -154,6 +324,7 @@ public class CutsceneController : MonoBehaviour
 
     void DisableGameplay()
     {
+        gameplayController.GetComponent<GameplayController>().MyOnDisable();
         gameplayController.SetActive(false);
     }
 

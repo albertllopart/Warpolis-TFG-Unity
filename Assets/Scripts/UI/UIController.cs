@@ -17,6 +17,11 @@ public class UIController : MonoBehaviour
         transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
 
         transform.Find("Money_info").GetComponent<MoneyInfo>().AfterStart();
+        transform.Find("Menu_shop").GetComponent<MenuShopController>().AfterStart();
+
+        //meu
+        DisableTileInfo();
+        DisableMoneyInfo();
     }
 
     // Update is called once per frame
@@ -128,6 +133,12 @@ public class UIController : MonoBehaviour
         transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(GameObject.Find("Player").transform.position);
     }
 
+    void OnWinCon()
+    {
+        DisableTileInfo();
+        DisableMoneyInfo();
+    }
+
     void SubscribeToEvents()
     {
         GameObject gameplay = GameObject.Find("Gameplay Controller");
@@ -141,5 +152,7 @@ public class UIController : MonoBehaviour
         gameplay.GetComponent<GameplayController>().cancelMenuUnit.AddListener(CancelMenuUnit);
         gameplay.GetComponent<GameplayController>().enableMoneyInfo.AddListener(EnableMoneyInfo);
         gameplay.GetComponent<GameplayController>().disableMoneyInfo.AddListener(DisableMoneyInfo);
+
+        GameObject.Find("Data Controller").GetComponent<DataController>().baseCaptured.AddListener(OnWinCon);
     }
 }

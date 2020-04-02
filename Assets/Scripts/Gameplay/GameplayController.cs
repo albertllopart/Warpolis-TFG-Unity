@@ -91,8 +91,22 @@ public class GameplayController : MonoBehaviour
 
     public void MyOnEnable()
     {
+        SubscribeToEvents();
         EnablePlayer();
+        UIController.GetComponent<UIController>().EnableTileInfo();
         playerState = PlayerState.NAVIGATING;
+    }
+
+    public void MyOnDisable()
+    {
+        DisablePlayer();
+        UnsubscribeFromEvents();
+    }
+
+    public void ResetParameters()
+    {
+        turn = Turn.CANI;
+        //playerState = PlayerState.NAVIGATING; de moment no cal però si s'ha de fer a algun lloc és aquí
     }
 
     void SetControllers()
@@ -129,8 +143,14 @@ public class GameplayController : MonoBehaviour
 
     void SubscribeToEvents()
     {
-        GetComponentInParent<Controls>().keyboard_o_down.AddListener(JudgeO);
-        GetComponentInParent<Controls>().keyboard_k_down.AddListener(JudgeK);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(JudgeO);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.AddListener(JudgeK);
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(JudgeO);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.RemoveListener(JudgeK);
     }
 
     void JudgeO()

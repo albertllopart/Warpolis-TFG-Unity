@@ -177,7 +177,6 @@ public class MenuUnitController : MonoBehaviour
         if (selectedButton.name == "Button_wait")
         {
             selectedUnit.GetComponent<Unit>().OnWait();
-            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
         }
         else if (selectedButton.name == "Button_attack")
         {
@@ -187,7 +186,6 @@ public class MenuUnitController : MonoBehaviour
         else if (selectedButton.name == "Button_capture")
         {
             selectedUnit.GetComponent<UnitInfantry>().OnCapture();
-            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
         }
     }
 

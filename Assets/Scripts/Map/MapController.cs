@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Events;
 
 public class MapController : MonoBehaviour
 {
@@ -53,9 +54,17 @@ public class MapController : MonoBehaviour
     public Tile arrowBottomRight;
     public Tile arrowBottomLeft;
 
+    //events
+    public UnityEvent mapUnloaded;
+
+    //important primera vegada que es crida l'unload hi haurà el gym carregat, les properes vegades s'ha de mirar que el gym no hi sigui
+    bool isLoaded = true;
+
     // Start is called before the first frame update
     void Start()
-    { 
+    {
+        mapUnloaded = new UnityEvent();
+
         if (tilemapBase != null)
         {
             width = (uint)tilemapBase.size.x;
@@ -147,13 +156,69 @@ public class MapController : MonoBehaviour
         Vector3 offset = new Vector3(xOffset, -yOffset, 0);
 
         // Aplico el mateix offset a la càmera
-        Camera.main.GetComponent<Transform>().position += offset;
-        //Camera.main.GetComponent<CameraController>().SetCameraMoved(true); <-------- No entenc per què l'Start de la càmera es fa després que el de mapa, aquesta línia és per si en algun moment deixa de passar
+        Camera.main.GetComponent<Transform>().position = new Vector3(0, 0, -10) + offset;
+        Camera.main.GetComponent<CameraController>().cameraMoved.Invoke();
 
         topLeftCorner = transform.position;
         bottomRightCorner = (Vector2)transform.position + new Vector2(width - 1, -height + 1);
 
         Debug.Log("MapController::HelloWorld - TopLeft = " + topLeftCorner + " , BottomRight = " + bottomRightCorner);
+    }
+
+    public void LoadMap(GameObject toLoad)
+    {
+        GameObject newMap = Instantiate(toLoad);
+
+        newMap.name = "Map";
+        newMap.transform.parent = transform;
+
+        tilemapBase = newMap.transform.Find("Tilemap_base").GetComponent<Tilemap>();
+        tilemapBuildings = newMap.transform.Find("Tilemap_buildings").GetComponent<Tilemap>();
+        tilemapHazards = newMap.transform.Find("Tilemap_hazards").GetComponent<Tilemap>();
+        tilemapWalkability = newMap.transform.Find("Tilemap_walkability").GetComponent<Tilemap>();
+        tilemapPathfinding = newMap.transform.Find("Tilemap_pathfinding").GetComponent<Tilemap>();
+        tilemapPlayer = newMap.transform.Find("Tilemap_player").GetComponent<Tilemap>();
+
+        if (tilemapBase != null)
+        {
+            width = (uint)tilemapBase.size.x;
+            height = (uint)tilemapBase.size.y;
+
+            Debug.Log("MapController::Start - Map size is " + width + " x " + height);
+        }
+        else
+        {
+            Debug.LogError("MapController::Start - No Tilemap found");
+            return;
+        }
+
+        HelloWorld();
+        SpawnBuildings();
+        InitializePathfinding();
+
+        isLoaded = true;
+    }
+
+    public void UnloadMap()
+    {
+        if (isLoaded)
+        {
+            tilemapBase = null;
+            tilemapBuildings = null;
+            tilemapHazards = null;
+            tilemapWalkability = null;
+            tilemapPathfinding = null;
+            tilemapPlayer = null;
+
+            DestroyBuildings();
+            Destroy(transform.Find("Map").gameObject);
+
+            GameObject.Find("Camera").GetComponent<CameraController>().fadeToWhiteRest.RemoveListener(UnloadMap);
+
+            mapUnloaded.Invoke();
+
+            isLoaded = false;
+        }
     }
 
     public Vector2 GetTopLeftCorner()
@@ -233,6 +298,11 @@ public class MapController : MonoBehaviour
     {
         GameObject newGO = Instantiate(factoryNeutralPrefab, pos, Quaternion.identity);
         newGO.transform.parent = tilemapBuildings.transform;
+    }
+
+    void DestroyBuildings()
+    {
+        GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().DestroyAllBuildings();
     }
 
     Vector3Int WorldToTilemap(Vector3 pos)
@@ -511,6 +581,6 @@ public class MapController : MonoBehaviour
 
     void SubscribeToEvents()
     {
-
+        
     }
 }

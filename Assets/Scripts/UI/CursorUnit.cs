@@ -178,15 +178,15 @@ public class CursorUnit : MonoBehaviour
     }
     void SubscribeToEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(MoveUp); // W
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(MoveDown); // S
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_o_down.AddListener(SendO); // O
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.AddListener(MoveUp); // W
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.AddListener(MoveDown); // S
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(SendO); // O
     }
 
     void UnsubscribeFromEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.RemoveListener(MoveUp); // W
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.RemoveListener(MoveDown); // S
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_o_down.RemoveListener(SendO); // O
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.RemoveListener(MoveUp); // W
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.RemoveListener(MoveDown); // S
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(SendO); // O
     }
 }

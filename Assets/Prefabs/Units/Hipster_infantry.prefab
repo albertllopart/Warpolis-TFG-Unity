@@ -150,7 +150,7 @@ MonoBehaviour:
   army: 0
   myTurn: 0
   unitType: 0
-  movementRange: 3
+  movementRange: 10
   neutralCost: 1
   containerCost: 1
   lampCost: 2

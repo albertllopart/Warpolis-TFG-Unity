@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MenuShopController : MonoBehaviour
 {
@@ -26,8 +27,18 @@ public class MenuShopController : MonoBehaviour
     [Header("Selected")]
     public GameObject selectedButton;
 
+    //events
+    public UnityEvent caniUnitCreated;
+    public UnityEvent hipsterUnitCreated;
+
     // Start is called before the first frame update
     void Start()
+    {
+        caniUnitCreated = new UnityEvent();
+        hipsterUnitCreated = new UnityEvent();
+    }
+
+    public void AfterStart()
     {
         AddButtons();
         Collapse();
@@ -140,6 +151,15 @@ public class MenuShopController : MonoBehaviour
         {
             GameObject gameplayController = GameObject.Find("Gameplay Controller");
 
+            if (selectedButton.name.Contains("cani"))
+            {
+                caniUnitCreated.Invoke();
+            }
+            else if (selectedButton.name.Contains("hipster"))
+            {
+                hipsterUnitCreated.Invoke();
+            }
+
             if (selectedButton.name == "Button_cani_infantry")
             {
                 Instantiate(caniInfantry, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
@@ -151,7 +171,7 @@ public class MenuShopController : MonoBehaviour
                 GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
             }
 
-            gameplayController.GetComponent<Controls>().keyboard_k_down.Invoke();
+            GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.Invoke();
         }
     }
 

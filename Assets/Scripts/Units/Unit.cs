@@ -29,7 +29,6 @@ public class Unit : MonoBehaviour
     public UnitArmy army;
 
     private Animator animator;
-    private SpriteRenderer renderer;
     private int layerDifference = 2;
 
     //important
@@ -80,6 +79,9 @@ public class Unit : MonoBehaviour
     GameObject UIHitPoints;
     GameObject UIDamageInfo;
 
+    //wincon
+    bool winCon = false;
+
     void Start()
     {
         state = UnitState.IDLE;
@@ -92,7 +94,6 @@ public class Unit : MonoBehaviour
             SetHipster();
 
         animator = GetComponent<Animator>();
-        renderer = GetComponent<SpriteRenderer>();
 
         activeButtons = new bool[3]; // 3 és el nombre màxim de botons actius al menú d'unitat
         activeButtons[0] = false; //capture
@@ -112,7 +113,7 @@ public class Unit : MonoBehaviour
 
     void Update()
     {
-        if (state == UnitState.MOVING)
+        if (state == UnitState.MOVING && !winCon)
         {
             moveTimer += Time.deltaTime;
             Move();
@@ -123,12 +124,6 @@ public class Unit : MonoBehaviour
         }
 
         DrawLines();
-
-        if (Input.GetKeyDown("m"))
-        {
-            state = UnitState.DYING;
-            UpdateAnimator();
-        }
     }
 
     void MyOnDestroy()
@@ -151,6 +146,21 @@ public class Unit : MonoBehaviour
         state = UnitState.DYING;
         UpdateAnimator();
         GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().DyingSetup(gameObject);
+
+        //finally destroy <<<<---- des del cutscene controller
+    }
+
+    public void MyOnExterminate()
+    {
+        EnableUIHitPoints(false);
+
+        if (army == UnitArmy.CANI)
+            GetComponentInParent<UnitsController>().caniUnits.Remove(gameObject);
+        else
+            GetComponentInParent<UnitsController>().hipsterUnits.Remove(gameObject);
+
+        state = UnitState.DYING;
+        UpdateAnimator();
 
         //finally destroy <<<<---- des del cutscene controller
     }
@@ -193,9 +203,9 @@ public class Unit : MonoBehaviour
     void Highlight(bool what)
     {
         if (what)
-            renderer.sortingOrder += layerDifference;
+            GetComponent<SpriteRenderer>().sortingOrder += layerDifference;
         else
-            renderer.sortingOrder -= layerDifference;
+            GetComponent<SpriteRenderer>().sortingOrder -= layerDifference;
     }
 
     void EnableUITarget(bool enable)
@@ -373,7 +383,6 @@ public class Unit : MonoBehaviour
 
     public void OnWait()
     {
-        Debug.Log("mira mira");
         Highlight(false);
 
         state = UnitState.WAITING;
@@ -393,7 +402,6 @@ public class Unit : MonoBehaviour
         UnsubscribeFromEvents();
 
         GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().playerState = GameplayController.PlayerState.NAVIGATING;
     }
 
     public void OnWaitWithCapture() //aquesta funció es crida per conservar la captura en comptes de OnWait que li restableix la vida màxima
@@ -413,6 +421,8 @@ public class Unit : MonoBehaviour
         UpdateAnimator();
 
         UnsubscribeFromEvents();
+
+        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
     }
 
     public void OnMove(Vector2Int goal)
@@ -847,22 +857,32 @@ public class Unit : MonoBehaviour
         return 5;
     }
 
+    public void OnWinCon()
+    {
+        winCon = true;
+
+        state = UnitState.MOVING;
+        ResetDirection();
+
+        UpdateAnimator();
+    }
+
     void SubscribeToEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.AddListener(SelectNextTarget);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.AddListener(SelectPreviousTarget);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.AddListener(SelectPreviousTarget);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.AddListener(SelectNextTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.AddListener(SelectNextTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.AddListener(SelectPreviousTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.AddListener(SelectPreviousTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.AddListener(SelectNextTarget);
 
         GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().attackUnit.AddListener(OnAttack);
     }
 
     public void UnsubscribeFromEvents()
     {
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_w_down.RemoveListener(SelectNextTarget);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_a_down.RemoveListener(SelectPreviousTarget);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_s_down.RemoveListener(SelectPreviousTarget);
-        GameObject.Find("Gameplay Controller").GetComponent<Controls>().keyboard_d_down.RemoveListener(SelectNextTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.RemoveListener(SelectNextTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.RemoveListener(SelectPreviousTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.RemoveListener(SelectPreviousTarget);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.RemoveListener(SelectNextTarget);
 
         GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().attackUnit.RemoveListener(OnAttack);
     }

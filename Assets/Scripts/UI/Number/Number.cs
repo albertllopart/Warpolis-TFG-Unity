@@ -26,6 +26,7 @@ public class Number : MonoBehaviour
     public Sprite nine;
 
     List<Sprite> numbers = new List<Sprite>();
+    int orderInLayer = 12;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,11 +76,13 @@ public class Number : MonoBehaviour
                 GameObject dotInstance = Instantiate(numberInstance, transform.position + new Vector3(spacing * counter - spacing - 3/16f, 0, 0), Quaternion.identity);
                 dotInstance.transform.parent = transform;
                 dotInstance.GetComponent<SpriteRenderer>().sprite = dot;
+                dotInstance.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer;
             }
 
             GameObject currentInstance = Instantiate(numberInstance, transform.position + new Vector3(spacing * counter + dotSpacing, 0, 0), Quaternion.identity);
             currentInstance.transform.parent = transform;
             currentInstance.GetComponent<SpriteRenderer>().sprite = numbers[number];
+            currentInstance.GetComponent<SpriteRenderer>().sortingOrder = orderInLayer;
 
             counter++;
         }

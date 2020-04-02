@@ -8,6 +8,11 @@ public class BuildingsController : MonoBehaviour
     public List<GameObject> caniBuildings;
     public List<GameObject> hipsterBuildings;
 
+    [HideInInspector]
+    public GameObject caniBase;
+    [HideInInspector]
+    public GameObject hipsterBase;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +25,32 @@ public class BuildingsController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DestroyAllBuildings()
+    {
+        foreach (GameObject building in neutralBuildings)
+        {
+            Destroy(building);
+        }
+
+        foreach (GameObject building in caniBuildings)
+        {
+            Destroy(building);
+        }
+
+        foreach (GameObject building in hipsterBuildings)
+        {
+            Destroy(building);
+        }
+
+        ResetLists();
+    }
+
+    void ResetLists()
+    {
+        neutralBuildings = new List<GameObject>();
+        caniBuildings = new List<GameObject>();
+        hipsterBuildings = new List<GameObject>();
     }
 }
