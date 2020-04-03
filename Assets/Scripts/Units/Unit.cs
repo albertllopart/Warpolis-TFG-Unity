@@ -786,6 +786,7 @@ public class Unit : MonoBehaviour
 
             if (hitPoints <= 0)
             {
+                GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per wincon amb suicidi
                 MyOnDestroy();
             }
         }
@@ -808,7 +809,7 @@ public class Unit : MonoBehaviour
 
     float DamageFormula(GameObject enemy)
     {
-        float damage = (float)basePower * 0.01f; // convertim 50 en 0.5
+        float damage = basePower * 0.01f; // convertim 50 en 0.5
 
         //establim multiplicador de defensa segons la casella
         float defenseMultiplier = 1.0f - enemy.GetComponent<Unit>().defense * 0.1f; // 1 de defensa resta 0.1 al multiplicador
@@ -861,7 +862,7 @@ public class Unit : MonoBehaviour
     {
         winCon = true;
 
-        state = UnitState.MOVING;
+        state = UnitState.IDLE;
         ResetDirection();
 
         UpdateAnimator();

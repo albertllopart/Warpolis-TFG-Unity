@@ -43,32 +43,72 @@ public class DataController : MonoBehaviour
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)hipsterMoney);
     }
 
-    void CheckWinConOnUnitDied()
+    public bool CheckWinConOnUnitDied(UnitArmy attackingUnitArmy)
     {
-        GameplayController.Turn turn = GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().GetTurn();
-
-        switch (turn)
+        switch (attackingUnitArmy)
         {
-            case GameplayController.Turn.CANI:
-                if (transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits.Count == 0)
+            case UnitArmy.CANI:
+                
+                if (CheckLastHipster())
                 {
                     Debug.Log("DataController::CheckWinConOnUnitDied - Cani win by Elimination");
-
                     GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit.GetComponent<Unit>().OnWinCon();
                     GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
-                }
-                break;
 
-            case GameplayController.Turn.HIPSTER:
-                if (transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits.Count == 0)
+                    return true;
+                }
+                else if (CheckLastCani())
                 {
                     Debug.Log("DataController::CheckWinConOnUnitDied - Hipster win by Elimination");
+                    GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
 
+                    return true;
+                }
+
+                break;
+
+            case UnitArmy.HIPSTER:
+
+                if (CheckLastCani())
+                {
+                    Debug.Log("DataController::CheckWinConOnUnitDied - Hipster win by Elimination");
                     GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit.GetComponent<Unit>().OnWinCon();
                     GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
+
+                    return true;
                 }
+                else if (CheckLastHipster())
+                {
+                    Debug.Log("DataController::CheckWinConOnUnitDied - Cani win by Elimination");
+                    GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
+
+                    return true;
+                }
+
                 break;
         }
+
+        return false;
+    }
+
+    bool CheckLastCani()
+    {
+        if (transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits.Count == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    bool CheckLastHipster()
+    {
+        if (transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits.Count == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     void CheckWinConOnBaseCaptured()
@@ -106,7 +146,6 @@ public class DataController : MonoBehaviour
         baseCaptured.AddListener(CheckWinConOnBaseCaptured);
 
         //foranis
-        GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().unitDied.AddListener(CheckWinConOnUnitDied);
         GameObject.Find("Menu Controller").GetComponent<MenuController>().newGame.AddListener(ResetData);
     }
 }

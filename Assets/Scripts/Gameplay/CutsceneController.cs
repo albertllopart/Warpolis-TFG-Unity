@@ -8,6 +8,8 @@ public class CutsceneController : MonoBehaviour
     bool afterStart = true;
     GameObject gameplayController;
     GameObject dataController;
+    GameObject cameraController;
+    GameObject mapController;
     GameplayController.Turn currentTurn = GameplayController.Turn.CANI;
 
     float timer = 0.0f;
@@ -29,6 +31,11 @@ public class CutsceneController : MonoBehaviour
     UnitArmy exterminatedArmy;
     GameObject nextToExterminate;
 
+    //camera
+    bool cameraMoving = false;
+    Vector3 target;
+    Vector3 goal;
+
     //events
     public UnityEvent unitDied;
     public UnityEvent repositionPlayer;
@@ -41,6 +48,8 @@ public class CutsceneController : MonoBehaviour
 
         gameplayController = GameObject.Find("Gameplay Controller");
         dataController = GameObject.Find("Data Controller");
+        cameraController = GameObject.Find("Camera");
+        mapController = GameObject.Find("Map Controller");
     }
 
     void AfterStart()
@@ -72,7 +81,15 @@ public class CutsceneController : MonoBehaviour
             UnitDeath();
 
         if (exterminating)
-            ExterminateArmy(); 
+            ExterminateArmy();
+
+        if (cameraMoving)
+            TargetCamera();
+
+        if (Input.GetKeyDown("f4"))
+        {
+            TargetCameraSetup(new Vector3(26, -17, -10));
+        }
     }
 
     public void NewGame()
@@ -162,22 +179,27 @@ public class CutsceneController : MonoBehaviour
         if (dyingAlpha < 0)
         {
             Destroy(dyingUnit);
-            unitDied.Invoke();
+            unitDied.Invoke(); // de moment ningú el fa servir
 
-            if (attackingUnit != null)
-            { 
-                attackingUnit.GetComponent<Unit>().OnWait();
+            if (dataController.GetComponent<DataController>().CheckWinConOnUnitDied(attackingUnit.GetComponent<Unit>().army)) //ha mort l'última unitat
+            {
+                gameplayController.GetComponent<GameplayController>().DisableMenuUnit();
+                DisableGameplay();
             }
             else
             {
-                gameplayController.GetComponent<GameplayController>().DisableMenuUnit();
-                gameplayController.GetComponent<GameplayController>().playerState = GameplayController.PlayerState.NAVIGATING;
+                if (attackingUnit != null)
+                {
+                    attackingUnit.GetComponent<Unit>().OnWait();
+                    attackingUnit = null;
+                }
+                else
+                {
+                    gameplayController.GetComponent<GameplayController>().DisableMenuUnit();
+                }
             }
 
             dying = false;
-            attackingUnit = null;
-            dyingUnit = null;
-            dyingAlpha = 1.0f;
             return;
         }
 
@@ -186,6 +208,16 @@ public class CutsceneController : MonoBehaviour
             dyingUnit.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dyingAlpha);
             dyingAlpha -= 0.1f;
             timer = 0.0f;
+        }
+    }
+
+    void CheckWinConUnitDeath(GameObject unit)
+    {
+        if (unit == attackingUnit)
+        {
+            Debug.Log("CutsceneController::CheckWinConUnitDeath - Last unit commited suicide");
+
+
         }
     }
 
@@ -314,6 +346,120 @@ public class CutsceneController : MonoBehaviour
             dyingAlpha -= 0.1f;
             timer = 0.0f;
         }
+    }
+
+    public void TargetCameraSetup(Vector3 target)
+    {
+        this.target = target;
+        cameraMoving = true;
+
+        CalculateGoal(target);
+    }
+
+    void CalculateGoal(Vector3 target)
+    {
+        Vector3 cameraPosition = cameraController.transform.position;
+        goal = target;
+
+        if (target == cameraPosition)
+        {
+            goal = cameraPosition;
+            return;
+        }
+
+        if (cameraPosition.x == target.x)
+        {
+            //buscar la Y
+            goal.y = CalculateY();
+            return;
+        }
+
+        if (cameraPosition.y == target.y)
+        {
+            //buscar la X
+            goal.x = CalculateX();
+            return;
+        }
+
+        //buscar X i Y
+        goal.y = CalculateY();
+        goal.x = CalculateX();
+    }
+
+    int CalculateY()
+    {
+        Vector3 cameraPosition = cameraController.transform.position;
+
+        int topMargin = 6;
+        int bottomMargin = 5;
+        int targetMargin = 0;
+
+        int topLimit = 0; //world position
+        int bottomLimit = (int)mapController.GetComponent<MapController>().GetBottomRightCorner().y; //world position
+
+        if (target.y > cameraPosition.y)
+        {
+            targetMargin = topLimit - (int)target.y;
+
+            if (targetMargin >= topMargin)
+                return (int)target.y;
+            else
+            {
+                return (int)target.y - (topMargin - targetMargin);
+            }
+        }
+        else
+        {
+            targetMargin = -bottomLimit + (int)target.y;
+
+            if (targetMargin > bottomMargin)
+                return (int)target.y;
+            else
+            {
+                return (int)target.y - (-bottomMargin + targetMargin);
+            }
+        }
+    }
+
+    int CalculateX()
+    {
+        Vector3 cameraPosition = cameraController.transform.position;
+
+        int leftMargin = 10;
+        int rightMargin = 10;
+        int targetMargin = 0;
+
+        int leftLimit = -1; //world position
+        int rightLimit = (int)mapController.GetComponent<MapController>().GetBottomRightCorner().x; //world position
+
+        if (target.x < cameraPosition.x)
+        {
+            targetMargin = leftLimit + (int)target.x;
+
+            if (targetMargin >= leftMargin)
+                return (int)target.x;
+            else
+            {
+                return (int)target.x + (leftMargin - targetMargin);
+            }
+        }
+        else
+        {
+            targetMargin = rightLimit - (int)target.x;
+
+            if (targetMargin > rightMargin)
+                return (int)target.x;
+            else
+            {
+                return (int)target.x + (-rightMargin + targetMargin);
+            }
+        }
+    }
+
+    void TargetCamera()
+    {
+        cameraController.transform.position = goal;
+        cameraMoving = false;
     }
 
     void EnableGameplay()
