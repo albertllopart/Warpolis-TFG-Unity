@@ -23,9 +23,14 @@ public class PlayerController : MonoBehaviour
     private uint xCameraMovementOffset = 2;
     private uint yCameraMovementOffset = 1; // la x és 2 perquè necessita tenir en compte la oclusió dels laterals
 
+    //events
+    public UnityEvent playerMoved;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerMoved = new UnityEvent();
+
         keyDownCounterW = 0.0f;
         keyDownCounterA = 0.0f;
         keyDownCounterS = 0.0f;
@@ -251,6 +256,8 @@ public class PlayerController : MonoBehaviour
         CheckArrow();
         DeterminePlayerLocation();
 
+        playerMoved.Invoke();
+
         //TODO: fer que això es cridi amb event
         GameObject.Find("UI Controller").transform.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
         GameObject.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdatePosition();
@@ -263,12 +270,12 @@ public class PlayerController : MonoBehaviour
         switch (turn)
         {
             case GameplayController.Turn.CANI:
-                transform.position = GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBase.transform.position;
+                transform.position = GameObject.Find("Data Controller").GetComponent<DataController>().playerCaniPosition;
                 OnMove();
                 break;
 
             case GameplayController.Turn.HIPSTER:
-                transform.position = GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBase.transform.position;
+                transform.position = GameObject.Find("Data Controller").GetComponent<DataController>().playerHipsterPosition;
                 OnMove();
                 break;
         }

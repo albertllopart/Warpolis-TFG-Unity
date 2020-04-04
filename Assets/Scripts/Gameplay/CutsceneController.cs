@@ -17,14 +17,15 @@ public class CutsceneController : MonoBehaviour
     //money
     bool addMoney = false;
     uint moneyToAdd;
-    float moneyTimer = 0.25f;
+    float moneyTime = 0.25f;
+    float moneyTimer = 0.0f;
 
     //dying
     bool dying = false;
     GameObject dyingUnit;
     public GameObject attackingUnit;
     float dyingAlpha = 0.0f;
-    float dyingTimer = 0.1f;
+    float dyingTime = 0.1f;
 
     //extermination
     bool exterminating = false;
@@ -32,9 +33,12 @@ public class CutsceneController : MonoBehaviour
     GameObject nextToExterminate;
 
     //camera
-    bool cameraMoving = false;
+    bool cameraTargeting = false;
     Vector3 target;
     Vector3 goal;
+    float targetCameraTime = 0.005f;
+    float targetCameraTimer = 0.0f;
+    float cameraSpeed = 0.2f;
 
     //events
     public UnityEvent unitDied;
@@ -83,13 +87,8 @@ public class CutsceneController : MonoBehaviour
         if (exterminating)
             ExterminateArmy();
 
-        if (cameraMoving)
+        if (cameraTargeting)
             TargetCamera();
-
-        if (Input.GetKeyDown("f4"))
-        {
-            TargetCameraSetup(new Vector3(26, -17, -10));
-        }
     }
 
     public void NewGame()
@@ -101,6 +100,7 @@ public class CutsceneController : MonoBehaviour
         cameraController.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         cameraController.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
         FirstTurn((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
+        TargetCameraSetup(dataController.GetComponent<DataController>().playerCaniPosition);
     }
 
     void NewTurnCani()
@@ -108,6 +108,7 @@ public class CutsceneController : MonoBehaviour
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
+        TargetCameraSetup(dataController.GetComponent<DataController>().playerCaniPosition);
     }
 
     void NewTurnHipster()
@@ -115,6 +116,7 @@ public class CutsceneController : MonoBehaviour
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().hipsterMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
+        TargetCameraSetup(dataController.GetComponent<DataController>().playerHipsterPosition);
     }
 
     public void FirstTurn(uint amount)
@@ -127,7 +129,7 @@ public class CutsceneController : MonoBehaviour
     {
         moneyToAdd = amount;
         addMoney = true;
-        timer = 0.0f;
+        moneyTimer = 0.0f;
 
         currentTurn = gameplayController.GetComponent<GameplayController>().GetTurn();
         DisableGameplay();
@@ -135,9 +137,9 @@ public class CutsceneController : MonoBehaviour
 
     void AddMoney()
     {
-        timer += Time.deltaTime;
+        moneyTimer += Time.deltaTime;
 
-        if (timer >= moneyTimer && moneyToAdd > 0)
+        if (moneyTimer >= moneyTime && moneyToAdd > 0)
         {
             switch (currentTurn)
             {
@@ -152,7 +154,7 @@ public class CutsceneController : MonoBehaviour
                     break;
             }
 
-            timer = 0.0f;
+            moneyTimer = 0.0f;
         }
 
         if (moneyToAdd == 0)
@@ -203,7 +205,7 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
-        if (timer >= dyingTimer && dyingAlpha != 0.0f)
+        if (timer >= dyingTime && dyingAlpha != 0.0f)
         {
             dyingUnit.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dyingAlpha);
             dyingAlpha -= 0.1f;
@@ -253,6 +255,7 @@ public class CutsceneController : MonoBehaviour
         if (nextToExterminate == null && dataController.transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits.Count > 0)
         {
             nextToExterminate = dataController.transform.Find("Units Controller").GetComponent<UnitsController>().caniUnits[0];
+            TargetCameraSetup(nextToExterminate.transform.position);
         }
 
         if (nextToExterminate == null) // en cas que hi hagi 0 unitats a eliminar - és un cas que no es donarà mai en gameplay normal, però s'ha de cobrir
@@ -269,7 +272,7 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
-        if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING)
+        if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING && !cameraTargeting)
             nextToExterminate.GetComponent<Unit>().MyOnExterminate(); //cridem aquesta funcio per canviar estat de la unitat, animació etc
 
         if (dyingAlpha < 0)
@@ -290,7 +293,7 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
-        if (timer >= dyingTimer && dyingAlpha != 0.0f)
+        if (timer >= dyingTime && dyingAlpha != 0.0f && !cameraTargeting)
         {
             nextToExterminate.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dyingAlpha);
             dyingAlpha -= 0.1f;
@@ -303,6 +306,7 @@ public class CutsceneController : MonoBehaviour
         if (nextToExterminate == null && dataController.transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits.Count > 0)
         {
             nextToExterminate = dataController.transform.Find("Units Controller").GetComponent<UnitsController>().hipsterUnits[0];
+            TargetCameraSetup(nextToExterminate.transform.position);
         }
 
         if (nextToExterminate == null) // en cas que hi hagi 0 unitats a eliminar - és un cas que no es donarà mai en gameplay normal, però s'ha de cobrir
@@ -319,7 +323,7 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
-        if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING)
+        if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING && !cameraTargeting)
             nextToExterminate.GetComponent<Unit>().MyOnExterminate(); //cridem aquesta funcio per canviar estat de la unitat, animació etc
 
         if (dyingAlpha < 0)
@@ -340,7 +344,7 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
-        if (timer >= dyingTimer && dyingAlpha != 0.0f)
+        if (timer >= dyingTime && dyingAlpha != 0.0f && !cameraTargeting)
         {
             nextToExterminate.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, dyingAlpha);
             dyingAlpha -= 0.1f;
@@ -351,12 +355,16 @@ public class CutsceneController : MonoBehaviour
     public void TargetCameraSetup(Vector3 target)
     {
         this.target = target;
-        cameraMoving = true;
+        if (this.target.z != -10)
+            this.target.z = -10;
 
-        CalculateGoal(target);
+        cameraTargeting = true;
+        targetCameraTimer = 0.0f;
+
+        CalculateGoal();
     }
 
-    void CalculateGoal(Vector3 target)
+    void CalculateGoal()
     {
         Vector3 cameraPosition = cameraController.transform.position;
         goal = target;
@@ -384,6 +392,8 @@ public class CutsceneController : MonoBehaviour
         //buscar X i Y
         goal.y = CalculateY();
         goal.x = CalculateX();
+
+        Debug.Log("CutsceneController::CalculateGoal - New Goal = " + goal);
     }
 
     int CalculateY()
@@ -458,8 +468,27 @@ public class CutsceneController : MonoBehaviour
 
     void TargetCamera()
     {
-        cameraController.transform.position = goal;
-        cameraMoving = false;
+        targetCameraTimer += Time.deltaTime;
+
+        if (targetCameraTimer >= targetCameraTime)
+        {
+            timer = 0.0f;
+
+            Vector3 direction = cameraController.transform.InverseTransformPoint(goal);
+
+            if (direction.magnitude < cameraSpeed)
+            {
+                cameraController.transform.position += direction;
+                cameraController.GetComponent<CameraController>().cameraMoved.Invoke();
+                cameraTargeting = false;
+                return;
+            }
+
+            direction.Normalize();
+            direction *= cameraSpeed;
+
+            cameraController.transform.position += direction;
+        }
     }
 
     void EnableGameplay()

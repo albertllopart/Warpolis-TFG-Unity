@@ -8,9 +8,7 @@ public class BuildingsController : MonoBehaviour
     public List<GameObject> caniBuildings;
     public List<GameObject> hipsterBuildings;
 
-    [HideInInspector]
     public GameObject caniBase;
-    [HideInInspector]
     public GameObject hipsterBase;
 
     // Start is called before the first frame update

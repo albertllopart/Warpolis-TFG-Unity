@@ -47,12 +47,10 @@ public class Building : MonoBehaviour
         if (CompareTag("Base_cani"))
         {
             type = BuildingType.BASE;
-            GetComponentInParent<BuildingsController>().caniBase = gameObject;
         }
         else if (CompareTag("Base_hipster"))
         {
             type = BuildingType.BASE;
-            GetComponentInParent<BuildingsController>().hipsterBase = gameObject;
         }
         else if (CompareTag("Factory_neutral") || CompareTag("Factory_cani") || CompareTag("Factory_hipster"))
             type = BuildingType.FACTORY;

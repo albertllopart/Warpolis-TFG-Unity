@@ -56,6 +56,7 @@ public class MapController : MonoBehaviour
 
     //events
     public UnityEvent mapUnloaded;
+    public UnityEvent mapLoaded;
 
     //important primera vegada que es crida l'unload hi haurà el gym carregat, les properes vegades s'ha de mirar que el gym no hi sigui
     bool isLoaded = true;
@@ -64,6 +65,7 @@ public class MapController : MonoBehaviour
     void Start()
     {
         mapUnloaded = new UnityEvent();
+        mapLoaded = new UnityEvent();
 
         if (tilemapBase != null)
         {
@@ -196,6 +198,8 @@ public class MapController : MonoBehaviour
         SpawnBuildings();
         InitializePathfinding();
 
+        mapLoaded.Invoke();
+
         isLoaded = true;
     }
 
@@ -259,7 +263,7 @@ public class MapController : MonoBehaviour
 
         else if (tile.name == tilesetDictionary[(int)TilesetCode.BASE_HIPSTER])
             SpawnBaseHipster(pos);
-        
+
         else if (tile.name == tilesetDictionary[(int)TilesetCode.FACTORY_CANI])
             SpawnFactoryCani(pos);
 
@@ -274,12 +278,18 @@ public class MapController : MonoBehaviour
     {
         GameObject newGO = Instantiate(baseCaniPrefab, pos, Quaternion.identity);
         newGO.transform.parent = tilemapBuildings.transform;
+
+        GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBase = newGO;
+        Debug.Log("MapController::SpawnBaseCani - Created Base_cani in " + newGO.transform.position);
     }
 
     void SpawnBaseHipster(Vector3 pos)
     {
         GameObject newGO = Instantiate(baseHipsterPrefab, pos, Quaternion.identity);
         newGO.transform.parent = tilemapBuildings.transform;
+
+        GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBase = newGO;
+        Debug.Log("MapController::SpawnBaseCani - Created Base_hipster in " + newGO.transform.position);
     }
 
     void SpawnFactoryCani(Vector3 pos)

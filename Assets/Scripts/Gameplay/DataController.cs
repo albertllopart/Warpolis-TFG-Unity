@@ -14,6 +14,10 @@ public class DataController : MonoBehaviour
     //events
     public UnityEvent baseCaptured;
 
+    //player data
+    public Vector3 playerCaniPosition;
+    public Vector3 playerHipsterPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,31 @@ public class DataController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void StoreInitialPosition()
+    {
+        playerCaniPosition = transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBase.transform.position;
+        playerHipsterPosition = transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBase.transform.position;
+
+        Debug.Log("DataController::StoreInitialPosition - Stored Base_cani position " + playerCaniPosition);
+        Debug.Log("DataController::StoreInitialPosition - Stored Base_hipster position " + playerHipsterPosition);
+    }
+
+    void StorePlayerPosition()
+    {
+        GameplayController.Turn turn = GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().GetTurn();
+
+        switch (turn)
+        {
+            case GameplayController.Turn.CANI:
+                playerCaniPosition = GameObject.Find("Gameplay Controller").transform.Find("Player").transform.position;
+                break;
+
+            case GameplayController.Turn.HIPSTER:
+                playerHipsterPosition = GameObject.Find("Gameplay Controller").transform.Find("Player").transform.position;
+                break;
+        }
     }
 
     public void AddCaniMoney(int amount)
@@ -147,5 +176,7 @@ public class DataController : MonoBehaviour
 
         //foranis
         GameObject.Find("Menu Controller").GetComponent<MenuController>().newGame.AddListener(ResetData);
+        GameObject.Find("Gameplay Controller").transform.Find("Player").GetComponent<PlayerController>().playerMoved.AddListener(StorePlayerPosition);
+        GameObject.Find("Map Controller").GetComponent<MapController>().mapLoaded.AddListener(StoreInitialPosition);
     }
 }
