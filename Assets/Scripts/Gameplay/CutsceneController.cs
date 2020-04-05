@@ -36,9 +36,9 @@ public class CutsceneController : MonoBehaviour
     bool cameraTargeting = false;
     Vector3 target;
     Vector3 goal;
-    float targetCameraTime = 0.005f;
+    float targetCameraTime = 0.0025f;
     float targetCameraTimer = 0.0f;
-    float cameraSpeed = 0.2f;
+    float cameraSpeed = 0.1f;
 
     //events
     public UnityEvent unitDied;
@@ -472,7 +472,7 @@ public class CutsceneController : MonoBehaviour
 
         if (targetCameraTimer >= targetCameraTime)
         {
-            timer = 0.0f;
+            targetCameraTimer = 0.0f;
 
             Vector3 direction = cameraController.transform.InverseTransformPoint(goal);
 
