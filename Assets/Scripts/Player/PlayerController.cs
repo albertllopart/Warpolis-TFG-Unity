@@ -370,6 +370,41 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
+
+    public bool InteractUnitsForAttackRange()
+    {
+        List<RaycastHit2D> results = new List<RaycastHit2D>();
+
+        RaycastHit2D resultCani = RayCast(LayerMask.GetMask("Cani_units"));
+        if (resultCani.collider != null)
+            results.Add(resultCani);
+
+        RaycastHit2D resultHipster = RayCast(LayerMask.GetMask("Hipster_units"));
+        if (resultHipster.collider != null)
+            results.Add(resultHipster);
+
+        foreach (RaycastHit2D result in results)
+        {
+            if (result.collider != null)
+            {
+                if (result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING)
+                {
+                    Debug.Log("PlayerController::Interact - Interacting for Attack Range with " + result.collider.gameObject.name);
+
+                    //seleccionar unitat
+                    selectedUnit = result.collider.gameObject;
+
+                    //cridar mètode OnSelected
+                    selectedUnit.GetComponent<Unit>().OnSelectedForAttackRange();
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public bool InteractBuildings()
     {
         RaycastHit2D result;
@@ -456,6 +491,7 @@ public class PlayerController : MonoBehaviour
 
             MyTile tile = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y];
             string tileType = "null";
+            string isWalkable = "null";
 
             switch (tile.type)
             {
@@ -467,8 +503,16 @@ public class PlayerController : MonoBehaviour
                     tileType = "Road";
                     break;
 
-                case MyTileType.CONTAINER:
-                    tileType = "Container";
+                case MyTileType.SEA:
+                    tileType = "Sea";
+                    break;
+
+                case MyTileType.CONE:
+                    tileType = "Cone";
+                    break;
+
+                case MyTileType.PLANTPOT:
+                    tileType = "Plantpot";
                     break;
 
                 case MyTileType.LAMP:
@@ -481,7 +525,7 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("PlayerController::LogPosition - " + transform.position + 
                       ", Player Location = " + locationString + 
-                      ", Tile info: " + tileType + 
+                      ", Tile info: " + tileType + ", Is Walkable = " + tile.isWalkable +  
                       ", Contains Cani: " + tile.containsCani + ", Contains Hipster: " + tile.containsHipster);
         }
     }

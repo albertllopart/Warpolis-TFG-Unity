@@ -13,6 +13,7 @@ public class UnitInfantry : MonoBehaviour
     //instantiate
     [Header("Instances")]
     public GameObject factory;
+    public GameObject building;
 
     // Start is called before the first frame update
     void Start()
@@ -88,11 +89,15 @@ public class UnitInfantry : MonoBehaviour
     {
         if (currentCapture.GetComponent<Building>().type == BuildingType.BASE)
         {
-            Instantiate(factory, transform.position, Quaternion.identity);
+            Instantiate(building, transform.position, Quaternion.identity);
         }
         else if (currentCapture.GetComponent<Building>().type == BuildingType.FACTORY)
         {
             Instantiate(factory, transform.position, Quaternion.identity);
+        }
+        else if (currentCapture.GetComponent<Building>().type == BuildingType.BUILDING)
+        {
+            Instantiate(building, transform.position, Quaternion.identity);
         }
 
         currentCapture.GetComponent<Building>().MyOnDestroy();

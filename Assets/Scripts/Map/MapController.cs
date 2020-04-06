@@ -8,7 +8,8 @@ public class MapController : MonoBehaviour
 {
     public enum TilesetCode
     {
-        RED, BLUE, YELLOW, BASE_CANI, BASE_HIPSTER, FACTORY_CANI, FACTORY_HIPSTER, FACTORY_NEUTRAL, NEUTRAL, ROAD, CROSSWALK1, CROSSWALK2, CONTAINER, LAMP
+        RED, BLUE, YELLOW, BASE_CANI, BASE_HIPSTER, FACTORY_CANI, FACTORY_HIPSTER, FACTORY_NEUTRAL, BUILDING_CANI, BUILDING_HIPSTER, BUILDING_NEUTRAL,
+        NEUTRAL, ROAD, CROSSWALK1, CROSSWALK2, CONTAINER, LAMP, PLANTPOT, SEA, CONE1, CONE2, CONE3, CONE4, CONE5, CONE6, CONE7, CONE8
     };
 
     public Dictionary<int, string> tilesetDictionary;
@@ -27,6 +28,9 @@ public class MapController : MonoBehaviour
     public GameObject factoryCaniPrefab;
     public GameObject factoryHipsterPrefab;
     public GameObject factoryNeutralPrefab;
+    public GameObject buildingCaniPrefab;
+    public GameObject buildingHipsterPrefab;
+    public GameObject buildingNeutralPrefab;
 
     private uint width;
     private uint height;
@@ -41,8 +45,8 @@ public class MapController : MonoBehaviour
     public Pathfinding pathfinding;
 
     [Header("Pathfinding")]
-    public Tile blueTile;
-    public Tile redTile;
+    public AnimatedTile blueTile;
+    public AnimatedTile redTile;
     public Tile arrowRight;
     public Tile arrowLeft;
     public Tile arrowUp;
@@ -101,6 +105,15 @@ public class MapController : MonoBehaviour
         tilesetDictionary.Add((int)TilesetCode.ROAD, "tileset_1");
         tilesetDictionary.Add((int)TilesetCode.CROSSWALK1, "tileset_2");
         tilesetDictionary.Add((int)TilesetCode.CROSSWALK2, "tileset_3");
+        tilesetDictionary.Add((int)TilesetCode.SEA, "animated_water");
+        tilesetDictionary.Add((int)TilesetCode.CONE1, "tileset_35");
+        tilesetDictionary.Add((int)TilesetCode.CONE2, "tileset_36");
+        tilesetDictionary.Add((int)TilesetCode.CONE3, "tileset_37");
+        tilesetDictionary.Add((int)TilesetCode.CONE4, "tileset_38");
+        tilesetDictionary.Add((int)TilesetCode.CONE5, "tileset_39");
+        tilesetDictionary.Add((int)TilesetCode.CONE6, "tileset_40");
+        tilesetDictionary.Add((int)TilesetCode.CONE7, "tileset_41");
+        tilesetDictionary.Add((int)TilesetCode.CONE8, "tileset_42");
 
         //buildings
         tilesetDictionary.Add((int)TilesetCode.BASE_CANI, "tileset_12");
@@ -108,10 +121,14 @@ public class MapController : MonoBehaviour
         tilesetDictionary.Add((int)TilesetCode.FACTORY_CANI, "tileset_16");
         tilesetDictionary.Add((int)TilesetCode.FACTORY_HIPSTER, "tileset_17");
         tilesetDictionary.Add((int)TilesetCode.FACTORY_NEUTRAL, "tileset_18");
+        tilesetDictionary.Add((int)TilesetCode.BUILDING_CANI, "tileset_43");
+        tilesetDictionary.Add((int)TilesetCode.BUILDING_HIPSTER, "tileset_44");
+        tilesetDictionary.Add((int)TilesetCode.BUILDING_NEUTRAL, "tileset_45");
 
         //hazards
         tilesetDictionary.Add((int)TilesetCode.CONTAINER, "tileset_5");
         tilesetDictionary.Add((int)TilesetCode.LAMP, "tileset_10");
+        tilesetDictionary.Add((int)TilesetCode.PLANTPOT, "tileset_33");
 
         //walkability
         tilesetDictionary.Add((int)TilesetCode.RED, "tileset_14");
@@ -272,6 +289,15 @@ public class MapController : MonoBehaviour
 
         else if (tile.name == tilesetDictionary[(int)TilesetCode.FACTORY_NEUTRAL])
             SpawnFactoryNeutral(pos);
+
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_CANI])
+            SpawnBuildingCani(pos);
+
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_HIPSTER])
+            SpawnBuildingHipster(pos);
+
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_NEUTRAL])
+            SpawnBuildingNeutral(pos);
     }
 
     void SpawnBaseCani(Vector3 pos)
@@ -307,6 +333,24 @@ public class MapController : MonoBehaviour
     void SpawnFactoryNeutral(Vector3 pos)
     {
         GameObject newGO = Instantiate(factoryNeutralPrefab, pos, Quaternion.identity);
+        newGO.transform.parent = tilemapBuildings.transform;
+    }
+
+    void SpawnBuildingCani(Vector3 pos)
+    {
+        GameObject newGO = Instantiate(buildingCaniPrefab, pos, Quaternion.identity);
+        newGO.transform.parent = tilemapBuildings.transform;
+    }
+
+    void SpawnBuildingHipster(Vector3 pos)
+    {
+        GameObject newGO = Instantiate(buildingHipsterPrefab, pos, Quaternion.identity);
+        newGO.transform.parent = tilemapBuildings.transform;
+    }
+
+    void SpawnBuildingNeutral(Vector3 pos)
+    {
+        GameObject newGO = Instantiate(buildingNeutralPrefab, pos, Quaternion.identity);
         newGO.transform.parent = tilemapBuildings.transform;
     }
 
@@ -348,7 +392,7 @@ public class MapController : MonoBehaviour
         }
     }
 
-    bool IsWalkable(Vector2Int pos)
+    public bool IsWalkable(Vector2Int pos)
     {
         TileBase tile = tilemapWalkability.GetTile(WorldToTilemap(new Vector3(pos.x, pos.y, 0)));
 
@@ -380,6 +424,14 @@ public class MapController : MonoBehaviour
             {
                 return MyTileType.ROAD;
             }
+            else if (IsSea(tile))
+            {
+                return MyTileType.SEA;
+            }
+            else if (IsCone(tile))
+            {
+                return MyTileType.CONE;
+            }
         }
 
         tile = tilemapBuildings.GetTile(WorldToTilemap(new Vector3(pos.x, pos.y, 0)));
@@ -404,6 +456,10 @@ public class MapController : MonoBehaviour
             {
                 return MyTileType.LAMP;
             }
+            else if (IsPlantpot(tile))
+            {
+                return MyTileType.PLANTPOT;
+            }
         }
 
         return MyTileType.NEUTRAL;
@@ -423,6 +479,22 @@ public class MapController : MonoBehaviour
         return false;
     }
 
+    bool IsSea(TileBase tile)
+    {
+        if (tile.name == tilesetDictionary[(int)TilesetCode.SEA])
+            return true;
+        return false;
+    }
+
+    bool IsCone(TileBase tile)
+    {
+        if (tile.name == tilesetDictionary[(int)TilesetCode.CONE1] || tile.name == tilesetDictionary[(int)TilesetCode.CONE2] || tile.name == tilesetDictionary[(int)TilesetCode.CONE3]
+            || tile.name == tilesetDictionary[(int)TilesetCode.CONE4] || tile.name == tilesetDictionary[(int)TilesetCode.CONE5] || tile.name == tilesetDictionary[(int)TilesetCode.CONE6]
+            || tile.name == tilesetDictionary[(int)TilesetCode.CONE7] || tile.name == tilesetDictionary[(int)TilesetCode.CONE8])
+            return true;
+        return false;
+    }
+
     bool IsContainer(TileBase tile)
     {
         if (tile.name == tilesetDictionary[(int)TilesetCode.CONTAINER])
@@ -437,11 +509,19 @@ public class MapController : MonoBehaviour
         return false;
     }
 
+    bool IsPlantpot(TileBase tile)
+    {
+        if (tile.name == tilesetDictionary[(int)TilesetCode.PLANTPOT])
+            return true;
+        return false;
+    }
+
     bool IsBuilding(TileBase tile)
     {
         if (tile.name == tilesetDictionary[(int)TilesetCode.BASE_CANI] || tile.name == tilesetDictionary[(int)TilesetCode.BASE_HIPSTER]
             || tile.name == tilesetDictionary[(int)TilesetCode.FACTORY_CANI] || tile.name == tilesetDictionary[(int)TilesetCode.FACTORY_HIPSTER]
-            || tile.name == tilesetDictionary[(int)TilesetCode.FACTORY_NEUTRAL])
+            || tile.name == tilesetDictionary[(int)TilesetCode.FACTORY_NEUTRAL] || tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_CANI]
+            || tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_HIPSTER] || tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_NEUTRAL])
             return true;
         return false;
     }
@@ -458,11 +538,30 @@ public class MapController : MonoBehaviour
         }
     }
 
+    public void DrawAttackRange(bool shouldDraw)
+    {
+        //draw attackRange
+        foreach (Vector2Int pos in pathfinding.attackRange)
+        {
+            if (shouldDraw)
+                tilemapPathfinding.SetTile(WorldToTilemap(new Vector3Int(pos.x, pos.y, 0)), redTile);
+            else
+                tilemapPathfinding.SetTile(WorldToTilemap(new Vector3Int(pos.x, pos.y, 0)), null);
+        }
+    }
+
     public void ExecutePathfinding(GameObject unit)
     {
         pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
         pathfinding.PropagateBFS(unit);
         DrawPathfinding(true);
+    }
+
+    public void ExecutePathfindingForAttackRange(GameObject unit)
+    {
+        pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        pathfinding.PropagateBFS(unit);
+        DrawAttackRange(true);
     }
 
     public void DrawArrow()

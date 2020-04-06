@@ -9,7 +9,7 @@ enum BuildingArmy
 
 public enum BuildingType
 {
-    BASE, FACTORY
+    BASE, FACTORY, BUILDING
 };
 
 public class Building : MonoBehaviour
@@ -36,11 +36,11 @@ public class Building : MonoBehaviour
     void Setup()
     {
         //army
-        if (CompareTag("Factory_neutral"))
+        if (CompareTag("Factory_neutral") || CompareTag("Building_neutral"))
             SetNeutral();
-        else if (CompareTag("Base_cani") || CompareTag("Factory_cani"))
+        else if (CompareTag("Base_cani") || CompareTag("Factory_cani") || CompareTag("Building_cani"))
             SetCani();
-        else if (CompareTag("Base_hipster") || CompareTag("Factory_hipster"))
+        else if (CompareTag("Base_hipster") || CompareTag("Factory_hipster") || CompareTag("Building_hipster"))
             SetHipster();
 
         //type
@@ -54,6 +54,8 @@ public class Building : MonoBehaviour
         }
         else if (CompareTag("Factory_neutral") || CompareTag("Factory_cani") || CompareTag("Factory_hipster"))
             type = BuildingType.FACTORY;
+        else if (CompareTag("Building_neutral") || CompareTag("Building_cani") || CompareTag("Building_hipster"))
+            type = BuildingType.BUILDING;
     }
 
     public void MyOnDestroy()

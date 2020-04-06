@@ -26,13 +26,18 @@ public class TileInfo : MonoBehaviour
     [Header("Tiles")]
     public Sprite road;
     public Sprite neutral;
-    public Sprite container;
+    public Sprite plantpot;
     public Sprite lamp;
+    public Sprite sea;
+    public Sprite cone;
     public Sprite cani_base;
     public Sprite hipster_base;
     public Sprite neutral_factory;
     public Sprite cani_factory;
     public Sprite hipster_factory;
+    public Sprite neutral_building;
+    public Sprite cani_building;
+    public Sprite hipster_building;
 
     //units
     [Header("Units")]
@@ -84,8 +89,18 @@ public class TileInfo : MonoBehaviour
                 map.transform.Find("Defense").transform.Find("Number").GetComponent<SpriteRenderer>().sprite = numberSprites[1];
                 break;
 
-            case MyTileType.CONTAINER:
-                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = container;
+            case MyTileType.CONE:
+                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = cone;
+                map.transform.Find("Defense").transform.Find("Number").GetComponent<SpriteRenderer>().sprite = numberSprites[0];
+                break;
+
+            case MyTileType.SEA:
+                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = sea;
+                map.transform.Find("Defense").transform.Find("Number").GetComponent<SpriteRenderer>().sprite = numberSprites[0];
+                break;
+
+            case MyTileType.PLANTPOT:
+                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = plantpot;
                 map.transform.Find("Defense").transform.Find("Number").GetComponent<SpriteRenderer>().sprite = numberSprites[2];
                 break;
 
@@ -203,6 +218,18 @@ public class TileInfo : MonoBehaviour
 
             case "Factory_hipster":
                 map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = hipster_factory;
+                break;
+
+            case "Building_neutral":
+                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = neutral_building;
+                break;
+
+            case "Building_cani":
+                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = cani_building;
+                break;
+
+            case "Building_hipster":
+                map.transform.Find("Tile").GetComponent<SpriteRenderer>().sprite = hipster_building;
                 break;
         }
     }

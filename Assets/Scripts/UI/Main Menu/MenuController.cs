@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour
 
     //maps
     public GameObject mapTurdIsland;
+    public GameObject mapSpanIsland;
     public GameObject big;
 
     //events
@@ -104,7 +105,7 @@ public class MenuController : MonoBehaviour
         mapController.GetComponent<MapController>().UnloadMap();
 
         //instanciar mapa
-        mapController.GetComponent<MapController>().LoadMap(big); //selectedMap
+        mapController.GetComponent<MapController>().LoadMap(mapSpanIsland); //selectedMap
     }
 
     public void EndGame()

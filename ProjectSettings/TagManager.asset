@@ -11,6 +11,9 @@ TagManager:
   - Factory_neutral
   - Unit_cani
   - Unit_hipster
+  - Building_cani
+  - Building_hipster
+  - Building_neutral
   layers:
   - Default
   - TransparentFX

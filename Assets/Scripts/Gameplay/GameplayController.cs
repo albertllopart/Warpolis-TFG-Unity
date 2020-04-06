@@ -7,7 +7,7 @@ public class GameplayController : MonoBehaviour
 {
     public enum PlayerState
     {
-        NAVIGATING, OPTIONS, INTERACTING, SHOP, WAITING, TARGETING
+        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING
     };
 
     public enum PlayerLocation
@@ -141,18 +141,6 @@ public class GameplayController : MonoBehaviour
        
     }
 
-    void SubscribeToEvents()
-    {
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(JudgeO);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.AddListener(JudgeK);
-    }
-
-    void UnsubscribeFromEvents()
-    {
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(JudgeO);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.RemoveListener(JudgeK);
-    }
-
     void JudgeO()
     {
         switch(playerState)
@@ -215,7 +203,23 @@ public class GameplayController : MonoBehaviour
         switch (playerState)
         {
             case PlayerState.NAVIGATING:
-                //interactuar amb la casella
+               
+                if (transform.Find("Player").GetComponent<PlayerController>().InteractUnitsForAttackRange())
+                {
+                    DisableMoneyInfo();
+                    playerState = PlayerState.ATTACKRANGE;
+                }
+
+                break;
+
+            case PlayerState.ATTACKRANGE:
+                
+                deselectUnit.Invoke();
+                EnableMoneyInfo();
+
+                //propi
+                playerState = PlayerState.NAVIGATING;
+
                 break;
 
             case PlayerState.INTERACTING:
@@ -342,5 +346,17 @@ public class GameplayController : MonoBehaviour
     void DisableMoneyInfo()
     {
         disableMoneyInfo.Invoke();
+    }
+
+    void SubscribeToEvents()
+    {
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(JudgeO);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.AddListener(JudgeK);
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(JudgeO);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.RemoveListener(JudgeK);
     }
 }

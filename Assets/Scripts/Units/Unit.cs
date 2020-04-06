@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum UnitState
 {
-    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING, DYING
+    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING, DYING, ATTACKRANGE
 };
 
 public enum UnitDirection
@@ -24,8 +24,8 @@ public enum UnitArmy
 
 public class Unit : MonoBehaviour
 {
-    private UnitState state;
-    private UnitDirection direction;
+    public UnitState state;
+    public UnitDirection direction;
     public UnitArmy army;
 
     private Animator animator;
@@ -40,8 +40,9 @@ public class Unit : MonoBehaviour
     public uint unitType; //el tipus d'unitat s'assigna des de l'inspector
     public uint movementRange;
     public uint neutralCost;
-    public uint containerCost;
+    public uint plantpotCost;
     public uint lampCost;
+    public uint coneCost;
 
     [Header("Stats")]
     public int hitPoints;
@@ -279,6 +280,23 @@ public class Unit : MonoBehaviour
         SetMyTurn();
     }
 
+    public void OnSelectedForAttackRange()
+    {
+        Highlight(true);
+
+        state = UnitState.ATTACKRANGE;
+
+        EnableUIHitPoints(false);
+
+        if (unitType == (uint)UnitType.INFANTRY)
+            GetComponent<UnitInfantry>().EnableUICaptureSign(false);
+
+        UpdateAnimator();
+
+        //mapa
+        GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(gameObject);
+    }
+
     void SetMyTurn()
     {
         if (GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().GetTurn() == GameplayController.Turn.CANI)
@@ -312,6 +330,7 @@ public class Unit : MonoBehaviour
 
         //mapa
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawAttackRange(false);
     }
 
     public void OnMenu()
@@ -586,11 +605,23 @@ public class Unit : MonoBehaviour
                 defense = 0;
                 break;
 
+            case MyTileType.SEA:
+                defense = 0;
+                break;
+
+            case MyTileType.CONE:
+                defense = 0;
+                break;
+
             case MyTileType.NEUTRAL:
                 defense = 1;
                 break;
 
             case MyTileType.CONTAINER:
+                defense = 2;
+                break;
+
+            case MyTileType.PLANTPOT:
                 defense = 2;
                 break;
 

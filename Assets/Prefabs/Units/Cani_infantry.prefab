@@ -150,10 +150,11 @@ MonoBehaviour:
   army: 0
   myTurn: 0
   unitType: 0
-  movementRange: 10
+  movementRange: 3
   neutralCost: 1
-  containerCost: 1
+  plantpotCost: 1
   lampCost: 2
+  coneCost: 1
   hitPoints: 50
   basePower: 55
   defense: 0
@@ -178,6 +179,8 @@ MonoBehaviour:
   lastCapture: {fileID: 0}
   toStopCapture: 0
   factory: {fileID: 6967724372786038338, guid: 40cacafd16325374bb68c0e2f804db4c, type: 3}
+  building: {fileID: 1274014662418323156, guid: df5353e53adeff14fa579112348af91a,
+    type: 3}
 --- !u!1001 &3334832117444554603
 PrefabInstance:
   m_ObjectHideFlags: 0

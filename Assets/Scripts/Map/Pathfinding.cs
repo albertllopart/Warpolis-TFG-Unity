@@ -24,7 +24,7 @@ public class BFS_Node
 
 public enum MyTileType
 {
-    NEUTRAL, ROAD, CONTAINER, LAMP, BUILDING
+    NEUTRAL, ROAD, CONTAINER, LAMP, BUILDING, PLANTPOT, SEA, CONE
 };
 
 public class MyTile
@@ -56,17 +56,20 @@ public class Pathfinding
 
     public Queue<BFS_Node> frontier = new Queue<BFS_Node>();
     public List<Vector2Int> visited = new List<Vector2Int>();
+    public List<Vector2Int> attackRange = new List<Vector2Int>();
     public List<BFS_Node> backtrack = new List<BFS_Node>();
 
     public void ResetBFS(Vector2Int position)
     {
         frontier.Clear();
         visited.Clear();
+        attackRange.Clear();
         backtrack.Clear();
 
         BFS_Node node = new BFS_Node(position, new Vector2Int(-1, -1));
         frontier.Enqueue(node);
         visited.Add(node.data);
+        attackRange.Add(node.data);
         backtrack.Add(node);
     }
 
@@ -110,8 +113,18 @@ public class Pathfinding
                             if (IsInMoveRange(unitScript, visited[0], node))
                                 CheckNode(node);
                         }
+
+                        CheckNodeForAttackRange(node);
                     }
                 }
+                else
+                {
+                    Debug.Log("Pathfinding::PropagateBFS - Found Non Walkable Tile at pos: " + popped.data);
+                }
+            }
+            else
+            {
+                Debug.Log("Pathfinding::PropagateBFS - Found null Tile at pos: " + popped.data);
             }
 
             if (safety++ >= 10000)
@@ -137,7 +150,9 @@ public class Pathfinding
                 {
                     if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.NEUTRAL ||
                         MyTilemap[node.data.x, -node.data.y].type == MyTileType.ROAD ||
-                        MyTilemap[node.data.x, -node.data.y].type == MyTileType.BUILDING)
+                        MyTilemap[node.data.x, -node.data.y].type == MyTileType.BUILDING ||
+                        MyTilemap[node.data.x, -node.data.y].type == MyTileType.CONE ||
+                        MyTilemap[node.data.x, -node.data.y].type == MyTileType.SEA)
                     {
                         orderedNodes.Add(node);
                     }
@@ -156,7 +171,7 @@ public class Pathfinding
             {
                 if (MyTilemap[node.data.x, -node.data.y] != null)
                 {
-                    if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.CONTAINER)
+                    if (MyTilemap[node.data.x, -node.data.y].type == MyTileType.PLANTPOT)
                     {
                         orderedNodes.Add(node);
                     }
@@ -195,14 +210,20 @@ public class Pathfinding
     {
         if (!visited.Contains(node.data))
         {
-            //mirar que no hi hagi una unitat enemiga
-
             if (MyTilemap[node.data.x, -node.data.y].isWalkable)
             {
                 frontier.Enqueue(node);
                 visited.Add(node.data);
                 backtrack.Add(node);
             }
+        }
+    }
+
+    public void CheckNodeForAttackRange(BFS_Node node)
+    {
+        if (!attackRange.Contains(node.data))
+        {
+            attackRange.Add(node.data);
         }
     }
 
@@ -268,8 +289,9 @@ public class Pathfinding
     {
         //dades de la unitat
         uint neutralCost = unitScript.neutralCost;
-        uint containerCost = unitScript.containerCost;
+        uint plantpotCost = unitScript.plantpotCost;
         uint lampCost = unitScript.lampCost;
+        uint coneCost = unitScript.coneCost;
 
         if (MyTilemap[pos.x, -pos.y].type == MyTileType.NEUTRAL)
         {
@@ -277,14 +299,19 @@ public class Pathfinding
         }
         else if (MyTilemap[pos.x, -pos.y].type == MyTileType.CONTAINER)
         {
-            return containerCost;
+            return plantpotCost;
         }
         else if (MyTilemap[pos.x, -pos.y].type == MyTileType.LAMP)
         {
             return lampCost;
         }
+        else if (MyTilemap[pos.x, -pos.y].type == MyTileType.CONE)
+        {
+            Debug.Log("Pathfinding::AddCost - Found Cone Tile with cost " + coneCost);
+            return coneCost;
+        }
 
-        //si no és ni neutral, ni contenidor ni fanal, retornem 1
+        //si no és ni neutral, ni jardinera ni fanal, retornem 1
         return 1;
     }
 
