@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour
         {
             if (result.collider != null)
             {
-                if (result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING)
+                if (result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING && result.collider.gameObject.GetComponent<Unit>().basePower > 0)
                 {
                     Debug.Log("PlayerController::Interact - Interacting for Attack Range with " + result.collider.gameObject.name);
 
@@ -465,6 +465,17 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
                     selectedUnit.GetComponent<Unit>().OnMove(goal);
+                }
+            }
+            else if (selectedUnit.GetComponent<Unit>().unitType == (uint)UnitType.INFANTRY && result.collider.gameObject.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT)
+            {
+                if (result.collider.gameObject.GetComponent<UnitTransport>().loadedUnit == null) //mirem que no hi hagi ja una unitat carregada
+                {
+                    if (selectedUnit != null && GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.visited.Contains(goal))
+                    {
+                        GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
+                        selectedUnit.GetComponent<Unit>().OnMove(goal);
+                    }
                 }
             }
         }

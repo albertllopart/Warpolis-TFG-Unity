@@ -14,7 +14,7 @@ public enum UnitDirection
 
 public enum UnitType
 {
-    INFANTRY
+    INFANTRY, TRANSPORT
 };
 
 public enum UnitArmy
@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour
 
     [Header("Multipliers")]
     public float vsInfantry;
+    public float vsTransport;
 
     [Header("Interaction")]
     public List<GameObject> targets;
@@ -76,9 +77,12 @@ public class Unit : MonoBehaviour
 
     //UI
     private bool[] activeButtons;
-    GameObject UITarget;
-    GameObject UIHitPoints;
-    GameObject UIDamageInfo;
+    [HideInInspector]
+    public GameObject UITarget;
+    [HideInInspector]
+    public GameObject UIDamageInfo;
+    [HideInInspector]
+    public GameObject UIHitPoints;
 
     //wincon
     bool winCon = false;
@@ -96,17 +100,15 @@ public class Unit : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        activeButtons = new bool[3]; // 3 és el nombre màxim de botons actius al menú d'unitat
+        activeButtons = new bool[5]; // 5 és el nombre màxim de botons actius al menú d'unitat, tot i que mai no hi podran ser tots, per context
         activeButtons[0] = false; //capture
         activeButtons[1] = false; //attack
-        activeButtons[2] = true; //wait sempre és true perquè sempre hi haurà la opció
+        activeButtons[2] = true; //wait sempre és true perquè sempre hi haurà la opció EDIT: excepte a l'hora de pujar al transport
+        activeButtons[3] = false; //load
+        activeButtons[4] = false; //drop
 
-        UITarget = transform.Find("Targeting").gameObject;
-        EnableUITarget(false);
         UIHitPoints = transform.Find("Hitpoints").gameObject;
         EnableUIHitPoints(true);
-        UIDamageInfo = transform.Find("Damage_info").gameObject;
-        EnableUIDamageInfo(false);
 
         UpdateStatsBasedOnTile();
         GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
@@ -209,7 +211,7 @@ public class Unit : MonoBehaviour
             GetComponent<SpriteRenderer>().sortingOrder -= layerDifference;
     }
 
-    void EnableUITarget(bool enable)
+    public void EnableUITarget(bool enable)
     {
         UITarget.SetActive(enable);
     }
@@ -219,7 +221,7 @@ public class Unit : MonoBehaviour
         UIHitPoints.SetActive(enable);
     }
 
-    void EnableUIDamageInfo(bool enable)
+    public void EnableUIDamageInfo(bool enable)
     {
         if (!enable)
             UIDamageInfo.transform.position = transform.position;
@@ -335,7 +337,8 @@ public class Unit : MonoBehaviour
 
     public void OnMenu()
     {
-        SearchForTargets();
+        if (basePower > 0)
+            SearchForTargets();
 
         if (unitType == (uint)UnitType.INFANTRY)
         {
@@ -343,10 +346,19 @@ public class Unit : MonoBehaviour
                 EnableCaptureButton(true);
             else
                 EnableCaptureButton(false);
+
+            if (GetComponent<UnitInfantry>().SearchForTransport() != null)
+            {
+                EnableLoadButton(true);
+            }
+            else
+                EnableLoadButton(false);
         }
 
         UpdateStatsBasedOnTile();
-        EnableUIDamageInfo(false);
+
+        if (basePower > 0)
+            EnableUIDamageInfo(false);
 
         state = UnitState.DECIDING;
 
@@ -358,7 +370,9 @@ public class Unit : MonoBehaviour
 
         //obrir el menú oju
         EnableMenuUnit();
-        Untarget();
+
+        if (basePower > 0)
+            Untarget();
     }
 
     public void OnCancelMovement()
@@ -558,11 +572,13 @@ public class Unit : MonoBehaviour
             if (myPos == goal)
             {
                 OnMenu();
+
+                //TODO: si és una intanteria i acaba de ser descarregada en comptes de cridar OnMenu s'ha de cridar OnWait directament
             }
         }
     }
 
-    void UpdateTileInfo()
+    public void UpdateTileInfo()
     {
         if (army == UnitArmy.CANI)
         {
@@ -709,6 +725,19 @@ public class Unit : MonoBehaviour
         activeButtons[0] = enable;
     }
 
+    public void EnableLoadButton(bool enable)
+    {
+        activeButtons[3] = enable;
+        activeButtons[2] = !enable; //activar o desactivar wait en funció de si hi ha o no transport
+
+        //desactivem la resta de botons ja que el load només pot ser-hi sol
+        if (enable)
+        {
+            activeButtons[0] = !enable;
+            activeButtons[1] = !enable;
+        }
+    }
+
     void DrawLines()
     {
         Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
@@ -852,6 +881,10 @@ public class Unit : MonoBehaviour
             case (uint)UnitType.INFANTRY:
                 typeMultiplier = 1.0f * vsInfantry;
                 break;
+
+            case (uint)UnitType.TRANSPORT:
+                typeMultiplier = 1.0f * vsTransport;
+                break;
         }
 
         //establim multiplicador segons la vida que tingui l'atacant
@@ -897,6 +930,14 @@ public class Unit : MonoBehaviour
         ResetDirection();
 
         UpdateAnimator();
+    }
+
+    public void EnableOwnCollider(bool enable)
+    {
+        if (!enable)
+            GetComponent<BoxCollider2D>().size = new Vector2(0, 0);
+        else
+            GetComponent<BoxCollider2D>().size = new Vector2(1, 1);
     }
 
     void SubscribeToEvents()

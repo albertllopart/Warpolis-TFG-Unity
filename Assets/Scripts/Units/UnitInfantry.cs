@@ -18,6 +18,11 @@ public class UnitInfantry : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Unit>().UITarget = transform.Find("Targeting").gameObject;
+        GetComponent<Unit>().EnableUITarget(false);
+        GetComponent<Unit>().UIDamageInfo = transform.Find("Damage_info").gameObject;
+        GetComponent<Unit>().EnableUIDamageInfo(false);
+
         UICaptureSign = transform.Find("Capture").gameObject;
         UICaptureSign.SetActive(false);
     }
@@ -137,5 +142,52 @@ public class UnitInfantry : MonoBehaviour
         }
 
         return null;
+    }
+
+    public GameObject SearchForTransport()
+    {
+        //aquest mètode retorna la unitat de transport que hi ha a la casella de la unitat
+
+        Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
+        Vector2 to = from;
+
+        GetComponent<Unit>().EnableOwnCollider(false); //desactivem el propi collider per mirar què hi ha sota
+
+        if (GetComponent<Unit>().army == UnitArmy.CANI)
+        {
+            RaycastHit2D cani = Physics2D.Linecast(from, to, LayerMask.GetMask("Cani_units"));
+            if (cani.collider != null && cani.collider.gameObject.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT)
+            {
+                GetComponent<Unit>().EnableOwnCollider(true);
+                return cani.collider.gameObject;
+            }
+        }
+        else if (GetComponent<Unit>().army == UnitArmy.HIPSTER)
+        {
+            RaycastHit2D hipster = Physics2D.Linecast(from, to, LayerMask.GetMask("Hipster_units"));
+            if (hipster.collider != null && hipster.collider.gameObject.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT)
+            {
+                GetComponent<Unit>().EnableOwnCollider(true);
+                return hipster.collider.gameObject;
+            }
+        }
+
+        GetComponent<Unit>().EnableOwnCollider(true);
+        return null;
+    }
+
+    public void OnLoad()
+    {
+        GameObject transport = SearchForTransport();
+
+        transport.GetComponent<UnitTransport>().loadedUnit = gameObject;
+        transport.GetComponent<UnitTransport>().EnableLoadSign(true);
+
+        StopCapture();
+        GetComponent<Unit>().UpdateTileInfo();
+        GetComponent<Unit>().UnsubscribeFromEvents();
+
+        gameObject.SetActive(false);
+        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
     }
 }

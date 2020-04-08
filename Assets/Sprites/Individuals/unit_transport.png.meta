@@ -1,0 +1,979 @@
+fileFormatVersion: 2
+guid: 5a8f85ad84c84104080172f552695c6e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6435017503931893938
+    second: unit_transport_0
+  - first:
+      213: 7569615295287993112
+    second: unit_transport_1
+  - first:
+      213: 8628437652293327499
+    second: unit_transport_2
+  - first:
+      213: -8739830870287461881
+    second: unit_transport_3
+  - first:
+      213: 438808530699440259
+    second: unit_transport_4
+  - first:
+      213: -8081893862824347153
+    second: unit_transport_5
+  - first:
+      213: -7871109349960862227
+    second: unit_transport_6
+  - first:
+      213: -4017706534236850003
+    second: unit_transport_7
+  - first:
+      213: 2578982163521284056
+    second: unit_transport_8
+  - first:
+      213: -8060080716218064200
+    second: unit_transport_9
+  - first:
+      213: 5031561753357163216
+    second: unit_transport_10
+  - first:
+      213: 7479324154830662106
+    second: unit_transport_11
+  - first:
+      213: 5912577216602809738
+    second: unit_transport_12
+  - first:
+      213: 8770710735641159780
+    second: unit_transport_13
+  - first:
+      213: -3896246339455338547
+    second: unit_transport_14
+  - first:
+      213: 4360958874138552338
+    second: unit_transport_15
+  - first:
+      213: -1034006030155913256
+    second: unit_transport_16
+  - first:
+      213: 125656466383464944
+    second: unit_transport_17
+  - first:
+      213: 6809521714789652596
+    second: unit_transport_18
+  - first:
+      213: -3340452266897897783
+    second: unit_transport_19
+  - first:
+      213: 8753762852551609967
+    second: unit_transport_20
+  - first:
+      213: 5318440304078224253
+    second: unit_transport_21
+  - first:
+      213: -3667219837374511953
+    second: unit_transport_22
+  - first:
+      213: -4855344126732719125
+    second: unit_transport_23
+  - first:
+      213: -7175036910818567888
+    second: unit_transport_24
+  - first:
+      213: -4565815509282450641
+    second: unit_transport_25
+  - first:
+      213: 8218598729678282514
+    second: unit_transport_26
+  - first:
+      213: -3086750676465224722
+    second: unit_transport_27
+  - first:
+      213: 1778095892966742843
+    second: unit_transport_28
+  - first:
+      213: 3057692193648053194
+    second: unit_transport_29
+  - first:
+      213: 166834226170837447
+    second: unit_transport_30
+  - first:
+      213: -2110213957293203772
+    second: unit_transport_31
+  - first:
+      213: -1847608521981535092
+    second: unit_transport_0
+  - first:
+      213: -754430276195785014
+    second: unit_transport_1
+  - first:
+      213: 6013383566877879875
+    second: unit_transport_2
+  - first:
+      213: 128826436731425757
+    second: unit_transport_3
+  - first:
+      213: -5720496573656497604
+    second: unit_transport_4
+  - first:
+      213: -6334404820729018462
+    second: unit_transport_5
+  - first:
+      213: 1661322756936569421
+    second: unit_transport_6
+  - first:
+      213: -3829250306997162500
+    second: unit_transport_7
+  - first:
+      213: 6822075331060992305
+    second: unit_transport_8
+  - first:
+      213: -8198531318857008979
+    second: unit_transport_9
+  - first:
+      213: 7158088798673197283
+    second: unit_transport_10
+  - first:
+      213: -1545126771450377298
+    second: unit_transport_11
+  - first:
+      213: 6968683061081833380
+    second: unit_transport_12
+  - first:
+      213: -8480759031456472258
+    second: unit_transport_13
+  - first:
+      213: 6600790243001145290
+    second: unit_transport_14
+  - first:
+      213: -4978391665721259555
+    second: unit_transport_15
+  - first:
+      213: -6121291077825124544
+    second: unit_transport_16
+  - first:
+      213: -5729126232107335692
+    second: unit_transport_17
+  - first:
+      213: -5953384782263725098
+    second: unit_transport_18
+  - first:
+      213: -2898867326558037223
+    second: unit_transport_19
+  - first:
+      213: 965928421531955478
+    second: unit_transport_20
+  - first:
+      213: 8238829555249970620
+    second: unit_transport_21
+  - first:
+      213: -4326508066457992669
+    second: unit_transport_22
+  - first:
+      213: 1654782218632313276
+    second: unit_transport_23
+  - first:
+      213: -3279391636912617937
+    second: unit_transport_24
+  - first:
+      213: 1027102908910663653
+    second: unit_transport_25
+  - first:
+      213: -640175136303737942
+    second: unit_transport_26
+  - first:
+      213: 8206199325533341373
+    second: unit_transport_27
+  - first:
+      213: -1964734233479110203
+    second: unit_transport_28
+  - first:
+      213: 5008910892720305634
+    second: unit_transport_29
+  - first:
+      213: -2669860872067654923
+    second: unit_transport_30
+  - first:
+      213: -9081843299963493560
+    second: unit_transport_31
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: unit_transport_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c5e4b96d9fb56e0800000000000000
+      internalID: -1847608521981535092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 187
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac6ec8339a9b785f0800000000000000
+      internalID: -754430276195785014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34e6de96e74d37350800000000000000
+      internalID: 6013383566877879875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd35e0f26fea9c100800000000000000
+      internalID: 128826436731425757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c328d5cbca6bc90b0800000000000000
+      internalID: -5720496573656497604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a7ccec606ca718a0800000000000000
+      internalID: -6334404820729018462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d421a70de343e0710800000000000000
+      internalID: 1661322756936569421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfde06f4225cbdac0800000000000000
+      internalID: -3829250306997162500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13988d26e51ecae50800000000000000
+      internalID: 6822075331060992305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_9
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da8fc930437f83e80800000000000000
+      internalID: -8198531318857008979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e85e9356d3a65360800000000000000
+      internalID: 7158088798673197283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_11
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 136
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eab01c6436b9e8ae0800000000000000
+      internalID: -1545126771450377298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 119
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4af7018825cb5b060800000000000000
+      internalID: 6968683061081833380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 119
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e33e958089a4e4a80800000000000000
+      internalID: -8480759031456472258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac792f6e0c7ba9b50800000000000000
+      internalID: 6600790243001145290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_15
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 102
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd94beb182339eab0800000000000000
+      internalID: -4978391665721259555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 85
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 047277b523ecc0ba0800000000000000
+      internalID: -6121291077825124544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 85
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ffbeddcb0e0e70b0800000000000000
+      internalID: -5729126232107335692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d354f93514516da0800000000000000
+      internalID: -5953384782263725098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b958d768725c7d0800000000000000
+      internalID: -2898867326558037223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_20
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 611bddb18caa76d00800000000000000
+      internalID: 965928421531955478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_21
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbdf9ad44d3365270800000000000000
+      internalID: 8238829555249970620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 322c8ec16d725f3c0800000000000000
+      internalID: -4326508066457992669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_23
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb9363219a7f6f610800000000000000
+      internalID: 1654782218632313276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_24
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f26cf626ea24d72d0800000000000000
+      internalID: -3279391636912617937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_25
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e7f36167a0014e00800000000000000
+      internalID: 1027102908910663653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa31496fa14ad17f0800000000000000
+      internalID: -640175136303737942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_27
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 34
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db6077aeec642e170800000000000000
+      internalID: 8206199325533341373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1ad6fcf9cdbb4e0800000000000000
+      internalID: -1964734233479110203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_29
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 17
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5bd282be9338540800000000000000
+      internalID: 5008910892720305634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fa51b0beafb2fad0800000000000000
+      internalID: -2669860872067654923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_transport_31
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8432ae7e2afc6f180800000000000000
+      internalID: -9081843299963493560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

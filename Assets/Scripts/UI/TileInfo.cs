@@ -43,6 +43,8 @@ public class TileInfo : MonoBehaviour
     [Header("Units")]
     public Sprite cani_infantry;
     public Sprite hipster_infantry;
+    public Sprite cani_transport;
+    public Sprite hipster_transport;
 
     //elements
     [Header("Elements")]
@@ -136,6 +138,7 @@ public class TileInfo : MonoBehaviour
                                              (int)Camera.main.GetComponent<CameraController>().GetBottomRightCorner().y + 2.5f, 0);
 
             unit.transform.position = transform.position + new Vector3(2, 0, 0);
+            unit.transform.Find("Load").transform.position = unit.transform.position + new Vector3(2, -0.75f, 0);
         }
         else
         {
@@ -143,6 +146,7 @@ public class TileInfo : MonoBehaviour
                                              (int)Camera.main.GetComponent<CameraController>().GetBottomRightCorner().y + 2.5f, 0);
 
             unit.transform.position = transform.position + new Vector3(-2, 0, 0);
+            unit.transform.Find("Load").transform.position = unit.transform.position + new Vector3(-1.5f, -0.75f, 0);
         }
     }
 
@@ -243,11 +247,13 @@ public class TileInfo : MonoBehaviour
         {
             unit.SetActive(true);
             UpdateUnitInfo(caniResult.collider.gameObject);
+            UpdateUnitLoadCani(caniResult.collider.gameObject);
         }        
         else if (hipsterResult.collider != null)
         {
             unit.SetActive(true);
             UpdateUnitInfo(hipsterResult.collider.gameObject);
+            UpdateUnitLoadHipster(hipsterResult.collider.gameObject);
         }
     }
 
@@ -279,6 +285,9 @@ public class TileInfo : MonoBehaviour
         {
             case 0: //infantry
                 return cani_infantry;
+
+            case 1: //transport
+                return cani_transport;
         }
 
         return null;
@@ -290,9 +299,38 @@ public class TileInfo : MonoBehaviour
         {
             case 0: //infantry
                 return hipster_infantry;
+
+            case 1: //transport
+                return hipster_transport;
         }
 
         return null;
+    }
+
+    void UpdateUnitLoadCani(GameObject transport)
+    {
+        if (transport.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT && transport.GetComponent<UnitTransport>().loadedUnit != null)
+        {
+            unit.transform.Find("Load").gameObject.SetActive(true);
+            unit.transform.Find("Load").transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = cani_infantry;
+        }
+        else
+        {
+            unit.transform.Find("Load").gameObject.SetActive(false);
+        }
+    }
+
+    void UpdateUnitLoadHipster(GameObject transport)
+    {
+        if (transport.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT && transport.GetComponent<UnitTransport>().loadedUnit != null)
+        {
+            unit.transform.Find("Load").gameObject.SetActive(true);
+            unit.transform.Find("Load").transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = hipster_infantry;
+        }
+        else
+        {
+            unit.transform.Find("Load").gameObject.SetActive(false);
+        }
     }
 
     void SetUpNumberSprites()

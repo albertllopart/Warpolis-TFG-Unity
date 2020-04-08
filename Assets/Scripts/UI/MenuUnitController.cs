@@ -7,6 +7,9 @@ public class MenuUnitController : MonoBehaviour
     public GameObject buttonWait;
     public GameObject buttonAttack;
     public GameObject buttonCapture;
+    public GameObject buttonLoad;
+    public GameObject buttonDropCani;
+    public GameObject buttonDropHipster;
 
     public List<GameObject> buttons; // a diferència del menú d'opcions on sempre hi ha tots els botons actius, aquí només hi haurà els que estiguin disponibles segons la unitat concreta
 
@@ -119,6 +122,35 @@ public class MenuUnitController : MonoBehaviour
             buttonAttack.SetActive(false);
         }
 
+        if (activeButtons[4]) // drop
+        {
+            GameplayController.Turn turn = GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().GetTurn();
+
+            switch (turn)
+            {
+                case GameplayController.Turn.CANI:
+                    buttonDropCani.SetActive(true);
+                    buttons.Add(buttonDropCani);
+
+                    buttonDropCani.transform.localPosition = new Vector3(0, 0, 0);
+                    buttonDropCani.transform.position += new Vector3(0, -(28.0f / 16.0f) * counter++, 0);
+                    break;
+
+                case GameplayController.Turn.HIPSTER:
+                    buttonDropHipster.SetActive(true);
+                    buttons.Add(buttonDropHipster);
+
+                    buttonDropHipster.transform.localPosition = new Vector3(0, 0, 0);
+                    buttonDropHipster.transform.position += new Vector3(0, -(28.0f / 16.0f) * counter++, 0);
+                    break;
+            }
+        }
+        else
+        {
+            buttonDropCani.SetActive(false);
+            buttonDropHipster.SetActive(false);
+        }
+
         if (activeButtons[2]) // wait
         {
             buttonWait.SetActive(true);
@@ -131,6 +163,19 @@ public class MenuUnitController : MonoBehaviour
         else
         {
             buttonWait.SetActive(false);
+        }
+
+        if (activeButtons[3]) // load
+        {
+            buttonLoad.SetActive(true);
+            buttons.Add(buttonLoad);
+
+            buttonLoad.transform.localPosition = new Vector3(0, 0, 0);
+            buttonLoad.transform.position += new Vector3(0, -(28.0f / 16.0f) * counter++, 0);
+        }
+        else
+        {
+            buttonLoad.SetActive(false);
         }
     }
 
@@ -186,6 +231,10 @@ public class MenuUnitController : MonoBehaviour
         else if (selectedButton.name == "Button_capture")
         {
             selectedUnit.GetComponent<UnitInfantry>().OnCapture();
+        }
+        else if (selectedButton.name == "Button_load")
+        {
+            selectedUnit.GetComponent<UnitInfantry>().OnLoad();
         }
     }
 

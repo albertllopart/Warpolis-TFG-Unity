@@ -17,6 +17,12 @@ TextureImporter:
   - first:
       213: -2104227892791265160
     second: capture_sign_2
+  - first:
+      213: 1580179073828208985
+    second: capture_sign_2
+  - first:
+      213: 4322411389676216202
+    second: capture_sign_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -169,8 +175,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87835b351e74cc2e0800000000000000
-      internalID: -2104227892791265160
+      spriteID: 9514909de7cede510800000000000000
+      internalID: 1580179073828208985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capture_sign_3
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 6
+        height: 6
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8fd0cef14a4cfb30800000000000000
+      internalID: 4322411389676216202
       vertices: []
       indices: 
       edges: []

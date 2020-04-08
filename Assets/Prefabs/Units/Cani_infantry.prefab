@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbad752209987f146bac4dc407e31ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  direction: 0
   army: 0
   myTurn: 0
   unitType: 0
@@ -159,10 +161,14 @@ MonoBehaviour:
   basePower: 55
   defense: 0
   vsInfantry: 1
+  vsTransport: 0.3
   targets: []
   currentTarget: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastGoal: {x: 0, y: 0}
+  UITarget: {fileID: 0}
+  UIDamageInfo: {fileID: 0}
+  UIHitPoints: {fileID: 0}
 --- !u!114 &-1669678623568732065
 MonoBehaviour:
   m_ObjectHideFlags: 0
