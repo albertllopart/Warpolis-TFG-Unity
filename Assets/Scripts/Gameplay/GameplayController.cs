@@ -7,7 +7,7 @@ public class GameplayController : MonoBehaviour
 {
     public enum PlayerState
     {
-        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING
+        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING, DROPPING
     };
 
     public enum PlayerLocation
@@ -45,6 +45,7 @@ public class GameplayController : MonoBehaviour
     public UnityEvent deselectUnit;
     public UnityEvent moveUnit;
     public UnityEvent attackUnit;
+    public UnityEvent dropUnit;
 
     //gameplay
     public UnityEvent endTurnCani;
@@ -74,6 +75,7 @@ public class GameplayController : MonoBehaviour
         deselectUnit = new UnityEvent();
         moveUnit = new UnityEvent();
         attackUnit = new UnityEvent();
+        dropUnit = new UnityEvent();
 
         //gameplay
         endTurnCani = new UnityEvent();
@@ -193,6 +195,7 @@ public class GameplayController : MonoBehaviour
             case PlayerState.TARGETING:
 
                 attackUnit.Invoke();
+                dropUnit.Invoke();
 
                 break;
         }

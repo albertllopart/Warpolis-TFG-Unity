@@ -283,10 +283,10 @@ public class TileInfo : MonoBehaviour
     {
         switch (unitGO.GetComponent<Unit>().unitType)
         {
-            case 0: //infantry
+            case UnitType.INFANTRY:
                 return cani_infantry;
 
-            case 1: //transport
+            case UnitType.TRANSPORT:
                 return cani_transport;
         }
 
@@ -297,10 +297,10 @@ public class TileInfo : MonoBehaviour
     {
         switch (unitGO.GetComponent<Unit>().unitType)
         {
-            case 0: //infantry
+            case UnitType.INFANTRY:
                 return hipster_infantry;
 
-            case 1: //transport
+            case UnitType.TRANSPORT:
                 return hipster_transport;
         }
 
@@ -309,7 +309,7 @@ public class TileInfo : MonoBehaviour
 
     void UpdateUnitLoadCani(GameObject transport)
     {
-        if (transport.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT && transport.GetComponent<UnitTransport>().loadedUnit != null)
+        if (transport.GetComponent<Unit>().unitType == UnitType.TRANSPORT && transport.GetComponent<UnitTransport>().loadedUnit != null)
         {
             unit.transform.Find("Load").gameObject.SetActive(true);
             unit.transform.Find("Load").transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = cani_infantry;
@@ -322,7 +322,7 @@ public class TileInfo : MonoBehaviour
 
     void UpdateUnitLoadHipster(GameObject transport)
     {
-        if (transport.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT && transport.GetComponent<UnitTransport>().loadedUnit != null)
+        if (transport.GetComponent<Unit>().unitType == UnitType.TRANSPORT && transport.GetComponent<UnitTransport>().loadedUnit != null)
         {
             unit.transform.Find("Load").gameObject.SetActive(true);
             unit.transform.Find("Load").transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = hipster_infantry;

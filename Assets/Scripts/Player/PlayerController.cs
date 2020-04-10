@@ -467,7 +467,7 @@ public class PlayerController : MonoBehaviour
                     selectedUnit.GetComponent<Unit>().OnMove(goal);
                 }
             }
-            else if (selectedUnit.GetComponent<Unit>().unitType == (uint)UnitType.INFANTRY && result.collider.gameObject.GetComponent<Unit>().unitType == (uint)UnitType.TRANSPORT)
+            else if (selectedUnit.GetComponent<Unit>().unitType == (uint)UnitType.INFANTRY && result.collider.gameObject.GetComponent<Unit>().unitType == UnitType.TRANSPORT)
             {
                 if (result.collider.gameObject.GetComponent<UnitTransport>().loadedUnit == null) //mirem que no hi hagi ja una unitat carregada
                 {

@@ -134,6 +134,8 @@ public class MenuUnitController : MonoBehaviour
 
                     buttonDropCani.transform.localPosition = new Vector3(0, 0, 0);
                     buttonDropCani.transform.position += new Vector3(0, -(28.0f / 16.0f) * counter++, 0);
+
+                    buttonDropHipster.SetActive(false);
                     break;
 
                 case GameplayController.Turn.HIPSTER:
@@ -142,6 +144,8 @@ public class MenuUnitController : MonoBehaviour
 
                     buttonDropHipster.transform.localPosition = new Vector3(0, 0, 0);
                     buttonDropHipster.transform.position += new Vector3(0, -(28.0f / 16.0f) * counter++, 0);
+
+                    buttonDropCani.SetActive(false);
                     break;
             }
         }
@@ -235,6 +239,11 @@ public class MenuUnitController : MonoBehaviour
         else if (selectedButton.name == "Button_load")
         {
             selectedUnit.GetComponent<UnitInfantry>().OnLoad();
+        }
+        else if (selectedButton.name.Contains("Button_drop"))
+        {
+            selectedUnit.GetComponent<UnitTransport>().OnTargetingDropPositions();
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().HideMenuUnit();
         }
     }
 

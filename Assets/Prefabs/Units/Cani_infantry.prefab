@@ -162,10 +162,21 @@ MonoBehaviour:
   defense: 0
   vsInfantry: 1
   vsTransport: 0.3
+  vsTank: 0.1
   targets: []
   currentTarget: {fileID: 0}
+  path: []
+  goal: {x: 0, y: 0}
+  nextPos: {x: 0, y: 0}
+  nextPosIndex: 0
+  moveInterval: 0.025
+  moveTimer: 0
+  moveSpeed: 0.25
+  switchTargetTimer: 0
+  switchTargetInterval: 0.1
   lastPosition: {x: 0, y: 0, z: 0}
   lastGoal: {x: 0, y: 0}
+  activeButtons: 
   UITarget: {fileID: 0}
   UIDamageInfo: {fileID: 0}
   UIHitPoints: {fileID: 0}
@@ -187,6 +198,9 @@ MonoBehaviour:
   factory: {fileID: 6967724372786038338, guid: 40cacafd16325374bb68c0e2f804db4c, type: 3}
   building: {fileID: 1274014662418323156, guid: df5353e53adeff14fa579112348af91a,
     type: 3}
+  SuccessfullyDropped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3334832117444554603
 PrefabInstance:
   m_ObjectHideFlags: 0

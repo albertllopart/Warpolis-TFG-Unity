@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: death_transport_hipster
+  m_Name: death_tank_hipster
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 166834226170837447, guid: 5a8f85ad84c84104080172f552695c6e,
+      value: {fileID: -4487396523577895586, guid: 70bd1faba9e20f44299dad1a7854182e,
         type: 3}
     - time: 0.083333336
-      value: {fileID: -2110213957293203772, guid: 5a8f85ad84c84104080172f552695c6e,
+      value: {fileID: -5634243623050340728, guid: 70bd1faba9e20f44299dad1a7854182e,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 166834226170837447, guid: 5a8f85ad84c84104080172f552695c6e, type: 3}
-    - {fileID: -2110213957293203772, guid: 5a8f85ad84c84104080172f552695c6e, type: 3}
+    - {fileID: -4487396523577895586, guid: 70bd1faba9e20f44299dad1a7854182e, type: 3}
+    - {fileID: -5634243623050340728, guid: 70bd1faba9e20f44299dad1a7854182e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

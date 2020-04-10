@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum UnitState
 {
-    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING, DYING, ATTACKRANGE
+    IDLE, SELECTED, MOVING, DECIDING, WAITING, TARGETING, DYING, ATTACKRANGE, DROPPED
 };
 
 public enum UnitDirection
@@ -14,7 +14,7 @@ public enum UnitDirection
 
 public enum UnitType
 {
-    INFANTRY, TRANSPORT
+    INFANTRY, TRANSPORT, TANK
 };
 
 public enum UnitArmy
@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour
 
     //stats
     [Header("Info")]
-    public uint unitType; //el tipus d'unitat s'assigna des de l'inspector
+    public UnitType unitType; //el tipus d'unitat s'assigna des de l'inspector
     public uint movementRange;
     public uint neutralCost;
     public uint plantpotCost;
@@ -52,23 +52,33 @@ public class Unit : MonoBehaviour
     [Header("Multipliers")]
     public float vsInfantry;
     public float vsTransport;
+    public float vsTank;
 
     [Header("Interaction")]
     public List<GameObject> targets;
     public GameObject currentTarget;
 
     //movement
-    List<Vector2Int> path = new List<Vector2Int>();
-    Vector2Int goal;
-    Vector2Int nextPos;
-    int nextPosIndex;
-    float moveInterval = 0.025f;
-    float moveTimer = 0.0f;
-    float moveSpeed = 0.25f;
+    [HideInInspector]
+    public List<Vector2Int> path = new List<Vector2Int>();
+    [HideInInspector]
+    public Vector2Int goal;
+    [HideInInspector]
+    public Vector2Int nextPos;
+    [HideInInspector]
+    public int nextPosIndex;
+    [HideInInspector]
+    public float moveInterval = 0.025f;
+    [HideInInspector]
+    public float moveTimer = 0.0f;
+    [HideInInspector]
+    public float moveSpeed = 0.25f;
 
     //targeting
-    float switchTargetTimer = 0.0f;
-    float switchTargetInterval = 0.1f;
+    [HideInInspector]
+    public float switchTargetTimer = 0.0f;
+    [HideInInspector]
+    public float switchTargetInterval = 0.1f;
 
     [HideInInspector]
     public Vector3 lastPosition;
@@ -76,7 +86,8 @@ public class Unit : MonoBehaviour
     public Vector2Int lastGoal;
 
     //UI
-    private bool[] activeButtons;
+    [HideInInspector]
+    public bool[] activeButtons;
     [HideInInspector]
     public GameObject UITarget;
     [HideInInspector]
@@ -124,6 +135,11 @@ public class Unit : MonoBehaviour
         else if (state == UnitState.TARGETING)
         {
             switchTargetTimer += Time.deltaTime;
+        }
+        else if (state == UnitState.DROPPED && !winCon)
+        {
+            moveTimer += Time.deltaTime;
+            GetComponent<UnitInfantry>().MoveOnDropped();
         }
 
         DrawLines();
@@ -203,7 +219,7 @@ public class Unit : MonoBehaviour
         return activeButtons;
     }
     
-    void Highlight(bool what)
+    public void Highlight(bool what)
     {
         if (what)
             GetComponent<SpriteRenderer>().sortingOrder += layerDifference;
@@ -216,7 +232,7 @@ public class Unit : MonoBehaviour
         UITarget.SetActive(enable);
     }
 
-    void EnableUIHitPoints(bool enable)
+    public void EnableUIHitPoints(bool enable)
     {
         UIHitPoints.SetActive(enable);
     }
@@ -340,19 +356,13 @@ public class Unit : MonoBehaviour
         if (basePower > 0)
             SearchForTargets();
 
-        if (unitType == (uint)UnitType.INFANTRY)
+        if (unitType == UnitType.INFANTRY)
         {
-            if (GetComponent<UnitInfantry>().SearchForOtherBuilding() != null) // això és per la captura
-                EnableCaptureButton(true);
-            else
-                EnableCaptureButton(false);
-
-            if (GetComponent<UnitInfantry>().SearchForTransport() != null)
-            {
-                EnableLoadButton(true);
-            }
-            else
-                EnableLoadButton(false);
+            GetComponent<UnitInfantry>().ManageButtons();
+        }
+        else if (unitType == UnitType.TRANSPORT)
+        {
+            GetComponent<UnitTransport>().ManageButtons();
         }
 
         UpdateStatsBasedOnTile();
@@ -371,8 +381,7 @@ public class Unit : MonoBehaviour
         //obrir el menú oju
         EnableMenuUnit();
 
-        if (basePower > 0)
-            Untarget();
+        Untarget();
     }
 
     public void OnCancelMovement()
@@ -395,7 +404,7 @@ public class Unit : MonoBehaviour
         currentTarget = null;
     }
 
-    void ResetDirection()
+    public void ResetDirection()
     {
         if (CompareTag("Unit_cani"))
             direction = UnitDirection.RIGHT;
@@ -498,7 +507,7 @@ public class Unit : MonoBehaviour
         Untarget();
     }
 
-    void UpdateAnimator()
+    public void UpdateAnimator()
     {
         animator.SetInteger("state", (int)state);
         animator.SetInteger("direction", (int)direction);
@@ -613,7 +622,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void UpdateStatsBasedOnTile()
+    public void UpdateStatsBasedOnTile()
     {
         switch(GetMyTileType(transform.position))
         {
@@ -720,24 +729,6 @@ public class Unit : MonoBehaviour
         activeButtons[1] = enable;
     }
 
-    public void EnableCaptureButton(bool enable)
-    {
-        activeButtons[0] = enable;
-    }
-
-    public void EnableLoadButton(bool enable)
-    {
-        activeButtons[3] = enable;
-        activeButtons[2] = !enable; //activar o desactivar wait en funció de si hi ha o no transport
-
-        //desactivem la resta de botons ja que el load només pot ser-hi sol
-        if (enable)
-        {
-            activeButtons[0] = !enable;
-            activeButtons[1] = !enable;
-        }
-    }
-
     void DrawLines()
     {
         Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f); //establim el punt de partida al centre de la casella
@@ -823,7 +814,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void Untarget()
+    public void Untarget()
     {
         UITarget.transform.position = transform.position;
         UITarget.SetActive(false);
@@ -878,12 +869,16 @@ public class Unit : MonoBehaviour
         float typeMultiplier = 0.0f;
         switch (enemy.GetComponent<Unit>().unitType)
         {
-            case (uint)UnitType.INFANTRY:
+            case UnitType.INFANTRY:
                 typeMultiplier = 1.0f * vsInfantry;
                 break;
 
-            case (uint)UnitType.TRANSPORT:
+            case UnitType.TRANSPORT:
                 typeMultiplier = 1.0f * vsTransport;
+                break;
+
+            case UnitType.TANK:
+                typeMultiplier = 1.0f * vsTank;
                 break;
         }
 
@@ -958,5 +953,10 @@ public class Unit : MonoBehaviour
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.RemoveListener(SelectNextTarget);
 
         GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().attackUnit.RemoveListener(OnAttack);
+
+        if (unitType == UnitType.TRANSPORT)
+        {
+            GetComponent<UnitTransport>().UnsubscribeFromEvents();
+        }
     }
 }

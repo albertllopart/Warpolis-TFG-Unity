@@ -2320,6 +2320,98 @@ Transform:
   m_Father: {fileID: 1190805764}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &876744646
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2106959094}
+    m_Modifications:
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: idle
+      value: 
+      objectReference: {fileID: 1447074666190570852, guid: bb9d40f56bbe4464a8411cac052acb50,
+        type: 3}
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: highlighted
+      value: 
+      objectReference: {fileID: 6602579521883344065, guid: bb9d40f56bbe4464a8411cac052acb50,
+        type: 3}
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: shopValue
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1447074666190570852, guid: bb9d40f56bbe4464a8411cac052acb50,
+        type: 3}
+    - target: {fileID: 4549133765042836332, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_Name
+      value: Button_hipster_tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa29c28fc341ea342bcf4ae9f7315f62, type: 3}
 --- !u!1001 &908949188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2476,6 +2568,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &957814532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4549133765042836332, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+    type: 3}
+  m_PrefabInstance: {fileID: 876744646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &957814533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+    type: 3}
+  m_PrefabInstance: {fileID: 876744646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &995624853 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7925741534278167029, guid: be1b895a10dea9d48962842770838259,
@@ -2924,6 +3028,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1161507411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4549133765042836332, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+    type: 3}
+  m_PrefabInstance: {fileID: 1379069826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1161507412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+    type: 3}
+  m_PrefabInstance: {fileID: 1379069826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1178085813
 GameObject:
   m_ObjectHideFlags: 0
@@ -8436,12 +8552,107 @@ MonoBehaviour:
   attackUnit:
     m_PersistentCalls:
       m_Calls: []
+  dropUnit:
+    m_PersistentCalls:
+      m_Calls: []
   endTurnCani:
     m_PersistentCalls:
       m_Calls: []
   endTurnHipster:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1379069826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2106959094}
+    m_Modifications:
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: idle
+      value: 
+      objectReference: {fileID: 4458054559679451181, guid: bb9d40f56bbe4464a8411cac052acb50,
+        type: 3}
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: highlighted
+      value: 
+      objectReference: {fileID: -4149462677746488711, guid: bb9d40f56bbe4464a8411cac052acb50,
+        type: 3}
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: shopValue
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4458054559679451181, guid: bb9d40f56bbe4464a8411cac052acb50,
+        type: 3}
+    - target: {fileID: 4549133765042836332, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_Name
+      value: Button_cani_tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549133765042836333, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa29c28fc341ea342bcf4ae9f7315f62, type: 3}
 --- !u!1 &1395025207
 GameObject:
   m_ObjectHideFlags: 0
@@ -15143,6 +15354,8 @@ Transform:
   - {fileID: 1331193159}
   - {fileID: 1927703624}
   - {fileID: 1423639184}
+  - {fileID: 1161507412}
+  - {fileID: 957814533}
   m_Father: {fileID: 349484953}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15160,17 +15373,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonCaniInfantry: {fileID: 7925741534161025555}
   buttonCaniTransport: {fileID: 1927703623}
+  buttonCaniTank: {fileID: 1161507411}
   caniButtons: []
   caniInfantry: {fileID: 666185830536341486, guid: 39c66174c5cc0704e80bb399d66fd2ee,
     type: 3}
   caniTransport: {fileID: 2082386380024262747, guid: 87524f713a47e19408be8b56910a7c61,
     type: 3}
+  caniTank: {fileID: 2717939172646256319, guid: 107ae9589bbd07e4b8440b1c085921f3,
+    type: 3}
   buttonHipsterInfantry: {fileID: 1331193158}
   buttonHipsterTransport: {fileID: 1423639183}
+  buttonHipsterTank: {fileID: 957814532}
   hipsterButtons: []
   hipsterInfantry: {fileID: 8884597790952577896, guid: ce88d37d218e70144b3dddc979985500,
     type: 3}
   hipsterTransport: {fileID: 2082386380024262747, guid: 7e9f7dac9721b8246a0e6dd2c34eac16,
+    type: 3}
+  hipsterTank: {fileID: 2717939172646256319, guid: 67a9e14d661eacd41a16bc88f621dd27,
     type: 3}
   selectedButton: {fileID: 0}
   caniUnitCreated:
