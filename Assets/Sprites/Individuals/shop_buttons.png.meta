@@ -62,6 +62,30 @@ TextureImporter:
   - first:
       213: 6602579521883344065
     second: shop_buttons_11
+  - first:
+      213: 7456117914713696145
+    second: shop_buttons_8
+  - first:
+      213: -2880476340667324468
+    second: shop_buttons_9
+  - first:
+      213: -3935306640377261150
+    second: shop_buttons_10
+  - first:
+      213: 8591355902357990891
+    second: shop_buttons_11
+  - first:
+      213: 8886408104879517367
+    second: shop_buttons_12
+  - first:
+      213: -346566823642340478
+    second: shop_buttons_13
+  - first:
+      213: 7970890721974132386
+    second: shop_buttons_14
+  - first:
+      213: 7520562694166275542
+    second: shop_buttons_15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -162,7 +186,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 220
+        y: 300
         width: 132
         height: 20
       alignment: 1
@@ -183,7 +207,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 200
+        y: 280
         width: 132
         height: 20
       alignment: 1
@@ -204,7 +228,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 180
+        y: 260
         width: 132
         height: 20
       alignment: 1
@@ -225,7 +249,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
+        y: 240
         width: 132
         height: 20
       alignment: 1
@@ -246,7 +270,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 140
+        y: 220
         width: 132
         height: 20
       alignment: 1
@@ -267,7 +291,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 120
+        y: 200
         width: 132
         height: 20
       alignment: 1
@@ -288,7 +312,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 100
+        y: 180
         width: 132
         height: 20
       alignment: 1
@@ -309,7 +333,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 160
         width: 132
         height: 20
       alignment: 1
@@ -330,6 +354,90 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 140
+        width: 132
+        height: 20
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 197afed3db3797760800000000000000
+      internalID: 7456117914713696145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_buttons_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 132
+        height: 20
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc76b92970e7608d0800000000000000
+      internalID: -2880476340667324468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_buttons_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 132
+        height: 20
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3d312f57bf269c0800000000000000
+      internalID: -3935306640377261150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_buttons_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 132
+        height: 20
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bede00b9ca0aa3770800000000000000
+      internalID: 8591355902357990891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_buttons_12
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 60
         width: 132
         height: 20
@@ -340,14 +448,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d20110390013edd30800000000000000
-      internalID: 4458054559679451181
+      spriteID: 7beee74d61dd25b70800000000000000
+      internalID: 8886408104879517367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_buttons_9
+      name: shop_buttons_13
       rect:
         serializedVersion: 2
         x: 0
@@ -361,14 +469,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97aed2ceda52a66c0800000000000000
-      internalID: -4149462677746488711
+      spriteID: 283ecd16f4fb03bf0800000000000000
+      internalID: -346566823642340478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_buttons_10
+      name: shop_buttons_14
       rect:
         serializedVersion: 2
         x: 0
@@ -382,14 +490,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46581c1fdba051410800000000000000
-      internalID: 1447074666190570852
+      spriteID: 2ae99ba41ea4e9e60800000000000000
+      internalID: 7970890721974132386
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_buttons_11
+      name: shop_buttons_15
       rect:
         serializedVersion: 2
         x: 0
@@ -403,8 +511,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cc002bd71311ab50800000000000000
-      internalID: 6602579521883344065
+      spriteID: 6d5e5d8bce76e5860800000000000000
+      internalID: 7520562694166275542
       vertices: []
       indices: 
       edges: []

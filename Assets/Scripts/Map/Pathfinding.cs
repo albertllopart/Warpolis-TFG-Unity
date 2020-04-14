@@ -86,40 +86,38 @@ public class Pathfinding
 
             if (MyTilemap[popped.data.x, -popped.data.y] != null)
             {
-                if (MyTilemap[popped.data.x, -popped.data.y].isWalkable)
+                BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
+                BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
+                BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
+                BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
+
+                List<BFS_Node> unorderedNodes = new List<BFS_Node>();
+
+                if (CheckMapLimits(north.data))
+                    unorderedNodes.Add(north);
+                if (CheckMapLimits(south.data))
+                    unorderedNodes.Add(south);
+                if (CheckMapLimits(east.data))
+                    unorderedNodes.Add(east);
+                if (CheckMapLimits(west.data))
+                    unorderedNodes.Add(west);
+
+                List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
+
+                foreach (BFS_Node node in orderedNodes)
                 {
-                    BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
-                    BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
-                    BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
-                    BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
-
-                    List<BFS_Node> unorderedNodes = new List<BFS_Node>();
-
-                    if (CheckMapLimits(north.data))
-                        unorderedNodes.Add(north);
-                    if (CheckMapLimits(south.data))
-                        unorderedNodes.Add(south);
-                    if (CheckMapLimits(east.data))
-                        unorderedNodes.Add(east);
-                    if (CheckMapLimits(west.data))
-                        unorderedNodes.Add(west);
-
-                    List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
-
-                    foreach (BFS_Node node in orderedNodes)
+                    if (!CheckEnemyInPos(node.data, unit)) //primer mira si hi ha un enemic a la casella i després si està a rang i és walkable
                     {
-                        if (!CheckEnemyInPos(node.data, unit)) //primer mira si hi ha un enemic a la casella i després si està a rang i és walkable
+                        if (IsInMoveRange(unitScript, visited[0], node))
                         {
-                            if (IsInMoveRange(unitScript, visited[0], node))
+                            if (unitScript.unitType != UnitType.AERIAL)
                                 CheckNode(node);
+                            else
+                                CheckNodeAerial(node);
                         }
-
-                        CheckNodeForAttackRange(node);
                     }
-                }
-                else
-                {
-                    Debug.Log("Pathfinding::PropagateBFS - Found Non Walkable Tile at pos: " + popped.data);
+
+                    CheckNodeForAttackRange(node);
                 }
             }
             else
@@ -216,6 +214,16 @@ public class Pathfinding
                 visited.Add(node.data);
                 backtrack.Add(node);
             }
+        }
+    }
+
+    public void CheckNodeAerial(BFS_Node node)
+    {
+        if (!visited.Contains(node.data))
+        {
+            frontier.Enqueue(node);
+            visited.Add(node.data);
+            backtrack.Add(node);
         }
     }
 

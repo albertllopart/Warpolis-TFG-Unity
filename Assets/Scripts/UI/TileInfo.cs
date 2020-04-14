@@ -45,6 +45,10 @@ public class TileInfo : MonoBehaviour
     public Sprite hipster_infantry;
     public Sprite cani_transport;
     public Sprite hipster_transport;
+    public Sprite cani_tank;
+    public Sprite hipster_tank;
+    public Sprite cani_aerial;
+    public Sprite hipster_aerial;
 
     //elements
     [Header("Elements")]
@@ -288,6 +292,12 @@ public class TileInfo : MonoBehaviour
 
             case UnitType.TRANSPORT:
                 return cani_transport;
+
+            case UnitType.TANK:
+                return cani_tank;
+
+            case UnitType.AERIAL:
+                return cani_aerial;
         }
 
         return null;
@@ -302,6 +312,12 @@ public class TileInfo : MonoBehaviour
 
             case UnitType.TRANSPORT:
                 return hipster_transport;
+
+            case UnitType.TANK:
+                return hipster_tank;
+
+            case UnitType.AERIAL:
+                return hipster_aerial;
         }
 
         return null;

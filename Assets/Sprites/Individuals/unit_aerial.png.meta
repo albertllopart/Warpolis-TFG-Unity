@@ -1,0 +1,3301 @@
+fileFormatVersion: 2
+guid: cfd2d8c5c2e9190429e920f974b34198
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2122684443322107804
+    second: unit_aerial_0
+  - first:
+      213: -2507685575714849976
+    second: unit_aerial_1
+  - first:
+      213: -4105602425221642771
+    second: unit_aerial_2
+  - first:
+      213: 5620889638185653940
+    second: unit_aerial_3
+  - first:
+      213: 5949464299126493031
+    second: unit_aerial_4
+  - first:
+      213: -7632198009146719953
+    second: unit_aerial_5
+  - first:
+      213: -2107827960520966195
+    second: unit_aerial_6
+  - first:
+      213: 6814542532020991385
+    second: unit_aerial_7
+  - first:
+      213: -1415608569350835783
+    second: unit_aerial_8
+  - first:
+      213: 5997019260101115826
+    second: unit_aerial_9
+  - first:
+      213: 4473809975791564278
+    second: unit_aerial_10
+  - first:
+      213: 1456525609622469677
+    second: unit_aerial_11
+  - first:
+      213: 687189372633539314
+    second: unit_aerial_12
+  - first:
+      213: 9203040698187195401
+    second: unit_aerial_13
+  - first:
+      213: 581188489825952734
+    second: unit_aerial_14
+  - first:
+      213: 8623808695777577880
+    second: unit_aerial_15
+  - first:
+      213: -1686931282717358041
+    second: unit_aerial_16
+  - first:
+      213: 4064774820436011017
+    second: unit_aerial_17
+  - first:
+      213: 8137854112527408856
+    second: unit_aerial_18
+  - first:
+      213: 1417062347428921701
+    second: unit_aerial_19
+  - first:
+      213: 644170315122855824
+    second: unit_aerial_20
+  - first:
+      213: -6408207262346266253
+    second: unit_aerial_21
+  - first:
+      213: 7616266627923873959
+    second: unit_aerial_22
+  - first:
+      213: -7000750561578516892
+    second: unit_aerial_23
+  - first:
+      213: 4241378789844622156
+    second: unit_aerial_24
+  - first:
+      213: 1797561303326137484
+    second: unit_aerial_25
+  - first:
+      213: 3912179745863723567
+    second: unit_aerial_26
+  - first:
+      213: -1939546143895374904
+    second: unit_aerial_27
+  - first:
+      213: -8836135127039026337
+    second: unit_aerial_28
+  - first:
+      213: 3909828461016693056
+    second: unit_aerial_29
+  - first:
+      213: 7709109692377673129
+    second: unit_aerial_30
+  - first:
+      213: 4632646821246338630
+    second: unit_aerial_31
+  - first:
+      213: -8383363616142097846
+    second: unit_aerial_32
+  - first:
+      213: -4547666769020836541
+    second: unit_aerial_33
+  - first:
+      213: -671128098668124112
+    second: unit_aerial_34
+  - first:
+      213: -1332848494296539087
+    second: unit_aerial_35
+  - first:
+      213: 4568384456973064023
+    second: unit_aerial_36
+  - first:
+      213: 4157157877162749271
+    second: unit_aerial_37
+  - first:
+      213: 1123598883590901621
+    second: unit_aerial_38
+  - first:
+      213: -8127891744281049218
+    second: unit_aerial_39
+  - first:
+      213: 7121046673143925636
+    second: unit_aerial_40
+  - first:
+      213: 3444780500750591143
+    second: unit_aerial_41
+  - first:
+      213: -3644626015601970177
+    second: unit_aerial_42
+  - first:
+      213: -5320345213794634525
+    second: unit_aerial_43
+  - first:
+      213: -8688004754076066749
+    second: unit_aerial_44
+  - first:
+      213: -517745423284076217
+    second: unit_aerial_45
+  - first:
+      213: -6658212545790147620
+    second: unit_aerial_46
+  - first:
+      213: 735059198821320351
+    second: unit_aerial_47
+  - first:
+      213: -3684843580985077871
+    second: unit_aerial_48
+  - first:
+      213: -1173089990114570467
+    second: unit_aerial_49
+  - first:
+      213: -5077748687757281358
+    second: unit_aerial_50
+  - first:
+      213: -1972911986095774126
+    second: unit_aerial_51
+  - first:
+      213: -5180193351065094115
+    second: unit_aerial_52
+  - first:
+      213: 6095618088924167375
+    second: unit_aerial_53
+  - first:
+      213: -7659430214889346280
+    second: unit_aerial_54
+  - first:
+      213: 6574473086463226819
+    second: unit_aerial_55
+  - first:
+      213: 8067621270293080161
+    second: unit_aerial_56
+  - first:
+      213: 8221865556225604535
+    second: unit_aerial_57
+  - first:
+      213: 3558534591799699515
+    second: unit_aerial_58
+  - first:
+      213: 3913116733315067032
+    second: unit_aerial_59
+  - first:
+      213: 4580695736015854390
+    second: unit_aerial_60
+  - first:
+      213: 6695360242970624832
+    second: unit_aerial_61
+  - first:
+      213: -6541930063206876540
+    second: unit_aerial_62
+  - first:
+      213: -8865223835830583266
+    second: unit_aerial_63
+  - first:
+      213: -3942854436455418447
+    second: unit_aerial_64
+  - first:
+      213: -6176059147648433753
+    second: unit_aerial_65
+  - first:
+      213: -648780199477819078
+    second: unit_aerial_66
+  - first:
+      213: 5320732219646426811
+    second: unit_aerial_67
+  - first:
+      213: 7512709840373869698
+    second: unit_aerial_68
+  - first:
+      213: -8814232760772563453
+    second: unit_aerial_69
+  - first:
+      213: 8966658436078546999
+    second: unit_aerial_70
+  - first:
+      213: 1732536925604754241
+    second: unit_aerial_71
+  - first:
+      213: -3424869570336089226
+    second: unit_aerial_72
+  - first:
+      213: -1208069500905874457
+    second: unit_aerial_73
+  - first:
+      213: 7271824794859191792
+    second: unit_aerial_74
+  - first:
+      213: -7848331109829494904
+    second: unit_aerial_75
+  - first:
+      213: -3091017523429411896
+    second: unit_aerial_76
+  - first:
+      213: 4764523410264023939
+    second: unit_aerial_77
+  - first:
+      213: 2563066993049045580
+    second: unit_aerial_78
+  - first:
+      213: -7440078309442279487
+    second: unit_aerial_79
+  - first:
+      213: 677881898440785017
+    second: unit_aerial_80
+  - first:
+      213: 2284847710134809584
+    second: unit_aerial_81
+  - first:
+      213: 5233778923878372528
+    second: unit_aerial_82
+  - first:
+      213: 5845661829654568353
+    second: unit_aerial_83
+  - first:
+      213: -4461858280232804128
+    second: unit_aerial_84
+  - first:
+      213: -6112386207213205275
+    second: unit_aerial_85
+  - first:
+      213: -793630107773921486
+    second: unit_aerial_86
+  - first:
+      213: -5086538669496125480
+    second: unit_aerial_87
+  - first:
+      213: 2775936327438578178
+    second: unit_aerial_88
+  - first:
+      213: -4955154127238150274
+    second: unit_aerial_89
+  - first:
+      213: -4917981535302887783
+    second: unit_aerial_90
+  - first:
+      213: 4525167045837015636
+    second: unit_aerial_91
+  - first:
+      213: 5477908335921458845
+    second: unit_aerial_92
+  - first:
+      213: -1929469862475130140
+    second: unit_aerial_93
+  - first:
+      213: -3097043906142033359
+    second: unit_aerial_94
+  - first:
+      213: -2942677546975062172
+    second: unit_aerial_95
+  - first:
+      213: -1191482868176131588
+    second: unit_aerial_96
+  - first:
+      213: -1891265591639899674
+    second: unit_aerial_97
+  - first:
+      213: -8669011835892699348
+    second: unit_aerial_98
+  - first:
+      213: 8077551123954498936
+    second: unit_aerial_99
+  - first:
+      213: 8763454310056717263
+    second: unit_aerial_100
+  - first:
+      213: -8721304452843627607
+    second: unit_aerial_101
+  - first:
+      213: 6830002613149054239
+    second: unit_aerial_102
+  - first:
+      213: 5815698193990048118
+    second: unit_aerial_103
+  - first:
+      213: -1748234154240510602
+    second: unit_aerial_104
+  - first:
+      213: 6790938592400916905
+    second: unit_aerial_105
+  - first:
+      213: 9183675536638964305
+    second: unit_aerial_106
+  - first:
+      213: 3556704018705253072
+    second: unit_aerial_107
+  - first:
+      213: -3383468859357759819
+    second: unit_aerial_108
+  - first:
+      213: -5839984882509264722
+    second: unit_aerial_109
+  - first:
+      213: -972927733930752855
+    second: unit_aerial_110
+  - first:
+      213: 6323742509453331430
+    second: unit_aerial_111
+  - first:
+      213: -3120391670282846523
+    second: unit_aerial_112
+  - first:
+      213: 6707263111907083785
+    second: unit_aerial_113
+  - first:
+      213: 2558597799348074912
+    second: unit_aerial_114
+  - first:
+      213: 3394179521043344936
+    second: unit_aerial_115
+  - first:
+      213: 719798979299800363
+    second: unit_aerial_116
+  - first:
+      213: -2429902860274527899
+    second: unit_aerial_117
+  - first:
+      213: -2322832596670821767
+    second: unit_aerial_0
+  - first:
+      213: -4233829883447963204
+    second: unit_aerial_1
+  - first:
+      213: -285084096565715471
+    second: unit_aerial_2
+  - first:
+      213: -6092800734864106811
+    second: unit_aerial_3
+  - first:
+      213: 3962633968758673248
+    second: unit_aerial_4
+  - first:
+      213: -8322740114149413135
+    second: unit_aerial_5
+  - first:
+      213: 378602083833544384
+    second: unit_aerial_6
+  - first:
+      213: -115502570257403699
+    second: unit_aerial_7
+  - first:
+      213: -1958245766448980284
+    second: unit_aerial_8
+  - first:
+      213: -7594524811056112763
+    second: unit_aerial_9
+  - first:
+      213: -316014482220949482
+    second: unit_aerial_10
+  - first:
+      213: 4859972258583149823
+    second: unit_aerial_11
+  - first:
+      213: 8390521077604740263
+    second: unit_aerial_12
+  - first:
+      213: -2004939409436653084
+    second: unit_aerial_13
+  - first:
+      213: 8698066588003675910
+    second: unit_aerial_14
+  - first:
+      213: 6018345673746319339
+    second: unit_aerial_15
+  - first:
+      213: -5510787780843189734
+    second: unit_aerial_16
+  - first:
+      213: -5533394212972243045
+    second: unit_aerial_17
+  - first:
+      213: 1493647024269361687
+    second: unit_aerial_18
+  - first:
+      213: -7849681595249025772
+    second: unit_aerial_19
+  - first:
+      213: 684151039356091988
+    second: unit_aerial_20
+  - first:
+      213: 6409542997169552325
+    second: unit_aerial_21
+  - first:
+      213: 1218730917797421560
+    second: unit_aerial_22
+  - first:
+      213: -818948272725531345
+    second: unit_aerial_23
+  - first:
+      213: 1361982731483791675
+    second: unit_aerial_24
+  - first:
+      213: -5868703070352557678
+    second: unit_aerial_25
+  - first:
+      213: -636095523719905819
+    second: unit_aerial_26
+  - first:
+      213: 7234557977829254728
+    second: unit_aerial_27
+  - first:
+      213: 9197472441556494652
+    second: unit_aerial_28
+  - first:
+      213: -4528128283416125973
+    second: unit_aerial_29
+  - first:
+      213: 2482130769913754069
+    second: unit_aerial_30
+  - first:
+      213: -5847270773933327597
+    second: unit_aerial_31
+  - first:
+      213: 4578621997725727485
+    second: unit_aerial_32
+  - first:
+      213: 170684469231398729
+    second: unit_aerial_33
+  - first:
+      213: 6148165669674969239
+    second: unit_aerial_34
+  - first:
+      213: 7182824344137784459
+    second: unit_aerial_35
+  - first:
+      213: -4195619896842193630
+    second: unit_aerial_36
+  - first:
+      213: -6005052690876005653
+    second: unit_aerial_37
+  - first:
+      213: 4129368116713508128
+    second: unit_aerial_38
+  - first:
+      213: -1553757909645433240
+    second: unit_aerial_39
+  - first:
+      213: -1478717071337593290
+    second: unit_aerial_40
+  - first:
+      213: 6242303435494834305
+    second: unit_aerial_41
+  - first:
+      213: 1683507662817249244
+    second: unit_aerial_42
+  - first:
+      213: -2058393613896561101
+    second: unit_aerial_43
+  - first:
+      213: -2244803654909122925
+    second: unit_aerial_44
+  - first:
+      213: -6776766987500703567
+    second: unit_aerial_45
+  - first:
+      213: -4029473919965587497
+    second: unit_aerial_46
+  - first:
+      213: 7144907543870095247
+    second: unit_aerial_47
+  - first:
+      213: -2892528861170995214
+    second: unit_aerial_48
+  - first:
+      213: -8952891009570009135
+    second: unit_aerial_49
+  - first:
+      213: -1071760047925951251
+    second: unit_aerial_50
+  - first:
+      213: 5266731026154549948
+    second: unit_aerial_51
+  - first:
+      213: 958122230232626956
+    second: unit_aerial_52
+  - first:
+      213: 2717325739991514654
+    second: unit_aerial_53
+  - first:
+      213: 5152648531287944625
+    second: unit_aerial_54
+  - first:
+      213: -4866870288229010773
+    second: unit_aerial_55
+  - first:
+      213: -8444990659443833677
+    second: unit_aerial_56
+  - first:
+      213: -557634258304977397
+    second: unit_aerial_57
+  - first:
+      213: -2867134199838954151
+    second: unit_aerial_58
+  - first:
+      213: -2291375654449047841
+    second: unit_aerial_59
+  - first:
+      213: 8222597611425348147
+    second: unit_aerial_60
+  - first:
+      213: 4420186021857283021
+    second: unit_aerial_61
+  - first:
+      213: -8692750719675312624
+    second: unit_aerial_62
+  - first:
+      213: 7441814210257348281
+    second: unit_aerial_63
+  - first:
+      213: 5957087838208949973
+    second: unit_aerial_64
+  - first:
+      213: 181919669701663061
+    second: unit_aerial_65
+  - first:
+      213: -1980082665039354041
+    second: unit_aerial_66
+  - first:
+      213: 1473218625081528299
+    second: unit_aerial_67
+  - first:
+      213: -893226283714739465
+    second: unit_aerial_68
+  - first:
+      213: -1006793762171183382
+    second: unit_aerial_69
+  - first:
+      213: -8084113265950274251
+    second: unit_aerial_70
+  - first:
+      213: 1480374649090170687
+    second: unit_aerial_71
+  - first:
+      213: 6191123215188278253
+    second: unit_aerial_72
+  - first:
+      213: 438824779354674351
+    second: unit_aerial_73
+  - first:
+      213: 2617343605237034501
+    second: unit_aerial_74
+  - first:
+      213: -991037786431131523
+    second: unit_aerial_75
+  - first:
+      213: -5824277057209956563
+    second: unit_aerial_76
+  - first:
+      213: -6395672356624409857
+    second: unit_aerial_77
+  - first:
+      213: 2822349910408454669
+    second: unit_aerial_78
+  - first:
+      213: -3643683905145403174
+    second: unit_aerial_79
+  - first:
+      213: 5693664407371217027
+    second: unit_aerial_80
+  - first:
+      213: 2608215165658944898
+    second: unit_aerial_81
+  - first:
+      213: 3533329587518263893
+    second: unit_aerial_82
+  - first:
+      213: 7200162897332272781
+    second: unit_aerial_83
+  - first:
+      213: 4515461920959509805
+    second: unit_aerial_84
+  - first:
+      213: 1726165541972004117
+    second: unit_aerial_85
+  - first:
+      213: -3407029899531103169
+    second: unit_aerial_86
+  - first:
+      213: 720535785145746871
+    second: unit_aerial_87
+  - first:
+      213: -3524517970484524719
+    second: unit_aerial_88
+  - first:
+      213: -2683791924282349642
+    second: unit_aerial_89
+  - first:
+      213: 3217373832465281912
+    second: unit_aerial_90
+  - first:
+      213: -2543976875499774638
+    second: unit_aerial_91
+  - first:
+      213: -4356237986338919146
+    second: unit_aerial_92
+  - first:
+      213: 1723952454226784617
+    second: unit_aerial_93
+  - first:
+      213: -4259586435486675384
+    second: unit_aerial_94
+  - first:
+      213: 3138849979081889862
+    second: unit_aerial_95
+  - first:
+      213: 7422522155812798331
+    second: unit_aerial_96
+  - first:
+      213: 6421439965273136053
+    second: unit_aerial_97
+  - first:
+      213: 5640084564143617992
+    second: unit_aerial_98
+  - first:
+      213: 5039538963168623827
+    second: unit_aerial_99
+  - first:
+      213: -7425050148118741806
+    second: unit_aerial_100
+  - first:
+      213: -2057062080870855397
+    second: unit_aerial_101
+  - first:
+      213: 5802458014330023501
+    second: unit_aerial_102
+  - first:
+      213: 896825534056943427
+    second: unit_aerial_103
+  - first:
+      213: -7043486713660536912
+    second: unit_aerial_104
+  - first:
+      213: -7581278688595539125
+    second: unit_aerial_105
+  - first:
+      213: 6763305876898388756
+    second: unit_aerial_106
+  - first:
+      213: -1741173180193565182
+    second: unit_aerial_107
+  - first:
+      213: 5901301174352111867
+    second: unit_aerial_108
+  - first:
+      213: 5332206159212320547
+    second: unit_aerial_109
+  - first:
+      213: -1170344936971844182
+    second: unit_aerial_110
+  - first:
+      213: -189929230539269761
+    second: unit_aerial_111
+  - first:
+      213: 6017703689205718938
+    second: unit_aerial_112
+  - first:
+      213: 4291677419123062053
+    second: unit_aerial_113
+  - first:
+      213: 3396253538991670950
+    second: unit_aerial_114
+  - first:
+      213: 8542192166782744647
+    second: unit_aerial_115
+  - first:
+      213: 6654003101926622820
+    second: unit_aerial_116
+  - first:
+      213: 6828173872062590757
+    second: unit_aerial_117
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: unit_aerial_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97accba6f04a3cfd0800000000000000
+      internalID: -2322832596670821767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb196ad172a6e35c0800000000000000
+      internalID: -4233829883447963204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fd561d468d2b0cf0800000000000000
+      internalID: -285084096565715471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_3
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ca9f2f3306027ba0800000000000000
+      internalID: -6092800734864106811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06fc1c2899a1ef630800000000000000
+      internalID: 3962633968758673248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_5
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1feea3246ffaf7c80800000000000000
+      internalID: -8322740114149413135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_6
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cefe1ed690114500800000000000000
+      internalID: 378602083833544384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_7
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 272
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc0b9293607a56ef0800000000000000
+      internalID: -115502570257403699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ce55e3c9d9e2d4e0800000000000000
+      internalID: -1958245766448980284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_9
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58b1c1ffbe3da9690800000000000000
+      internalID: -7594524811056112763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_10
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6106753b08a4d9bf0800000000000000
+      internalID: -316014482220949482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_11
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffcf91b1507127340800000000000000
+      internalID: 4859972258583149823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_12
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7acee07177e117470800000000000000
+      internalID: 8390521077604740263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_13
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e9c850da360d24e0800000000000000
+      internalID: -2004939409436653084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_14
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60f27aa3a7db5b870800000000000000
+      internalID: 8698066588003675910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_15
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 255
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be78823f085758350800000000000000
+      internalID: 6018345673746319339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1a4742f5bfb583b0800000000000000
+      internalID: -5510787780843189734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_17
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97569dc74f6533b0800000000000000
+      internalID: -5533394212972243045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_18
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 712056d0e008ab410800000000000000
+      internalID: 1493647024269361687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_19
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41d9243bd24501390800000000000000
+      internalID: -7849681595249025772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_20
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45eb889deb79e7900800000000000000
+      internalID: 684151039356091988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_21
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cb32ee856543f850800000000000000
+      internalID: 6409542997169552325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_22
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f1e918005dc9e010800000000000000
+      internalID: 1218730917797421560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_23
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 238
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2566ca82e282a4f0800000000000000
+      internalID: -818948272725531345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b31ce44041cb6e210800000000000000
+      internalID: 1361982731483791675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_25
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2993467b6ad2e8ea0800000000000000
+      internalID: -5868703070352557678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_26
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed7579cd722c27f0800000000000000
+      internalID: -636095523719905819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_27
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8462b778620566460800000000000000
+      internalID: 7234557977829254728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_28
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c396b6e847cf3af70800000000000000
+      internalID: 9197472441556494652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_29
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bed1599315bd821c0800000000000000
+      internalID: -4528128283416125973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_30
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 221
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1b6cac8cc427220800000000000000
+      internalID: 2482130769913754069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b3e2616325adea0800000000000000
+      internalID: -5847270773933327597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_32
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa3b37c2788a8f30800000000000000
+      internalID: 4578621997725727485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_33
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94fa635de946e5200800000000000000
+      internalID: 170684469231398729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_34
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7986a392a1ca25550800000000000000
+      internalID: 6148165669674969239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_35
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8c5c5c4fa48ea360800000000000000
+      internalID: 7182824344137784459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_36
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 225f824eee926c5c0800000000000000
+      internalID: -4195619896842193630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_37
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 204
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be205dec464c9aca0800000000000000
+      internalID: -6005052690876005653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d488f7c667e4930800000000000000
+      internalID: 4129368116713508128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_39
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86661a0d961ff6ae0800000000000000
+      internalID: -1553757909645433240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_40
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 636ed9f78aa8a7be0800000000000000
+      internalID: -1478717071337593290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_41
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 180ced4c6ed11a650800000000000000
+      internalID: 6242303435494834305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_42
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd7cedabc450d5710800000000000000
+      internalID: 1683507662817249244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_43
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33e43cbf9ed1f63e0800000000000000
+      internalID: -2058393613896561101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_44
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 187
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 396a4a628fad8d0e0800000000000000
+      internalID: -2244803654909122925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b03d68645614f1a0800000000000000
+      internalID: -6776766987500703567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_46
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d710c0a1de6418c0800000000000000
+      internalID: -4029473919965587497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_47
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8fb2694e8fc72360800000000000000
+      internalID: 7144907543870095247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_48
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff6657735cabd7d0800000000000000
+      internalID: -2892528861170995214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_49
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1df8acdaf01f0c380800000000000000
+      internalID: -8952891009570009135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_50
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de40be23ae75021f0800000000000000
+      internalID: -1071760047925951251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_51
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 170
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb27875c6ff271940800000000000000
+      internalID: 5266731026154549948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07bb60971feb4d00800000000000000
+      internalID: 958122230232626956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_53
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1e383f0d51e5b520800000000000000
+      internalID: 2717325739991514654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_54
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bd2bdf0a82e18740800000000000000
+      internalID: 5152648531287944625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_55
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba2f4363247657cb0800000000000000
+      internalID: -4866870288229010773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_56
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b4cb5c1dbd5dca80800000000000000
+      internalID: -8444990659443833677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_57
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06b427b892e248f0800000000000000
+      internalID: -557634258304977397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_58
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 153
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95da93fc2a4e538d0800000000000000
+      internalID: -2867134199838954151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_59
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd616958bf56330e0800000000000000
+      internalID: -2291375654449047841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_60
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33abbff56f88c1270800000000000000
+      internalID: 8222597611425348147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_61
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb43f984c7a75d30800000000000000
+      internalID: 4420186021857283021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_62
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0165bb0d6452d5780800000000000000
+      internalID: -8692750719675312624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_63
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b6e7d68892a64760800000000000000
+      internalID: 7441814210257348281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_64
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5de7e3ca3d3dba250800000000000000
+      internalID: 5957087838208949973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_65
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 559593ac9fe468200800000000000000
+      internalID: 181919669701663061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_66
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 136
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 747ab6c9e455584e0800000000000000
+      internalID: -1980082665039354041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_67
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bef4978b88ce17410800000000000000
+      internalID: 1473218625081528299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_68
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f2042f6d6f9a93f0800000000000000
+      internalID: -893226283714739465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_69
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aee15b358662702f0800000000000000
+      internalID: -1006793762171183382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_70
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53dc20be0d57fcf80800000000000000
+      internalID: -8084113265950274251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_71
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3f538566e85b8410800000000000000
+      internalID: 1480374649090170687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_72
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: debb8f123c94be550800000000000000
+      internalID: 6191123215188278253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_73
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa41314dfc4071600800000000000000
+      internalID: 438824779354674351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_74
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 119
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e2b45442ca25420800000000000000
+      internalID: 2617343605237034501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_75
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7078cc42602f32f0800000000000000
+      internalID: -991037786431131523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_76
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d270b83ffd20c2fa0800000000000000
+      internalID: -5824277057209956563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_77
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffadd9b90e10e37a0800000000000000
+      internalID: -6395672356624409857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_78
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0260c14a400b2720800000000000000
+      internalID: 2822349910408454669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_79
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad800081bc80f6dc0800000000000000
+      internalID: -3643683905145403174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_80
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38875a7bc95f30f40800000000000000
+      internalID: 5693664407371217027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_81
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28553eecfdd323420800000000000000
+      internalID: 2608215165658944898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_82
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 102
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 552576a1a88e80130800000000000000
+      internalID: 3533329587518263893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_83
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8eff6cc10e1ce360800000000000000
+      internalID: 7200162897332272781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_84
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d25389371b42aae30800000000000000
+      internalID: 4515461920959509805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_85
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51dc2c03a6294f710800000000000000
+      internalID: 1726165541972004117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_86
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f34505b8b5cc7b0d0800000000000000
+      internalID: -3407029899531103169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_87
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b5c191aa7bdff900800000000000000
+      internalID: 720535785145746871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_88
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1590acc5495661fc0800000000000000
+      internalID: -3524517970484524719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_89
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 85
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b7a616d67141cad0800000000000000
+      internalID: -2683791924282349642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 873fab9447866ac20800000000000000
+      internalID: 3217373832465281912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_91
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 68
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25d1703a28af1bcd0800000000000000
+      internalID: -2543976875499774638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_92
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61da43bb1a88b83c0800000000000000
+      internalID: -4356237986338919146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_93
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 51
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 961b9db8f95bce710800000000000000
+      internalID: 1723952454226784617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_94
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 51
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84e8eb684b8e2e4c0800000000000000
+      internalID: -4259586435486675384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_95
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 51
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6481b66fc6f6f8b20800000000000000
+      internalID: 3138849979081889862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f30b21398120760800000000000000
+      internalID: 7422522155812798331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_97
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bb1a9c40a98d1950800000000000000
+      internalID: 6421439965273136053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_98
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c7b1f4570b954e40800000000000000
+      internalID: 5640084564143617992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_99
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dcf7638cf900f540800000000000000
+      internalID: 5039538963168623827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_100
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dcbbe9da3ce4f890800000000000000
+      internalID: -7425050148118741806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_101
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d44ccafe8d373e0800000000000000
+      internalID: -2057062080870855397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_102
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e624042d8768050800000000000000
+      internalID: 5802458014330023501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_103
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 34
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34fc6f6521a227c00800000000000000
+      internalID: 896825534056943427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_104
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b78414e622804e90800000000000000
+      internalID: -7043486713660536912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_105
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b06073333e9c690800000000000000
+      internalID: -7581278688595539125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_106
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b17db8cd61cdd50800000000000000
+      internalID: 6763305876898388756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_107
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 206102eb73c16d7e0800000000000000
+      internalID: -1741173180193565182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_108
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf86ad1d622a5e150800000000000000
+      internalID: 5901301174352111867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_109
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3271005204dcff940800000000000000
+      internalID: 5332206159212320547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_110
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa5cd170b7912cfe0800000000000000
+      internalID: -1170344936971844182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_111
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 17
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f795e310f5c3d5df0800000000000000
+      internalID: -189929230539269761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f1aa64f9d238350800000000000000
+      internalID: 6017703689205718938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_113
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5253569dfd91f8b30800000000000000
+      internalID: 4291677419123062053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_114
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a603ce799ae12f20800000000000000
+      internalID: 3396253538991670950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_115
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 0
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 748b5386486fb8670800000000000000
+      internalID: 8542192166782744647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_116
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4660fa81194c75c50800000000000000
+      internalID: 6654003101926622820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_aerial_117
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 18
+        height: 17
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.88235295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52fe4ec95fb82ce50800000000000000
+      internalID: 6828173872062590757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

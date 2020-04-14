@@ -14,7 +14,7 @@ public enum UnitDirection
 
 public enum UnitType
 {
-    INFANTRY, TRANSPORT, TANK
+    INFANTRY, TRANSPORT, TANK, AERIAL
 };
 
 public enum UnitArmy
@@ -53,6 +53,7 @@ public class Unit : MonoBehaviour
     public float vsInfantry;
     public float vsTransport;
     public float vsTank;
+    public float vsAerial;
 
     [Header("Interaction")]
     public List<GameObject> targets;
@@ -879,6 +880,10 @@ public class Unit : MonoBehaviour
 
             case UnitType.TANK:
                 typeMultiplier = 1.0f * vsTank;
+                break;
+
+            case UnitType.AERIAL:
+                typeMultiplier = 1.0f * vsAerial;
                 break;
         }
 
