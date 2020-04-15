@@ -49,6 +49,8 @@ public class TileInfo : MonoBehaviour
     public Sprite hipster_tank;
     public Sprite cani_aerial;
     public Sprite hipster_aerial;
+    public Sprite cani_gunner;
+    public Sprite hipster_gunner;
 
     //elements
     [Header("Elements")]
@@ -298,6 +300,9 @@ public class TileInfo : MonoBehaviour
 
             case UnitType.AERIAL:
                 return cani_aerial;
+
+            case UnitType.GUNNER:
+                return cani_gunner;
         }
 
         return null;
@@ -318,6 +323,9 @@ public class TileInfo : MonoBehaviour
 
             case UnitType.AERIAL:
                 return hipster_aerial;
+
+            case UnitType.GUNNER:
+                return hipster_gunner;
         }
 
         return null;

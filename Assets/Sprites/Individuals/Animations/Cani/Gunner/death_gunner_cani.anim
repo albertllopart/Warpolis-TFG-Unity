@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: death_aerial_cani
+  m_Name: death_gunner_cani
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -4917981535302887783, guid: cfd2d8c5c2e9190429e920f974b34198,
+      value: {fileID: -1415047876864414692, guid: 7374e69107b0ea84c97f0ecbb17283fa,
         type: 3}
     - time: 0.083333336
-      value: {fileID: 4525167045837015636, guid: cfd2d8c5c2e9190429e920f974b34198,
+      value: {fileID: 5448942820236145967, guid: 7374e69107b0ea84c97f0ecbb17283fa,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -4917981535302887783, guid: cfd2d8c5c2e9190429e920f974b34198, type: 3}
-    - {fileID: 4525167045837015636, guid: cfd2d8c5c2e9190429e920f974b34198, type: 3}
+    - {fileID: -1415047876864414692, guid: 7374e69107b0ea84c97f0ecbb17283fa, type: 3}
+    - {fileID: 5448942820236145967, guid: 7374e69107b0ea84c97f0ecbb17283fa, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

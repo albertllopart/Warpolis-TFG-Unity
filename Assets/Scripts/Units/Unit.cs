@@ -14,7 +14,7 @@ public enum UnitDirection
 
 public enum UnitType
 {
-    INFANTRY, TRANSPORT, TANK, AERIAL
+    INFANTRY, TRANSPORT, TANK, AERIAL, GUNNER
 };
 
 public enum UnitArmy
@@ -54,6 +54,7 @@ public class Unit : MonoBehaviour
     public float vsTransport;
     public float vsTank;
     public float vsAerial;
+    public float vsGunner;
 
     [Header("Interaction")]
     public List<GameObject> targets;
@@ -659,6 +660,9 @@ public class Unit : MonoBehaviour
                 defense = 4;
                 break;
         }
+
+        if (unitType == UnitType.AERIAL) // les unitats aeries no es beneficien del terreny perquè volen
+            defense = 0;
     }
 
     MyTileType GetMyTileType(Vector2 pos)
@@ -884,6 +888,10 @@ public class Unit : MonoBehaviour
 
             case UnitType.AERIAL:
                 typeMultiplier = 1.0f * vsAerial;
+                break;
+
+            case UnitType.GUNNER:
+                typeMultiplier = 1.0f * vsGunner;
                 break;
         }
 

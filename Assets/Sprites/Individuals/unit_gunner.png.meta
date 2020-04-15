@@ -1,0 +1,1519 @@
+fileFormatVersion: 2
+guid: 7374e69107b0ea84c97f0ecbb17283fa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4549810069846425764
+    second: unit_gunner_0
+  - first:
+      213: 1723288595888558059
+    second: unit_gunner_1
+  - first:
+      213: 3456469991862742480
+    second: unit_gunner_2
+  - first:
+      213: 1361135016178879945
+    second: unit_gunner_3
+  - first:
+      213: -5721069750352177533
+    second: unit_gunner_4
+  - first:
+      213: 4620389244027571910
+    second: unit_gunner_5
+  - first:
+      213: 1843952009589204187
+    second: unit_gunner_6
+  - first:
+      213: -3442045211282714094
+    second: unit_gunner_7
+  - first:
+      213: 4047823625770576336
+    second: unit_gunner_8
+  - first:
+      213: -9109713842123389388
+    second: unit_gunner_9
+  - first:
+      213: -1715002992365987960
+    second: unit_gunner_10
+  - first:
+      213: 4650346267150091247
+    second: unit_gunner_11
+  - first:
+      213: -8975607566605238980
+    second: unit_gunner_12
+  - first:
+      213: -8827845935384991514
+    second: unit_gunner_13
+  - first:
+      213: -7762537410374588986
+    second: unit_gunner_14
+  - first:
+      213: 2683537370590991378
+    second: unit_gunner_15
+  - first:
+      213: 6611209818421820427
+    second: unit_gunner_16
+  - first:
+      213: -4470281733260308381
+    second: unit_gunner_17
+  - first:
+      213: -8957563611628581028
+    second: unit_gunner_18
+  - first:
+      213: 245434646338341117
+    second: unit_gunner_19
+  - first:
+      213: 7554137693254806235
+    second: unit_gunner_20
+  - first:
+      213: -8232401646717599765
+    second: unit_gunner_21
+  - first:
+      213: -805534272918827452
+    second: unit_gunner_22
+  - first:
+      213: -785070846473931000
+    second: unit_gunner_23
+  - first:
+      213: -1415047876864414692
+    second: unit_gunner_24
+  - first:
+      213: 5448942820236145967
+    second: unit_gunner_25
+  - first:
+      213: -427084890862570661
+    second: unit_gunner_26
+  - first:
+      213: 9211673100351707104
+    second: unit_gunner_27
+  - first:
+      213: 6409306572422073687
+    second: unit_gunner_28
+  - first:
+      213: 5685908008773338530
+    second: unit_gunner_29
+  - first:
+      213: -1203414778762195569
+    second: unit_gunner_30
+  - first:
+      213: 1367575285507290448
+    second: unit_gunner_31
+  - first:
+      213: 9589146027209840
+    second: unit_gunner_32
+  - first:
+      213: 1831735974639536938
+    second: unit_gunner_33
+  - first:
+      213: -2014971755604800912
+    second: unit_gunner_34
+  - first:
+      213: -2363336052826567374
+    second: unit_gunner_35
+  - first:
+      213: -280852521810092577
+    second: unit_gunner_36
+  - first:
+      213: 4041690232701310646
+    second: unit_gunner_37
+  - first:
+      213: -651980516463150578
+    second: unit_gunner_38
+  - first:
+      213: 7734994736476555055
+    second: unit_gunner_39
+  - first:
+      213: -5254657665139110680
+    second: unit_gunner_40
+  - first:
+      213: 1852183431531234057
+    second: unit_gunner_41
+  - first:
+      213: -3484792084138257821
+    second: unit_gunner_42
+  - first:
+      213: 4275798826065862575
+    second: unit_gunner_43
+  - first:
+      213: -4269658748628898002
+    second: unit_gunner_44
+  - first:
+      213: -1787657614906940393
+    second: unit_gunner_45
+  - first:
+      213: -632382936406685862
+    second: unit_gunner_46
+  - first:
+      213: 127681783040025299
+    second: unit_gunner_47
+  - first:
+      213: -2364228637391855466
+    second: unit_gunner_48
+  - first:
+      213: -6047305612012561033
+    second: unit_gunner_49
+  - first:
+      213: -7772551032698862486
+    second: unit_gunner_50
+  - first:
+      213: -6369286667478131817
+    second: unit_gunner_51
+  - first:
+      213: -839874575681031827
+    second: unit_gunner_0
+  - first:
+      213: 5312360319861676864
+    second: unit_gunner_1
+  - first:
+      213: 7435791322011901203
+    second: unit_gunner_2
+  - first:
+      213: -8314305600955604064
+    second: unit_gunner_3
+  - first:
+      213: -3801577872117275809
+    second: unit_gunner_4
+  - first:
+      213: 5190733869706961111
+    second: unit_gunner_5
+  - first:
+      213: -8521756874674210105
+    second: unit_gunner_6
+  - first:
+      213: 12905003459541353
+    second: unit_gunner_7
+  - first:
+      213: -8565180856643214160
+    second: unit_gunner_8
+  - first:
+      213: -8898722029162064158
+    second: unit_gunner_9
+  - first:
+      213: 8593098985974733179
+    second: unit_gunner_10
+  - first:
+      213: -1098856421874069655
+    second: unit_gunner_11
+  - first:
+      213: 8869936489245890608
+    second: unit_gunner_12
+  - first:
+      213: -7039795203085847117
+    second: unit_gunner_13
+  - first:
+      213: -7173163892517607739
+    second: unit_gunner_14
+  - first:
+      213: 324560759479805564
+    second: unit_gunner_15
+  - first:
+      213: 2885834685200931356
+    second: unit_gunner_16
+  - first:
+      213: 3842333094717241995
+    second: unit_gunner_17
+  - first:
+      213: -4944003984528479077
+    second: unit_gunner_18
+  - first:
+      213: 490810542670710635
+    second: unit_gunner_19
+  - first:
+      213: -7751719414119802476
+    second: unit_gunner_20
+  - first:
+      213: 8542810807970015136
+    second: unit_gunner_21
+  - first:
+      213: 3020164149421692179
+    second: unit_gunner_22
+  - first:
+      213: 4794799082567674636
+    second: unit_gunner_23
+  - first:
+      213: 275338985167398211
+    second: unit_gunner_24
+  - first:
+      213: 5657216575940879981
+    second: unit_gunner_25
+  - first:
+      213: -3127288727380244494
+    second: unit_gunner_26
+  - first:
+      213: -8135514544863921165
+    second: unit_gunner_27
+  - first:
+      213: -8442103496323501379
+    second: unit_gunner_28
+  - first:
+      213: -2332182013393851275
+    second: unit_gunner_29
+  - first:
+      213: 8143473821831295183
+    second: unit_gunner_30
+  - first:
+      213: -5655217235659803896
+    second: unit_gunner_31
+  - first:
+      213: 5294123309267202244
+    second: unit_gunner_32
+  - first:
+      213: -2596204174077577870
+    second: unit_gunner_33
+  - first:
+      213: -1907110662758611726
+    second: unit_gunner_34
+  - first:
+      213: 2705587364665023864
+    second: unit_gunner_35
+  - first:
+      213: -5560458367592391326
+    second: unit_gunner_36
+  - first:
+      213: 3288654714389946989
+    second: unit_gunner_37
+  - first:
+      213: -6870901999482128383
+    second: unit_gunner_38
+  - first:
+      213: 1501864486727568793
+    second: unit_gunner_39
+  - first:
+      213: 2923157208220229839
+    second: unit_gunner_40
+  - first:
+      213: -4984299490966908619
+    second: unit_gunner_41
+  - first:
+      213: -3912120643660718594
+    second: unit_gunner_42
+  - first:
+      213: -366002192516185661
+    second: unit_gunner_43
+  - first:
+      213: -8767604502267715800
+    second: unit_gunner_44
+  - first:
+      213: 1266425018605162285
+    second: unit_gunner_45
+  - first:
+      213: -8950221171394430297
+    second: unit_gunner_46
+  - first:
+      213: 6266525775280931019
+    second: unit_gunner_47
+  - first:
+      213: 3895359949944707553
+    second: unit_gunner_48
+  - first:
+      213: 8123099115745683799
+    second: unit_gunner_49
+  - first:
+      213: -5101402560895417351
+    second: unit_gunner_50
+  - first:
+      213: -7132651698798405188
+    second: unit_gunner_51
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: unit_gunner_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 221
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6176a4f58a2854f0800000000000000
+      internalID: -839874575681031827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 221
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04b5c38909b49b940800000000000000
+      internalID: 5312360319861676864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 221
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31d93749fcc313760800000000000000
+      internalID: 7435791322011901203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 221
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a320056b17ad9c80800000000000000
+      internalID: -8314305600955604064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 204
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f53e67221151e3bc0800000000000000
+      internalID: -3801577872117275809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 204
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d0e87be3f0390840800000000000000
+      internalID: 5190733869706961111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 204
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cafccec543acb980800000000000000
+      internalID: -8521756874674210105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 204
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 969f7034809dd2000800000000000000
+      internalID: 12905003459541353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b42ec2246d522980800000000000000
+      internalID: -8565180856643214160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 187
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e61ad04673618480800000000000000
+      internalID: -8898722029162064158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 187
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b791bc2eff1d04770800000000000000
+      internalID: 8593098985974733179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 187
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96f0a0308e310c0f0800000000000000
+      internalID: -1098856421874069655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 038d6c5fd38581b70800000000000000
+      internalID: 8869936489245890608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b5b19caf8f9d4e90800000000000000
+      internalID: -7039795203085847117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c664ded17dc37c90800000000000000
+      internalID: -7173163892517607739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 170
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7623d88a42118400800000000000000
+      internalID: 324560759479805564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a17eb3b5b8c0820800000000000000
+      internalID: 2885834685200931356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8a39539795b25530800000000000000
+      internalID: 3842333094717241995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9c601e029e536bb0800000000000000
+      internalID: -4944003984528479077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 153
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6787ef8695bfc600800000000000000
+      internalID: 490810542670710635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 499d3e2634c5c6490800000000000000
+      internalID: -7751719414119802476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_21
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 136
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a7ab680b292e8670800000000000000
+      internalID: 8542810807970015136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_22
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 136
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31556a9da47c9e920800000000000000
+      internalID: 3020164149421692179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_23
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 136
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0ba0d59c5c8a8240800000000000000
+      internalID: 4794799082567674636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 119
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34528b3295332d300800000000000000
+      internalID: 275338985167398211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_25
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 119
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d66686aa088728e40800000000000000
+      internalID: 5657216575940879981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7ca66b873a994d0800000000000000
+      internalID: -3127288727380244494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_27
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 102
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fbbc5010a8d81f80800000000000000
+      internalID: -8135514544863921165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_28
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 102
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db2fd88299f97da80800000000000000
+      internalID: -8442103496323501379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_29
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 102
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57caa14b0dc62afd0800000000000000
+      internalID: -2332182013393851275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 85
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc072f38b4e630170800000000000000
+      internalID: 8143473821831295183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_31
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 85
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803b4d403e1a481b0800000000000000
+      internalID: -5655217235659803896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 85
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c0bcfda911887940800000000000000
+      internalID: 5294123309267202244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_33
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 85
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27538b71f0e68fbd0800000000000000
+      internalID: -2596204174077577870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4c9eed4f49885e0800000000000000
+      internalID: -1907110662758611726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_35
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87dd4a39f5d2c8520800000000000000
+      internalID: 2705587364665023864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_36
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d9e43439845d2b0800000000000000
+      internalID: -5560458367592391326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_37
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 68
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d626028e906a3ad20800000000000000
+      internalID: 3288654714389946989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 108b85af807a5a0a0800000000000000
+      internalID: -6870901999482128383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_39
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99dcb202bc1b7d410800000000000000
+      internalID: 1501864486727568793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_40
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0e69a4ef3219820800000000000000
+      internalID: 2923157208220229839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_41
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 51
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531d1ca550634dab0800000000000000
+      internalID: -4984299490966908619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efd512c700b55b9c0800000000000000
+      internalID: -3912120643660718594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_43
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 34
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c10f00f1f2bbeaf0800000000000000
+      internalID: -366002192516185661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_44
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 34
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82f973f6826335680800000000000000
+      internalID: -8767604502267715800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_45
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 34
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2fc0a838de339110800000000000000
+      internalID: 1266425018605162285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aabad1d34d6ac380800000000000000
+      internalID: -8950221171394430297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_47
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 17
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0037bbdfb27f650800000000000000
+      internalID: 6266525775280931019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_48
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 17
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9dcb86c391f0630800000000000000
+      internalID: 3895359949944707553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_49
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 17
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 759af459b9b0bb070800000000000000
+      internalID: 8123099115745683799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f38f85366d2439b0800000000000000
+      internalID: -5101402560895417351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: unit_gunner_51
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0.8235294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb9d882021bb30d90800000000000000
+      internalID: -7132651698798405188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -357,6 +357,16 @@ PrefabInstance:
       propertyPath: state
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
+        type: 3}
+      propertyPath: vsAerial
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
+        type: 3}
+      propertyPath: vsGunner
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9047819817644104511, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: m_Sprite

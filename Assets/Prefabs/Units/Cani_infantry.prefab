@@ -163,6 +163,8 @@ MonoBehaviour:
   vsInfantry: 1
   vsTransport: 0.3
   vsTank: 0.1
+  vsAerial: 0.1
+  vsGunner: 0.1
   targets: []
   currentTarget: {fileID: 0}
   path: []

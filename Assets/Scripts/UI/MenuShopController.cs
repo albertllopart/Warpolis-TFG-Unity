@@ -11,6 +11,8 @@ public class MenuShopController : MonoBehaviour
     public GameObject buttonCaniTransport;
     public GameObject buttonCaniTank;
     public GameObject buttonCaniAerial;
+    public GameObject buttonCaniGunner;
+
     public List<GameObject> caniButtons;
 
     [Header("Prefabs")]
@@ -18,6 +20,7 @@ public class MenuShopController : MonoBehaviour
     public GameObject caniTransport;
     public GameObject caniTank;
     public GameObject caniAerial;
+    public GameObject caniGunner;
 
     [Header("Buttons")]
     [Header("Hipster")]
@@ -25,6 +28,8 @@ public class MenuShopController : MonoBehaviour
     public GameObject buttonHipsterTransport;
     public GameObject buttonHipsterTank;
     public GameObject buttonHipsterAerial;
+    public GameObject buttonHipsterGunner;
+
     public List<GameObject> hipsterButtons;
 
     [Header("Prefabs")]
@@ -32,6 +37,7 @@ public class MenuShopController : MonoBehaviour
     public GameObject hipsterTransport;
     public GameObject hipsterTank;
     public GameObject hipsterAerial;
+    public GameObject hipsterGunner;
 
     private uint xOffset = 2;
     private float yOffset = 2.5f;
@@ -103,6 +109,8 @@ public class MenuShopController : MonoBehaviour
             buttonCaniTank.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniTank.GetComponent<MyButton>().shopValue);
             caniButtons.Add(buttonCaniAerial);
             buttonCaniAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniAerial.GetComponent<MyButton>().shopValue);
+            caniButtons.Add(buttonCaniGunner);
+            buttonCaniGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniGunner.GetComponent<MyButton>().shopValue);
 
             hipsterButtons = new List<GameObject>();
             hipsterButtons.Add(buttonHipsterInfantry);
@@ -113,6 +121,8 @@ public class MenuShopController : MonoBehaviour
             buttonHipsterTank.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterTank.GetComponent<MyButton>().shopValue);
             hipsterButtons.Add(buttonHipsterAerial);
             buttonHipsterAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterAerial.GetComponent<MyButton>().shopValue);
+            hipsterButtons.Add(buttonHipsterGunner);
+            buttonHipsterGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterGunner.GetComponent<MyButton>().shopValue);
         }
     }
 
@@ -222,6 +232,16 @@ public class MenuShopController : MonoBehaviour
             else if (selectedButton.name == "Button_hipster_aerial")
             {
                 Instantiate(hipsterAerial, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
+            }
+            else if (selectedButton.name == "Button_cani_gunner")
+            {
+                Instantiate(caniGunner, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddCaniMoney(-selectedButton.GetComponent<MyButton>().shopValue);
+            }
+            else if (selectedButton.name == "Button_hipster_gunner")
+            {
+                Instantiate(hipsterGunner, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
                 GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
             }
 
