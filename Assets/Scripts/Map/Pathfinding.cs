@@ -59,6 +59,12 @@ public class Pathfinding
     public List<Vector2Int> attackRange = new List<Vector2Int>();
     public List<BFS_Node> backtrack = new List<BFS_Node>();
 
+    //ranged
+    public Queue<BFS_Node> rangedFrontier = new Queue<BFS_Node>();
+    public List<Vector2Int> rangedVisited = new List<Vector2Int>();
+    public List<Vector2Int> rangedAttackRange = new List<Vector2Int>();
+    public List<BFS_Node> rangedBacktrack = new List<BFS_Node>();
+
     public void ResetBFS(Vector2Int position)
     {
         frontier.Clear();
@@ -71,6 +77,19 @@ public class Pathfinding
         visited.Add(node.data);
         attackRange.Add(node.data);
         backtrack.Add(node);
+    }
+
+    public void ResetRangedBFS(Vector2Int position)
+    {
+        rangedFrontier.Clear();
+        rangedVisited.Clear();
+        rangedAttackRange.Clear();
+        rangedBacktrack.Clear();
+
+        BFS_Node node = new BFS_Node(position, new Vector2Int(-1, -1));
+        rangedFrontier.Enqueue(node);
+        rangedVisited.Add(node.data);
+        rangedBacktrack.Add(node);
     }
 
     public void PropagateBFS(GameObject unit)
@@ -418,6 +437,87 @@ public class Pathfinding
         }
 
         return path;
+    }
+
+    public void PropagateRangedBFS(GameObject unit) // per les unitats ranged
+    {
+        int safety = 0;
+
+        //agafar dades de la unitat
+        UnitRanged unitScript = unit.GetComponent<UnitRanged>();
+
+        while (rangedFrontier.Count != 0)
+        {
+            BFS_Node popped = rangedFrontier.Dequeue();
+
+            if (MyTilemap[popped.data.x, -popped.data.y] != null)
+            {
+                BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
+                BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
+                BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
+                BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
+
+                List<BFS_Node> unorderedNodes = new List<BFS_Node>();
+
+                if (CheckMapLimits(north.data))
+                    unorderedNodes.Add(north);
+                if (CheckMapLimits(south.data))
+                    unorderedNodes.Add(south);
+                if (CheckMapLimits(east.data))
+                    unorderedNodes.Add(east);
+                if (CheckMapLimits(west.data))
+                    unorderedNodes.Add(west);
+
+                List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
+
+                foreach (BFS_Node node in orderedNodes)
+                {
+                    //mirar si està a rang màxim
+                    if (CheckRange(rangedVisited[0], node) <= unitScript.maxRange)
+                    {
+                        if (CheckRange(rangedVisited[0], node) >= unitScript.minRange) //mirar si està a rang minim
+                        {
+                            CheckNodeRangedForAttack(node);
+                        }
+
+                        CheckNodeRanged(node);
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Pathfinding::PropagateRangedBFS - Found null Tile at pos: " + popped.data);
+            }
+
+            if (safety++ >= 10000)
+                break;
+        }
+    }
+
+    public int CheckRange(Vector2Int origin, BFS_Node goal)
+    {
+        int deltaX = Mathf.Abs(origin.x - goal.data.x);
+        int deltaY = Mathf.Abs(origin.y - goal.data.y);
+
+        return deltaX + deltaY;
+    }
+
+    public void CheckNodeRanged(BFS_Node node)
+    {
+        if (!rangedVisited.Contains(node.data))
+        {
+            rangedFrontier.Enqueue(node);
+            rangedVisited.Add(node.data);
+            rangedBacktrack.Add(node);
+        }
+    }
+
+    public void CheckNodeRangedForAttack(BFS_Node node)
+    {
+        if (!rangedAttackRange.Contains(node.data))
+        {
+            rangedAttackRange.Add(node.data);
+        }
     }
 }
 

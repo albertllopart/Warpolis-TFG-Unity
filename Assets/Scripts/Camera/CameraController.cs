@@ -126,6 +126,12 @@ public class CameraController : MonoBehaviour
         cameraMoved.Invoke();
     }
 
+    public void CameraTraslation(Vector3 goal)
+    {
+        transform.position = goal;
+        cameraMoved.Invoke();
+    }
+
     public Vector2 GetTopLeftCorner()
     {
         return topLeftCorner;

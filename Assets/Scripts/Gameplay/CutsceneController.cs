@@ -396,6 +396,38 @@ public class CutsceneController : MonoBehaviour
         Debug.Log("CutsceneController::CalculateGoal - New Goal = " + goal);
     }
 
+    public Vector3 CalculateGoal(Vector3 unit) //per moure la càmera de forma abrupta
+    {
+        Vector3 cameraPosition = cameraController.transform.position;
+        Vector3 ret = target;
+
+        if (target == cameraPosition)
+        {
+            ret = cameraPosition;
+            return ret;
+        }
+
+        if (cameraPosition.x == target.x)
+        {
+            //buscar la Y
+            ret.y = CalculateY();
+            return ret; ;
+        }
+
+        if (cameraPosition.y == target.y)
+        {
+            //buscar la X
+            ret.x = CalculateX();
+            return ret; ;
+        }
+
+        //buscar X i Y
+        ret.y = CalculateY();
+        ret.x = CalculateX();
+
+        return ret;
+    }
+
     int CalculateY()
     {
         Vector3 cameraPosition = cameraController.transform.position;

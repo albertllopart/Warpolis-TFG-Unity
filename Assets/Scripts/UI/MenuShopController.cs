@@ -12,6 +12,7 @@ public class MenuShopController : MonoBehaviour
     public GameObject buttonCaniTank;
     public GameObject buttonCaniAerial;
     public GameObject buttonCaniGunner;
+    public GameObject buttonCaniRanged;
 
     public List<GameObject> caniButtons;
 
@@ -21,6 +22,7 @@ public class MenuShopController : MonoBehaviour
     public GameObject caniTank;
     public GameObject caniAerial;
     public GameObject caniGunner;
+    public GameObject caniRanged;
 
     [Header("Buttons")]
     [Header("Hipster")]
@@ -29,6 +31,7 @@ public class MenuShopController : MonoBehaviour
     public GameObject buttonHipsterTank;
     public GameObject buttonHipsterAerial;
     public GameObject buttonHipsterGunner;
+    public GameObject buttonHipsterRanged;
 
     public List<GameObject> hipsterButtons;
 
@@ -38,6 +41,7 @@ public class MenuShopController : MonoBehaviour
     public GameObject hipsterTank;
     public GameObject hipsterAerial;
     public GameObject hipsterGunner;
+    public GameObject hipsterRanged;
 
     private uint xOffset = 2;
     private float yOffset = 2.5f;
@@ -111,6 +115,8 @@ public class MenuShopController : MonoBehaviour
             buttonCaniAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniAerial.GetComponent<MyButton>().shopValue);
             caniButtons.Add(buttonCaniGunner);
             buttonCaniGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniGunner.GetComponent<MyButton>().shopValue);
+            caniButtons.Add(buttonCaniRanged);
+            buttonCaniRanged.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniRanged.GetComponent<MyButton>().shopValue);
 
             hipsterButtons = new List<GameObject>();
             hipsterButtons.Add(buttonHipsterInfantry);
@@ -123,6 +129,8 @@ public class MenuShopController : MonoBehaviour
             buttonHipsterAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterAerial.GetComponent<MyButton>().shopValue);
             hipsterButtons.Add(buttonHipsterGunner);
             buttonHipsterGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterGunner.GetComponent<MyButton>().shopValue);
+            hipsterButtons.Add(buttonHipsterRanged);
+            buttonHipsterRanged.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterRanged.GetComponent<MyButton>().shopValue);
         }
     }
 
@@ -132,14 +140,14 @@ public class MenuShopController : MonoBehaviour
 
         foreach (GameObject button in caniButtons)
         {
-            button.transform.position += new Vector3(6.0f / 16.0f, -(22.0f / 16.0f) * counter++ -(6.0f / 16.0f), 0); //6 son els pixels de marge respecte el background que s'han d'aplicar tant a x com a y
+            button.transform.position += new Vector3(6.0f / 16.0f, -(22.0f / 16.0f) * counter++ -(7.0f / 16.0f), 0); //6 son els pixels de marge respecte el background que s'han d'aplicar tant a x com a y
         }
 
         counter = 0.0f;
 
         foreach (GameObject button in hipsterButtons)
         {
-            button.transform.position += new Vector3(6.0f / 16.0f, -(22.0f / 16.0f) * counter++ - (6.0f / 16.0f), 0); //6 son els pixels de marge respecte el background que s'han d'aplicar tant a x com a y
+            button.transform.position += new Vector3(6.0f / 16.0f, -(22.0f / 16.0f) * counter++ - (7.0f / 16.0f), 0); //6 son els pixels de marge respecte el background que s'han d'aplicar tant a x com a y
         }
     }
 
@@ -242,6 +250,16 @@ public class MenuShopController : MonoBehaviour
             else if (selectedButton.name == "Button_hipster_gunner")
             {
                 Instantiate(hipsterGunner, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
+            }
+            else if (selectedButton.name == "Button_cani_ranged")
+            {
+                Instantiate(caniRanged, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddCaniMoney(-selectedButton.GetComponent<MyButton>().shopValue);
+            }
+            else if (selectedButton.name == "Button_hipster_ranged")
+            {
+                Instantiate(hipsterRanged, gameplayController.transform.Find("Player").transform.position, Quaternion.identity);
                 GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
             }
 

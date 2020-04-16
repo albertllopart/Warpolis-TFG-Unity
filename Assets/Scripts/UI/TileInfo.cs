@@ -51,6 +51,8 @@ public class TileInfo : MonoBehaviour
     public Sprite hipster_aerial;
     public Sprite cani_gunner;
     public Sprite hipster_gunner;
+    public Sprite cani_ranged;
+    public Sprite hipster_ranged;
 
     //elements
     [Header("Elements")]
@@ -303,6 +305,9 @@ public class TileInfo : MonoBehaviour
 
             case UnitType.GUNNER:
                 return cani_gunner;
+
+            case UnitType.RANGED:
+                return cani_ranged;
         }
 
         return null;
@@ -326,6 +331,9 @@ public class TileInfo : MonoBehaviour
 
             case UnitType.GUNNER:
                 return hipster_gunner;
+
+            case UnitType.RANGED:
+                return hipster_ranged;
         }
 
         return null;

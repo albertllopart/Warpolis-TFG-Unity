@@ -14,7 +14,7 @@ public enum UnitDirection
 
 public enum UnitType
 {
-    INFANTRY, TRANSPORT, TANK, AERIAL, GUNNER
+    INFANTRY, TRANSPORT, TANK, AERIAL, GUNNER, RANGED
 };
 
 public enum UnitArmy
@@ -55,6 +55,7 @@ public class Unit : MonoBehaviour
     public float vsTank;
     public float vsAerial;
     public float vsGunner;
+    public float vsRanged;
 
     [Header("Interaction")]
     public List<GameObject> targets;
@@ -306,15 +307,25 @@ public class Unit : MonoBehaviour
 
         state = UnitState.ATTACKRANGE;
 
-        EnableUIHitPoints(false);
+        EnableUIHitPoints(false);           
 
-        if (unitType == (uint)UnitType.INFANTRY)
-            GetComponent<UnitInfantry>().EnableUICaptureSign(false);
+        switch (unitType)
+        {
+            case UnitType.INFANTRY:
+                GetComponent<UnitInfantry>().EnableUICaptureSign(false);
+                GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(gameObject);
+                break;
+
+            case UnitType.RANGED:
+                GameObject.Find("Map Controller").GetComponent<MapController>().ExecuteRangedPathfindingForAttackRange(gameObject);
+                break;
+
+            default:
+                GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(gameObject);
+                break;
+        }
 
         UpdateAnimator();
-
-        //mapa
-        GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(gameObject);
     }
 
     void SetMyTurn()
@@ -351,26 +362,35 @@ public class Unit : MonoBehaviour
         //mapa
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawAttackRange(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawRangedAttackRange(false);
     }
 
     public void OnMenu()
     {
-        if (basePower > 0)
-            SearchForTargets();
+        switch (unitType)
+        {
+            case UnitType.INFANTRY:
+                SearchForTargets();
+                GetComponent<UnitInfantry>().ManageButtons();
+                EnableUIDamageInfo(false);
+                break;
 
-        if (unitType == UnitType.INFANTRY)
-        {
-            GetComponent<UnitInfantry>().ManageButtons();
-        }
-        else if (unitType == UnitType.TRANSPORT)
-        {
-            GetComponent<UnitTransport>().ManageButtons();
-        }
+            case UnitType.TRANSPORT:
+                GetComponent<UnitTransport>().ManageButtons();
+                break;
+
+            case UnitType.RANGED:
+                GetComponent<UnitRanged>().ManageButtons();
+                EnableUIDamageInfo(false);
+                break;
+
+            default:
+                SearchForTargets();
+                EnableUIDamageInfo(false);
+                break;
+        }            
 
         UpdateStatsBasedOnTile();
-
-        if (basePower > 0)
-            EnableUIDamageInfo(false);
 
         state = UnitState.DECIDING;
 
@@ -483,6 +503,12 @@ public class Unit : MonoBehaviour
 
     public void OnTargeting()
     {
+        //moure la càmera
+        if (unitType == UnitType.RANGED)
+        {
+            GameObject.Find("Camera").GetComponent<CameraController>().CameraTraslation(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().CalculateGoal(transform.position));
+        }
+
         state = UnitState.TARGETING;
 
         EnableUIDamageInfo(true);
@@ -729,7 +755,7 @@ public class Unit : MonoBehaviour
             EnableAttackButton(false);
     }
 
-    void EnableAttackButton(bool enable)
+    public void EnableAttackButton(bool enable)
     {
         activeButtons[1] = enable;
     }
@@ -833,23 +859,47 @@ public class Unit : MonoBehaviour
 
         Debug.Log("Unit::AttackTarget - Enemy Hitpoints = " + currentTarget.GetComponent<Unit>().hitPoints);
 
-        if (currentTarget.GetComponent<Unit>().hitPoints > 0)
+        switch (unitType)
         {
-            UpdateHitpoints(currentTarget);
+            case UnitType.RANGED:
 
-            float defensiveDamage = currentTarget.GetComponent<Unit>().DamageFormula(gameObject);
-            hitPoints -= RatioToInt(defensiveDamage);
+                if (currentTarget.GetComponent<Unit>().hitPoints > 0)
+                {
+                    UpdateHitpoints(currentTarget);
+                }
+                else
+                {
+                    GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per poder cridar OnWait
+                    currentTarget.GetComponent<Unit>().MyOnDestroy();
+                }
 
-            if (hitPoints <= 0)
-            {
-                GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per wincon amb suicidi
-                MyOnDestroy();
-            }
-        }
-        else
-        {
-            GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per poder cridar OnWait
-            currentTarget.GetComponent<Unit>().MyOnDestroy();
+                break;
+
+            default:
+
+                if (currentTarget.GetComponent<Unit>().hitPoints > 0)
+                {
+                    UpdateHitpoints(currentTarget);
+
+                    if (currentTarget.GetComponent<Unit>().unitType != UnitType.RANGED) // no hi ha contratac per part de ranged
+                    {
+                        float defensiveDamage = currentTarget.GetComponent<Unit>().DamageFormula(gameObject);
+                        hitPoints -= RatioToInt(defensiveDamage);
+
+                        if (hitPoints <= 0)
+                        {
+                            GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per wincon amb suicidi
+                            MyOnDestroy();
+                        }
+                    }
+                }
+                else
+                {
+                    GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per poder cridar OnWait
+                    currentTarget.GetComponent<Unit>().MyOnDestroy();
+                }
+
+                break;
         }
 
         UpdateHitpoints(gameObject);
@@ -892,6 +942,10 @@ public class Unit : MonoBehaviour
 
             case UnitType.GUNNER:
                 typeMultiplier = 1.0f * vsGunner;
+                break;
+
+            case UnitType.RANGED:
+                typeMultiplier = 1.0f * vsRanged;
                 break;
         }
 

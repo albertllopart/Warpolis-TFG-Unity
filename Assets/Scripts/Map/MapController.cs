@@ -550,11 +550,28 @@ public class MapController : MonoBehaviour
         }
     }
 
+    public void DrawRangedAttackRange(bool shouldDraw)
+    {
+        //draw rangedAttackRange
+        foreach (Vector2Int pos in pathfinding.rangedAttackRange)
+        {
+            if (shouldDraw)
+                tilemapPathfinding.SetTile(WorldToTilemap(new Vector3Int(pos.x, pos.y, 0)), redTile);
+            else
+                tilemapPathfinding.SetTile(WorldToTilemap(new Vector3Int(pos.x, pos.y, 0)), null);
+        }
+    }
+
     public void ExecutePathfinding(GameObject unit)
     {
         pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
         pathfinding.PropagateBFS(unit);
         DrawPathfinding(true);
+    }
+    public void ExecuteRangedPathfinding(GameObject unit)
+    {
+        pathfinding.ResetRangedBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        pathfinding.PropagateRangedBFS(unit);
     }
 
     public void ExecutePathfindingForAttackRange(GameObject unit)
@@ -562,6 +579,13 @@ public class MapController : MonoBehaviour
         pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
         pathfinding.PropagateBFS(unit);
         DrawAttackRange(true);
+    }
+
+    public void ExecuteRangedPathfindingForAttackRange(GameObject unit)
+    {
+        pathfinding.ResetRangedBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        pathfinding.PropagateRangedBFS(unit);
+        DrawRangedAttackRange(true);
     }
 
     public void DrawArrow()
