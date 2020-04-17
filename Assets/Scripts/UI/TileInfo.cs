@@ -158,6 +158,45 @@ public class TileInfo : MonoBehaviour
         }
     }
 
+    public void UpdatePosition(Vector3 position)
+    {
+        GameplayController.PlayerLocation location = DeterminePositionLocation(position);
+
+        switch (location)
+        {
+            case GameplayController.PlayerLocation.LEFT:
+
+                transform.position = new Vector3((int)Camera.main.GetComponent<CameraController>().GetBottomRightCorner().x - 2.5f,
+                                             (int)Camera.main.GetComponent<CameraController>().GetBottomRightCorner().y + 2.5f, 0);
+
+                unit.transform.position = transform.position + new Vector3(-2, 0, 0);
+                unit.transform.Find("Load").transform.position = unit.transform.position + new Vector3(-1.5f, -0.75f, 0);
+
+                break;
+
+            case GameplayController.PlayerLocation.RIGHT:
+
+                transform.position = new Vector3((int)Camera.main.GetComponent<CameraController>().GetTopLeftCorner().x + 1.5f,
+                                             (int)Camera.main.GetComponent<CameraController>().GetBottomRightCorner().y + 2.5f, 0);
+
+                unit.transform.position = transform.position + new Vector3(2, 0, 0);
+                unit.transform.Find("Load").transform.position = unit.transform.position + new Vector3(2, -0.75f, 0);
+
+                break;
+        }
+    }
+
+    public GameplayController.PlayerLocation DeterminePositionLocation(Vector3 position)
+    {
+        uint cameraMiddle = (uint)Camera.main.gameObject.GetComponent<CameraController>().GetTopLeftCorner().x +
+                                  Camera.main.gameObject.GetComponent<CameraController>().GetCameraWidth() / 2;
+
+        if (position.x < cameraMiddle)
+            return GameplayController.PlayerLocation.LEFT;
+        else
+            return GameplayController.PlayerLocation.RIGHT;
+    }
+
     public void CheckBuilding(Vector3 pos)
     {
         RaycastHit2D result = RayCast(pos, LayerMask.GetMask("Cani_buildings"));

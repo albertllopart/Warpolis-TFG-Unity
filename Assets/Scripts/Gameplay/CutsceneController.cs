@@ -40,15 +40,31 @@ public class CutsceneController : MonoBehaviour
     float targetCameraTimer = 0.0f;
     float cameraSpeed = 0.1f;
 
+    //healing
+    bool healing = false;
+    List<GameObject> toHeal;
+    GameObject healingUnit;
+    public GameObject healingSignPrefab;
+    GameObject healingSign;
+
+
     //events
     public UnityEvent unitDied;
     public UnityEvent repositionPlayer;
+    public UnityEvent finishedCameraTargeting;
+    public UnityEvent finishedAddingMoney;
+    public UnityEvent finishedHealing;
+    public UnityEvent finishedAllCutscenes;
 
     // Start is called before the first frame update
     void Start()
     {
         unitDied = new UnityEvent();
         repositionPlayer = new UnityEvent();
+        finishedCameraTargeting = new UnityEvent();
+        finishedAddingMoney = new UnityEvent();
+        finishedHealing = new UnityEvent();
+        finishedAllCutscenes = new UnityEvent();
 
         gameplayController = GameObject.Find("Gameplay Controller");
         dataController = GameObject.Find("Data Controller");
@@ -89,10 +105,15 @@ public class CutsceneController : MonoBehaviour
 
         if (cameraTargeting)
             TargetCamera();
+
+        if (healing)
+            UnitHeal();
     }
 
     public void NewGame()
     {
+        currentTurn = GameplayController.Turn.CANI;
+
         GameObject cameraController = GameObject.Find("Camera");
 
         cameraController.GetComponent<CameraController>().fadeToWhiteEnd.RemoveListener(NewGame);
@@ -100,30 +121,37 @@ public class CutsceneController : MonoBehaviour
         cameraController.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         cameraController.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
         FirstTurn((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
-        TargetCameraSetup(dataController.GetComponent<DataController>().playerCaniPosition);
+
+        finishedAddingMoney.AddListener(UnitHealSetup);
     }
 
     void NewTurnCani()
     {
+        currentTurn = GameplayController.Turn.CANI;
+
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
-        TargetCameraSetup(dataController.GetComponent<DataController>().playerCaniPosition);
+
+        finishedAddingMoney.AddListener(UnitHealSetup);
     }
 
     void NewTurnHipster()
     {
+        currentTurn = GameplayController.Turn.HIPSTER;
+
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().hipsterMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
-        TargetCameraSetup(dataController.GetComponent<DataController>().playerHipsterPosition);
+
+        finishedAddingMoney.AddListener(UnitHealSetup);
     }
 
     public void FirstTurn(uint amount)
     {
         moneyToAdd = amount;
         addMoney = true;
-        timer = 0.0f;
+        moneyTimer = 0.0f;
     }
     public void MoneySetup(uint amount)
     {
@@ -131,7 +159,6 @@ public class CutsceneController : MonoBehaviour
         addMoney = true;
         moneyTimer = 0.0f;
 
-        currentTurn = gameplayController.GetComponent<GameplayController>().GetTurn();
         DisableGameplay();
     }
 
@@ -144,13 +171,13 @@ public class CutsceneController : MonoBehaviour
             switch (currentTurn)
             {
                 case GameplayController.Turn.CANI:
-                    dataController.GetComponent<DataController>().AddCaniMoney(1000);
-                    moneyToAdd -= 1000;
+                    dataController.GetComponent<DataController>().AddCaniMoney((int)moneyToAdd);
+                    moneyToAdd = 0;
                     break;
 
                 case GameplayController.Turn.HIPSTER:
-                    dataController.GetComponent<DataController>().AddHipsterMoney(1000);
-                    moneyToAdd -= 1000;
+                    dataController.GetComponent<DataController>().AddHipsterMoney((int)moneyToAdd);
+                    moneyToAdd = 0;
                     break;
             }
 
@@ -160,8 +187,8 @@ public class CutsceneController : MonoBehaviour
         if (moneyToAdd == 0)
         {
             addMoney = false;
-            EnableGameplay();
-            repositionPlayer.Invoke();
+            finishedAddingMoney.Invoke();
+            //EnableGameplay();
         }
     }
 
@@ -378,20 +405,20 @@ public class CutsceneController : MonoBehaviour
         if (cameraPosition.x == target.x)
         {
             //buscar la Y
-            goal.y = CalculateY();
+            goal.y = CalculateY(target);
             return;
         }
 
         if (cameraPosition.y == target.y)
         {
             //buscar la X
-            goal.x = CalculateX();
+            goal.x = CalculateX(target);
             return;
         }
 
         //buscar X i Y
-        goal.y = CalculateY();
-        goal.x = CalculateX();
+        goal.y = CalculateY(target);
+        goal.x = CalculateX(target);
 
         Debug.Log("CutsceneController::CalculateGoal - New Goal = " + goal);
     }
@@ -399,36 +426,36 @@ public class CutsceneController : MonoBehaviour
     public Vector3 CalculateGoal(Vector3 unit) //per moure la càmera de forma abrupta
     {
         Vector3 cameraPosition = cameraController.transform.position;
-        Vector3 ret = target;
+        Vector3 ret = unit;
 
-        if (target == cameraPosition)
+        if (unit == cameraPosition)
         {
             ret = cameraPosition;
             return ret;
         }
 
-        if (cameraPosition.x == target.x)
+        if (cameraPosition.x == unit.x)
         {
             //buscar la Y
-            ret.y = CalculateY();
+            ret.y = CalculateY(unit);
             return ret; ;
         }
 
-        if (cameraPosition.y == target.y)
+        if (cameraPosition.y == unit.y)
         {
             //buscar la X
-            ret.x = CalculateX();
+            ret.x = CalculateX(unit);
             return ret; ;
         }
 
         //buscar X i Y
-        ret.y = CalculateY();
-        ret.x = CalculateX();
+        ret.y = CalculateY(unit);
+        ret.x = CalculateX(unit);
 
         return ret;
     }
 
-    int CalculateY()
+    int CalculateY(Vector3 vec)
     {
         Vector3 cameraPosition = cameraController.transform.position;
 
@@ -439,31 +466,31 @@ public class CutsceneController : MonoBehaviour
         int topLimit = 0; //world position
         int bottomLimit = (int)mapController.GetComponent<MapController>().GetBottomRightCorner().y; //world position
 
-        if (target.y > cameraPosition.y)
+        if (vec.y > cameraPosition.y)
         {
-            targetMargin = topLimit - (int)target.y;
+            targetMargin = topLimit - (int)vec.y;
 
             if (targetMargin >= topMargin)
-                return (int)target.y;
+                return (int)vec.y;
             else
             {
-                return (int)target.y - (topMargin - targetMargin);
+                return (int)vec.y - (topMargin - targetMargin);
             }
         }
         else
         {
-            targetMargin = -bottomLimit + (int)target.y;
+            targetMargin = -bottomLimit + (int)vec.y;
 
             if (targetMargin > bottomMargin)
-                return (int)target.y;
+                return (int)vec.y;
             else
             {
-                return (int)target.y - (-bottomMargin + targetMargin);
+                return (int)vec.y - (-bottomMargin + targetMargin);
             }
         }
     }
 
-    int CalculateX()
+    int CalculateX(Vector3 vec)
     {
         Vector3 cameraPosition = cameraController.transform.position;
 
@@ -474,26 +501,26 @@ public class CutsceneController : MonoBehaviour
         int leftLimit = -1; //world position
         int rightLimit = (int)mapController.GetComponent<MapController>().GetBottomRightCorner().x; //world position
 
-        if (target.x < cameraPosition.x)
+        if (vec.x < cameraPosition.x)
         {
-            targetMargin = leftLimit + (int)target.x;
+            targetMargin = leftLimit + (int)vec.x;
 
             if (targetMargin >= leftMargin)
-                return (int)target.x;
+                return (int)vec.x;
             else
             {
-                return (int)target.x + (leftMargin - targetMargin);
+                return (int)vec.x + (leftMargin - targetMargin);
             }
         }
         else
         {
-            targetMargin = rightLimit - (int)target.x;
+            targetMargin = rightLimit - (int)vec.x;
 
             if (targetMargin > rightMargin)
-                return (int)target.x;
+                return (int)vec.x;
             else
             {
-                return (int)target.x + (-rightMargin + targetMargin);
+                return (int)vec.x + (-rightMargin + targetMargin);
             }
         }
     }
@@ -513,6 +540,7 @@ public class CutsceneController : MonoBehaviour
                 cameraController.transform.position += direction;
                 cameraController.GetComponent<CameraController>().cameraMoved.Invoke();
                 cameraTargeting = false;
+                finishedCameraTargeting.Invoke();
                 return;
             }
 
@@ -523,10 +551,100 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
+    public void UnitHealSetup()
+    {
+        finishedAddingMoney.RemoveListener(UnitHealSetup);
+
+        switch (currentTurn)
+        {
+            case GameplayController.Turn.CANI:
+                toHeal = dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().GetUnitsOnBuildings(UnitArmy.CANI);
+                break;
+
+            case GameplayController.Turn.HIPSTER:
+                toHeal = dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().GetUnitsOnBuildings(UnitArmy.HIPSTER);
+                break;
+        }
+
+        if (toHeal.Count > 0)
+            healing = true;
+        else
+        {
+            finishedHealing.Invoke();
+            finishedCameraTargeting.AddListener(LastCutsceneEnded);
+
+            switch (currentTurn)
+            {
+                case GameplayController.Turn.CANI:
+                    TargetCameraSetup(dataController.GetComponent<DataController>().playerCaniPosition);
+                    break;
+
+                case GameplayController.Turn.HIPSTER:
+                    TargetCameraSetup(dataController.GetComponent<DataController>().playerHipsterPosition);
+                    break;
+            }
+            
+        }
+    }
+
+    void UnitHeal()
+    {
+        if (healingSign == null)
+        {
+            if (toHeal.Count > 0)
+            {
+                healingUnit = toHeal[0];              
+                TargetCameraSetup(healingUnit.transform.position);
+                finishedCameraTargeting.AddListener(InstantiateHealingSign);
+                healing = false;
+            }
+            else
+            {
+                healing = false;
+                finishedHealing.Invoke();
+                finishedCameraTargeting.AddListener(LastCutsceneEnded);
+
+                switch (currentTurn)
+                {
+                    case GameplayController.Turn.CANI:
+                        TargetCameraSetup(dataController.GetComponent<DataController>().playerCaniPosition);
+                        break;
+
+                    case GameplayController.Turn.HIPSTER:
+                        TargetCameraSetup(dataController.GetComponent<DataController>().playerHipsterPosition);
+                        break;
+                }
+            }
+        }
+    }
+
+    public void InstantiateHealingSign()
+    {
+        finishedCameraTargeting.RemoveListener(InstantiateHealingSign);
+        healingSign = Instantiate(healingSignPrefab, healingUnit.transform.position, Quaternion.identity);
+        healingUnit.GetComponent<Unit>().OnHealing();
+        PopToHealFirst();
+        healing = true;
+    }
+
+    public void PopToHealFirst()
+    {
+        if (toHeal.Count > 0)
+            toHeal.Remove(toHeal[0]);
+    }
+
+    void LastCutsceneEnded()
+    {
+        finishedCameraTargeting.RemoveListener(LastCutsceneEnded);
+        finishedAllCutscenes.Invoke();
+    }
+
     void EnableGameplay()
     {
         gameplayController.SetActive(true);
         gameplayController.GetComponent<GameplayController>().MyOnEnable();
+
+        repositionPlayer.Invoke();
     }
 
     void DisableGameplay()
@@ -539,5 +657,8 @@ public class CutsceneController : MonoBehaviour
     {
         gameplayController.GetComponent<GameplayController>().endTurnCani.AddListener(NewTurnHipster);
         gameplayController.GetComponent<GameplayController>().endTurnHipster.AddListener(NewTurnCani);
+
+        //meus
+        finishedAllCutscenes.AddListener(EnableGameplay);
     }
 }

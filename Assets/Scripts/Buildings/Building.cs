@@ -112,4 +112,39 @@ public class Building : MonoBehaviour
 
         return false;
     }
+
+    public GameObject CheckUnit()
+    {
+        GameObject ret = null;
+
+        Vector2 from = transform.position; from += new Vector2(0.5f, -0.5f);
+        Vector2 to = from;
+        int layer = 0;
+        RaycastHit2D result;
+
+        switch (army)
+        {
+            case BuildingArmy.CANI:
+
+                layer = LayerMask.GetMask("Cani_units");
+                result = Physics2D.Linecast(from, to, layer);
+
+                if (result.collider != null)
+                    ret = result.collider.gameObject;
+
+                break;
+
+            case BuildingArmy.HIPSTER:
+                
+                layer = LayerMask.GetMask("Hipster_units");
+                result = Physics2D.Linecast(from, to, layer);
+
+                if (result.collider != null)
+                    ret = result.collider.gameObject;
+
+                break;
+        }
+
+        return ret;
+    }
 }

@@ -51,4 +51,42 @@ public class BuildingsController : MonoBehaviour
         caniBuildings = new List<GameObject>();
         hipsterBuildings = new List<GameObject>();
     }
+
+    public List<GameObject> GetUnitsOnBuildings(UnitArmy army)
+    {
+        List<GameObject> ret = new List<GameObject>();
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+
+                foreach (GameObject building in caniBuildings)
+                {
+                    GameObject toAdd = building.GetComponent<Building>().CheckUnit();
+
+                    if (toAdd != null && toAdd.GetComponent<Unit>().hitPoints < 50)
+                    {
+                        ret.Add(toAdd);
+                    }
+                }
+
+                break;
+
+            case UnitArmy.HIPSTER:
+
+                foreach (GameObject building in hipsterBuildings)
+                {
+                    GameObject toAdd = building.GetComponent<Building>().CheckUnit();
+
+                    if (toAdd != null && toAdd.GetComponent<Unit>().hitPoints < 50)
+                    {
+                        ret.Add(toAdd);
+                    }
+                }
+
+                break;
+        }
+
+        return ret;
+    }
 }

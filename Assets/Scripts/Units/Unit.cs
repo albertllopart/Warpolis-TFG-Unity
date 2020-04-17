@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour
     //stats
     [Header("Info")]
     public UnitType unitType; //el tipus d'unitat s'assigna des de l'inspector
+    public uint shopValue;
     public uint movementRange;
     public uint neutralCost;
     public uint plantpotCost;
@@ -274,6 +275,16 @@ public class Unit : MonoBehaviour
 
         UIDamageInfo.transform.Find("Number").transform.Find("Integer").GetComponent<Number>().SetNumber(integer);
         UIDamageInfo.transform.Find("Number").transform.Find("Float").GetComponent<Number>().SetNumber(myFloat);
+
+        //reposicionar segons Tile_info de la UI
+        if (GameObject.Find("Tile_info").GetComponent<TileInfo>().DeterminePositionLocation(target.transform.position) == GameplayController.PlayerLocation.LEFT)
+        {
+            UIDamageInfo.transform.position = Camera.main.transform.Find("UI Controller").transform.position + new Vector3(4.5f, -3, 0);
+        }
+        else
+        {
+            UIDamageInfo.transform.position = Camera.main.transform.Find("UI Controller").transform.position + new Vector3(-6, -3, 0);
+        }
     }
 
     public void OnIdle()
@@ -506,13 +517,14 @@ public class Unit : MonoBehaviour
         //moure la càmera
         if (unitType == UnitType.RANGED)
         {
-            GameObject.Find("Camera").GetComponent<CameraController>().CameraTraslation(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().CalculateGoal(transform.position));
+            GameObject.Find("Camera").GetComponent<CameraController>().CameraTraslation(
+                GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().CalculateGoal(
+                    transform.position));
         }
 
         state = UnitState.TARGETING;
 
         EnableUIDamageInfo(true);
-        UIDamageInfo.transform.Find("Number").transform.Find("Integer").GetComponent<Number>().SetNumber(7);
 
         if (targets.Count > 0)
         {
@@ -838,10 +850,11 @@ public class Unit : MonoBehaviour
             float estimateDamage = DamageFormula(target);
             Debug.Log("Unit::Target - Estimate damage: " + estimateDamage);
 
-            UpdateUIDamageInfo(target);
-
             GameObject.Find("UI Controller").GetComponent<UIController>().EnableTileInfo();
             GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(currentTarget.transform.position);
+            GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdatePosition(currentTarget.transform.position);
+
+            UpdateUIDamageInfo(target);
         }
     }
 
@@ -1000,6 +1013,31 @@ public class Unit : MonoBehaviour
             GetComponent<BoxCollider2D>().size = new Vector2(0, 0);
         else
             GetComponent<BoxCollider2D>().size = new Vector2(1, 1);
+    }
+
+    public void OnHealing()
+    {
+        if (hitPoints <= 40)
+        {
+            hitPoints += 10;
+        }
+        else
+        {
+            hitPoints = 50;
+        }
+
+        UpdateHitpoints(gameObject);
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddCaniMoney(-(int)(shopValue * 0.2));
+                break;
+
+            case UnitArmy.HIPSTER:
+                GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-(int)(shopValue * 0.2));
+                break;
+        }
     }
 
     void SubscribeToEvents()

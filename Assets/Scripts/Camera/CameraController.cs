@@ -128,7 +128,13 @@ public class CameraController : MonoBehaviour
 
     public void CameraTraslation(Vector3 goal)
     {
+        if (goal.z != -10)
+        {
+            goal.z = -10;
+        }
+
         transform.position = goal;
+
         cameraMoved.Invoke();
     }
 

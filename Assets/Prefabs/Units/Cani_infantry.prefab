@@ -152,6 +152,7 @@ MonoBehaviour:
   army: 0
   myTurn: 0
   unitType: 0
+  shopValue: 1000
   movementRange: 3
   neutralCost: 1
   plantpotCost: 1
@@ -165,6 +166,7 @@ MonoBehaviour:
   vsTank: 0.1
   vsAerial: 0.1
   vsGunner: 0.1
+  vsRanged: 0
   targets: []
   currentTarget: {fileID: 0}
   path: []

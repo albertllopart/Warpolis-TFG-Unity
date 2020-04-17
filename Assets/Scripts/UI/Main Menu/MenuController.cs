@@ -105,7 +105,7 @@ public class MenuController : MonoBehaviour
         mapController.GetComponent<MapController>().UnloadMap();
 
         //instanciar mapa
-        mapController.GetComponent<MapController>().LoadMap(mapSpanIsland); //selectedMap
+        mapController.GetComponent<MapController>().LoadMap(big); //selectedMap
     }
 
     public void EndGame()

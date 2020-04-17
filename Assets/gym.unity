@@ -151,10 +151,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackingUnit: {fileID: 0}
+  healingSignPrefab: {fileID: 8762473776784102672, guid: 0e24bf4e4f4e0d5408261191669036fb,
+    type: 3}
   unitDied:
     m_PersistentCalls:
       m_Calls: []
   repositionPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedCameraTargeting:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedAddingMoney:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedHealing:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedAllCutscenes:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &35440811
