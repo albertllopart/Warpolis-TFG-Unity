@@ -23,6 +23,8 @@ L'scripting del projecte està fet íntegrament amb C#.
 
 - L'únic mode de joc que hi ha disponible a dia d'avui 20/04/2020 és multijugador local u contra u.
 
+- Qualsevol dubte sentiu-vos lliures de contactar amb mi per twitter @pocafeiner, o per qualsevol altre mitjà que estigui al vostre abast en cas de relació més propera.
+
 ## Controls
 
 ### Teclat
@@ -57,6 +59,14 @@ L'scripting del projecte està fet íntegrament amb C#.
 
 - Si la casella conté una unitat enemiga el jugdor podrà veure'n el rang de moviment. També hi ha la opció d'apretar el botó de 'Cancel·lar acció' per veure el rang d'atac de la unitat, especialment útil per controlar les caselles que es troben amenaçades per l'enemic.
 
+### Mecànica de captura
+
+- Per iniciar la captura d'un edifici cal ubicar una unitat d'infanteria damunt del mateix i prémer el botó 'Capture'. 
+- Cada edifici té 10 punts de captura i per a capturar-lo el jugador ha d'aconseguir baixar aquests punts a 0. 
+- Quan una unitat d'infanteria realitza l'acció de capturar baixa tants punts de captura a l'edifici com salut té la unitat, essent 5 la salut màxima de totes les unitats. D'això s'infereix que, com a mínim es triga dos torns a capturar un edifici.
+- Si la infanteria que està capturant l'edifici realitza qualsevol altra acció abans d'haver acabat la captura del mateix aquest recuperarà els 10 punts de captura inicials.
+- Si la infanteria que està capturant l'edifici és eliminada en combat l'edifici també recuperarà els 10 punts de captura inicials.
+
 ### Menú d'unitat
 
 - Wait: Aquest botó confirma l'acció de moure sense més.
@@ -79,11 +89,15 @@ L'scripting del projecte està fet íntegrament amb C#.
 
 És la unitat més dèbil i lenta i s'encarrega de capturar edificis.
 
+<img src="ReadmeImages/cani_infantry.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_infantry.PNG" alt="hi" class="inline"/>
+
 ### Transport
 
 - Cost 5000
 
 En el cas dels Canis és una moto, i en el cas dels Hipsters, un patinet. Aquesta unitat no pot atacar però serveix per transportar infanteries de forma més ràpida pel mapa. També són útils per bloquejar camins o parar ofensives fent de barrera a altres unitats més dèbils però amb poder ofensiu.
+
+<img src="ReadmeImages/cani_transport.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_transport.PNG" alt="hi" class="inline"/>
 
 ### Tanc
 
@@ -91,11 +105,15 @@ En el cas dels Canis és una moto, i en el cas dels Hipsters, un patinet. Aquest
 
 És la unitat terrestre més robusta i útil contra tota la resta d'unitats terrestres. En el cas dels Canis és un cotxe i en el dels Hipsters, una Furgoneta.
 
+<img src="ReadmeImages/cani_tank.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_tank.PNG" alt="hi" class="inline"/>
+
 ### Aeria
 
 - Cost 9000
 
 En el cas dels Canis és una cadernera i en els dels Hipsters, un dron. És una unitat molt ràpida ja que no té impediments de moviment per tipus de terreny. Útil contra totes les unitats terrestres excepte contra l'artiller, que la destrueix amb facilitat.
+
+<img src="ReadmeImages/cani_aerial.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_aerial.PNG" alt="hi" class="inline"/>
 
 ### Artiller
 
@@ -103,11 +121,29 @@ En el cas dels Canis és una cadernera i en els dels Hipsters, un dron. És una 
 
 És una unitat molt útil contra infanteria i contra aeria. En el cas dels Canis és un cani amb un foc artificial i en el cas dels Hipsters, un hipster amb una ampolla de refresc gasós.
 
+<img src="ReadmeImages/cani_gunner.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_gunner.PNG" alt="hi" class="inline"/>
+
 ### A distància
 
 - Cost 6.000
 
 En el cas dels canis és un Cani amb un smartphone i en el cas dels Hipsters, un fotògraf. És una unitat que només pot atacar a distància a un rang d'entre 2 i 4 caselles. Només pot atacar si ho fa des de la mateixa casella on ha començat el torn. No pot moure i atacar al mateix torn.
+
+<img src="ReadmeImages/cani_ranged.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_ranged.PNG" alt="hi" class="inline"/>
+
+## Tipus de casella
+
+Cada tipus de casella atorga punts de defensa a la unitat que conté. Cada punt de defensa redueix un 10% del mal rebut per la unitat. Les unitats aeries no es beneficien de la defensa de les caselles, a l'anar pel cel.
+
+- Carretera: Defensa 0
+- Mar: Defensa 0
+- Obres: Defensa 0
+- Vorera: Defensa 1
+- Jardinera: Defensa 2
+- Edifici: Defensa 3
+- Fanal: Defensa 4
+
+Algunes caselles entorpeixen el moviment d'algunes unitats. L'exemple més clar és el fanal, que només pot ser atravessat o trepitjat per infanteria o unitats aeries.
 
 ## License
 
