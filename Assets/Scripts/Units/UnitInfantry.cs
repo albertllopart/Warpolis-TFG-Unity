@@ -144,6 +144,8 @@ public class UnitInfantry : MonoBehaviour
         }
 
         currentCapture.GetComponent<Building>().MyOnDestroy();
+
+        FindObjectOfType<SoundController>().PlayCapture();
     }
 
     public GameObject SearchForOtherBuilding()

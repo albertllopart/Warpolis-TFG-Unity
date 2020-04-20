@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MenuOptionsController : MonoBehaviour
 {
@@ -15,9 +16,14 @@ public class MenuOptionsController : MonoBehaviour
 
     public GameObject selectedButton;
 
+    //events
+    public UnityEvent buttonPressed;
+
     // Start is called before the first frame update
     void Start()
     {
+        buttonPressed = new UnityEvent();
+
         AddButtons();
         Collapse();
 
@@ -125,6 +131,8 @@ public class MenuOptionsController : MonoBehaviour
 
     public void PressSelectedButton()
     {
+        FindObjectOfType<SoundController>().PlayButton();
+
         if (selectedButton.name == "Button_quit")
         {
             Application.Quit();

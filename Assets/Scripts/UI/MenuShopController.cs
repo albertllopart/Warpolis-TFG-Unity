@@ -52,12 +52,14 @@ public class MenuShopController : MonoBehaviour
     //events
     public UnityEvent caniUnitCreated;
     public UnityEvent hipsterUnitCreated;
+    public UnityEvent unavailableButtonPressed;
 
     // Start is called before the first frame update
     void Start()
     {
         caniUnitCreated = new UnityEvent();
         hipsterUnitCreated = new UnityEvent();
+        unavailableButtonPressed = new UnityEvent();
     }
 
     public void AfterStart()
@@ -263,7 +265,15 @@ public class MenuShopController : MonoBehaviour
                 GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-selectedButton.GetComponent<MyButton>().shopValue);
             }
 
-            GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.Invoke();
+            FindObjectOfType<SoundController>().PlayMoney();
+
+            FindObjectOfType<GameplayController>().disableMenuShop.Invoke();
+            FindObjectOfType<GameplayController>().EnablePlayer();
+            FindObjectOfType<GameplayController>().playerState = GameplayController.PlayerState.NAVIGATING;
+        }
+        else
+        {
+            FindObjectOfType<SoundController>().PlayUnavailable();
         }
     }
 

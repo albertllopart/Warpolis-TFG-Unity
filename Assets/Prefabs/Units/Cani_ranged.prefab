@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: movementRange
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
@@ -164,22 +164,22 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: basePower
-      value: 55
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsInfantry
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsTransport
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsTank
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
@@ -189,12 +189,12 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsGunner
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsRanged
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}

@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour
 
     //events
     public UnityEvent playerMoved;
+    public UnityEvent playerMovedSound;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMoved = new UnityEvent();
+        playerMovedSound = new UnityEvent();
 
         keyDownCounterW = 0.0f;
         keyDownCounterA = 0.0f;
@@ -121,80 +123,68 @@ public class PlayerController : MonoBehaviour
 
     void checkEnhancedW()
     {
-        if (Input.GetKey("w"))
+        if (keyDownCounterW < keyDownSpeed)
+            keyDownCounterW += Time.deltaTime;
+
+        nextMoveCounterW += Time.deltaTime;
+
+        if (keyDownCounterW >= keyDownSpeed)
         {
-            if (keyDownCounterW < keyDownSpeed)
-                keyDownCounterW += Time.deltaTime;
-
-            nextMoveCounterW += Time.deltaTime;
-
-            if (keyDownCounterW >= keyDownSpeed)
+            if (nextMoveCounterW >= nextMoveSpeed)
             {
-                if (nextMoveCounterW >= nextMoveSpeed)
-                {
-                    MovePlayerUp();
-                    nextMoveCounterW = 0.0f;
-                }
+                MovePlayerUp();
+                nextMoveCounterW = 0.0f;
             }
         }
     }
 
     void checkEnhancedA()
     {
-        if (Input.GetKey("a"))
+        if (keyDownCounterA < keyDownSpeed)
+            keyDownCounterA += Time.deltaTime;
+
+        nextMoveCounterA += Time.deltaTime;
+
+        if (keyDownCounterA >= keyDownSpeed)
         {
-            if (keyDownCounterA < keyDownSpeed)
-                keyDownCounterA += Time.deltaTime;
-
-            nextMoveCounterA += Time.deltaTime;
-
-            if (keyDownCounterA >= keyDownSpeed)
+            if (nextMoveCounterA >= nextMoveSpeed)
             {
-                if (nextMoveCounterA >= nextMoveSpeed)
-                {
-                    MovePlayerLeft();
-                    nextMoveCounterA = 0.0f;
-                }
+                MovePlayerLeft();
+                nextMoveCounterA = 0.0f;
             }
         }
     }
 
     void checkEnhancedS()
     {
-        if (Input.GetKey("s"))
+        if (keyDownCounterS < keyDownSpeed)
+            keyDownCounterS += Time.deltaTime;
+
+        nextMoveCounterS += Time.deltaTime;
+
+        if (keyDownCounterS >= keyDownSpeed)
         {
-            if (keyDownCounterS < keyDownSpeed)
-                keyDownCounterS += Time.deltaTime;
-
-            nextMoveCounterS += Time.deltaTime;
-
-            if (keyDownCounterS >= keyDownSpeed)
+            if (nextMoveCounterS >= nextMoveSpeed)
             {
-                if (nextMoveCounterS >= nextMoveSpeed)
-                {
-                    MovePlayerDown();
-                    nextMoveCounterS = 0.0f;
-                }
+                MovePlayerDown();
+                nextMoveCounterS = 0.0f;
             }
         }
     }
 
     void checkEnhancedD()
     {
-        if (Input.GetKey("d"))
+        if (keyDownCounterD < keyDownSpeed)
+            keyDownCounterD += Time.deltaTime;
+
+        nextMoveCounterD += Time.deltaTime;
+
+        if (keyDownCounterD >= keyDownSpeed)
         {
-            if (keyDownCounterD < keyDownSpeed)
-                keyDownCounterD += Time.deltaTime;
-
-            nextMoveCounterD += Time.deltaTime;
-
-            if (keyDownCounterD >= keyDownSpeed)
+            if (nextMoveCounterD >= nextMoveSpeed)
             {
-                if (nextMoveCounterD >= nextMoveSpeed)
-                {
-                    MovePlayerRight();
-                    nextMoveCounterD = 0.0f;
-                }
+                MovePlayerRight();
+                nextMoveCounterD = 0.0f;
             }
         }
     }
@@ -209,6 +199,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraUp();
 
             OnMove();
+            playerMovedSound.Invoke();
         }
     }
 
@@ -222,6 +213,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraLeft();
 
             OnMove();
+            playerMovedSound.Invoke();
         }
     }
 
@@ -235,6 +227,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraDown();
 
             OnMove();
+            playerMovedSound.Invoke();
         }
     }
 
@@ -248,6 +241,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraRight();
 
             OnMove();
+            playerMovedSound.Invoke();
         }
     }
 

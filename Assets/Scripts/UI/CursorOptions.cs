@@ -67,6 +67,9 @@ public class CursorOptions : MonoBehaviour
         bool moved = false;
         int index = transform.GetComponentInParent<MenuOptionsController>().GetButtonList().IndexOf(transform.GetComponentInParent<MenuOptionsController>().GetSelectedButton());
 
+        if (transform.GetComponentInParent<MenuOptionsController>().GetButtonList().Count > 1)
+            FindObjectOfType<SoundController>().PlayPlayerMove();
+
         if (index != -1)
         {
             if (index == 0) // el botó és el de dalt de tot
@@ -92,6 +95,9 @@ public class CursorOptions : MonoBehaviour
     {
         bool moved = false;
         int index = transform.GetComponentInParent<MenuOptionsController>().GetButtonList().IndexOf(transform.GetComponentInParent<MenuOptionsController>().GetSelectedButton());
+
+        if (transform.GetComponentInParent<MenuOptionsController>().GetButtonList().Count > 1)
+            FindObjectOfType<SoundController>().PlayPlayerMove();
 
         if (index != -1)
         {

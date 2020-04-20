@@ -1,0 +1,128 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "eabfb66c-f610-454f-bd81-e241a23e995d",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "3c59236a-caba-4e68-8e0d-77b74a63978d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "e4a08636-b27f-4b5b-a3c6-b6efa2473fe9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Move Up",
+                    "type": "Button",
+                    "id": "8f8a4842-0b79-4607-ae99-e7949983ce05",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)"
+                },
+                {
+                    "name": "Move Down",
+                    "type": "Button",
+                    "id": "82e4cedc-bbb7-4a05-80db-7060a5400bf6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)"
+                },
+                {
+                    "name": "Move Left",
+                    "type": "Button",
+                    "id": "134fdef0-3d32-490d-978c-383dca88654d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)"
+                },
+                {
+                    "name": "Move Right",
+                    "type": "Button",
+                    "id": "9beabdd8-5941-4a8a-aaae-0565059544d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "12643ece-1c95-4c55-8e2d-95a2c15d8070",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79fe2b91-e5ff-40c5-881f-d5b22a10a31b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bf87c34-edea-4f43-a23a-a94ddb5bd84f",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4ddc754-8038-4b10-963b-c0e40655af48",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72159dc-2ba5-4280-bfa6-2372207fb09c",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fae0dce-a8a5-4772-a974-33da7787326f",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -103,9 +103,7 @@ public class Unit : MonoBehaviour
     bool winCon = false;
 
     void Start()
-    {
-        state = UnitState.IDLE;
-        
+    {   
         transform.parent = GameObject.Find("Units Controller").transform;
 
         if (CompareTag("Unit_cani"))
@@ -127,6 +125,9 @@ public class Unit : MonoBehaviour
 
         UpdateStatsBasedOnTile();
         GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
+
+        state = UnitState.WAITING;
+        UpdateAnimator();
     }
 
     void Update()
@@ -791,6 +792,9 @@ public class Unit : MonoBehaviour
     {
         if (switchTargetTimer >= switchTargetInterval)
         {
+            if (targets.Count > 1)
+                FindObjectOfType<SoundController>().PlayPlayerMove();
+
             if (targets.Count > 0)
             {
                 int currentTargetIndex = targets.IndexOf(currentTarget);
@@ -811,6 +815,9 @@ public class Unit : MonoBehaviour
     {
         if (switchTargetTimer >= switchTargetInterval)
         {
+            if (targets.Count > 1)
+                FindObjectOfType<SoundController>().PlayPlayerMove();
+
             if (targets.Count > 0)
             {
                 int currentTargetIndex = targets.IndexOf(currentTarget);

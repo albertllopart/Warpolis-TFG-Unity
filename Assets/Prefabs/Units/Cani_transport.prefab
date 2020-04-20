@@ -140,7 +140,7 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: movementRange
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}

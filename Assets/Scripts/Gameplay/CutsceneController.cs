@@ -47,7 +47,6 @@ public class CutsceneController : MonoBehaviour
     public GameObject healingSignPrefab;
     GameObject healingSign;
 
-
     //events
     public UnityEvent unitDied;
     public UnityEvent repositionPlayer;
@@ -55,6 +54,10 @@ public class CutsceneController : MonoBehaviour
     public UnityEvent finishedAddingMoney;
     public UnityEvent finishedHealing;
     public UnityEvent finishedAllCutscenes;
+
+    //sound related
+    public UnityEvent unitDiedSound;
+    public UnityEvent moneyAddedSound;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +69,9 @@ public class CutsceneController : MonoBehaviour
         finishedHealing = new UnityEvent();
         finishedAllCutscenes = new UnityEvent();
 
+        unitDiedSound = new UnityEvent();
+        moneyAddedSound = new UnityEvent();
+
         gameplayController = GameObject.Find("Gameplay Controller");
         dataController = GameObject.Find("Data Controller");
         cameraController = GameObject.Find("Camera");
@@ -75,6 +81,7 @@ public class CutsceneController : MonoBehaviour
     void AfterStart()
     {
         //aquí s'han de cridar tots els AfterStart perquè s'inicialitzin bé tots els controladors que depenguin de coses que el cutscene controller manipularà
+        GameObject.Find("Sound Controller").GetComponent<SoundController>().AfterStart();
         GameObject.Find("UI Controller").GetComponent<UIController>().AfterStart();
         GameObject.Find("Data Controller").GetComponent<DataController>().AfterStart();
         GameObject.Find("Camera").GetComponent<CameraController>().AfterStart();
@@ -123,6 +130,8 @@ public class CutsceneController : MonoBehaviour
         FirstTurn((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
 
         finishedAddingMoney.AddListener(UnitHealSetup);
+
+        FindObjectOfType<SoundController>().PlayCani();
     }
 
     void NewTurnCani()
@@ -134,6 +143,8 @@ public class CutsceneController : MonoBehaviour
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
 
         finishedAddingMoney.AddListener(UnitHealSetup);
+
+        FindObjectOfType<SoundController>().PlayCani();
     }
 
     void NewTurnHipster()
@@ -145,6 +156,8 @@ public class CutsceneController : MonoBehaviour
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
 
         finishedAddingMoney.AddListener(UnitHealSetup);
+
+        FindObjectOfType<SoundController>().PlayHipster();
     }
 
     public void FirstTurn(uint amount)
@@ -182,6 +195,7 @@ public class CutsceneController : MonoBehaviour
             }
 
             moneyTimer = 0.0f;
+            moneyAddedSound.Invoke();
         }
 
         if (moneyToAdd == 0)
@@ -199,6 +213,8 @@ public class CutsceneController : MonoBehaviour
         dying = true;
         timer = 0.0f;
         dyingAlpha = 1.0f;
+
+        unitDiedSound.Invoke();
     }
 
     void UnitDeath()
@@ -300,7 +316,10 @@ public class CutsceneController : MonoBehaviour
         }
 
         if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING && !cameraTargeting)
+        {
             nextToExterminate.GetComponent<Unit>().MyOnExterminate(); //cridem aquesta funcio per canviar estat de la unitat, animació etc
+            unitDiedSound.Invoke();
+        }
 
         if (dyingAlpha < 0)
         {

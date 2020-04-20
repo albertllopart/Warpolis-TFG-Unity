@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MenuUnitController : MonoBehaviour
 {
@@ -21,9 +22,13 @@ public class MenuUnitController : MonoBehaviour
     //unitat
     public GameObject selectedUnit;
 
+    //events
+    public UnityEvent buttonPressed;
+
     // Start is called before the first frame update
     void Start()
     {
+        buttonPressed = new UnityEvent();
         gameObject.SetActive(false);
     }
 
@@ -245,6 +250,8 @@ public class MenuUnitController : MonoBehaviour
             selectedUnit.GetComponent<UnitTransport>().OnTargetingDropPositions();
             GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().HideMenuUnit();
         }
+
+        FindObjectOfType<SoundController>().PlayButton();
     }
 
     void UpdateTileInfo()

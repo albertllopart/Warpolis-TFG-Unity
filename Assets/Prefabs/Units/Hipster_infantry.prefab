@@ -159,14 +159,14 @@ MonoBehaviour:
   lampCost: 2
   coneCost: 1
   hitPoints: 50
-  basePower: 55
+  basePower: 100
   defense: 0
-  vsInfantry: 1
-  vsTransport: 0.3
+  vsInfantry: 0.55
+  vsTransport: 0.15
   vsTank: 0.1
   vsAerial: 0.1
-  vsGunner: 0.1
-  vsRanged: 0
+  vsGunner: 0.05
+  vsRanged: 0.3
   targets: []
   currentTarget: {fileID: 0}
   path: []

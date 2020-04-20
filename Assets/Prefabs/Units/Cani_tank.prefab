@@ -305,7 +305,7 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: movementRange
-      value: 20
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
@@ -335,22 +335,22 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: basePower
-      value: 55
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsInfantry
-      value: 1.35
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsTransport
-      value: 1.35
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsTank
-      value: 1
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
@@ -360,22 +360,22 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsAerial
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsGunner
-      value: 1
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: vsRanged
-      value: 1.35
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: shopValue
-      value: 3000
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 9047819817644104511, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}

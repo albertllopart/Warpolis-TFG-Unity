@@ -116,6 +116,9 @@ public class UnitTransport : MonoBehaviour
     {
         if (GetComponent<Unit>().switchTargetTimer >= GetComponent<Unit>().switchTargetInterval)
         {
+            if (dropPositions.Count > 1)
+                FindObjectOfType<SoundController>().PlayPlayerMove();
+
             if (dropPositions.Count > 0)
             {
                 int currentDropPositionIndex = dropPositions.IndexOf(currentDropPosition);
@@ -136,6 +139,9 @@ public class UnitTransport : MonoBehaviour
     {
         if (GetComponent<Unit>().switchTargetTimer >= GetComponent<Unit>().switchTargetInterval)
         {
+            if (dropPositions.Count > 1)
+                FindObjectOfType<SoundController>().PlayPlayerMove();
+
             if (dropPositions.Count > 0)
             {
                 int currentDropPositionIndex = dropPositions.IndexOf(currentDropPosition);
