@@ -82,7 +82,6 @@ public class TileInfo : MonoBehaviour
     public void UpdateInfo(Vector3 position)
     {
         UpdatePosition();
-
         //mirar la posició del player per determinar quin myTile agafar
         Vector2Int pos = new Vector2Int((int)position.x, (int)position.y);
         MyTile tile = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[pos.x, -pos.y];

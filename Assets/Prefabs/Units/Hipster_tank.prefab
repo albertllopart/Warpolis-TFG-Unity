@@ -385,7 +385,7 @@ PrefabInstance:
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}
       propertyPath: shopValue
-      value: 3000
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 8345399457042751412, guid: ae3aa3442ae550d419c1f0083074f2af,
         type: 3}

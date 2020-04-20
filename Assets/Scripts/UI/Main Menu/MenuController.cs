@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
     public GameObject mapTurdIsland;
     public GameObject mapSpanIsland;
     public GameObject big;
+    public GameObject alphaIsland;
 
     //events
     public UnityEvent newGame;
@@ -105,7 +106,7 @@ public class MenuController : MonoBehaviour
         mapController.GetComponent<MapController>().UnloadMap();
 
         //instanciar mapa
-        mapController.GetComponent<MapController>().LoadMap(big); //selectedMap
+        mapController.GetComponent<MapController>().LoadMap(alphaIsland); //selectedMap
     }
 
     public void EndGame()

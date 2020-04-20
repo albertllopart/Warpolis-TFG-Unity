@@ -130,6 +130,8 @@ public class UnitInfantry : MonoBehaviour
 
     void DestroyAndCreate()
     {
+        Debug.Log("UnitInfantry::DestroyAndCreate");
+
         if (currentCapture.GetComponent<Building>().type == BuildingType.BASE)
         {
             Instantiate(building, transform.position, Quaternion.identity);

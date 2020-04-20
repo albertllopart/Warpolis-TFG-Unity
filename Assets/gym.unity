@@ -1467,6 +1467,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -3328050278035528244, guid: bb9d40f56bbe4464a8411cac052acb50,
         type: 3}
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: shopValue
+      value: 8000
+      objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: m_Sprite
@@ -1557,7 +1562,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 2000
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -2009,6 +2014,8 @@ MonoBehaviour:
   mapSpanIsland: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591,
     type: 3}
   big: {fileID: 1195193868761505584, guid: c3cb7020285182e4fbfb017eabe2b4dc, type: 3}
+  alphaIsland: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5,
+    type: 3}
   newGame:
     m_PersistentCalls:
       m_Calls: []
@@ -2163,7 +2170,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 2000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -2255,7 +2262,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 4000
+      value: 9000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -2347,7 +2354,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 4000
+      value: 9000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -2728,7 +2735,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 3000
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -3081,7 +3088,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 2000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -8474,6 +8481,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7188200658099665783, guid: bb9d40f56bbe4464a8411cac052acb50,
         type: 3}
+    - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
+        type: 3}
+      propertyPath: shopValue
+      value: 8000
+      objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: m_Sprite
@@ -9192,7 +9204,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 3000
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
@@ -14068,7 +14080,7 @@ PrefabInstance:
     - target: {fileID: 4549133765042836330, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}
       propertyPath: shopValue
-      value: 2000
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: 4549133765042836331, guid: aa29c28fc341ea342bcf4ae9f7315f62,
         type: 3}

@@ -108,7 +108,10 @@ public class Building : MonoBehaviour
         currentHP -= capturePower;
 
         if (currentHP <= 0)
+        {
+            currentHP = 0;
             return true;
+        }
 
         return false;
     }

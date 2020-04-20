@@ -14,6 +14,8 @@ màxim de la partida.
 Warpolis ha estat desenvolupat amb Unity, és d’estètica pixel art i tot el què
 conté és feina original meva, excepte la banda sonora que a dia d'avui 20/04/2020 és un "placeholder".
 
+Music themes by Esteban Mendez (https://www.youtube.com/channel/UCatlMoEqORDf-uTSoMvWmew/feed)
+
 - Repository del projecte (https://github.com/albertllopart/Warpolis-TFG-Unity)
 - Github del creador, Albert Llopart Navarra (https://github.com/albertllopart)
 
@@ -26,6 +28,8 @@ L'scripting del projecte està fet íntegrament amb C#.
 - L'únic mode de joc que hi ha disponible a dia d'avui 20/04/2020 és multijugador local u contra u.
 
 - Qualsevol dubte sentiu-vos lliures de contactar amb mi per twitter @pocafeiner, o per qualsevol altre mitjà que estigui al vostre abast en cas de relació més propera.
+
+- Sou benvinguts de contribuir al projecte dissenyant mapes si ho voleu. Podreu triar el nom del mapa que creeu i apareixereu als crèdits.
 
 ## Controls
 
@@ -163,6 +167,8 @@ máximo de la partida.
 Warpolis ha sido desarrollado con Unity, es de estética píxel arte y todo lo qué
 contiene es trabajo original mío, excepto la banda sonora que a día de hoy 20/04/2020 es un "placeholder".
 
+Music themes by Esteban Mendez (https://www.youtube.com/channel/UCatlMoEqORDf-uTSoMvWmew/feed)
+
 - Repository del proyecto (https://github.com/albertllopart/warpolis-tfg-unity)
 - Github del creador, Albert Llopart Navarra (https://github.com/albertllopart)
 
@@ -175,6 +181,8 @@ El scripting del proyecto está hecho íntegramente con C#.
 - El único modo de juego que hay disponible a día de hoy 20/04/2020 es multijugador local uno contra uno.
 
 - Cualquier duda sentíos libras de contactar conmigo por twitter @pocafeiner, o por cualquier otro medio que esté a vuestro alcance en caso de relación más próxima.
+
+- Sou bienvenidos de contribuir al proyecto dissenyando mapas si lo deseais. Podreis escoger el nombre del mapa que creéis y apereceréis en los créditos.Podreu triar el nom del mapa que creeu i apareixereu als crèdits.
 
 ## Controles
 
@@ -311,6 +319,8 @@ have more control that the enemy over the map when having exhausted the number o
 turns of the game.
 Warpolis has been developed with Unity, is made of pixel art and all of what
 contains is my original work, except for the soundtrack that as of today 20/04/2020 is a "placeholder".
+
+Music themes by Esteban Mendez (https://www.youtube.com/channel/UCatlMoEqORDf-uTSoMvWmew/feed)
 
 - Repository of the project (https://github.com/albertllopart/*Warpolis-*TFG-*Unity)
 - Github of the creator, Albert Llopart Navarra (https://github.com/albertllopart)

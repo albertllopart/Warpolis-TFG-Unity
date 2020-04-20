@@ -343,6 +343,7 @@ public class GameplayController : MonoBehaviour
     public void DisableMenuUnit()
     {
         EnablePlayer();
+
         transform.Find("Player").GetComponent<PlayerController>().selectedUnit = null;
 
         disableMenuUnit.Invoke();
