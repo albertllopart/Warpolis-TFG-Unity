@@ -117,6 +117,9 @@ public class MenuController : MonoBehaviour
     {
         EnableMainMenu();
         cameraController.GetComponent<CameraController>().fadeToWhiteRest.RemoveListener(MyOnEnable);
+
+        FindObjectOfType<SoundController>().StopCani();
+        FindObjectOfType<SoundController>().StopHipster();
     }
 
     public void CompleteGameLoop()
