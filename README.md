@@ -258,7 +258,7 @@ Es la unidad terrestre más robusta y útil contra todo el resto de unidades ter
 
 <img src="ReadmeImages/cani_tank.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_tank.PNG" alt="hi" class="inline"/>
 
-### Aeria
+### Aerea
 
 - Coste 9000
 
@@ -389,7 +389,7 @@ The units listed below are ordered in the same way as in the store. I am very aw
 
 It is the weakest and slowest unit and is responsible for capturing buildings.
 
-<img src = "ReadmeImages / cani_infantry.PNG" alt = "hi" class = "inline" /> <img src = "ReadmeImages / hipster_infantry.PNG" alt = "hi" class = "inline" />
+<img src="ReadmeImages/cani_infantry.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_infantry.PNG" alt="hi" class="inline"/>
 
 ### Transport
 
@@ -397,7 +397,7 @@ It is the weakest and slowest unit and is responsible for capturing buildings.
 
 In the case of the Canis it is a motorcycle, and in the case of the Hipsters, a skateboard. This unit cannot attack but is used to transport infantry faster on the map. They are also useful for blocking offensives or stopping offensives, making other units weaker but with offensive power.
 
-<img src = "ReadmeImages / cani_transport.PNG" alt = "hi" class = "inline" /> <img src = "ReadmeImages / hipster_transport.PNG" alt = "hi" class = "inline" />
+<img src="ReadmeImages/cani_transport.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_transport.PNG" alt="hi" class="inline"/>
 
 ### Tank
 
@@ -405,7 +405,7 @@ In the case of the Canis it is a motorcycle, and in the case of the Hipsters, a 
 
 It is the most robust and useful ground unit against all other ground units. In the case of the Canis it is a car and in the case of the Hipsters, a Van.
 
-<img src = "ReadmeImages / cani_tank.PNG" alt = "hi" class = "inline" /> <img src = "ReadmeImages / hipster_tank.PNG" alt = "hi" class = "inline" />
+<img src="ReadmeImages/cani_tank.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_tank.PNG" alt="hi" class="inline"/>
 
 ### Aerial
 
@@ -413,7 +413,7 @@ It is the most robust and useful ground unit against all other ground units. In 
 
 In the case of the Canis he is a gambler and in the Hipsters, a drone. It is a very fast unit since it does not have obstacles of movement by type of terrain. Useful against all land units except against the gunner, who easily destroys it.
 
-<img src = "ReadmeImages / cani_aerial.PNG" alt = "hi" class = "inline" /> <img src = "ReadmeImages / hipster_aerial.PNG" alt = "hi" class = "inline" />
+<img src="ReadmeImages/cani_aerial.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_aerial.PNG" alt="hi" class="inline"/>
 
 ### Gunner
 
@@ -421,7 +421,7 @@ In the case of the Canis he is a gambler and in the Hipsters, a drone. It is a v
 
 It is a very useful unit against infantry and against air. In the case of the Canis it is a dog with a firework and in the case of the Hipsters, a hipster with a bottle of soda.
 
-<img src = "ReadmeImages / cani_gunner.PNG" alt = "hi" class = "inline" /> <img src = "ReadmeImages / hipster_gunner.PNG" alt = "hi" class = "inline" />
+<img src="ReadmeImages/cani_gunner.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_gunner.PNG" alt="hi" class="inline"/>
 
 ### Ranged
 
@@ -429,7 +429,7 @@ It is a very useful unit against infantry and against air. In the case of the Ca
 
 In the case of the Cani it is a Canis with a smartphone and in the case of the Hipsters, a photographer. It is a unit that can only attack from a distance between 2 and 4 squares. It can only attack if it does from the same square where the turn has begun. He cannot move and attack at the same turn.
 
-<img src = "ReadmeImages / cani_ranged.PNG" alt = "hi" class = "inline" /> <img src = "ReadmeImages / hipster_ranged.PNG" alt = "hi" class = "inline" />
+<img src="ReadmeImages/cani_ranged.PNG" alt="hi" class="inline"/> <img src="ReadmeImages/hipster_ranged.PNG" alt="hi" class="inline"/>
 
 ## Type of box
 
