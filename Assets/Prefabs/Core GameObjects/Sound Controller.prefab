@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &583776519372351855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 583776519372351825}
+  - component: {fileID: 583776519372351854}
+  m_Layer: 0
+  m_Name: Sound Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &583776519372351825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583776519372351855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583776519372351854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583776519372351855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5e75ad669281841b31e124a9b65c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: button
+    clip: {fileID: 8300000, guid: b1cbc082c351f1645add95d4dce49088, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: playerMove
+    clip: {fileID: 8300000, guid: c729d0029f82ab245b3ccada8a3a0de8, type: 3}
+    volume: 0.3
+    pitch: 1
+    source: {fileID: 0}
+  - name: back
+    clip: {fileID: 8300000, guid: 7dc37404a96c2de48a941d1871be4e99, type: 3}
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
+  - name: unavailable
+    clip: {fileID: 8300000, guid: 2cd76110a96adab46a30c3bf5a5a4220, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: f2d2bc112024dd84db9ed38363eca8eb, type: 3}
+    volume: 1
+    pitch: 1.5
+    source: {fileID: 0}
+  - name: money
+    clip: {fileID: 8300000, guid: deaf7549b8325e34bbe19d6fc15cffd8, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: capture
+    clip: {fileID: 8300000, guid: a15ac8d2051f47d4dbbeff1c3c919d4e, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  themes:
+  - name: cani
+    clip: {fileID: 8300000, guid: 706b7fc7ca9245f4386b4ee6b42c4236, type: 3}
+    volume: 0.3
+    pitch: 1
+    source: {fileID: 0}
+  - name: hipster
+    clip: {fileID: 8300000, guid: bceb50e97fe8b1f489a94ab835028819, type: 3}
+    volume: 0.2
+    pitch: 1
+    source: {fileID: 0}

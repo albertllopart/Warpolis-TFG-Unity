@@ -74,6 +74,8 @@ public class Controls : MonoBehaviour
         controls.Gameplay.MoveRight.started += ctx => SendDDown();
         controls.Gameplay.MoveRight.performed += ctx => SendD(true);
         controls.Gameplay.MoveRight.canceled += ctx => SendD(false);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update

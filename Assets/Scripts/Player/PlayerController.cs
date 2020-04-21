@@ -25,13 +25,11 @@ public class PlayerController : MonoBehaviour
 
     //events
     public UnityEvent playerMoved;
-    public UnityEvent playerMovedSound;
 
     // Start is called before the first frame update
     void Start()
     {
         playerMoved = new UnityEvent();
-        playerMovedSound = new UnityEvent();
 
         keyDownCounterW = 0.0f;
         keyDownCounterA = 0.0f;
@@ -199,7 +197,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraUp();
 
             OnMove();
-            playerMovedSound.Invoke();
+            FindObjectOfType<SoundController>().PlayPlayerMove();
         }
     }
 
@@ -213,7 +211,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraLeft();
 
             OnMove();
-            playerMovedSound.Invoke();
+            FindObjectOfType<SoundController>().PlayPlayerMove();
         }
     }
 
@@ -227,7 +225,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraDown();
 
             OnMove();
-            playerMovedSound.Invoke();
+            FindObjectOfType<SoundController>().PlayPlayerMove();
         }
     }
 
@@ -241,7 +239,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.GetComponent<CameraController>().MoveCameraRight();
 
             OnMove();
-            playerMovedSound.Invoke();
+            FindObjectOfType<SoundController>().PlayPlayerMove();
         }
     }
 

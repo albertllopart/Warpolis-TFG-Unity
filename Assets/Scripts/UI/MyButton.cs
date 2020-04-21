@@ -53,6 +53,11 @@ public class MyButton : MonoBehaviour
             child.GetComponent<SpriteRenderer>().color = color;
         }
 
+        foreach (Transform character in transform.Find("MyText").transform.Find("Text").transform)
+        {
+            character.GetComponent<SpriteRenderer>().color = color;
+        }
+
         isEnabled = false;
     }
 
@@ -65,6 +70,11 @@ public class MyButton : MonoBehaviour
         foreach (Transform child in transform.Find("Number").transform)
         {
             child.GetComponent<SpriteRenderer>().color = color;
+        }
+
+        foreach (Transform character in transform.Find("MyText").transform.Find("Text").transform)
+        {
+            character.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
         }
 
         isEnabled = true;

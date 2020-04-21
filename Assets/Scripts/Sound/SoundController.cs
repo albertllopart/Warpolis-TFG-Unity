@@ -30,11 +30,8 @@ public class SoundController : MonoBehaviour
 
             s.source.loop = true;
         }
-    }
 
-    public void AfterStart()
-    {
-        SubscribeToEvents();
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlayButton()
@@ -43,7 +40,7 @@ public class SoundController : MonoBehaviour
         s.source.Play();
     }
 
-    void PlayBack()
+    public void PlayBack()
     {
         Sound s = Array.Find(sounds, sound => sound.name == "back");
         s.source.Play();
@@ -110,23 +107,5 @@ public class SoundController : MonoBehaviour
     {
         Sound s = Array.Find(themes, sound => sound.name == "hipster");
         s.source.Stop();
-    }
-
-    void SubscribeToEvents()
-    {
-        //Button
-        FindObjectOfType<GameplayController>().interactSound.AddListener(PlayButton);
-
-        //Back
-        FindObjectOfType<GameplayController>().backSound.AddListener(PlayBack);
-
-        //PlayerMove
-        FindObjectOfType<PlayerController>().playerMovedSound.AddListener(PlayPlayerMove);
-
-        //Death
-        FindObjectOfType<CutsceneController>().unitDiedSound.AddListener(PlayDeath);
-
-        //Money
-        FindObjectOfType<CutsceneController>().moneyAddedSound.AddListener(PlayMoney);
     }
 }

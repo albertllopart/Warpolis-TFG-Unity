@@ -51,10 +51,6 @@ public class GameplayController : MonoBehaviour
     public UnityEvent endTurnCani;
     public UnityEvent endTurnHipster;
 
-    //sound
-    public UnityEvent backSound;
-    public UnityEvent interactSound;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -84,10 +80,6 @@ public class GameplayController : MonoBehaviour
         //gameplay
         endTurnCani = new UnityEvent();
         endTurnHipster = new UnityEvent();
-
-        //sound
-        backSound = new UnityEvent();
-        interactSound = new UnityEvent();
 
         playerState = PlayerState.NAVIGATING;
         turn = Turn.CANI;
@@ -157,7 +149,7 @@ public class GameplayController : MonoBehaviour
         {
             case PlayerState.NAVIGATING:
 
-                interactSound.Invoke();
+                FindObjectOfType<SoundController>().PlayButton();
 
                 //cridar funcio interact de player i mirar què retorna
                 if (transform.Find("Player").GetComponent<PlayerController>().InteractUnits())
@@ -191,7 +183,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.INTERACTING:
                 //interactuar amb la unitat
-                interactSound.Invoke();
+                FindObjectOfType<SoundController>().PlayButton();
 
                 moveUnit.Invoke();
 
@@ -207,7 +199,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.TARGETING:
 
-                interactSound.Invoke();
+                FindObjectOfType<SoundController>().PlayButton();
 
                 attackUnit.Invoke();
                 dropUnit.Invoke();
@@ -224,7 +216,7 @@ public class GameplayController : MonoBehaviour
                
                 if (transform.Find("Player").GetComponent<PlayerController>().InteractUnitsForAttackRange())
                 {
-                    interactSound.Invoke();
+                    FindObjectOfType<SoundController>().PlayButton();
 
                     DisableMoneyInfo();
                     playerState = PlayerState.ATTACKRANGE;
@@ -234,7 +226,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.ATTACKRANGE:
 
-                backSound.Invoke();
+                FindObjectOfType<SoundController>().PlayBack();
 
                 deselectUnit.Invoke();
                 EnableMoneyInfo();
@@ -246,7 +238,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.INTERACTING:
 
-                backSound.Invoke();
+                FindObjectOfType<SoundController>().PlayBack();
 
                 deselectUnit.Invoke();
                 EnableMoneyInfo();
@@ -257,7 +249,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.OPTIONS:
 
-                backSound.Invoke();
+                FindObjectOfType<SoundController>().PlayBack();
 
                 DisableMenuOptions();
                 EnablePlayer();
@@ -268,7 +260,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.SHOP:
 
-                backSound.Invoke();
+                FindObjectOfType<SoundController>().PlayBack();
 
                 DisableMenuShop();
                 EnablePlayer();
@@ -280,7 +272,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.WAITING:
 
-                backSound.Invoke();
+                FindObjectOfType<SoundController>().PlayBack();
 
                 transform.Find("Player").gameObject.SetActive(true); //alerta, codi brut però necessito activar el player perquè cancelMenuUnit necessita la seva posició
                 CancelMenuUnit();
@@ -293,7 +285,7 @@ public class GameplayController : MonoBehaviour
 
             case PlayerState.TARGETING:
 
-                backSound.Invoke();
+                FindObjectOfType<SoundController>().PlayBack();
 
                 ShowMenuUnit();
 
