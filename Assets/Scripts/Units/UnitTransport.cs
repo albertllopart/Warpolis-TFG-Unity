@@ -28,6 +28,25 @@ public class UnitTransport : MonoBehaviour
         
     }
 
+    public void MyOnDestroy()
+    {
+        if (loadedUnit != null)
+        {
+            switch (loadedUnit.GetComponent<Unit>().army)
+            {
+                case UnitArmy.CANI:
+                    GetComponentInParent<UnitsController>().caniUnits.Remove(loadedUnit);
+                    break;
+
+                case UnitArmy.HIPSTER:
+                    GetComponentInParent<UnitsController>().hipsterUnits.Remove(loadedUnit);
+                    break;
+            }
+
+            Destroy(loadedUnit);
+        }
+    }
+
     public void EnableLoadSign(bool enable)
     {
         UILoadSign.SetActive(enable);

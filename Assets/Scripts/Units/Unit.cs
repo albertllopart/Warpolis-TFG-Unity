@@ -166,6 +166,9 @@ public class Unit : MonoBehaviour
         if (unitType == (uint)UnitType.INFANTRY)
             GetComponent<UnitInfantry>().StopCapture(); // s'ha de fer ja perquè no hi haurà update
 
+        if (unitType == UnitType.TRANSPORT)
+            GetComponent<UnitTransport>().MyOnDestroy();
+
         //cutscene!!
         state = UnitState.DYING;
         UpdateAnimator();

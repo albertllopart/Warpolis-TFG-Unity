@@ -233,7 +233,7 @@ public class CutsceneController : MonoBehaviour
             }
             else
             {
-                if (attackingUnit != null)
+                if (attackingUnit != null && attackingUnit != dyingUnit)
                 {
                     attackingUnit.GetComponent<Unit>().OnWait();
                     attackingUnit = null;
