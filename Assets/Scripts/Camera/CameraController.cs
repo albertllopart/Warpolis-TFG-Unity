@@ -52,11 +52,6 @@ public class CameraController : MonoBehaviour
 
         if (ftwToRest)
             FtwRest();
-
-        if (Input.GetKeyDown("f3"))
-        {
-            FadeToWhiteSetup(1.0f);
-        }
     }
 
     public void CalculateCameraCorners()
@@ -98,7 +93,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("CameraController::CalculateCameraWidth - TopLeftCorner.x < 0");
+            //Debug.LogError("CameraController::CalculateCameraWidth - TopLeftCorner.x < 0");
         }
     }
 

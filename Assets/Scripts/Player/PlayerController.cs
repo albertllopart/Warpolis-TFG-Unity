@@ -494,7 +494,6 @@ public class PlayerController : MonoBehaviour
 
             MyTile tile = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y];
             string tileType = "null";
-            string isWalkable = "null";
 
             switch (tile.type)
             {
