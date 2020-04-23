@@ -44,6 +44,9 @@ public class Controls : MonoBehaviour
     [HideInInspector]
     public UnityEvent keyboard_k_down;
 
+    [HideInInspector]
+    public UnityEvent keyboard_return_down;
+
     //gamepad
     PlayerControls controls;
 
@@ -57,6 +60,7 @@ public class Controls : MonoBehaviour
         controls = new PlayerControls();
         controls.Gameplay.Interact.performed += ctx => SendODown(); //ctx serveix per dir-li a unity que sé que hi ha un context a l'acció però jo simplement vull cridar aquest mètode independentment d'aquest
         controls.Gameplay.Cancel.performed += ctx => SendKDown();
+        controls.Gameplay.Start.performed += ctx => SendReturnDown();
 
         //W
         controls.Gameplay.MoveUp.started += ctx => SendWDown();
@@ -100,6 +104,8 @@ public class Controls : MonoBehaviour
         keyboard_k = new UnityEvent();
         keyboard_k_up = new UnityEvent();
         keyboard_k_down = new UnityEvent();
+
+        keyboard_return_down = new UnityEvent();
     }
 
     // Update is called once per frame
@@ -112,6 +118,7 @@ public class Controls : MonoBehaviour
 
         InvokeO();
         InvokeK();
+        InvokeReturn();
 
         if (up)
             keyboard_w.Invoke();
@@ -240,5 +247,16 @@ public class Controls : MonoBehaviour
     void SendKDown()
     {
         keyboard_k_down.Invoke();
+    }
+
+    void InvokeReturn()
+    {
+        if (Input.GetKeyDown("return"))
+            keyboard_return_down.Invoke();
+    }
+
+    void SendReturnDown()
+    {
+        keyboard_return_down.Invoke();
     }
 }

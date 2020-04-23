@@ -111,7 +111,7 @@ public class SoundController : MonoBehaviour
 
     public void PlayTitle()
     {
-        StopCani();
+        StopTitle();
 
         Sound s = Array.Find(themes, sound => sound.name == "title");
         s.source.Play();

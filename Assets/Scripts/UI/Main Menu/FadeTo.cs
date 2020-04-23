@@ -63,6 +63,13 @@ public class FadeTo : MonoBehaviour
         }
     }
 
+    public void FadeToSetup()
+    {
+        play = true;
+        state = State.INCREASING;
+        currentAlpha = 0.0f;
+    }
+
     bool IncreaseAlpha()
     {
         currentAlpha += alphaIncreaseSpeed * Time.deltaTime;

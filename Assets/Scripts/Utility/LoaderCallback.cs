@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class LoaderCallback : MonoBehaviour
 {
-    private bool isFirstUpdate = true;
+    private float timer = 0.0f;
 
     private void Update()
     {
-        if (isFirstUpdate)
+        if (timer >= 1f)
         {
-            isFirstUpdate = false;
             Loader.LoaderCallback();
         }
+
+        timer += Time.deltaTime;
     }
 }

@@ -65,6 +65,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.2)""
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""302d42b5-11ca-4add-93ee-3daf86b82c75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -133,6 +141,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Move Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6f14e9d-ea1c-4183-b630-bad81e7bd944"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -147,6 +166,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_MoveDown = m_Gameplay.FindAction("Move Down", throwIfNotFound: true);
         m_Gameplay_MoveLeft = m_Gameplay.FindAction("Move Left", throwIfNotFound: true);
         m_Gameplay_MoveRight = m_Gameplay.FindAction("Move Right", throwIfNotFound: true);
+        m_Gameplay_Start = m_Gameplay.FindAction("Start", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,6 +222,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_MoveDown;
     private readonly InputAction m_Gameplay_MoveLeft;
     private readonly InputAction m_Gameplay_MoveRight;
+    private readonly InputAction m_Gameplay_Start;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -212,6 +233,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @MoveDown => m_Wrapper.m_Gameplay_MoveDown;
         public InputAction @MoveLeft => m_Wrapper.m_Gameplay_MoveLeft;
         public InputAction @MoveRight => m_Wrapper.m_Gameplay_MoveRight;
+        public InputAction @Start => m_Wrapper.m_Gameplay_Start;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -239,6 +261,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MoveRight.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveRight;
                 @MoveRight.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveRight;
                 @MoveRight.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveRight;
+                @Start.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -261,6 +286,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MoveRight.started += instance.OnMoveRight;
                 @MoveRight.performed += instance.OnMoveRight;
                 @MoveRight.canceled += instance.OnMoveRight;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
             }
         }
     }
@@ -273,5 +301,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMoveDown(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
 }

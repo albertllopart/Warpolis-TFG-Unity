@@ -110,16 +110,25 @@ public class TitleScreen : MonoBehaviour
     void TransitionToNextScene()
     {
         UnsubscribeFromEvents();
+        FindObjectOfType<FadeTo>().FadeToSetup();
+        FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(LoadNextScene);
+    }
+
+    void LoadNextScene()
+    {
+        FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(LoadNextScene);
         Loader.Load(Loader.Scene.main_menu);
     }
 
     void SubscribeToEvents()
     {
         FindObjectOfType<Controls>().keyboard_o_down.AddListener(TransitionToNextScene);
+        FindObjectOfType<Controls>().keyboard_return_down.AddListener(TransitionToNextScene);
     }
 
     void UnsubscribeFromEvents()
     {
         FindObjectOfType<Controls>().keyboard_o_down.RemoveListener(TransitionToNextScene);
+        FindObjectOfType<Controls>().keyboard_return_down.RemoveListener(TransitionToNextScene);
     }
 }
