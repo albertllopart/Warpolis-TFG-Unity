@@ -54,7 +54,7 @@ public class IntroController : MonoBehaviour
             case IntroState.BLACK2:
                 if (timer > introTime1)
                 {
-                    Loader.Load(Loader.Scene.main_menu);
+                    Loader.Load(Loader.Scene.title);
                 }
                 break;
         }

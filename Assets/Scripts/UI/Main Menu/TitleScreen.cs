@@ -46,6 +46,9 @@ public class TitleScreen : MonoBehaviour
         hipster.Add(hipster_aerial);
         hipster.Add(hipster_gunner);
         hipster.Add(hipster_ranged);
+
+        FindObjectOfType<SoundController>().PlayTitle();
+        FindObjectOfType<FadeTo>().finishedDecreasing.AddListener(SubscribeToEvents);
     }
 
     // Update is called once per frame
@@ -69,7 +72,7 @@ public class TitleScreen : MonoBehaviour
 
                 int crandom = lastCani;
                 while (crandom == lastCani)
-                    crandom = Random.Range(0, 5);
+                    crandom = Random.Range(0, 6);
 
                 GameObject cpuppet = Instantiate(cani[crandom], transform.Find("Spawner").transform.position, Quaternion.identity);
                 cpuppet.transform.SetParent(transform.Find("Spawner"));
@@ -84,7 +87,7 @@ public class TitleScreen : MonoBehaviour
 
                 int hrandom = lastHipster;
                 while (hrandom == lastHipster)
-                    hrandom = Random.Range(0, 5);
+                    hrandom = Random.Range(0, 6);
 
                 GameObject hpuppet = Instantiate(hipster[hrandom], transform.Find("Spawner").transform.position, Quaternion.identity);
                 hpuppet.transform.SetParent(transform.Find("Spawner"));
@@ -102,5 +105,21 @@ public class TitleScreen : MonoBehaviour
         {
             Destroy(puppet.gameObject);
         }
+    }
+
+    void TransitionToNextScene()
+    {
+        UnsubscribeFromEvents();
+        Loader.Load(Loader.Scene.main_menu);
+    }
+
+    void SubscribeToEvents()
+    {
+        FindObjectOfType<Controls>().keyboard_o_down.AddListener(TransitionToNextScene);
+    }
+
+    void UnsubscribeFromEvents()
+    {
+        FindObjectOfType<Controls>().keyboard_o_down.RemoveListener(TransitionToNextScene);
     }
 }
