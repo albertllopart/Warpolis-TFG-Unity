@@ -10,11 +10,11 @@ public class FadeTo : MonoBehaviour
     public float alphaIncreaseSpeed;
     public bool playOnAwake;
 
-    bool play;
-    float currentAlpha;
+    public bool play;
+    public float currentAlpha;
 
-    enum State { INCREASING, DECREASING };
-    State state;
+    public enum State { INCREASING, DECREASING };
+    public State state;
 
     public UnityEvent finishedDecreasing;
     public UnityEvent finishedIncreasing;
@@ -31,14 +31,14 @@ public class FadeTo : MonoBehaviour
         if (playOnAwake)
         {
             GetComponent<SpriteRenderer>().color = color;
-            play = true;
+            SetPlay(true);
             currentAlpha = 1.0f;
             state = State.DECREASING;
         }
         else
         {
             GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
-            play = false;
+            SetPlay(false);
             currentAlpha = 0.0f;
         }
     }
@@ -51,13 +51,17 @@ public class FadeTo : MonoBehaviour
             switch (state)
             {
                 case State.INCREASING:
-                    if (IncreaseAlpha())
-                        play = false;
+                    SetPlay(!IncreaseAlpha());
+
+                    if (!play)
+                        finishedIncreasing.Invoke();
                     break;
 
                 case State.DECREASING:
-                    if (DecreaseAlpha())
-                        play = false;
+                    SetPlay(!DecreaseAlpha());
+
+                    if (!play)
+                        finishedDecreasing.Invoke();
                     break;
             }
         }
@@ -65,9 +69,18 @@ public class FadeTo : MonoBehaviour
 
     public void FadeToSetup()
     {
-        play = true;
-        state = State.INCREASING;
+        SetPlay(true);
         currentAlpha = 0.0f;
+
+        Debug.Log("FadeTo::FadeFromSetup - Starting to Increase Alpha");
+    }
+
+    public void FadeFromSetup()
+    {
+        SetPlay(true);
+        currentAlpha = 1.0f;
+
+        Debug.Log("FadeTo::FadeFromSetup - Starting to Decrease Alpha");
     }
 
     bool IncreaseAlpha()
@@ -77,7 +90,7 @@ public class FadeTo : MonoBehaviour
 
         if (currentAlpha >= 1.0f)
         {
-            finishedIncreasing.Invoke();
+            state = State.DECREASING;
             return true;
         }
 
@@ -91,10 +104,15 @@ public class FadeTo : MonoBehaviour
 
         if (currentAlpha <= 0.0f)
         {
-            finishedDecreasing.Invoke();
+            state = State.INCREASING;
             return true;
         }
 
         return false;
+    }
+
+    void SetPlay(bool set)
+    {
+        play = set;
     }
 }

@@ -150,3 +150,5 @@ MonoBehaviour:
   dots: {fileID: 5828142360239581868, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
   at: {fileID: 4648844174987794615, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
   sprite: {fileID: 4249412137838877586, guid: dc94ed6b8d6d66a4286b989830e7cf57, type: 3}
+  verticalAnchor: 0
+  spacing: 1

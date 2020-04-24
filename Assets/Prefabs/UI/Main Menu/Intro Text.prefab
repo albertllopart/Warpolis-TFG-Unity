@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Created by:'
       objectReference: {fileID: 0}
+    - target: {fileID: 3878031044127987073, guid: d125fcd802ea8854fa1250381fadb088,
+        type: 3}
+      propertyPath: spacing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3878031044127987074, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class MyTextManager : MonoBehaviour
 {
+    //prefab
+    public GameObject sprite;
+    public enum VerticalAnchor { COLLAPSE, CENTER };
+
+    [Header("Parameters")]
+    public VerticalAnchor verticalAnchor;
+    public float spacing;
+    
+    [Header("Characters")]
     public Sprite A;
     public Sprite B;
     public Sprite C;
@@ -63,8 +72,7 @@ public class MyTextManager : MonoBehaviour
     public Sprite dots;
     public Sprite at;
 
-    //prefab
-    public GameObject sprite;
+    bool needToUpdate;
 
     // Start is called before the first frame update
     void Start()
@@ -75,8 +83,25 @@ public class MyTextManager : MonoBehaviour
         {
             CreateText(text.gameObject);
 
-            text.transform.position -= new Vector3(0, 1 * count++, 0);
+            text.transform.position -= new Vector3(0, spacing * count++, 0);
         }
+
+        if (verticalAnchor == VerticalAnchor.CENTER)
+        {
+            float textsCenter = GetTextVerticalCenter(count);
+            float offset = Mathf.Abs(textsCenter - transform.position.y);
+
+            foreach (Transform text in transform)
+            {
+                text.position += new Vector3(0, offset, 0);
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (needToUpdate)
+            UpdatePositionForLeftText();
     }
 
     void CreateText(GameObject myText)
@@ -406,5 +431,69 @@ public class MyTextManager : MonoBehaviour
         }
 
         return myText.transform.position;
+    }
+
+    float GetTextVerticalCenter(int count)
+    {
+        if (count % 2 == 0) //count és parell
+        {
+            int middleTextIndex = count / 2 - 1;
+
+            GameObject targetText = null;
+
+            int iterator = 0;
+            foreach (Transform text in transform)
+            {
+                if (iterator++ == middleTextIndex)
+                    targetText = text.gameObject;
+            }
+
+            float jump = (spacing * 16f - 9f) / 16f;
+            return targetText.transform.position.y - 9 / 16f - jump / 2; // 9 és l'alçada de les lletres
+        }
+        else // count és imparell
+        {
+            int middleTextIndex = count / 2;
+
+            GameObject targetText = null;
+
+            int iterator = 0;
+            foreach (Transform text in transform)
+            {
+                if (iterator++ == middleTextIndex)
+                    targetText = text.gameObject;
+            }
+
+            return targetText.transform.position.y - (4.5f / 16f); // 9 és l'alçada de les lletres
+        }
+    }
+
+    public void SetNewText(string text, Color color, MyText.Anchor anchor)
+    {
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        GameObject newText = new GameObject();
+        newText.AddComponent<MyText>();
+        newText.GetComponent<MyText>().text = text;
+        newText.GetComponent<MyText>().color = color;
+        newText.GetComponent<MyText>().anchor = anchor;
+
+        newText.transform.SetParent(transform);
+
+        CreateText(newText);
+
+        needToUpdate = true;
+    }
+
+    public void UpdatePositionForLeftText()
+    {
+        int counter = 0;
+        foreach(Transform text in transform)
+        {
+            text.transform.position = new Vector3(transform.position.x, transform.position.y - spacing * counter++, 0);
+        }
     }
 }

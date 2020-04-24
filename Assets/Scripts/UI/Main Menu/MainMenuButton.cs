@@ -25,9 +25,12 @@ public class MainMenuButton : MonoBehaviour
         if (info != null)
         {
             info.SetActive(enable);
-            
+
             if (enable)
-                info.transform.position = FindObjectOfType<MainMenuController>().transform.Find("Main").transform.Find("Info").transform.Find("TextPosition").transform.position;
+            {
+                info.transform.SetParent(FindObjectOfType<MainMenuController>().transform.Find("Mode").transform.Find("Info").transform.Find("TextPosition").transform);
+                info.transform.localPosition = new Vector3(0, 0, 0);
+            }
         }
     }
 }
