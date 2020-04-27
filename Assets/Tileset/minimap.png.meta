@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: e65550ccca412ae4d944591d8a916c68
+guid: 2e27e616422df8a438236bd9d756f154
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7590638603020057717
-    second: shop_background_0
+      213: -4619674151455593843
+    second: minimap_0
   - first:
-      213: 2823788725124018662
-    second: shop_background_1
+      213: -826354440442802093
+    second: minimap_1
   - first:
-      213: 6888112554678813587
-    second: shop_background_2
+      213: 5198188617347713711
+    second: minimap_2
   - first:
-      213: 7064460925345337391
-    second: shop_background_3
+      213: 652144405596611627
+    second: minimap_3
   - first:
-      213: -5115500048146746795
-    second: shop_background_4
+      213: -9079087187247109636
+    second: minimap_4
   - first:
-      213: -8824876621572020365
-    second: shop_background_5
+      213: 2283842554243771670
+    second: minimap_5
   - first:
-      213: 6735375191383071016
-    second: shop_background_6
+      213: -2664871688769517146
+    second: minimap_6
   - first:
-      213: 1771688011063314169
-    second: shop_background_7
+      213: 1960699265212983287
+    second: minimap_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -67,8 +67,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 1
-  spritePivot: {x: 0, y: 1}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -122,169 +122,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shop_background_0
+      name: minimap_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
-        width: 144
-        height: 144
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        y: 3
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b834f905862a8a690800000000000000
-      internalID: -7590638603020057717
+      spriteID: d8a6f68d5de93efb0800000000000000
+      internalID: -4619674151455593843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_background_1
+      name: minimap_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 20
-        width: 132
-        height: 20
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 3
+        y: 3
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e135c962ec103720800000000000000
-      internalID: 2823788725124018662
+      spriteID: 35017deb3033884f0800000000000000
+      internalID: -826354440442802093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_background_2
+      name: minimap_2
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 3
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faa4d7c910da32840800000000000000
+      internalID: 5198188617347713711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: minimap_3
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 3
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2428d5b1e1ec0900800000000000000
+      internalID: 652144405596611627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: minimap_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 3
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf9e5576e4a900280800000000000000
+      internalID: -9079087187247109636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: minimap_5
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 132
-        height: 20
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3930a8aafdd779f50800000000000000
-      internalID: 6888112554678813587
+      spriteID: 61dee98e3b6d1bf10800000000000000
+      internalID: 2283842554243771670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_background_3
+      name: minimap_6
       rect:
         serializedVersion: 2
-        x: 132
-        y: 31
-        width: 12
-        height: 7
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 3
+        y: 0
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2016d058c10a0260800000000000000
-      internalID: 7064460925345337391
+      spriteID: 6a9c5e27159740bd0800000000000000
+      internalID: -2664871688769517146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_background_4
+      name: minimap_7
       rect:
         serializedVersion: 2
-        x: 132
-        y: 24
-        width: 12
-        height: 7
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 6
+        y: 0
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55238bd2fc71209b0800000000000000
-      internalID: -5115500048146746795
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shop_background_5
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 60
-        width: 136
-        height: 124
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 377ec88087db78580800000000000000
-      internalID: -8824876621572020365
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shop_background_6
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 40
-        width: 124
-        height: 20
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 829dd5f0d0cd87d50800000000000000
-      internalID: 6735375191383071016
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shop_background_7
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 20
-        width: 124
-        height: 20
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f64f38fbdc469810800000000000000
-      internalID: 1771688011063314169
+      spriteID: 7f7a36ee79dc53b10800000000000000
+      internalID: 1960699265212983287
       vertices: []
       indices: 
       edges: []

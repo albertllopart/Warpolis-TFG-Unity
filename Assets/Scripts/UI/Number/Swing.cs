@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class Swing : MonoBehaviour
 {
-    enum SwingState
-    {
-        GOING, RETURNING
-    };
+    public enum Direction { GOING, RETURNING };
+
+    public enum Orientation { VERTICAL, HORIZONTAL };
 
     public uint pixels;
-    public uint direction;
+    public Orientation orientation;
+    public Direction direction;
     public float speed;
     float timer = 0.0f;
 
-    //intern
-    SwingState state = SwingState.GOING;
+    
     uint pixelsCount = 0;
 
     // Start is called before the first frame update
@@ -38,13 +37,13 @@ public class Swing : MonoBehaviour
 
     void DoTheSwing()
     {
-        switch (direction)
+        switch (orientation)
         {
-            case 0: //vertical
+            case Orientation.VERTICAL: //vertical
                 ApplySwingVector(new Vector3(0, 1/16f, 0));
                 break;
 
-            case 1: //horitzontal
+            case Orientation.HORIZONTAL: //horitzontal
                 ApplySwingVector(new Vector3(1/16f, 0, 0));
                 break;
         }
@@ -52,7 +51,7 @@ public class Swing : MonoBehaviour
 
     void ApplySwingVector(Vector3 swing)
     {
-        if (state == SwingState.GOING)
+        if (direction == Direction.GOING)
         {
             if (pixelsCount < pixels)
             {
@@ -62,10 +61,10 @@ public class Swing : MonoBehaviour
             else
             {
                 pixelsCount = 0;
-                state = SwingState.RETURNING;
+                direction = Direction.RETURNING;
             }
         }
-        else if (state == SwingState.RETURNING)
+        else if (direction == Direction.RETURNING)
         {
             if (pixelsCount < pixels)
             {
@@ -75,7 +74,7 @@ public class Swing : MonoBehaviour
             else
             {
                 pixelsCount = 0;
-                state = SwingState.GOING;
+                direction = Direction.GOING;
             }
         }
     }

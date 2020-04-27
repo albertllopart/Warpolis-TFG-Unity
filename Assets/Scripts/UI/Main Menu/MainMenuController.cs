@@ -63,6 +63,10 @@ public class MainMenuController : MonoBehaviour
             case MainMenuState.MODE:
                 TransitionToPreviousScene();
                 break;
+
+            case MainMenuState.MAP:
+                map.GetComponent<MainMenuMap>().TransitionToMode();
+                break;
         }
     }
 
@@ -128,7 +132,7 @@ public class MainMenuController : MonoBehaviour
         FindObjectOfType<FadeTo>().FadeFromSetup();
     }
 
-    void EnableMode()
+    public void EnableMode()
     {
         mode.SetActive(true);
         state = MainMenuState.MODE;
@@ -143,6 +147,7 @@ public class MainMenuController : MonoBehaviour
     {
         map.SetActive(true);
         state = MainMenuState.MAP;
+        map.GetComponent<MainMenuMap>().MyOnEnable();
     }
 
     void DisableMap()
