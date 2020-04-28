@@ -81,7 +81,7 @@ public class RecyclerView : MonoBehaviour
             lowerButton = viewSize;
     }
 
-    public void MoveDown()
+    public bool MoveDown()
     {
         if (selectedButton == lowerButton)
         {
@@ -93,12 +93,17 @@ public class RecyclerView : MonoBehaviour
                 {
                     button.transform.position += new Vector3(0, spacing, 0);
                 }
+
+                return true;
             }
         }
         else
         {
             SelectButton(buttons[selectedButton++]);
+            return true;
         }
+
+        return false;
     }
 
     void AfterDown()
@@ -113,7 +118,7 @@ public class RecyclerView : MonoBehaviour
         UpdateLimitArrows();
     }
 
-    public void MoveUp()
+    public bool MoveUp()
     {
         if (selectedButton == upperButton)
         {
@@ -125,12 +130,17 @@ public class RecyclerView : MonoBehaviour
                 {
                     button.transform.position -= new Vector3(0, spacing, 0);
                 }
+
+                return true;
             }
         }
         else
         {
             SelectButton(buttons[--selectedButton - 1]);
+            return true;
         }
+
+        return false;
     }
 
     void AfterUp()

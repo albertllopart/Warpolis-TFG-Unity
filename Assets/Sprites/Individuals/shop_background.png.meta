@@ -26,6 +26,18 @@ TextureImporter:
   - first:
       213: 1771688011063314169
     second: shop_background_7
+  - first:
+      213: 1339398259792018853
+    second: shop_background_8
+  - first:
+      213: 6055976787844644132
+    second: shop_background_9
+  - first:
+      213: -1860637961826179910
+    second: shop_background_10
+  - first:
+      213: 1659558719789118319
+    second: shop_background_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -285,6 +297,90 @@ TextureImporter:
       bones: []
       spriteID: 9f64f38fbdc469810800000000000000
       internalID: 1771688011063314169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_8
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 14
+        width: 6
+        height: 6
+      alignment: 9
+      pivot: {x: 0.16666667, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5adfdafee9f769210800000000000000
+      internalID: 1339398259792018853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_9
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 8
+        width: 6
+        height: 6
+      alignment: 9
+      pivot: {x: 0.16666667, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42dbd777dc62b0450800000000000000
+      internalID: 6055976787844644132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_10
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 14
+        width: 6
+        height: 6
+      alignment: 9
+      pivot: {x: -0.16666667, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab46ebdb1afad26e0800000000000000
+      internalID: -1860637961826179910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_11
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 8
+        width: 6
+        height: 6
+      alignment: 9
+      pivot: {x: -0.16666667, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f63bee8ecdfe70710800000000000000
+      internalID: 1659558719789118319
       vertices: []
       indices: 
       edges: []

@@ -53,6 +53,10 @@ public class MainMenuController : MonoBehaviour
             case MainMenuState.MODE:
                 mode.GetComponent<MainMenuMode>().PressSelectedButton();
                 break;
+
+            case MainMenuState.MAP:
+                map.GetComponent<MainMenuMap>().TransitionToNextScene();
+                break;
         }
     }
 
@@ -190,6 +194,8 @@ public class MainMenuController : MonoBehaviour
 
         //children
         mode.GetComponent<MainMenuMode>().versusPressed.AddListener(TransitionToMap);
+
+        Debug.Log("MainMenuController::SubscribeToEvents - Subscribed to Events");
     }
 
     public void UnsubscribeFromEvents()
@@ -205,5 +211,7 @@ public class MainMenuController : MonoBehaviour
 
         //children
         mode.GetComponent<MainMenuMode>().versusPressed.RemoveListener(TransitionToMap);
+
+        Debug.Log("MainMenuController::UnsubscribeFromEvents - Unsubscribed from Events");
     }
 }

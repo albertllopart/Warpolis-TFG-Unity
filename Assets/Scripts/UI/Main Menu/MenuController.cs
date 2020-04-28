@@ -10,12 +10,6 @@ public class MenuController : MonoBehaviour
     GameObject gameplayController;
     GameObject mapController;
 
-    //maps
-    public GameObject mapTurdIsland;
-    public GameObject mapSpanIsland;
-    public GameObject big;
-    public GameObject alphaIsland;
-
     //events
     public UnityEvent newGame;
     public UnityEvent endGame;
@@ -95,18 +89,18 @@ public class MenuController : MonoBehaviour
         UnsubscribeFromEvents();
 
         //carregar mapa
-        LoadMap(/*selectedMap*/);
+        LoadMap(FindObjectOfType<DataTransferer>().map);
 
         newGame.Invoke();
     }
 
-    void LoadMap(/*GameObject selectedMap*/)
+    void LoadMap(GameObject selectedMap)
     {
         //eliminar gym
         mapController.GetComponent<MapController>().UnloadMap();
 
         //instanciar mapa
-        mapController.GetComponent<MapController>().LoadMap(alphaIsland); //selectedMap
+        mapController.GetComponent<MapController>().LoadMap(selectedMap); //selectedMap
     }
 
     public void EndGame()

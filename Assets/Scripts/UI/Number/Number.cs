@@ -26,11 +26,17 @@ public class Number : MonoBehaviour
     public Sprite nine;
 
     List<Sprite> numbers = new List<Sprite>();
-    int orderInLayer = 12;
+    int orderInLayer = 30;
+
+    void Awake()
+    {
+        SetupNumbers();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        SetupNumbers();
+
     }
 
     // Update is called once per frame
@@ -116,5 +122,8 @@ public class Number : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        if (GetComponent<SpriteRenderer>() != null)
+            GetComponent<SpriteRenderer>().sprite = null;
     }
 }

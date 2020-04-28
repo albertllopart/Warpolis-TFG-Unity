@@ -8,10 +8,13 @@ public class MainMenuMap : MonoBehaviour
     [Header("Maps")]
     public GameObject alpha_island;
     public GameObject span_island;
-    public GameObject map1;
-    public GameObject map2;
-    public GameObject map3;
+    public GameObject turd_island;
     public GameObject map4;
+    public GameObject map5;
+    public GameObject map6;
+    public GameObject map7;
+    public GameObject map8;
+    public GameObject map9;
 
     [Header("Minimap")]
     public GameObject minimapPrefab;
@@ -45,10 +48,13 @@ public class MainMenuMap : MonoBehaviour
 
         mapList.Add(alpha_island);
         mapList.Add(span_island);
-        mapList.Add(map1);
-        mapList.Add(map2);
-        mapList.Add(map3);
+        mapList.Add(turd_island);
         mapList.Add(map4);
+        mapList.Add(map5);
+        mapList.Add(map6);
+        mapList.Add(map7);
+        mapList.Add(map8);
+        mapList.Add(map9);
     }
 
     public void AfterStart()
@@ -67,6 +73,8 @@ public class MainMenuMap : MonoBehaviour
             minimapList.Add(newMinimap);
             SetMinimapPosition(newMinimap);
         }
+
+        UpdateMapInfo(0);
 
         gameObject.SetActive(false);
     }
@@ -143,14 +151,85 @@ public class MainMenuMap : MonoBehaviour
         MyOnDisable();
     }
 
+    public void TransitionToNextScene()
+    {
+        GetComponentInParent<MainMenuController>().UnsubscribeFromEvents();
+        UnsubscribeFromEvents();
+        FindObjectOfType<FadeTo>().FadeToSetup();
+        FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(SwitchToNextScene);
+    }
+
+    public void SwitchToNextScene()
+    {
+        FindObjectOfType<DataTransferer>().TransferMap(mapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()]);
+
+        FindObjectOfType<SoundController>().StopTitle();
+        FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(SwitchToNextScene);
+        Loader.Load(Loader.Scene.game);
+    }
+
     public void MoveUp()
     {
-        recyclerView.GetComponent<RecyclerView>().MoveUp();
+        if (recyclerView.GetComponent<RecyclerView>().MoveUp())
+        {
+            int index = recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex();
+            minimapList[index + 1].SetActive(false);
+
+            UpdateMapInfo(index);
+        }
     }
 
     public void MoveDown()
     {
-        recyclerView.GetComponent<RecyclerView>().MoveDown();
+        if (recyclerView.GetComponent<RecyclerView>().MoveDown())
+        {
+            int index = recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex();
+            minimapList[index - 1].SetActive(false);
+
+            UpdateMapInfo(index);
+        }
+    }
+
+    void UpdateMapInfo(int index)
+    {
+        minimapList[index].SetActive(true);
+
+        mapInfo.transform.Find("Size").transform.Find("Width").GetComponent<Number>().CreateNumber(minimapList[index].transform.Find("Tilemap").GetComponent<Tilemap>().size.x);
+        mapInfo.transform.Find("Size").transform.Find("Height").GetComponent<Number>().CreateNumber(minimapList[index].transform.Find("Tilemap").GetComponent<Tilemap>().size.y);
+
+        Vector2Int buildings = CountBuildings(index);
+
+        mapInfo.transform.Find("Buildings").transform.Find("Building").transform.Find("Number").GetComponent<Number>().CreateNumber(buildings.x);
+        mapInfo.transform.Find("Buildings").transform.Find("Factory").transform.Find("Number").GetComponent<Number>().CreateNumber(buildings.y);
+    }
+
+    Vector2Int CountBuildings(int index)
+    {
+        //aquest mètode itera el mapa corresponent i retorna un vector2Int on les X són el nombre d'edificis i les Y el nombre de fàbriques
+        Vector2Int ret = new Vector2Int(0, 0);
+
+        Tilemap tilemap = mapList[index].transform.Find("Tilemap_buildings").GetComponent<Tilemap>();
+
+        for (int i = 0; i < tilemap.size.x; i++)
+        {
+            for (int j = 0; j > -tilemap.size.y; j--)
+            {
+                TileBase tile = tilemap.GetTile(WorldToTilemap(new Vector3(i, j, 0)));
+
+                if (tile != null)
+                {
+                    if (tile.name == tilesetDictionary[(int)MapController.TilesetCode.BUILDING_NEUTRAL] || tile.name == tilesetDictionary[(int)MapController.TilesetCode.BUILDING_CANI]
+                    || tile.name == tilesetDictionary[(int)MapController.TilesetCode.BUILDING_HIPSTER])
+                        ret.x++;
+
+                    else if (tile.name == tilesetDictionary[(int)MapController.TilesetCode.FACTORY_NEUTRAL] || tile.name == tilesetDictionary[(int)MapController.TilesetCode.FACTORY_CANI]
+                        || tile.name == tilesetDictionary[(int)MapController.TilesetCode.FACTORY_HIPSTER])
+                        ret.y++;
+                }
+            }
+        }
+
+        return ret;
     }
 
     GameObject GenerateMinimap(GameObject map, Transform parent)
@@ -258,14 +337,18 @@ public class MainMenuMap : MonoBehaviour
         Tilemap tilemap = minimap.transform.Find("Tilemap").GetComponent<Tilemap>();
         tilemap.CompressBounds();
         minimap.transform.position = minimap.transform.parent.position - new Vector3(3 / 16f, 0, 0);
-
-        //Vector3 offset = minimap.transform.Find("Tilemap").GetComponent<Tilemap>().size;
-        //offset /= 2f;
-        //minimap.transform.position += new Vector3(-(offset.x / 2f) * (1 / 16f), (offset.y / 2f) * (1 / 16f), 0);
-
         minimap.transform.position += new Vector3(-(tilemap.size.x / 2f) * (3 / 16f), (tilemap.size.y / 2f) * (3 / 16f), 0);
 
+        AllocateMinimapCorners(minimap, tilemap);
+
         minimap.SetActive(false);
+    }
+
+    void AllocateMinimapCorners(GameObject minimap, Tilemap tilemap)
+    {
+        minimap.transform.Find("Corners").transform.Find("TopRight").transform.position += new Vector3(tilemap.size.x * 3 / 16f, 0, 0);
+        minimap.transform.Find("Corners").transform.Find("BottomLeft").transform.position += new Vector3(0, -tilemap.size.y * 3 / 16f, 0);
+        minimap.transform.Find("Corners").transform.Find("BottomRight").transform.position += new Vector3(tilemap.size.x * 3 / 16f, -tilemap.size.y * 3 / 16f, 0);
     }
 
     void SubscribeToEvents()
