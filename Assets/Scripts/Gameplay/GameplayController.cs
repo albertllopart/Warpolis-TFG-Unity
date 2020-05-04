@@ -7,7 +7,7 @@ public class GameplayController : MonoBehaviour
 {
     public enum PlayerState
     {
-        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING, DROPPING
+        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING, DROPPING, CONFIRM
     };
 
     public enum PlayerLocation
@@ -205,6 +205,14 @@ public class GameplayController : MonoBehaviour
                 dropUnit.Invoke();
 
                 break;
+
+            case PlayerState.CONFIRM:
+
+                UnsubscribeFromEvents();
+                FindObjectOfType<FadeTo>().FadeToSetup();
+                FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(BackToTitle);
+
+                break;
         }
     }
 
@@ -290,6 +298,14 @@ public class GameplayController : MonoBehaviour
                 ShowMenuUnit();
 
                 break;
+
+            case PlayerState.CONFIRM:
+
+                EnableMenuOptions();
+                playerState = PlayerState.OPTIONS;
+                Destroy(GameObject.Find("ConfirmScreen(Clone)"));
+
+                break;
         }
     }
 
@@ -316,7 +332,7 @@ public class GameplayController : MonoBehaviour
         enableMenuOptions.Invoke();
     }
 
-    void DisableMenuOptions()
+    public void DisableMenuOptions()
     {
         disableMenuOptions.Invoke();
     }
@@ -373,13 +389,20 @@ public class GameplayController : MonoBehaviour
         disableMoneyInfo.Invoke();
     }
 
-    void SubscribeToEvents()
+    void BackToTitle()
+    {
+        FindObjectOfType<SoundController>().StopCani();
+        FindObjectOfType<SoundController>().StopHipster();
+        Loader.Load(Loader.Scene.title);
+    }
+
+    public void SubscribeToEvents()
     {
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(JudgeO);
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.AddListener(JudgeK);
     }
 
-    void UnsubscribeFromEvents()
+    public void UnsubscribeFromEvents()
     {
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(JudgeO);
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.RemoveListener(JudgeK);

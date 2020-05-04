@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   versusButton: {fileID: 1972349164}
-  onlineButton: {fileID: 1801277119}
+  quitButton: {fileID: 1801277119}
   tutorialButton: {fileID: 90046935}
   optionsButton: {fileID: 1822556989}
   selectedButtonPosition: {x: -5.5, y: 0.875}
@@ -2059,6 +2059,7 @@ MonoBehaviour:
   text: a map of your choice!
   color: {r: 0, g: 0, b: 0, a: 1}
   anchor: 1
+  layer: 12
 --- !u!1001 &1482039355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2337,7 +2338,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: Coming soon
+      value: Exit the application
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
@@ -3061,7 +3062,7 @@ PrefabInstance:
     - target: {fileID: 1246740810697083765, guid: 4f3adff5bf5d49f4bad33b0079ef1b4b,
         type: 3}
       propertyPath: text
-      value: Online
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 1246740810697083765, guid: 4f3adff5bf5d49f4bad33b0079ef1b4b,
         type: 3}
@@ -3097,7 +3098,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3320651762612503935, guid: 70a9e329f6dd23d44894385e59044050,
+      objectReference: {fileID: 1237059460723120834, guid: 70a9e329f6dd23d44894385e59044050,
         type: 3}
     - target: {fileID: 2613514117565880487, guid: 4f3adff5bf5d49f4bad33b0079ef1b4b,
         type: 3}
@@ -3172,7 +3173,7 @@ PrefabInstance:
     - target: {fileID: 7925741534278167029, guid: 4f3adff5bf5d49f4bad33b0079ef1b4b,
         type: 3}
       propertyPath: m_Name
-      value: Online
+      value: Quit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f3adff5bf5d49f4bad33b0079ef1b4b, type: 3}

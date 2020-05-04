@@ -12,6 +12,9 @@ public class Number : MonoBehaviour
     private float spacing = -7/16f;
     private float dotSpacing = 0.0f;
 
+    //posicionament
+    Vector3 startPosition;
+
     //individual
     [Header("Individual")]
     public Sprite zero;
@@ -24,6 +27,7 @@ public class Number : MonoBehaviour
     public Sprite seven;
     public Sprite eight;
     public Sprite nine;
+    public Sprite infinite;
 
     List<Sprite> numbers = new List<Sprite>();
     int orderInLayer = 30;
@@ -36,7 +40,7 @@ public class Number : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -65,6 +69,21 @@ public class Number : MonoBehaviour
     {
         if (numbers.Count > num)
             GetComponent<SpriteRenderer>().sprite = numbers[num];
+    }
+
+    public void SetInfinite()
+    {
+        DeleteNumber();
+        GetComponent<SpriteRenderer>().sprite = infinite;
+    }
+
+    public void CenterNumber()
+    {
+        //aquest mètode és per centrar un nombre de dues xifres
+        int count = 0;
+
+        foreach (Transform child in transform)
+            count++;
     }
 
     public void CreateNumber(int num)

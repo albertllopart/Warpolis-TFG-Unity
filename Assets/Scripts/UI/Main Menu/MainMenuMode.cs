@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class MainMenuMode : MonoBehaviour
 {
     public GameObject versusButton;
-    public GameObject onlineButton;
+    public GameObject quitButton;
     public GameObject tutorialButton;
     public GameObject optionsButton;
 
@@ -29,15 +29,17 @@ public class MainMenuMode : MonoBehaviour
 
     //events
     public UnityEvent versusPressed;
+    public UnityEvent quitPressed;
 
     // Start is called before the first frame update
     void Awake()
     {
         versusPressed = new UnityEvent();
+        quitPressed = new UnityEvent();
 
         mainButtons = new List<GameObject>();
         mainButtons.Add(versusButton);
-        mainButtons.Add(onlineButton);
+        mainButtons.Add(quitButton);
         mainButtons.Add(tutorialButton);
         mainButtons.Add(optionsButton);
 
@@ -61,14 +63,14 @@ public class MainMenuMode : MonoBehaviour
     void RepositionMainButtons()
     {
         versusButton.transform.position = selectedButtonPosition;
-        onlineButton.transform.position = lowerButtonPosition;
-        tutorialButton.transform.position = fadeDownButtonPosition;
+        tutorialButton.transform.position = lowerButtonPosition;
+        quitButton.transform.position = fadeDownButtonPosition;
         optionsButton.transform.position = upperButtonPosition;
 
         selectedButton = versusButton;
         upperButton = optionsButton;
-        lowerButton = onlineButton;
-        invisibleButton = tutorialButton;
+        lowerButton = tutorialButton;
+        invisibleButton = quitButton;
 
         UpdateInfo();
     }
@@ -196,6 +198,10 @@ public class MainMenuMode : MonoBehaviour
         {
             case "Versus":
                 versusPressed.Invoke();
+                break;
+
+            case "Quit":
+                quitPressed.Invoke();
                 break;
         }
 

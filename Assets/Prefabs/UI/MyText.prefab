@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Insert Text
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0, g: 0, b: 0, a: 1}
   anchor: 1
+  layer: 12
 --- !u!1 &3878031044127987072
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8e38eec5da1b34099517dccc200a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 4249412137838877586, guid: dc94ed6b8d6d66a4286b989830e7cf57, type: 3}
+  verticalAnchor: 0
+  spacing: 1
   A: {fileID: 8469901007498452947, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
   B: {fileID: -6237329817201710510, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
   C: {fileID: -6235877539815393105, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
@@ -149,6 +153,3 @@ MonoBehaviour:
   coma: {fileID: 8433881463193637263, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
   dots: {fileID: 5828142360239581868, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
   at: {fileID: 4648844174987794615, guid: 3e55c22dd97055f40ba06f1194c75f06, type: 3}
-  sprite: {fileID: 4249412137838877586, guid: dc94ed6b8d6d66a4286b989830e7cf57, type: 3}
-  verticalAnchor: 0
-  spacing: 1

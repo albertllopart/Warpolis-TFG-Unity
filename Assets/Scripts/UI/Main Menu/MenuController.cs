@@ -14,6 +14,13 @@ public class MenuController : MonoBehaviour
     public UnityEvent newGame;
     public UnityEvent endGame;
 
+    //internal
+    GameObject turnLimitGO;
+
+    public enum TurnLimit { INFINITE, FINITE };
+    public TurnLimit turnLimit = TurnLimit.INFINITE;
+    public int turnLimitAmount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +30,18 @@ public class MenuController : MonoBehaviour
         cameraController = GameObject.Find("Camera");
         gameplayController = GameObject.Find("Gameplay Controller");
         mapController = GameObject.Find("Map Controller");
+
+        turnLimitGO = transform.Find("Preparation").transform.Find("Background").transform.Find("Turn Limit").gameObject;
+
+        FindObjectOfType<FadeTo>().finishedDecreasing.AddListener(SubscribeToEvents);
     }
 
     public void AfterStart()
     {
         DisableGameplay();
-        SubscribeToEvents();
+
+        if (turnLimit == TurnLimit.INFINITE)
+            turnLimitGO.transform.Find("Number").GetComponent<Number>().SetInfinite();
     }
 
     // Update is called once per frame
@@ -48,15 +61,15 @@ public class MenuController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void EnableMainMenu()
+    void EnablePreparation()
     {
-        transform.Find("Main Menu").gameObject.SetActive(true);
-        transform.Find("Main Menu").transform.position = cameraController.transform.position + new Vector3(0, 0, 10);
+        transform.Find("Preparation").gameObject.SetActive(true);
+        transform.Find("Preparation").transform.position = cameraController.transform.position + new Vector3(0, 0, 10);
     }
 
-    void DisableMainMenu()
+    void DisablePreparation()
     {
-        transform.Find("Main Menu").gameObject.SetActive(false);
+        transform.Find("Preparation").gameObject.SetActive(false);
     }
 
     void EnableGameplay()
@@ -69,6 +82,62 @@ public class MenuController : MonoBehaviour
     {
         gameplayController.GetComponent<GameplayController>().MyOnDisable();
         gameplayController.SetActive(false);
+    }
+
+    void IncreaseTurnLimit()
+    {
+        switch (turnLimit)
+        {
+            case TurnLimit.INFINITE:
+                turnLimit = TurnLimit.FINITE;
+                turnLimitAmount = 15;
+                UpdateTurnLimit();
+                break;
+
+            case TurnLimit.FINITE:
+                turnLimitAmount += 5;
+
+                if (turnLimitAmount > 50)
+                    turnLimit = TurnLimit.INFINITE;
+
+                UpdateTurnLimit();
+                break;
+        }
+    }
+
+    void DecreaseTurnLimit()
+    {
+        switch (turnLimit)
+        {
+            case TurnLimit.INFINITE:
+                turnLimit = TurnLimit.FINITE;
+                turnLimitAmount = 50;
+                UpdateTurnLimit();
+                break;
+
+            case TurnLimit.FINITE:
+                turnLimitAmount -= 5;
+
+                if (turnLimitAmount < 15)
+                    turnLimit = TurnLimit.INFINITE;
+
+                UpdateTurnLimit();
+                break;
+        }
+    }
+
+    void UpdateTurnLimit()
+    {
+        switch (turnLimit)
+        {
+            case TurnLimit.INFINITE:
+                turnLimitGO.transform.Find("Number").GetComponent<Number>().SetInfinite();
+                break;
+
+            case TurnLimit.FINITE:
+                turnLimitGO.transform.Find("Number").GetComponent<Number>().CreateNumber(turnLimitAmount);
+                break;
+        }
     }
 
     void StartGame()
@@ -85,7 +154,7 @@ public class MenuController : MonoBehaviour
     {
         cameraController.GetComponent<CameraController>().fadeToWhiteRest.RemoveListener(NewGame);
 
-        DisableMainMenu();
+        DisablePreparation();
         UnsubscribeFromEvents();
 
         //carregar mapa
@@ -110,7 +179,7 @@ public class MenuController : MonoBehaviour
 
     public void OnGameEnded()
     {
-        EnableMainMenu();
+        EnablePreparation();
         cameraController.GetComponent<CameraController>().fadeToWhiteRest.RemoveListener(MyOnEnable);
 
         FindObjectOfType<SoundController>().StopCani();
@@ -125,11 +194,17 @@ public class MenuController : MonoBehaviour
 
     void SubscribeToEvents()
     {
+        FindObjectOfType<FadeTo>().finishedDecreasing.RemoveListener(SubscribeToEvents);
+
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(StartGame);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.AddListener(IncreaseTurnLimit);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.AddListener(DecreaseTurnLimit);
     }
 
     void UnsubscribeFromEvents()
     {
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(StartGame);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.RemoveListener(IncreaseTurnLimit);
+        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.RemoveListener(DecreaseTurnLimit);
     }
 }

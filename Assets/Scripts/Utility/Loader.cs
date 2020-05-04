@@ -13,7 +13,7 @@ public static class Loader
 
     public enum Scene
     {
-        intro, loading, title, main_menu, game, gym
+        intro, loading, title, main_menu, game, gym, quit
     };
 
     private static Action onLoaderCallback;
@@ -30,6 +30,17 @@ public static class Loader
 
         //load loading scene
         SceneManager.LoadScene(Scene.loading.ToString());
+    }
+
+    public static void Quit()
+    {
+        onLoaderCallback = () =>
+        {
+            Application.Quit();
+        };
+
+        //load quit scene
+        SceneManager.LoadScene(Scene.quit.ToString());
     }
 
     public static IEnumerator LoadSceneAsync(Scene scene)

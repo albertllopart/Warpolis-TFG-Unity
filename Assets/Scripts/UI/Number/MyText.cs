@@ -12,6 +12,7 @@ public class MyText : MonoBehaviour
     public string text;
     public Color color;
     public Anchor anchor;
+    public int layer;
 
     void Awake()
     {

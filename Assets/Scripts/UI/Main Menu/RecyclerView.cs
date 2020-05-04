@@ -44,7 +44,7 @@ public class RecyclerView : MonoBehaviour
         GameObject newButton = Instantiate(recyclerButtonPrefab, transform.position + new Vector3(0, -(4 / 16f + margin + spacing * counter++), 0), Quaternion.identity); //els magic numbers són per centrar els botons al background
         newButton.name = name;
         newButton.transform.SetParent(transform);
-        newButton.transform.Find("MyText").GetComponent<MyTextManager>().SetNewText(name, new Color(0, 0, 0, 1), MyText.Anchor.LEFT);
+        newButton.transform.Find("MyText").GetComponent<MyTextManager>().SetNewText(name, new Color(0, 0, 0, 1), MyText.Anchor.LEFT, 12);
 
         buttons.Add(newButton);
 

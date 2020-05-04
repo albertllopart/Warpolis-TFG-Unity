@@ -59,6 +59,12 @@ public class UIController : MonoBehaviour
         transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnEnable();
     }
 
+    public void OnConfirmScreen()
+    {
+        transform.Find("Menu_options").GetComponent<MenuOptionsController>().MyOnDisable();
+        transform.Find("Menu_options").gameObject.SetActive(false);
+    }
+
     void DisableMenuOptions()
     {
         EnableTileInfo();

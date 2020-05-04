@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb59f4b9e0863fb4b8d3e3643d532696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberInstance: {fileID: 0}
+  dot: {fileID: 0}
   zero: {fileID: -3295778609609746925, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   one: {fileID: -9174533908493705734, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   two: {fileID: 4584472800584304161, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
@@ -105,3 +107,5 @@ MonoBehaviour:
   seven: {fileID: 507978020864038391, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   eight: {fileID: -5526221462849876624, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   nine: {fileID: 6256619994742917393, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
+  infinite: {fileID: -4956663618592490732, guid: e2a3fa01063c8854c8b7290184b1cf9c,
+    type: 3}

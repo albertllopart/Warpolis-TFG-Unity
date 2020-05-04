@@ -136,6 +136,20 @@ public class MainMenuController : MonoBehaviour
         FindObjectOfType<FadeTo>().FadeFromSetup();
     }
 
+    void TransitionToQuit()
+    {
+        UnsubscribeFromEvents();
+        FindObjectOfType<FadeTo>().FadeToSetup();
+        FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(Quit);
+    }
+
+    void Quit()
+    {
+        FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(Quit);
+        FindObjectOfType<SoundController>().StopTitle();
+        Loader.Quit();
+    }
+
     public void EnableMode()
     {
         mode.SetActive(true);
@@ -194,6 +208,7 @@ public class MainMenuController : MonoBehaviour
 
         //children
         mode.GetComponent<MainMenuMode>().versusPressed.AddListener(TransitionToMap);
+        mode.GetComponent<MainMenuMode>().quitPressed.AddListener(TransitionToQuit);
 
         Debug.Log("MainMenuController::SubscribeToEvents - Subscribed to Events");
     }
@@ -211,6 +226,7 @@ public class MainMenuController : MonoBehaviour
 
         //children
         mode.GetComponent<MainMenuMode>().versusPressed.RemoveListener(TransitionToMap);
+        mode.GetComponent<MainMenuMode>().quitPressed.RemoveListener(TransitionToQuit);
 
         Debug.Log("MainMenuController::UnsubscribeFromEvents - Unsubscribed from Events");
     }

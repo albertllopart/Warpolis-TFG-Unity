@@ -44,6 +44,9 @@ TextureImporter:
   - first:
       213: 3122261235286243653
     second: damage_numbers_13
+  - first:
+      213: -4956663618592490732
+    second: damage_numbers_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -429,6 +432,27 @@ TextureImporter:
       bones: []
       spriteID: 54975311d00845b20800000000000000
       internalID: 3122261235286243653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage_numbers_14
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 8
+      alignment: 9
+      pivot: {x: 0.46875, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b31be43b4663bb0800000000000000
+      internalID: -4956663618592490732
       vertices: []
       indices: 
       edges: []

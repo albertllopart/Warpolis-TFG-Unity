@@ -38,6 +38,18 @@ TextureImporter:
   - first:
       213: 1659558719789118319
     second: shop_background_11
+  - first:
+      213: 1410479876342457057
+    second: shop_background_12
+  - first:
+      213: 4009222582755708574
+    second: shop_background_13
+  - first:
+      213: 3786593314878022619
+    second: shop_background_14
+  - first:
+      213: 5750830623899201813
+    second: shop_background_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -381,6 +393,69 @@ TextureImporter:
       bones: []
       spriteID: f63bee8ecdfe70710800000000000000
       internalID: 1659558719789118319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_12
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 8
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e2aa3879f7039310800000000000000
+      internalID: 1410479876342457057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 8
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9ec0ae72be93a730800000000000000
+      internalID: 4009222582755708574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_14
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 123
+        width: 136
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51133f4bbfd0fcf40800000000000000
+      internalID: 5750830623899201813
       vertices: []
       indices: 
       edges: []

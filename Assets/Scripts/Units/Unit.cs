@@ -514,6 +514,10 @@ public class Unit : MonoBehaviour
 
         //mapa
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+
+        //gameplay
+        //desactivar events de controls
+        FindObjectOfType<GameplayController>().UnsubscribeFromEvents();
     }
 
     public void OnTargeting()
@@ -624,9 +628,8 @@ public class Unit : MonoBehaviour
 
             if (myPos == goal)
             {
+                FindObjectOfType<GameplayController>().SubscribeToEvents();
                 OnMenu();
-
-                //TODO: si és una intanteria i acaba de ser descarregada en comptes de cridar OnMenu s'ha de cridar OnWait directament
             }
         }
     }

@@ -5,8 +5,12 @@ using UnityEngine.Events;
 
 public class MenuOptionsController : MonoBehaviour
 {
-    public GameObject buttonOptions;
-    public GameObject buttonQuit;
+    //prefabs
+    public GameObject confirmScreen;
+
+    [Header("Buttons")]
+    public GameObject buttonResume;
+    public GameObject buttonExit;
     public GameObject buttonEndTurn;
 
     public List<GameObject> buttons;
@@ -70,11 +74,11 @@ public class MenuOptionsController : MonoBehaviour
         {
             buttons = new List<GameObject>();
 
-            buttons.Add(buttonOptions);
-            buttonOptions.GetComponent<MyButton>().button = new MyButtonOptions();
+            buttons.Add(buttonResume);
+            buttonResume.GetComponent<MyButton>().button = new MyButtonOptions();
 
-            buttons.Add(buttonQuit);
-            buttonQuit.GetComponent<MyButton>().button = new MyButtonQuit();
+            buttons.Add(buttonExit);
+            buttonExit.GetComponent<MyButton>().button = new MyButtonQuit();
 
             buttons.Add(buttonEndTurn);
             buttonEndTurn.GetComponent<MyButton>().button = new MyButtonEndTurn();
@@ -133,13 +137,21 @@ public class MenuOptionsController : MonoBehaviour
     {
         FindObjectOfType<SoundController>().PlayButton();
 
-        if (selectedButton.name == "Button_quit")
+        if (selectedButton.name == "Button_exit")
         {
-            Application.Quit();
+            GameObject confirm = Instantiate(confirmScreen);
+            confirm.transform.position = Camera.main.transform.position + new Vector3(0, 0, 10);
+
+            FindObjectOfType<UIController>().OnConfirmScreen();
+            FindObjectOfType<GameplayController>().playerState = GameplayController.PlayerState.CONFIRM;
         }
         else if (selectedButton.name == "Button_endturn")
         {
             GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().EndTurn(); // TODO: invocar un event del gameplay controller en comptes del mètode directament
+        }
+        else if (selectedButton.name == "Button_resume")
+        {
+            FindObjectOfType<Controls>().keyboard_k_down.Invoke();
         }
     }
 
