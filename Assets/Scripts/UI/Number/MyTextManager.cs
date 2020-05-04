@@ -124,6 +124,7 @@ public class MyTextManager : MonoBehaviour
             nextChar.transform.parent = myText.transform;
             nextChar.GetComponent<SpriteRenderer>().sprite = GetSprite(character);
             nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
+            nextChar.GetComponent<SpriteRenderer>().sortingOrder = myText.GetComponent<MyText>().layer;
 
             //preparar offset pel seguent character
             if (nextChar.GetComponent<SpriteRenderer>().sprite != null)
@@ -468,7 +469,7 @@ public class MyTextManager : MonoBehaviour
         }
     }
 
-    public void SetNewText(string text, Color color, MyText.Anchor anchor)
+    public void SetNewText(string text, Color color, MyText.Anchor anchor, int layer)
     {
         foreach(Transform child in transform)
         {
@@ -480,6 +481,7 @@ public class MyTextManager : MonoBehaviour
         newText.GetComponent<MyText>().text = text;
         newText.GetComponent<MyText>().color = color;
         newText.GetComponent<MyText>().anchor = anchor;
+        newText.GetComponent<MyText>().layer = layer;
 
         newText.transform.SetParent(transform);
 
