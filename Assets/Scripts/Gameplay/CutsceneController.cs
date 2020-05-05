@@ -47,6 +47,9 @@ public class CutsceneController : MonoBehaviour
     public GameObject healingSignPrefab;
     GameObject healingSign;
 
+    //announcement
+    public GameObject announcer;
+
     //events
     public UnityEvent unitDied;
     public UnityEvent repositionPlayer;
@@ -109,7 +112,14 @@ public class CutsceneController : MonoBehaviour
             UnitHeal();
     }
 
-    public void NewGame()
+    public void NewGameSetup()
+    {
+        AnnouncementSetupNewGame(Announcer.AnnouncementType.TURN_COUNT);
+        DisableUIInfo();
+        FindObjectOfType<SoundController>().PlayCani();
+    }
+
+    void NewGame()
     {
         currentTurn = GameplayController.Turn.CANI;
 
@@ -122,8 +132,21 @@ public class CutsceneController : MonoBehaviour
         FirstTurn((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
 
         finishedAddingMoney.AddListener(UnitHealSetup);
+    }
 
-        FindObjectOfType<SoundController>().PlayCani();
+    void NewTurnCaniSetup()
+    {
+        DisableUIInfo();
+
+        if (dataController.GetComponent<DataController>().CheckTurnLimitReached())
+        {
+            AnnouncementSetupDomination(Announcer.AnnouncementType.TURN_LIMIT_REACHED);
+        }
+        else
+        {
+            AnnouncementSetupCani(Announcer.AnnouncementType.TURN_COUNT);
+            FindObjectOfType<SoundController>().PlayCani();
+        }
     }
 
     void NewTurnCani()
@@ -135,8 +158,13 @@ public class CutsceneController : MonoBehaviour
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
 
         finishedAddingMoney.AddListener(UnitHealSetup);
+    }
 
-        FindObjectOfType<SoundController>().PlayCani();
+    void NewTurnHipsterSetup()
+    {
+        AnnouncementSetupHipster(Announcer.AnnouncementType.TURN_COUNT);
+        DisableUIInfo();
+        FindObjectOfType<SoundController>().PlayHipster();
     }
 
     void NewTurnHipster()
@@ -148,8 +176,27 @@ public class CutsceneController : MonoBehaviour
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
 
         finishedAddingMoney.AddListener(UnitHealSetup);
+    }
 
-        FindObjectOfType<SoundController>().PlayHipster();
+    void OnWinConDomination()
+    {
+        DataController.Winner winner = FindObjectOfType<DataController>().CheckDomination();
+
+        switch (winner)
+        {
+            case DataController.Winner.DRAW:
+                break;
+
+            case DataController.Winner.CANI:
+                ExterminationSetup(UnitArmy.HIPSTER);
+                break;
+
+            case DataController.Winner.HIPSTER:
+                ExterminationSetup(UnitArmy.CANI);
+                break;
+        }
+
+        Debug.Log(winner);
     }
 
     public void FirstTurn(uint amount)
@@ -158,6 +205,7 @@ public class CutsceneController : MonoBehaviour
         addMoney = true;
         moneyTimer = 0.0f;
     }
+
     public void MoneySetup(uint amount)
     {
         moneyToAdd = amount;
@@ -644,6 +692,60 @@ public class CutsceneController : MonoBehaviour
             toHeal.Remove(toHeal[0]);
     }
 
+    public void AnnouncementSetupNewGame(Announcer.AnnouncementType type)
+    {
+        GameObject newAnnouncer = Instantiate(announcer);
+        newAnnouncer.GetComponent<Announcer>().CreateAnnouncement(type);
+
+        switch (type)
+        {
+            case Announcer.AnnouncementType.TURN_COUNT:
+                newAnnouncer.GetComponent<Announcer>().announcementEnded.AddListener(NewGame);
+                break;
+        }
+    }
+
+    public void AnnouncementSetupCani(Announcer.AnnouncementType type)
+    {
+        GameObject newAnnouncer = Instantiate(announcer);
+        newAnnouncer.GetComponent<Announcer>().CreateAnnouncement(type);
+
+        switch (type)
+        {
+            case Announcer.AnnouncementType.TURN_COUNT:
+                newAnnouncer.GetComponent<Announcer>().announcementEnded.AddListener(NewTurnCani);
+                break;
+        }
+    }
+
+    public void AnnouncementSetupHipster(Announcer.AnnouncementType type)
+    {
+        GameObject newAnnouncer = Instantiate(announcer);
+        newAnnouncer.GetComponent<Announcer>().CreateAnnouncement(type);
+
+        switch (type)
+        {
+            case Announcer.AnnouncementType.TURN_COUNT:
+                newAnnouncer.GetComponent<Announcer>().announcementEnded.AddListener(NewTurnHipster);
+                break;
+        }
+    }
+
+    public void AnnouncementSetupDomination(Announcer.AnnouncementType type)
+    {
+        Debug.Log("CutsceneController::AnnouncementSetupDomination");
+
+        GameObject newAnnouncer = Instantiate(announcer);
+        newAnnouncer.GetComponent<Announcer>().CreateAnnouncement(type);
+
+        switch (type)
+        {
+            case Announcer.AnnouncementType.TURN_LIMIT_REACHED:
+                newAnnouncer.GetComponent<Announcer>().announcementEnded.AddListener(OnWinConDomination);
+                break;
+        }
+    }
+
     void LastCutsceneEnded()
     {
         finishedCameraTargeting.RemoveListener(LastCutsceneEnded);
@@ -652,6 +754,8 @@ public class CutsceneController : MonoBehaviour
 
     void EnableGameplay()
     {
+        EnableUIInfo();
+
         gameplayController.SetActive(true);
         gameplayController.GetComponent<GameplayController>().MyOnEnable();
 
@@ -664,10 +768,22 @@ public class CutsceneController : MonoBehaviour
         gameplayController.SetActive(false);
     }
 
+    void EnableUIInfo()
+    {
+        FindObjectOfType<UIController>().EnableMoneyInfo();
+        FindObjectOfType<UIController>().EnableTileInfo();
+    }
+
+    void DisableUIInfo()
+    {
+        FindObjectOfType<UIController>().DisableMoneyInfo();
+        FindObjectOfType<UIController>().DisableTileInfo();
+    }
+
     void SubscribeToEvents()
     {
-        gameplayController.GetComponent<GameplayController>().endTurnCani.AddListener(NewTurnHipster);
-        gameplayController.GetComponent<GameplayController>().endTurnHipster.AddListener(NewTurnCani);
+        gameplayController.GetComponent<GameplayController>().endTurnCani.AddListener(NewTurnHipsterSetup);
+        gameplayController.GetComponent<GameplayController>().endTurnHipster.AddListener(NewTurnCaniSetup);
 
         //meus
         finishedAllCutscenes.AddListener(EnableGameplay);

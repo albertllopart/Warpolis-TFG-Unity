@@ -95,7 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb59f4b9e0863fb4b8d3e3643d532696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberInstance: {fileID: 0}
+  numberInstance: {fileID: 4249412137838877586, guid: ad2aeb2580bef2f4381cefb704eb579c,
+    type: 3}
   dot: {fileID: 0}
   zero: {fileID: -3295778609609746925, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}
   one: {fileID: -9174533908493705734, guid: e2a3fa01063c8854c8b7290184b1cf9c, type: 3}

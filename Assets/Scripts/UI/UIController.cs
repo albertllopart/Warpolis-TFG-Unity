@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour
         transform.Find("Tile_info").gameObject.SetActive(true);
     }
 
-    void DisableTileInfo()
+    public void DisableTileInfo()
     {
         transform.Find("Tile_info").gameObject.SetActive(false);
     }
@@ -45,7 +45,7 @@ public class UIController : MonoBehaviour
         transform.Find("Money_info").gameObject.SetActive(true);
     }
 
-    void DisableMoneyInfo()
+    public void DisableMoneyInfo()
     {
         transform.Find("Money_info").gameObject.SetActive(false);
     }

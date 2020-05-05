@@ -8,8 +8,18 @@ public class DataController : MonoBehaviour
     public int caniMoney = 0;
     public int hipsterMoney = 0;
 
-    public int turnLimit = 15;
+    public int turnLimit = 0;
     public int currentTurn = 0;
+
+    public enum WinCondition
+    {
+        EXTERMINATION, OCUPATION, DOMINATION
+    }
+
+    public enum Winner
+    {
+        CANI, HIPSTER, DRAW
+    }
 
     //events
     public UnityEvent baseCaptured;
@@ -33,6 +43,36 @@ public class DataController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetTurnLimit(int turnLimit)
+    {
+        this.turnLimit = turnLimit;
+    }
+
+    public bool CheckTurnLimitReached()
+    {
+        if (turnLimit == 0)
+            return false;
+
+        if (currentTurn > turnLimit)
+            return true;
+
+        return false;
+    }
+
+    public Winner CheckDomination()
+    {
+        int caniBuildings = FindObjectOfType<BuildingsController>().caniBuildings.Count;
+        int hipsterBuildings = FindObjectOfType<BuildingsController>().hipsterBuildings.Count;
+
+        if (caniBuildings == hipsterBuildings)
+            return Winner.DRAW;
+
+        if (caniBuildings > hipsterBuildings)
+            return Winner.CANI;
+        else
+            return Winner.HIPSTER;
     }
 
     void StoreInitialPosition()
@@ -166,7 +206,7 @@ public class DataController : MonoBehaviour
     {
         caniMoney = 0;
         hipsterMoney = 0;
-        currentTurn = 0;
+        currentTurn = 1;
     }
 
     void SubscribeToEvents()

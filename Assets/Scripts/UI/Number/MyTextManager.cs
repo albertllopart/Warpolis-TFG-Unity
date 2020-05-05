@@ -71,6 +71,7 @@ public class MyTextManager : MonoBehaviour
     public Sprite coma;
     public Sprite dots;
     public Sprite at;
+    public Sprite slash;
 
     bool needToUpdate;
 
@@ -378,6 +379,10 @@ public class MyTextManager : MonoBehaviour
 
             case "@":
                 ret = at;
+                break;
+
+            case "/":
+                ret = slash;
                 break;
         }
 

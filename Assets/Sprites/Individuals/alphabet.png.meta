@@ -191,6 +191,9 @@ TextureImporter:
   - first:
       213: 4648844174987794615
     second: alphabet_57
+  - first:
+      213: -170619278461768712
+    second: alphabet_58
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -1500,6 +1503,27 @@ TextureImporter:
       bones: []
       spriteID: 7b89a428523048040800000000000000
       internalID: 4648844174987794615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alphabet_58
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 1
+        width: 4
+        height: 8
+      alignment: 9
+      pivot: {x: 0, y: 1.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fbe3739ba6d1adf0800000000000000
+      internalID: -170619278461768712
       vertices: []
       indices: 
       edges: []

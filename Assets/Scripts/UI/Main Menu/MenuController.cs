@@ -142,12 +142,30 @@ public class MenuController : MonoBehaviour
 
     void StartGame()
     {
+        UnsubscribeFromEvents();
+
+        SetTurnLimit();
+
         cameraController.GetComponent<CameraController>().FadeToWhiteSetup(1.0f);
         cameraController.GetComponent<CameraController>().fadeToWhiteRest.AddListener(NewGame);
 
-        cameraController.GetComponent<CameraController>().fadeToWhiteEnd.AddListener(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().NewGame);
+        cameraController.GetComponent<CameraController>().fadeToWhiteEnd.AddListener(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().NewGameSetup);
 
         //startGame.Invoke(); //de moment això no crida res
+    }
+
+    void SetTurnLimit()
+    {
+        switch (turnLimit)
+        {
+            case TurnLimit.INFINITE:
+                FindObjectOfType<DataController>().SetTurnLimit(0);
+                break;
+
+            case TurnLimit.FINITE:
+                FindObjectOfType<DataController>().SetTurnLimit(turnLimitAmount);
+                break;
+        }
     }
 
     void NewGame()
