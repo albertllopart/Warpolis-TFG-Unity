@@ -161,6 +161,8 @@ MonoBehaviour:
   myTextDouble: {fileID: 7508220977068573707, guid: b8e2a9f04a6e8524e804814e188a24e1,
     type: 3}
   number: {fileID: 6380652000250856735, guid: fa23ab8633a1fa54497b087d07831284, type: 3}
+  cani: {fileID: 1081595553402291391, guid: e65550ccca412ae4d944591d8a916c68, type: 3}
+  hipster: {fileID: 4128797618271198955, guid: e65550ccca412ae4d944591d8a916c68, type: 3}
   announcementEnded:
     m_PersistentCalls:
       m_Calls: []

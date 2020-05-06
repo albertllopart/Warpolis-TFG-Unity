@@ -8,6 +8,10 @@ public class Announcer : MonoBehaviour
     public GameObject myTextDouble;
     public GameObject number;
 
+    //skins
+    public Sprite cani;
+    public Sprite hipster;
+
     GameObject numbers;
 
     //movement
@@ -56,6 +60,7 @@ public class Announcer : MonoBehaviour
         {
             case AnnouncementType.TURN_COUNT:
                 SetTurnCount();
+                SetSkin();
                 break;
 
             case AnnouncementType.TURN_LIMIT_REACHED:
@@ -85,6 +90,20 @@ public class Announcer : MonoBehaviour
             turnLimit.GetComponent<Number>().SetInfinite();
         else
             turnLimit.GetComponent<Number>().CreateNumber(FindObjectOfType<DataController>().turnLimit);
+    }
+
+    void SetSkin()
+    {
+        switch (FindObjectOfType<CutsceneController>().currentTurn)
+        {
+            case GameplayController.Turn.CANI:
+                GetComponent<SpriteRenderer>().sprite = cani;
+                break;
+
+            case GameplayController.Turn.HIPSTER:
+                GetComponent<SpriteRenderer>().sprite = hipster;
+                break;
+        }
     }
 
     void SetTurnLimitReached()

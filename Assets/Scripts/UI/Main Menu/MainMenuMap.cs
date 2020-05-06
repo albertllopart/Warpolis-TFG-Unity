@@ -161,7 +161,8 @@ public class MainMenuMap : MonoBehaviour
 
     public void SwitchToNextScene()
     {
-        FindObjectOfType<DataTransferer>().TransferMap(mapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()]);
+        FindObjectOfType<DataTransferer>().TransferMap(mapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()], minimapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()]);
+        minimapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()].transform.SetParent(FindObjectOfType<DataTransferer>().transform);
 
         FindObjectOfType<SoundController>().StopTitle();
         FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(SwitchToNextScene);

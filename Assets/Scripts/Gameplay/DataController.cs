@@ -21,6 +21,10 @@ public class DataController : MonoBehaviour
         CANI, HIPSTER, DRAW
     }
 
+    //to transfer
+    Winner winner;
+    WinCondition winCondition;
+
     //events
     public UnityEvent baseCaptured;
 
@@ -66,13 +70,24 @@ public class DataController : MonoBehaviour
         int caniBuildings = FindObjectOfType<BuildingsController>().caniBuildings.Count;
         int hipsterBuildings = FindObjectOfType<BuildingsController>().hipsterBuildings.Count;
 
+        winCondition = WinCondition.DOMINATION;
+
         if (caniBuildings == hipsterBuildings)
+        {
+            winner = Winner.DRAW;
             return Winner.DRAW;
+        }
 
         if (caniBuildings > hipsterBuildings)
+        {
+            winner = Winner.CANI;
             return Winner.CANI;
+        }
         else
+        {
+            winner = Winner.DRAW;
             return Winner.HIPSTER;
+        }
     }
 
     void StoreInitialPosition()
@@ -120,7 +135,10 @@ public class DataController : MonoBehaviour
                 
                 if (CheckLastHipster())
                 {
-                    Debug.Log("DataController::CheckWinConOnUnitDied - Cani win by Elimination");
+                    Debug.Log("DataController::CheckWinConOnUnitDied - Cani win by Extermination");
+                    winner = Winner.CANI;
+                    winCondition = WinCondition.EXTERMINATION;
+
                     GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit.GetComponent<Unit>().OnWinCon();
                     GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
 
@@ -128,7 +146,10 @@ public class DataController : MonoBehaviour
                 }
                 else if (CheckLastCani())
                 {
-                    Debug.Log("DataController::CheckWinConOnUnitDied - Hipster win by Elimination");
+                    Debug.Log("DataController::CheckWinConOnUnitDied - Hipster win by Extermination");
+                    winner = Winner.HIPSTER;
+                    winCondition = WinCondition.EXTERMINATION;
+
                     GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
 
                     return true;
@@ -140,7 +161,10 @@ public class DataController : MonoBehaviour
 
                 if (CheckLastCani())
                 {
-                    Debug.Log("DataController::CheckWinConOnUnitDied - Hipster win by Elimination");
+                    Debug.Log("DataController::CheckWinConOnUnitDied - Hipster win by Extermination");
+                    winner = Winner.HIPSTER;
+                    winCondition = WinCondition.EXTERMINATION;
+
                     GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit.GetComponent<Unit>().OnWinCon();
                     GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
 
@@ -148,7 +172,10 @@ public class DataController : MonoBehaviour
                 }
                 else if (CheckLastHipster())
                 {
-                    Debug.Log("DataController::CheckWinConOnUnitDied - Cani win by Elimination");
+                    Debug.Log("DataController::CheckWinConOnUnitDied - Cani win by Extermination");
+                    winner = Winner.CANI;
+                    winCondition = WinCondition.EXTERMINATION;
+
                     GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
 
                     return true;
@@ -188,14 +215,18 @@ public class DataController : MonoBehaviour
         {
             case GameplayController.Turn.CANI:
 
-                Debug.Log("DataController::CheckWinConOnBaseCaptured - Cani win by Invasion");
+                Debug.Log("DataController::CheckWinConOnBaseCaptured - Cani win by Ocupation");
+                winCondition = WinCondition.OCUPATION;
+                winner = Winner.CANI;
 
                 GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().ExterminationSetup(UnitArmy.HIPSTER);
                 break;
 
             case GameplayController.Turn.HIPSTER:
 
-                Debug.Log("DataController::CheckWinConOnBaseCaptured - Hipster win by Invasion");
+                Debug.Log("DataController::CheckWinConOnBaseCaptured - Hipster win by Ocupation");
+                winCondition = WinCondition.OCUPATION;
+                winner = Winner.HIPSTER;
 
                 GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().ExterminationSetup(UnitArmy.CANI);
                 break;
@@ -207,6 +238,11 @@ public class DataController : MonoBehaviour
         caniMoney = 0;
         hipsterMoney = 0;
         currentTurn = 1;
+    }
+
+    public void TransferResults()
+    {
+        FindObjectOfType<DataTransferer>().TransferResults(winner, winCondition, currentTurn);
     }
 
     void SubscribeToEvents()

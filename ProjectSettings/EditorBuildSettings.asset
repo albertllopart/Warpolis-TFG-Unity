@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/quit.unity
     guid: 279ed1d0541831e4dbcaacbb21d7fc38
+  - enabled: 1
+    path: Assets/results.unity
+    guid: ee7e5ff575a10e34f9540818149a2db1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e3496a7febf35f349ba5e1b65282eb02,
       type: 2}

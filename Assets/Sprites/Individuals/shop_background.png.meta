@@ -50,6 +50,12 @@ TextureImporter:
   - first:
       213: 5750830623899201813
     second: shop_background_14
+  - first:
+      213: 1081595553402291391
+    second: shop_background_15
+  - first:
+      213: 4128797618271198955
+    second: shop_background_16
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -448,7 +454,7 @@ TextureImporter:
         width: 136
         height: 61
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -456,6 +462,48 @@ TextureImporter:
       bones: []
       spriteID: 51133f4bbfd0fcf40800000000000000
       internalID: 5750830623899201813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_15
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 62
+        width: 136
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb48f2fdc69920f00800000000000000
+      internalID: 1081595553402291391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_16
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 1
+        width: 136
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee988afe8f6c4930800000000000000
+      internalID: 4128797618271198955
       vertices: []
       indices: 
       edges: []

@@ -10,7 +10,7 @@ public class CutsceneController : MonoBehaviour
     GameObject dataController;
     GameObject cameraController;
     GameObject mapController;
-    GameplayController.Turn currentTurn = GameplayController.Turn.CANI;
+    public GameplayController.Turn currentTurn = GameplayController.Turn.CANI;
 
     float timer = 0.0f;
 
@@ -114,6 +114,8 @@ public class CutsceneController : MonoBehaviour
 
     public void NewGameSetup()
     {
+        currentTurn = GameplayController.Turn.CANI;
+
         AnnouncementSetupNewGame(Announcer.AnnouncementType.TURN_COUNT);
         DisableUIInfo();
         FindObjectOfType<SoundController>().PlayCani();
@@ -121,8 +123,6 @@ public class CutsceneController : MonoBehaviour
 
     void NewGame()
     {
-        currentTurn = GameplayController.Turn.CANI;
-
         GameObject cameraController = GameObject.Find("Camera");
 
         cameraController.GetComponent<CameraController>().fadeToWhiteEnd.RemoveListener(NewGame);
@@ -136,10 +136,14 @@ public class CutsceneController : MonoBehaviour
 
     void NewTurnCaniSetup()
     {
+        currentTurn = GameplayController.Turn.CANI;
+        FindObjectOfType<DataController>().currentTurn++;
+
         DisableUIInfo();
 
         if (dataController.GetComponent<DataController>().CheckTurnLimitReached())
         {
+            FindObjectOfType<DataController>().currentTurn--; //per indicar el nombre de torns correctament a la pantalla de resultats
             AnnouncementSetupDomination(Announcer.AnnouncementType.TURN_LIMIT_REACHED);
         }
         else
@@ -151,8 +155,6 @@ public class CutsceneController : MonoBehaviour
 
     void NewTurnCani()
     {
-        currentTurn = GameplayController.Turn.CANI;
-
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
@@ -162,6 +164,8 @@ public class CutsceneController : MonoBehaviour
 
     void NewTurnHipsterSetup()
     {
+        currentTurn = GameplayController.Turn.HIPSTER;
+
         AnnouncementSetupHipster(Announcer.AnnouncementType.TURN_COUNT);
         DisableUIInfo();
         FindObjectOfType<SoundController>().PlayHipster();
@@ -169,8 +173,6 @@ public class CutsceneController : MonoBehaviour
 
     void NewTurnHipster()
     {
-        currentTurn = GameplayController.Turn.HIPSTER;
-
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().hipsterMoney);
         MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
@@ -185,6 +187,7 @@ public class CutsceneController : MonoBehaviour
         switch (winner)
         {
             case DataController.Winner.DRAW:
+                GameObject.Find("Menu Controller").GetComponent<MenuController>().EndGame();
                 break;
 
             case DataController.Winner.CANI:
@@ -195,8 +198,6 @@ public class CutsceneController : MonoBehaviour
                 ExterminationSetup(UnitArmy.CANI);
                 break;
         }
-
-        Debug.Log(winner);
     }
 
     public void FirstTurn(uint amount)

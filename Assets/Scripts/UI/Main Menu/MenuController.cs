@@ -197,11 +197,20 @@ public class MenuController : MonoBehaviour
 
     public void OnGameEnded()
     {
-        EnablePreparation();
+        FindObjectOfType<FadeTo>().FadeToSetup();
+        FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(LoadResults);
+        FindObjectOfType<DataController>().TransferResults();
+
+        //EnablePreparation();
         cameraController.GetComponent<CameraController>().fadeToWhiteRest.RemoveListener(MyOnEnable);
 
         FindObjectOfType<SoundController>().StopCani();
         FindObjectOfType<SoundController>().StopHipster();
+    }
+
+    void LoadResults()
+    {
+        Loader.Load(Loader.Scene.results);
     }
 
     public void CompleteGameLoop()

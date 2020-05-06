@@ -137,7 +137,6 @@ public class GameplayController : MonoBehaviour
             case Turn.HIPSTER:
                 //posar en idle els hipsters
                 turn = Turn.CANI;
-                FindObjectOfType<DataController>().currentTurn++;
                 endTurnHipster.Invoke();         
                 break;
         }

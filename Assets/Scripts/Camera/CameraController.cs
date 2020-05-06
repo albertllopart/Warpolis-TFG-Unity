@@ -159,7 +159,7 @@ public class CameraController : MonoBehaviour
 
         fadeToWhiteRest.AddListener(GameObject.Find("Map Controller").GetComponent<MapController>().UnloadMap);
         fadeToWhiteRest.AddListener(GameObject.Find("Menu Controller").GetComponent<MenuController>().OnGameEnded);
-        fadeToWhiteEnd.AddListener(GameObject.Find("Menu Controller").GetComponent<MenuController>().CompleteGameLoop);
+        //fadeToWhiteEnd.AddListener(GameObject.Find("Menu Controller").GetComponent<MenuController>().CompleteGameLoop);
     }
 
     public void FadeToWhiteSetup(float restingTime)
