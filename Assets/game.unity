@@ -3156,6 +3156,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &618502145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 618502146}
+  m_Layer: 0
+  m_Name: UnitInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &618502146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618502145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106959094}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &645191455 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4549133765042836332, guid: aa29c28fc341ea342bcf4ae9f7315f62,
@@ -17591,6 +17621,7 @@ Transform:
   - {fileID: 1155891368}
   - {fileID: 1244408509}
   - {fileID: 645191456}
+  - {fileID: 618502146}
   m_Father: {fileID: 349484953}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17645,6 +17676,8 @@ MonoBehaviour:
   hipsterRanged: {fileID: 1254852491631605761, guid: c560a4b597dd880488ae991275bd4baf,
     type: 3}
   selectedButton: {fileID: 0}
+  unitInfo: {fileID: 4638436645133330092, guid: b1a188b50446b8c4fa1295c1ccd83739,
+    type: 3}
   caniUnitCreated:
     m_PersistentCalls:
       m_Calls: []

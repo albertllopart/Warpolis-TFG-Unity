@@ -56,6 +56,9 @@ TextureImporter:
   - first:
       213: 4128797618271198955
     second: shop_background_16
+  - first:
+      213: -750656740512807589
+    second: shop_background_17
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -496,7 +499,7 @@ TextureImporter:
         width: 136
         height: 61
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -504,6 +507,27 @@ TextureImporter:
       bones: []
       spriteID: bee988afe8f6c4930800000000000000
       internalID: 4128797618271198955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shop_background_17
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 8
+        width: 144
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b554b71fba12595f0800000000000000
+      internalID: -750656740512807589
       vertices: []
       indices: 
       edges: []

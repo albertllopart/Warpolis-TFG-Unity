@@ -72,6 +72,7 @@ public class MyTextManager : MonoBehaviour
     public Sprite dots;
     public Sprite at;
     public Sprite slash;
+    public Sprite score;
 
     bool needToUpdate;
 
@@ -384,6 +385,10 @@ public class MyTextManager : MonoBehaviour
 
             case "/":
                 ret = slash;
+                break;
+
+            case "-":
+                ret = score;
                 break;
         }
 

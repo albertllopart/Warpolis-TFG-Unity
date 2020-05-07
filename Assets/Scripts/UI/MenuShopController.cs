@@ -49,6 +49,10 @@ public class MenuShopController : MonoBehaviour
     [Header("Selected")]
     public GameObject selectedButton;
 
+    [Header("UnitInfo")]
+    public GameObject unitInfo;
+    GameObject currentUnitInfo;
+
     //events
     public UnityEvent caniUnitCreated;
     public UnityEvent hipsterUnitCreated;
@@ -97,6 +101,8 @@ public class MenuShopController : MonoBehaviour
     public void MyOnDisable()
     {
         UnsubscribeFromEvents();
+
+        Destroy(currentUnitInfo);
 
         //cridar tots els MyOnDisable dels fills que ho necessitin
         transform.Find("Cursor_shop").GetComponent<CursorShop>().MyOnDisable();
@@ -164,6 +170,8 @@ public class MenuShopController : MonoBehaviour
             selectedButton = hipsterButtons[index];
 
         HighlightSelected();
+
+        InstantiateUnitInfo();
     }
 
     void HighlightSelected()
@@ -312,6 +320,72 @@ public class MenuShopController : MonoBehaviour
                     button.GetComponent<MyButton>().OnDisabled();
             }
         }
+    }
+
+    void InstantiateUnitInfo()
+    {
+        if (currentUnitInfo != null)
+            Destroy(currentUnitInfo);
+
+        currentUnitInfo = Instantiate(unitInfo);
+        currentUnitInfo.transform.SetParent(transform.Find("UnitInfo").transform);
+        currentUnitInfo.transform.position = Camera.main.transform.position + new Vector3(5, 0, 10);
+
+        currentUnitInfo.GetComponent<UnitInfo>().BuildInfo(GetUnitTypeFromSelectedButton());
+    }
+
+    UnitType GetUnitTypeFromSelectedButton()
+    {
+        if (selectedButton.name == "Button_cani_infantry")
+        {
+            return UnitType.INFANTRY;
+        }
+        else if (selectedButton.name == "Button_hipster_infantry")
+        {
+            return UnitType.INFANTRY;
+        }
+        else if (selectedButton.name == "Button_cani_transport")
+        {
+            return UnitType.TRANSPORT;
+        }
+        else if (selectedButton.name == "Button_hipster_transport")
+        {
+            return UnitType.TRANSPORT;
+        }
+        else if (selectedButton.name == "Button_cani_tank")
+        {
+            return UnitType.TANK;
+        }
+        else if (selectedButton.name == "Button_hipster_tank")
+        {
+            return UnitType.TANK;
+        }
+        else if (selectedButton.name == "Button_cani_aerial")
+        {
+            return UnitType.AERIAL;
+        }
+        else if (selectedButton.name == "Button_hipster_aerial")
+        {
+            return UnitType.AERIAL;
+        }
+        else if (selectedButton.name == "Button_cani_gunner")
+        {
+            return UnitType.GUNNER;
+        }
+        else if (selectedButton.name == "Button_hipster_gunner")
+        {
+            return UnitType.GUNNER;
+        }
+        else if (selectedButton.name == "Button_cani_ranged")
+        {
+            return UnitType.RANGED;
+        }
+        else if (selectedButton.name == "Button_hipster_ranged")
+        {
+            return UnitType.RANGED;
+        }
+
+        return UnitType.INFANTRY;
     }
 
     void SubscribeToEvents()
