@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public GameObject selectedUnit;
+    public GameObject selectedUnitAttackRange;
 
     private float keyDownCounterW; //per calcular el temps que el botó porta premut
     private float keyDownCounterA;
@@ -379,15 +380,15 @@ public class PlayerController : MonoBehaviour
         {
             if (result.collider != null)
             {
-                if (result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING && result.collider.gameObject.GetComponent<Unit>().basePower > 0)
+                if (result.collider.gameObject.GetComponent<Unit>().basePower > 0)
                 {
                     Debug.Log("PlayerController::Interact - Interacting for Attack Range with " + result.collider.gameObject.name);
 
                     //seleccionar unitat
-                    selectedUnit = result.collider.gameObject;
+                    selectedUnitAttackRange = result.collider.gameObject;
 
                     //cridar mètode OnSelected
-                    selectedUnit.GetComponent<Unit>().OnSelectedForAttackRange();
+                    selectedUnitAttackRange.GetComponent<Unit>().OnSelectedForAttackRange();
 
                     return true;
                 }
@@ -435,6 +436,12 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Map Controller").GetComponent<MapController>().UndrawArrow();
         selectedUnit.GetComponent<Unit>().OnDeselected();
         selectedUnit = null;
+    }
+
+    void DeselectUnitAttackRange()
+    {
+        selectedUnitAttackRange.GetComponent<Unit>().OnDeselectedAttackRange();
+        selectedUnitAttackRange = null;
     }
 
     void MoveUnit()
@@ -549,6 +556,7 @@ public class PlayerController : MonoBehaviour
 
         //gameplay
         GetComponentInParent<GameplayController>().deselectUnit.AddListener(DeselectUnit);
+        GetComponentInParent<GameplayController>().deselectUnitAttackRange.AddListener(DeselectUnitAttackRange);
         GetComponentInParent<GameplayController>().moveUnit.AddListener(MoveUnit);
 
         //cutscene
@@ -572,6 +580,7 @@ public class PlayerController : MonoBehaviour
 
         //gameplay
         GetComponentInParent<GameplayController>().deselectUnit.RemoveListener(DeselectUnit);
+        GetComponentInParent<GameplayController>().deselectUnitAttackRange.RemoveListener(DeselectUnitAttackRange);
         GetComponentInParent<GameplayController>().moveUnit.RemoveListener(MoveUnit);
 
         //cutscene

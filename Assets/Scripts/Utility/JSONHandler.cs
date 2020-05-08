@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class JSONHandler : MonoBehaviour
 {
-    string unitDatafilename = "unitsData.json";
+    string unitDatafilename = "unitData.json";
     string path;
 
     public UnitDataCollection unitDataCollection = new UnitDataCollection();
@@ -54,7 +54,7 @@ public class JSONHandler : MonoBehaviour
             }
             else //build
             {
-                TextAsset textAsset = Resources.Load("unitsData") as TextAsset; //-> Assets/Resources/fitxer(sense extensió)
+                TextAsset textAsset = Resources.Load("unitData") as TextAsset; //-> Assets/Resources/fitxer(sense extensió)
                 if (textAsset != null)
                 {
                     string contents = textAsset.text;

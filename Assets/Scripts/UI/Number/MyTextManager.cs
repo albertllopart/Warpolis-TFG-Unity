@@ -11,6 +11,7 @@ public class MyTextManager : MonoBehaviour
     [Header("Parameters")]
     public VerticalAnchor verticalAnchor;
     public float spacing;
+    public int length;
     
     [Header("Characters")]
     public Sprite A;
@@ -83,9 +84,15 @@ public class MyTextManager : MonoBehaviour
 
         foreach (Transform text in transform)
         {
-            CreateText(text.gameObject);
-
-            text.transform.position -= new Vector3(0, spacing * count++, 0);
+            if (length == 0)
+            {
+                CreateText(text.gameObject);
+                text.transform.position -= new Vector3(0, spacing * count++, 0);
+            }
+            else
+            {
+                count += CreateRestrictedText(text.gameObject);
+            }
         }
 
         if (verticalAnchor == VerticalAnchor.CENTER)
@@ -106,9 +113,21 @@ public class MyTextManager : MonoBehaviour
             UpdatePositionForLeftText();
     }
 
+    string GetText(GameObject myText)
+    {
+        if (myText.GetComponent<MyText>().text.Contains("#"))
+        {
+            return "Placeholder for json Resource";
+        }
+        else
+        {
+            return myText.GetComponent<MyText>().text;
+        }
+    }
+
     void CreateText(GameObject myText)
     {
-        string text = myText.GetComponent<MyText>().text;
+        string text = GetText(myText);
         string[] characters = new string[text.Length];
 
         for (int i = 0; i < text.Length; i++)
@@ -124,6 +143,7 @@ public class MyTextManager : MonoBehaviour
 
             GameObject nextChar = Instantiate(sprite, nextPos, Quaternion.identity);
             nextChar.transform.parent = myText.transform;
+            nextChar.name = character;
             nextChar.GetComponent<SpriteRenderer>().sprite = GetSprite(character);
             nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
             nextChar.GetComponent<SpriteRenderer>().sortingOrder = myText.GetComponent<MyText>().layer;
@@ -143,6 +163,77 @@ public class MyTextManager : MonoBehaviour
                 myText.transform.position -= positionDifference;
                 break;
         }
+    }
+
+    int CreateRestrictedText(GameObject myText) //retorna el nombre de línies que ha ocupat el text
+    {
+        int ret = 0;
+
+        string text = GetText(myText);
+        string[] characters = new string[text.Length];
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            characters[i] = text[i].ToString();
+        }
+
+        float accumulatedOffset = 0f;
+        List<GameObject> currentWord = new List<GameObject>(); //saber quina paraula estem escrivint per fer el salt de línia incloent-la
+
+        foreach (string character in characters)
+        {
+            if (character != " ")
+            {
+                if (accumulatedOffset >= length)
+                {
+                    accumulatedOffset = 0.0f;
+                    ret++;
+
+                    foreach (GameObject letter in currentWord)
+                    {
+                        letter.transform.position = myText.transform.position + new Vector3(accumulatedOffset, spacing * ret, 0);
+
+                        if (letter.GetComponent<SpriteRenderer>().sprite != null)
+                            accumulatedOffset += letter.GetComponent<SpriteRenderer>().sprite.rect.width / 16f;
+
+                        accumulatedOffset += GetOffset(letter.name);
+                    }
+                }
+            }
+            else if (character == " ")
+            {
+                currentWord = new List<GameObject>();
+            }
+
+            Vector3 nextPos = myText.transform.position + new Vector3(accumulatedOffset, spacing * ret, 0);
+
+            GameObject nextChar = Instantiate(sprite, nextPos, Quaternion.identity);
+            nextChar.transform.parent = myText.transform;
+            nextChar.name = character;
+            nextChar.GetComponent<SpriteRenderer>().sprite = GetSprite(character);
+            nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
+            nextChar.GetComponent<SpriteRenderer>().sortingOrder = myText.GetComponent<MyText>().layer;
+
+            if (character != " ")
+                currentWord.Add(nextChar);
+
+            //preparar offset pel seguent character
+            if (nextChar.GetComponent<SpriteRenderer>().sprite != null)
+                accumulatedOffset += nextChar.GetComponent<SpriteRenderer>().sprite.rect.width / 16f;
+
+            accumulatedOffset += GetOffset(character);
+        }
+
+        switch (myText.GetComponent<MyText>().anchor)
+        {
+            case MyText.Anchor.CENTERED:
+                Debug.Log("MyTextManager::CreateText - Centering Text from " + myText.transform.position + " to " + (GetTextCenter(myText) - myText.transform.position));
+                Vector3 positionDifference = GetTextCenter(myText) - myText.transform.position;
+                myText.transform.position -= positionDifference;
+                break;
+        }
+
+        return ret;
     }
 
     Sprite GetSprite(string character)

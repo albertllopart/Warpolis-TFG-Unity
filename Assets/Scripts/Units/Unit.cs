@@ -25,6 +25,7 @@ public enum UnitArmy
 public class Unit : MonoBehaviour
 {
     public UnitState state;
+    public UnitState lastState;
     public UnitDirection direction;
     public UnitArmy army;
 
@@ -320,6 +321,7 @@ public class Unit : MonoBehaviour
     {
         Highlight(true);
 
+        lastState = state;
         state = UnitState.ATTACKRANGE;
 
         EnableUIHitPoints(false);           
@@ -366,6 +368,25 @@ public class Unit : MonoBehaviour
         Highlight(false);
 
         state = UnitState.IDLE;
+
+        EnableUIHitPoints(true);
+
+        if (unitType == (uint)UnitType.INFANTRY && GetComponent<UnitInfantry>().currentCapture != null)
+            GetComponent<UnitInfantry>().EnableUICaptureSign(true);
+
+        UpdateAnimator();
+
+        //mapa
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawAttackRange(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawRangedAttackRange(false);
+    }
+
+    public void OnDeselectedAttackRange()
+    {
+        Highlight(false);
+
+        state = lastState;
 
         EnableUIHitPoints(true);
 

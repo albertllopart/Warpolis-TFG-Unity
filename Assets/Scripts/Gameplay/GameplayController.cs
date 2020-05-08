@@ -43,6 +43,7 @@ public class GameplayController : MonoBehaviour
 
     //unit
     public UnityEvent deselectUnit;
+    public UnityEvent deselectUnitAttackRange;
     public UnityEvent moveUnit;
     public UnityEvent attackUnit;
     public UnityEvent dropUnit;
@@ -73,6 +74,7 @@ public class GameplayController : MonoBehaviour
 
         //unit
         deselectUnit = new UnityEvent();
+        deselectUnitAttackRange = new UnityEvent();
         moveUnit = new UnityEvent();
         attackUnit = new UnityEvent();
         dropUnit = new UnityEvent();
@@ -210,6 +212,7 @@ public class GameplayController : MonoBehaviour
             case PlayerState.CONFIRM:
 
                 UnsubscribeFromEvents();
+                Destroy(GameObject.Find("ConfirmScreen(Clone)"));
                 FindObjectOfType<FadeTo>().FadeToSetup();
                 FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(BackToTitle);
 
@@ -237,7 +240,7 @@ public class GameplayController : MonoBehaviour
 
                 FindObjectOfType<SoundController>().PlayBack();
 
-                deselectUnit.Invoke();
+                deselectUnitAttackRange.Invoke();
                 EnableMoneyInfo();
 
                 //propi
