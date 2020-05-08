@@ -16,7 +16,8 @@ public class JSONHandler : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        path = Application.dataPath + "/json/";
+        path = Application.persistentDataPath + "/json/";
+        
         Debug.Log("JSONHandler::Start - dataPath = " + path);
 
         ReadUnitData();
@@ -51,10 +52,19 @@ public class JSONHandler : MonoBehaviour
                     Debug.Log(unitData.name);
                 }
             }
-            else
+            else //build
             {
-                Debug.Log("File does not exist");
-                unitDataCollection = new UnitDataCollection();
+                TextAsset textAsset = Resources.Load("unitsData") as TextAsset; //-> Assets/Resources/fitxer(sense extensió)
+                if (textAsset != null)
+                {
+                    string contents = textAsset.text;
+                    JSONWrapper wrapper = JsonUtility.FromJson<JSONWrapper>(contents);
+                    unitDataCollection = wrapper.unitDataCollection;
+                }
+                else
+                {
+                    Application.Quit();
+                }
             }
         }
         catch (Exception ex)
@@ -65,3 +75,7 @@ public class JSONHandler : MonoBehaviour
         Debug.Log("JSONHandler::ReadUnitData - UnitData loaded: " + unitDataCollection.unitDataList.Count);
     }
 }
+
+//Apunts importants sobre llegir json o qualsevol format (xml?):
+//El path de l'aplicació només serveix per quan s'està fent servir l'editor. Lògicament quan hi ha una build la seva estructura no té res a veure amb la del projecte
+//de manera que s'ha de fer servir Resources.Load(). Tots els arxius que estiguin guardats a Assets/Resources podran ser carregats d'aquesta manera
