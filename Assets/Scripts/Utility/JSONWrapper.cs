@@ -8,3 +8,5 @@ public class JSONWrapper
 {
     public UnitDataCollection unitDataCollection;
 }
+
+//això és simplement per incloure el nom de la classe creada al json

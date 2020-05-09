@@ -13,6 +13,8 @@ public class UnitDataCollection
 public class UnitData
 {
     public string name;
+    public string description;
+
     public int movementRange;
     public int attackRangeFrom;
     public int attackRangeTo;

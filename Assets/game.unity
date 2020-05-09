@@ -2291,6 +2291,12 @@ MonoBehaviour:
   sendO:
     m_PersistentCalls:
       m_Calls: []
+  toggleUnitDescription:
+    m_PersistentCalls:
+      m_Calls: []
+  toggleUnitInfo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &520131182
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4066,6 +4072,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1586869354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &998352568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 998352569}
+  m_Layer: 0
+  m_Name: UnitDescription
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &998352569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998352568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106959094}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1006834407
 GameObject:
   m_ObjectHideFlags: 0
@@ -10485,6 +10521,9 @@ MonoBehaviour:
   deselectUnit:
     m_PersistentCalls:
       m_Calls: []
+  deselectUnitAttackRange:
+    m_PersistentCalls:
+      m_Calls: []
   moveUnit:
     m_PersistentCalls:
       m_Calls: []
@@ -16108,6 +16147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedUnit: {fileID: 0}
+  selectedUnitAttackRange: {fileID: 0}
   keyDownSpeed: 0.25
   nextMoveSpeed: 0.1
   playerMoved:
@@ -16492,6 +16532,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5970689950577273215}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1713921779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713921780}
+  m_Layer: 0
+  m_Name: Toggle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1713921780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713921779}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106959094}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1740508477
 GameObject:
   m_ObjectHideFlags: 0
@@ -17622,6 +17692,8 @@ Transform:
   - {fileID: 1244408509}
   - {fileID: 645191456}
   - {fileID: 618502146}
+  - {fileID: 998352569}
+  - {fileID: 1713921780}
   m_Father: {fileID: 349484953}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17677,6 +17749,12 @@ MonoBehaviour:
     type: 3}
   selectedButton: {fileID: 0}
   unitInfo: {fileID: 4638436645133330092, guid: b1a188b50446b8c4fa1295c1ccd83739,
+    type: 3}
+  unitDescription: {fileID: 3904259751198075421, guid: 2a95d450fbb5c4848bbef101b99c8b68,
+    type: 3}
+  toggleRight: {fileID: 6630383925439331322, guid: ae59c2f3a7f6495458e885a47a9cbccc,
+    type: 3}
+  toggleLeft: {fileID: 2676070731472105414, guid: e04326237bb17c342897a8cf6bc5f4ba,
     type: 3}
   caniUnitCreated:
     m_PersistentCalls:

@@ -80,24 +80,28 @@ public class MyTextManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int count = 0;
+        int textCount = 0;
+        int extraLines = 0;
 
         foreach (Transform text in transform)
         {
             if (length == 0)
             {
                 CreateText(text.gameObject);
-                text.transform.position -= new Vector3(0, spacing * count++, 0);
+                text.transform.position -= new Vector3(0, spacing * textCount++, 0);
             }
             else
             {
-                count += CreateRestrictedText(text.gameObject);
+                extraLines += CreateRestrictedText(text.gameObject);
+                text.transform.position -= new Vector3(0, spacing * textCount++, 0);
+
+                textCount += extraLines; extraLines = 0; //espai extra per les linies fetes amb salt de linia corresponents a un sol objecte myText
             }
         }
 
         if (verticalAnchor == VerticalAnchor.CENTER)
         {
-            float textsCenter = GetTextVerticalCenter(count);
+            float textsCenter = GetTextVerticalCenter(textCount);
             float offset = Mathf.Abs(textsCenter - transform.position.y);
 
             foreach (Transform text in transform)
@@ -117,7 +121,7 @@ public class MyTextManager : MonoBehaviour
     {
         if (myText.GetComponent<MyText>().text.Contains("#"))
         {
-            return "Placeholder for json Resource";
+            return FindObjectOfType<JSONHandler>().RetrieveText(myText.GetComponent<MyText>().text);
         }
         else
         {
@@ -170,6 +174,8 @@ public class MyTextManager : MonoBehaviour
         int ret = 0;
 
         string text = GetText(myText);
+        Debug.Log("MyTextManager::CreateRestrictedText - Successfully retrieved text = " + text);
+
         string[] characters = new string[text.Length];
 
         for (int i = 0; i < text.Length; i++)
@@ -191,7 +197,7 @@ public class MyTextManager : MonoBehaviour
 
                     foreach (GameObject letter in currentWord)
                     {
-                        letter.transform.position = myText.transform.position + new Vector3(accumulatedOffset, spacing * ret, 0);
+                        letter.transform.position = myText.transform.position + new Vector3(accumulatedOffset, -(spacing * ret), 0);
 
                         if (letter.GetComponent<SpriteRenderer>().sprite != null)
                             accumulatedOffset += letter.GetComponent<SpriteRenderer>().sprite.rect.width / 16f;
@@ -205,7 +211,7 @@ public class MyTextManager : MonoBehaviour
                 currentWord = new List<GameObject>();
             }
 
-            Vector3 nextPos = myText.transform.position + new Vector3(accumulatedOffset, spacing * ret, 0);
+            Vector3 nextPos = myText.transform.position + new Vector3(accumulatedOffset, (-spacing * ret), 0);
 
             GameObject nextChar = Instantiate(sprite, nextPos, Quaternion.identity);
             nextChar.transform.parent = myText.transform;
@@ -222,15 +228,6 @@ public class MyTextManager : MonoBehaviour
                 accumulatedOffset += nextChar.GetComponent<SpriteRenderer>().sprite.rect.width / 16f;
 
             accumulatedOffset += GetOffset(character);
-        }
-
-        switch (myText.GetComponent<MyText>().anchor)
-        {
-            case MyText.Anchor.CENTERED:
-                Debug.Log("MyTextManager::CreateText - Centering Text from " + myText.transform.position + " to " + (GetTextCenter(myText) - myText.transform.position));
-                Vector3 positionDifference = GetTextCenter(myText) - myText.transform.position;
-                myText.transform.position -= positionDifference;
-                break;
         }
 
         return ret;

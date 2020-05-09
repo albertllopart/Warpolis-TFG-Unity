@@ -3,6 +3,7 @@
     "unitDataList": [
       {
         "name": "infantry",
+        "description": "Infantry units have the lowest deployment cost. They can capture buildings but have low firepower and mobility.",
         "movementRange": 3,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -21,6 +22,7 @@
       },
       {
         "name": "transport",
+        "description": "Transport units can transport infantry units to help them travel faster. They are also a good road blocker for enemy units.",
         "movementRange": 6,
         "attackRangeFrom": 0,
         "attackRangeTo": 0,
@@ -39,6 +41,7 @@
       },
       {
         "name": "tank",
+        "description": "Tank units have great offense and the best defense of all units. Offensively they struggle against aerial units.",
         "movementRange": 6,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -57,6 +60,7 @@
       },
       {
         "name": "aerial",
+        "description": "Aerial units have the highest mobility of all units and no restrictions due to terrain. They have great offense but fear gunner units the most.",
         "movementRange": 8,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -75,6 +79,7 @@
       },
       {
         "name": "gunner",
+        "description": "Gunner units are especially effective against infantry and aerial units. They struggle against tanks.",
         "movementRange": 6,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -93,6 +98,7 @@
       },
       {
         "name": "ranged",
+        "description": "Ranged units have the best overall offense of all units. They must attack from the same position they started the turn.",
         "movementRange": 5,
         "attackRangeFrom": 2,
         "attackRangeTo": 4,

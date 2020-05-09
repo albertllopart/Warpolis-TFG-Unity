@@ -12,11 +12,15 @@ public class CursorShop : MonoBehaviour
     uint currentFrame = 0;
 
     public UnityEvent sendO;
+    public UnityEvent toggleUnitDescription;
+    public UnityEvent toggleUnitInfo;
 
     // Start is called before the first frame update
     void Start()
     {
         sendO = new UnityEvent();
+        toggleUnitDescription = new UnityEvent();
+        toggleUnitInfo = new UnityEvent();
     }
 
     // Update is called once per frame
@@ -182,17 +186,34 @@ public class CursorShop : MonoBehaviour
     {
         sendO.Invoke();
     }
+
+    void ToggleUnitDescription()
+    {
+        toggleUnitDescription.Invoke();
+    }
+
+    void ToggleUnitInfo()
+    {
+        toggleUnitInfo.Invoke();
+    }
+
     void SubscribeToEvents()
     {
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.AddListener(MoveUp); // W
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.AddListener(MoveDown); // S
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(SendO); // O
+        FindObjectOfType<Controls>().keyboard_w_down.AddListener(MoveUp); // W
+        FindObjectOfType<Controls>().keyboard_s_down.AddListener(MoveDown); // S
+        FindObjectOfType<Controls>().keyboard_o_down.AddListener(SendO); // O
+
+        FindObjectOfType<Controls>().keyboard_a_down.AddListener(ToggleUnitInfo);
+        FindObjectOfType<Controls>().keyboard_d_down.AddListener(ToggleUnitDescription);
     }
 
     void UnsubscribeFromEvents()
     {
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.RemoveListener(MoveUp); // W
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_s_down.RemoveListener(MoveDown); // S
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(SendO); // O
+        FindObjectOfType<Controls>().keyboard_w_down.RemoveListener(MoveUp); // W
+        FindObjectOfType<Controls>().keyboard_s_down.RemoveListener(MoveDown); // S
+        FindObjectOfType<Controls>().keyboard_o_down.RemoveListener(SendO); // O
+
+        FindObjectOfType<Controls>().keyboard_a_down.RemoveListener(ToggleUnitInfo);
+        FindObjectOfType<Controls>().keyboard_d_down.RemoveListener(ToggleUnitDescription);
     }
 }

@@ -52,6 +52,11 @@ public class MenuShopController : MonoBehaviour
     [Header("UnitInfo")]
     public GameObject unitInfo;
     GameObject currentUnitInfo;
+    public GameObject unitDescription;
+    GameObject currentUnitDescription;
+    public GameObject toggleRight;
+    public GameObject toggleLeft;
+    GameObject toggle;
 
     //events
     public UnityEvent caniUnitCreated;
@@ -102,7 +107,7 @@ public class MenuShopController : MonoBehaviour
     {
         UnsubscribeFromEvents();
 
-        Destroy(currentUnitInfo);
+        DestroyUnitInfo();
 
         //cridar tots els MyOnDisable dels fills que ho necessitin
         transform.Find("Cursor_shop").GetComponent<CursorShop>().MyOnDisable();
@@ -171,7 +176,7 @@ public class MenuShopController : MonoBehaviour
 
         HighlightSelected();
 
-        InstantiateUnitInfo();
+        UpdateUnitInfo();
     }
 
     void HighlightSelected()
@@ -322,6 +327,30 @@ public class MenuShopController : MonoBehaviour
         }
     }
 
+    void UpdateUnitInfo()
+    {
+        if (currentUnitInfo != null)
+        {
+            InstantiateUnitInfo();
+            Destroy(currentUnitDescription);
+        }
+        else if (currentUnitDescription != null)
+        {
+            InstantiateUnitDescription();
+            Destroy(currentUnitInfo);
+        }
+        else
+        {
+            InstantiateUnitInfo();
+        }
+    }
+
+    void DestroyUnitInfo()
+    {
+        Destroy(currentUnitInfo);
+        Destroy(currentUnitDescription);
+    }
+
     void InstantiateUnitInfo()
     {
         if (currentUnitInfo != null)
@@ -332,6 +361,60 @@ public class MenuShopController : MonoBehaviour
         currentUnitInfo.transform.position = Camera.main.transform.position + new Vector3(5, 0, 10);
 
         currentUnitInfo.GetComponent<UnitInfo>().BuildInfo(GetUnitTypeFromSelectedButton());
+
+        InstantiateToggleRight();
+
+        toggle.transform.position = currentUnitInfo.transform.position + new Vector3(-5, 4.5f, 0);
+    }
+
+    void InstantiateUnitDescription()
+    {
+        if (currentUnitDescription != null)
+            Destroy(currentUnitDescription);
+
+        currentUnitDescription = Instantiate(unitDescription);
+        currentUnitDescription.transform.SetParent(transform.Find("UnitDescription").transform);
+        currentUnitDescription.transform.position = Camera.main.transform.position + new Vector3(5, 0, 10);
+
+        currentUnitDescription.GetComponent<UnitDescription>().BuildDescription(GetUnitTypeFromSelectedButton());
+
+        InstantiateToggleLeft();
+
+        toggle.transform.position = currentUnitDescription.transform.position + new Vector3(-5, 4.5f, 0);
+    }
+
+    void ToggleUnitInfo()
+    {
+        if (currentUnitInfo == null)
+        {
+            Destroy(currentUnitDescription);
+
+            InstantiateUnitInfo();
+        }
+    }
+
+    void ToggleUnitDescription()
+    {
+        if (currentUnitDescription == null)
+        {
+            Destroy(currentUnitInfo);
+
+            InstantiateUnitDescription();
+        }
+    }
+
+    void InstantiateToggleRight()
+    {
+        Destroy(toggle);
+        toggle = Instantiate(toggleRight);
+        toggle.transform.SetParent(transform.Find("Toggle"));
+    }
+
+    void InstantiateToggleLeft()
+    {
+        Destroy(toggle);
+        toggle = Instantiate(toggleLeft);
+        toggle.transform.SetParent(transform.Find("Toggle"));
     }
 
     UnitType GetUnitTypeFromSelectedButton()
@@ -391,10 +474,14 @@ public class MenuShopController : MonoBehaviour
     void SubscribeToEvents()
     {
         transform.Find("Cursor_shop").GetComponent<CursorShop>().sendO.AddListener(PressSelectedButton);
+        transform.Find("Cursor_shop").GetComponent<CursorShop>().toggleUnitDescription.AddListener(ToggleUnitDescription);
+        transform.Find("Cursor_shop").GetComponent<CursorShop>().toggleUnitInfo.AddListener(ToggleUnitInfo);
     }
 
     void UnsubscribeFromEvents()
     {
         transform.Find("Cursor_shop").GetComponent<CursorShop>().sendO.RemoveListener(PressSelectedButton);
+        transform.Find("Cursor_shop").GetComponent<CursorShop>().toggleUnitDescription.RemoveListener(ToggleUnitDescription);
+        transform.Find("Cursor_shop").GetComponent<CursorShop>().toggleUnitInfo.RemoveListener(ToggleUnitInfo);
     }
 }
