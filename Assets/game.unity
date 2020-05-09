@@ -1539,6 +1539,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3ee525b3840394d9c51dc0fb8ec052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitInfo: {fileID: 4638436645133330092, guid: b1a188b50446b8c4fa1295c1ccd83739,
+    type: 3}
+  unitDescription: {fileID: 3904259751198075421, guid: 2a95d450fbb5c4848bbef101b99c8b68,
+    type: 3}
 --- !u!1 &361494193
 GameObject:
   m_ObjectHideFlags: 0
@@ -10516,6 +10520,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   disableMoneyInfo:
+    m_PersistentCalls:
+      m_Calls: []
+  destroyUnitInfo:
     m_PersistentCalls:
       m_Calls: []
   deselectUnit:

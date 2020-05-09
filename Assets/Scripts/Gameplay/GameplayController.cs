@@ -7,7 +7,7 @@ public class GameplayController : MonoBehaviour
 {
     public enum PlayerState
     {
-        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING, DROPPING, CONFIRM
+        NAVIGATING, OPTIONS, INTERACTING, ATTACKRANGE, SHOP, WAITING, TARGETING, DROPPING, CONFIRM, UNITINFO
     };
 
     public enum PlayerLocation
@@ -40,6 +40,7 @@ public class GameplayController : MonoBehaviour
     public UnityEvent cancelMenuUnit;
     public UnityEvent enableMoneyInfo;
     public UnityEvent disableMoneyInfo;
+    public UnityEvent destroyUnitInfo;
 
     //unit
     public UnityEvent deselectUnit;
@@ -71,6 +72,7 @@ public class GameplayController : MonoBehaviour
         cancelMenuUnit = new UnityEvent();
         enableMoneyInfo = new UnityEvent();
         disableMoneyInfo = new UnityEvent();
+        destroyUnitInfo = new UnityEvent();
 
         //unit
         deselectUnit = new UnityEvent();
@@ -310,7 +312,61 @@ public class GameplayController : MonoBehaviour
                 Destroy(GameObject.Find("ConfirmScreen(Clone)"));
 
                 break;
+
+            case PlayerState.UNITINFO:
+
+                DestroyUnitInfo();
+                EnablePlayer();
+                playerState = PlayerState.NAVIGATING;
+
+                break;
         }
+    }
+
+    void JudgeL()
+    {
+        switch (playerState)
+        {
+            case PlayerState.NAVIGATING:
+
+                GameObject unit = FindObjectOfType<UnitsController>().FindNextActiveUnit();
+
+                if (unit != null)
+                {
+                    transform.Find("Player").GetComponent<PlayerController>().TargetPosition(unit.transform.position);
+                }
+
+                break;
+        }
+    }
+
+    void JudgeR()
+    {
+        switch (playerState)
+        {
+            case PlayerState.NAVIGATING:
+
+                GameObject unit = transform.Find("Player").GetComponent<PlayerController>().InteractUnitsForUnitInfo();
+
+                if (unit != null)
+                {
+                    InstantiateUnitInfo(unit);
+                    DisablePlayer();
+                    playerState = PlayerState.UNITINFO;
+                }
+
+                break;
+        }
+    }
+
+    void InstantiateUnitInfo(GameObject unit)
+    {
+        FindObjectOfType<UIController>().InstantiateUnitInfo(unit);
+    }
+
+    void DestroyUnitInfo()
+    {
+        destroyUnitInfo.Invoke();
     }
 
     void TransitionToOptionsMenu()
@@ -402,13 +458,17 @@ public class GameplayController : MonoBehaviour
 
     public void SubscribeToEvents()
     {
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(JudgeO);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.AddListener(JudgeK);
+        FindObjectOfType<Controls>().keyboard_o_down.AddListener(JudgeO);
+        FindObjectOfType<Controls>().keyboard_k_down.AddListener(JudgeK);
+        FindObjectOfType<Controls>().keyboard_q_down.AddListener(JudgeL);
+        FindObjectOfType<Controls>().keyboard_e_down.AddListener(JudgeR);
     }
 
     public void UnsubscribeFromEvents()
     {
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(JudgeO);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_k_down.RemoveListener(JudgeK);
+        FindObjectOfType<Controls>().keyboard_o_down.RemoveListener(JudgeO);
+        FindObjectOfType<Controls>().keyboard_k_down.RemoveListener(JudgeK);
+        FindObjectOfType<Controls>().keyboard_q_down.RemoveListener(JudgeL);
+        FindObjectOfType<Controls>().keyboard_e_down.RemoveListener(JudgeR);
     }
 }

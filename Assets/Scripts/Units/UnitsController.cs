@@ -51,6 +51,34 @@ public class UnitsController : MonoBehaviour
         hipsterUnits = new List<GameObject>();
     }
 
+    public GameObject FindNextActiveUnit()
+    {
+        switch (FindObjectOfType<GameplayController>().GetTurn())
+        {
+            case GameplayController.Turn.CANI:
+                foreach (GameObject unit in caniUnits)
+                {
+                    if (unit.GetComponent<Unit>().state != UnitState.WAITING)
+                    {
+                        return unit;
+                    }
+                }
+                break;
+
+            case GameplayController.Turn.HIPSTER:
+                foreach (GameObject unit in hipsterUnits)
+                {
+                    if (unit.GetComponent<Unit>().state != UnitState.WAITING)
+                    {
+                        return unit;
+                    }
+                }
+                break;
+        }
+
+        return null;
+    }
+
     void SubscribeToEvents()
     {
         GameObject gameplay = GameObject.Find("Gameplay Controller");

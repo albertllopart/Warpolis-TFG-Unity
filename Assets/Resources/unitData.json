@@ -22,7 +22,7 @@
       },
       {
         "name": "transport",
-        "description": "Transport units can transport infantry units to help them travel faster. They are also a good road blocker for enemy units.",
+        "description": "Transport units can transport infantry units to help them travel faster.  They are also a good road blocker for enemy units.",
         "movementRange": 6,
         "attackRangeFrom": 0,
         "attackRangeTo": 0,

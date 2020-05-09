@@ -73,6 +73,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""L"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f52d560-36e0-4e3d-b201-5f4a05087fbb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""aca3efb1-f930-40ba-bf4d-25bf787c229f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -152,6 +168,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b94be74-8e5f-4dd9-b556-90f3be3760f6"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de4ea841-a7be-49df-9061-80ac51f8ab1b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5aad7639-8f65-42cf-bf54-bf1a1da45023"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90f40cee-ffa7-48e7-963c-03bc379c4635"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -167,6 +227,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_MoveLeft = m_Gameplay.FindAction("Move Left", throwIfNotFound: true);
         m_Gameplay_MoveRight = m_Gameplay.FindAction("Move Right", throwIfNotFound: true);
         m_Gameplay_Start = m_Gameplay.FindAction("Start", throwIfNotFound: true);
+        m_Gameplay_L = m_Gameplay.FindAction("L", throwIfNotFound: true);
+        m_Gameplay_R = m_Gameplay.FindAction("R", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -223,6 +285,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_MoveLeft;
     private readonly InputAction m_Gameplay_MoveRight;
     private readonly InputAction m_Gameplay_Start;
+    private readonly InputAction m_Gameplay_L;
+    private readonly InputAction m_Gameplay_R;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -234,6 +298,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @MoveLeft => m_Wrapper.m_Gameplay_MoveLeft;
         public InputAction @MoveRight => m_Wrapper.m_Gameplay_MoveRight;
         public InputAction @Start => m_Wrapper.m_Gameplay_Start;
+        public InputAction @L => m_Wrapper.m_Gameplay_L;
+        public InputAction @R => m_Wrapper.m_Gameplay_R;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -264,6 +330,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Start.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
                 @Start.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
                 @Start.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStart;
+                @L.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnL;
+                @L.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnL;
+                @L.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnL;
+                @R.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnR;
+                @R.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnR;
+                @R.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnR;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -289,6 +361,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Start.started += instance.OnStart;
                 @Start.performed += instance.OnStart;
                 @Start.canceled += instance.OnStart;
+                @L.started += instance.OnL;
+                @L.performed += instance.OnL;
+                @L.canceled += instance.OnL;
+                @R.started += instance.OnR;
+                @R.performed += instance.OnR;
+                @R.canceled += instance.OnR;
             }
         }
     }
@@ -302,5 +380,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
+        void OnL(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
     }
 }

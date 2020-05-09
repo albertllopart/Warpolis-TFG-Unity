@@ -21,6 +21,7 @@ public class UnitInfo : MonoBehaviour
     [Header("Prefabs")]
     public GameObject spritePrefab;
 
+    GameObject unit;
     UnitType unitType;
     UnitData unitData;
 
@@ -55,6 +56,18 @@ public class UnitInfo : MonoBehaviour
         SetWeak();
     }
 
+    public void BuildInfo(GameObject unit)
+    {
+        this.unit = unit;
+        unitType = unit.GetComponent<Unit>().unitType;
+
+        GetUnitData();
+
+        SetStats();
+        SetStrong();
+        SetWeak();
+    }
+
     void SetStats()
     {
         Debug.Log("UnitInfo::SetStats - Setting Stats for Unit: " + unitData.name);
@@ -73,7 +86,11 @@ public class UnitInfo : MonoBehaviour
     void SetStrong()
     {
         List<Sprite> sprites = new List<Sprite>();
-        BuildSpriteList(sprites);
+
+        if (unit == null)
+            BuildSpriteList(sprites);
+        else
+            BuildSpriteList(sprites, unit);
 
         List<Sprite> strongList = new List<Sprite>();
 
@@ -108,7 +125,11 @@ public class UnitInfo : MonoBehaviour
     void SetWeak()
     {
         List<Sprite> sprites = new List<Sprite>();
-        BuildSpriteList(sprites);
+
+        if (unit == null)
+            BuildSpriteList(sprites);
+        else
+            BuildSpriteList(sprites, unit);
 
         List<Sprite> weakList = new List<Sprite>();
 
@@ -140,7 +161,7 @@ public class UnitInfo : MonoBehaviour
         PositionSpriteList(weakSprites, weakList);
     }
 
-    void BuildSpriteList(List<Sprite> sprites)
+    void BuildSpriteList(List<Sprite> sprites) //per la botiga
     {
         switch (FindObjectOfType<CutsceneController>().currentTurn)
         {
@@ -154,6 +175,30 @@ public class UnitInfo : MonoBehaviour
                 break;
 
             case GameplayController.Turn.HIPSTER:
+                sprites.Add(caniInfantry);
+                sprites.Add(caniTransport);
+                sprites.Add(caniTank);
+                sprites.Add(caniAerial);
+                sprites.Add(caniGunner);
+                sprites.Add(caniRanged);
+                break;
+        }
+    }
+
+    void BuildSpriteList(List<Sprite> sprites, GameObject unit) //per si la unitat és de l'exèrcit rival
+    {
+        switch (unit.GetComponent<Unit>().army)
+        {
+            case UnitArmy.CANI:
+                sprites.Add(hipsterInfantry);
+                sprites.Add(hipsterTransport);
+                sprites.Add(hipsterTank);
+                sprites.Add(hipsterAerial);
+                sprites.Add(hipsterGunner);
+                sprites.Add(hipsterRanged);
+                break;
+
+            case UnitArmy.HIPSTER:
                 sprites.Add(caniInfantry);
                 sprites.Add(caniTransport);
                 sprites.Add(caniTank);

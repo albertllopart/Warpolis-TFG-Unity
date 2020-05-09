@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public GameObject unitInfo;
+    GameObject currentUnitInfo;
+    public GameObject unitDescription;
+    GameObject currentUnitDescription;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -145,6 +150,33 @@ public class UIController : MonoBehaviour
         DisableMoneyInfo();
     }
 
+    public void InstantiateUnitInfo(GameObject unit)
+    {
+        DisableMoneyInfo();
+        DisableTileInfo();
+
+        GameObject info = Instantiate(unitInfo);
+        info.GetComponent<UnitInfo>().BuildInfo(unit);
+        info.transform.position = Camera.main.transform.position + new Vector3(-5, 0, 10);
+        info.transform.SetParent(transform);
+        currentUnitInfo = info;
+
+        GameObject description = Instantiate(unitDescription);
+        description.GetComponent<UnitDescription>().BuildDescription(unit.GetComponent<Unit>().unitType);
+        description.transform.position = Camera.main.transform.position + new Vector3(5, 0, 10);
+        description.transform.SetParent(transform);
+        currentUnitDescription = description;
+    }
+
+    public void DestroyUnitInfo()
+    {
+        Destroy(currentUnitInfo);
+        Destroy(currentUnitDescription);
+
+        EnableMoneyInfo();
+        EnableTileInfo();
+    }
+
     void SubscribeToEvents()
     {
         GameObject gameplay = GameObject.Find("Gameplay Controller");
@@ -158,6 +190,7 @@ public class UIController : MonoBehaviour
         gameplay.GetComponent<GameplayController>().cancelMenuUnit.AddListener(CancelMenuUnit);
         gameplay.GetComponent<GameplayController>().enableMoneyInfo.AddListener(EnableMoneyInfo);
         gameplay.GetComponent<GameplayController>().disableMoneyInfo.AddListener(DisableMoneyInfo);
+        gameplay.GetComponent<GameplayController>().destroyUnitInfo.AddListener(DestroyUnitInfo);
 
         GameObject.Find("Data Controller").GetComponent<DataController>().baseCaptured.AddListener(OnWinCon);
     }

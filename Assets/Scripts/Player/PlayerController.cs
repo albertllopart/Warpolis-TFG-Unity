@@ -274,6 +274,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void TargetPosition(Vector3 position)
+    {
+        GameObject.Find("Camera").GetComponent<CameraController>().CameraTraslation(
+                GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().CalculateGoal(
+                    position));
+
+        transform.position = position;
+
+        OnMove();
+    }
+
     public void CheckArrow()
     {
         Vector2Int myPos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
@@ -344,7 +355,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (result.collider.gameObject.GetComponent<Unit>().GetState() != UnitState.WAITING)
                 {
-                    Debug.Log("PlayerController::Interact - Interacting with " + result.collider.gameObject.name);
+                    Debug.Log("PlayerController::InteractUnits - Interacting with " + result.collider.gameObject.name);
 
                     //seleccionar unitat
                     selectedUnit = result.collider.gameObject;
@@ -382,7 +393,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (result.collider.gameObject.GetComponent<Unit>().basePower > 0)
                 {
-                    Debug.Log("PlayerController::Interact - Interacting for Attack Range with " + result.collider.gameObject.name);
+                    Debug.Log("PlayerController::InteractUnitsForAttackRange - Interacting for Attack Range with " + result.collider.gameObject.name);
 
                     //seleccionar unitat
                     selectedUnitAttackRange = result.collider.gameObject;
@@ -396,6 +407,31 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public GameObject InteractUnitsForUnitInfo() //TODO: fer servir aquest mètode com a base dels altres dos
+    {
+        List<RaycastHit2D> results = new List<RaycastHit2D>();
+
+        RaycastHit2D resultCani = RayCast(LayerMask.GetMask("Cani_units"));
+        if (resultCani.collider != null)
+            results.Add(resultCani);
+
+        RaycastHit2D resultHipster = RayCast(LayerMask.GetMask("Hipster_units"));
+        if (resultHipster.collider != null)
+            results.Add(resultHipster);
+
+        foreach (RaycastHit2D result in results)
+        {
+            if (result.collider != null)
+            {
+                Debug.Log("PlayerController::InteractUnitsForUnitInfo - Interacting for Unit Info with " + result.collider.gameObject.name);
+
+                return result.collider.gameObject;
+            }
+        }
+
+        return null;
     }
 
     public bool InteractBuildings()

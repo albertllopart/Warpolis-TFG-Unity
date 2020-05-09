@@ -36,16 +36,20 @@ public class Controls : MonoBehaviour
     [HideInInspector]
     public UnityEvent keyboard_o_up;
     [HideInInspector]
-    public UnityEvent keyboard_o_down;
+    public UnityEvent keyboard_o_down; //A
     [HideInInspector]
     public UnityEvent keyboard_k;
     [HideInInspector]
     public UnityEvent keyboard_k_up;
     [HideInInspector]
-    public UnityEvent keyboard_k_down;
+    public UnityEvent keyboard_k_down; //B
 
     [HideInInspector]
-    public UnityEvent keyboard_return_down;
+    public UnityEvent keyboard_return_down; //START
+    [HideInInspector]
+    public UnityEvent keyboard_e_down; //R
+    [HideInInspector]
+    public UnityEvent keyboard_q_down; //L
 
     //gamepad
     PlayerControls controls;
@@ -61,6 +65,8 @@ public class Controls : MonoBehaviour
         controls.Gameplay.Interact.performed += ctx => SendODown(); //ctx serveix per dir-li a unity que sé que hi ha un context a l'acció però jo simplement vull cridar aquest mètode independentment d'aquest
         controls.Gameplay.Cancel.performed += ctx => SendKDown();
         controls.Gameplay.Start.performed += ctx => SendReturnDown();
+        controls.Gameplay.L.performed += ctx => SendShoulderLDown();
+        controls.Gameplay.R.performed += ctx => SendShoulderRDown();
 
         //W
         controls.Gameplay.MoveUp.started += ctx => SendWDown();
@@ -106,6 +112,8 @@ public class Controls : MonoBehaviour
         keyboard_k_down = new UnityEvent();
 
         keyboard_return_down = new UnityEvent();
+        keyboard_e_down = new UnityEvent();
+        keyboard_q_down = new UnityEvent();
     }
 
     // Update is called once per frame
@@ -119,6 +127,8 @@ public class Controls : MonoBehaviour
         InvokeO();
         InvokeK();
         InvokeReturn();
+        InvokeShoulderL();
+        InvokeShoulderR();
 
         if (up)
             keyboard_w.Invoke();
@@ -258,5 +268,27 @@ public class Controls : MonoBehaviour
     void SendReturnDown()
     {
         keyboard_return_down.Invoke();
+    }
+
+    void InvokeShoulderL()
+    {
+        if (Input.GetKeyDown("q"))
+            keyboard_q_down.Invoke();
+    }
+
+    void SendShoulderLDown()
+    {
+        keyboard_q_down.Invoke();
+    }
+
+    void InvokeShoulderR()
+    {
+        if (Input.GetKeyDown("e"))
+            keyboard_e_down.Invoke();
+    }
+
+    void SendShoulderRDown()
+    {
+        keyboard_e_down.Invoke();
     }
 }
