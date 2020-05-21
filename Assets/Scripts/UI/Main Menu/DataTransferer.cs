@@ -21,6 +21,14 @@ public class DataTransferer : MonoBehaviour
     public GameObject map;
     public GameObject minimap;
     public ResultsInfo resultsInfo;
+    public DataController.PlayerCommander caniPlayer;
+    public DataController.PlayerCommander hipsterPlayer;
+
+    void Awake()
+    {
+        caniPlayer = DataController.PlayerCommander.COMPUTER;
+        hipsterPlayer = DataController.PlayerCommander.COMPUTER;
+    }
 
     void Start()
     {
@@ -38,5 +46,11 @@ public class DataTransferer : MonoBehaviour
     public void TransferResults(DataController.Winner winner, DataController.WinCondition winCondition, int turns)
     {
         resultsInfo = new ResultsInfo(winner, winCondition, turns);
+    }
+
+    public void TransferCommanders(DataController.PlayerCommander caniPlayer, DataController.PlayerCommander hipsterPlayer)
+    {
+        this.caniPlayer = caniPlayer;
+        this.hipsterPlayer = hipsterPlayer;
     }
 }

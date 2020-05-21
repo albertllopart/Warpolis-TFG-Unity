@@ -162,7 +162,6 @@ public class MyTextManager : MonoBehaviour
         switch (myText.GetComponent<MyText>().anchor)
         {
             case MyText.Anchor.CENTERED:
-                Debug.Log("MyTextManager::CreateText - Centering Text from " + myText.transform.position + " to " + (GetTextCenter(myText) - myText.transform.position));
                 Vector3 positionDifference = GetTextCenter(myText) - myText.transform.position;
                 myText.transform.position -= positionDifference;
                 break;

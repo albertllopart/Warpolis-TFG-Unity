@@ -27,6 +27,11 @@ public enum MyTileType
     NEUTRAL, ROAD, CONTAINER, LAMP, BUILDING, PLANTPOT, SEA, CONE
 };
 
+public enum Applicant
+{
+    HUMAN, AI
+};
+
 public class MyTile
 {
     public MyTile(Vector2Int position, bool isWalkable, MyTileType type, uint maxWidth, uint maxHeight)
@@ -65,6 +70,11 @@ public class Pathfinding
     public List<Vector2Int> rangedAttackRange = new List<Vector2Int>();
     public List<BFS_Node> rangedBacktrack = new List<BFS_Node>();
 
+    //AI
+    public Queue<BFS_Node> AIFrontier = new Queue<BFS_Node>();
+    public List<Vector2Int> AIVisited = new List<Vector2Int>();
+    public List<BFS_Node> AIBacktrack = new List<BFS_Node>();
+
     public void ResetBFS(Vector2Int position)
     {
         frontier.Clear();
@@ -90,6 +100,18 @@ public class Pathfinding
         rangedFrontier.Enqueue(node);
         rangedVisited.Add(node.data);
         rangedBacktrack.Add(node);
+    }
+
+    public void ResetAIBFS(Vector2Int position)
+    {
+        AIFrontier.Clear();
+        AIVisited.Clear();
+        AIBacktrack.Clear();
+
+        BFS_Node node = new BFS_Node(position, new Vector2Int(-1, -1));
+        AIFrontier.Enqueue(node);
+        AIVisited.Add(node.data);
+        AIBacktrack.Add(node);
     }
 
     public void PropagateBFS(GameObject unit)
@@ -127,7 +149,64 @@ public class Pathfinding
                 {
                     if (!CheckEnemyInPos(node.data, unit)) //primer mira si hi ha un enemic a la casella i després si està a rang i és walkable
                     {
-                        if (IsInMoveRange(unitScript, visited[0], node))
+                        if (IsInMoveRange(unitScript.movementRange, unitScript, visited[0], node, Applicant.HUMAN))
+                        {
+                            if (unitScript.unitType != UnitType.AERIAL)
+                                CheckNode(node);
+                            else
+                                CheckNodeAerial(node);
+                        }
+                    }
+
+                    CheckNodeForAttackRange(node);
+                }
+            }
+            else
+            {
+                Debug.Log("Pathfinding::PropagateBFS - Found null Tile at pos: " + popped.data);
+            }
+
+            if (safety++ >= 10000)
+                break;
+        }
+    }
+
+    public void PropagateBFS(GameObject unit, uint range) //aquest serveix per establir un rang manualment mentre fa servir les restriccions de moviment de la unitat
+    {
+        int safety = 0;
+
+        //agafar dades de la unitat
+        Unit unitScript = unit.GetComponent<Unit>();
+
+        while (frontier.Count != 0)
+        {
+            BFS_Node popped = frontier.Dequeue();
+
+            if (MyTilemap[popped.data.x, -popped.data.y] != null)
+            {
+                BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
+                BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
+                BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
+                BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
+
+                List<BFS_Node> unorderedNodes = new List<BFS_Node>();
+
+                if (CheckMapLimits(north.data))
+                    unorderedNodes.Add(north);
+                if (CheckMapLimits(south.data))
+                    unorderedNodes.Add(south);
+                if (CheckMapLimits(east.data))
+                    unorderedNodes.Add(east);
+                if (CheckMapLimits(west.data))
+                    unorderedNodes.Add(west);
+
+                List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
+
+                foreach (BFS_Node node in orderedNodes)
+                {
+                    if (!CheckEnemyInPos(node.data, unit)) //primer mira si hi ha un enemic a la casella i després si està a rang i és walkable
+                    {
+                        if (IsInMoveRange(range, unitScript, visited[0], node, Applicant.HUMAN))
                         {
                             if (unitScript.unitType != UnitType.AERIAL)
                                 CheckNode(node);
@@ -254,6 +333,29 @@ public class Pathfinding
         }
     }
 
+    public void CheckNodeForAI(BFS_Node node)
+    {
+        if (!AIVisited.Contains(node.data))
+        {
+            if (MyTilemap[node.data.x, -node.data.y].isWalkable)
+            {
+                AIFrontier.Enqueue(node);
+                AIVisited.Add(node.data);
+                AIBacktrack.Add(node);
+            }
+        }
+    }
+
+    public void CheckNodeAerialForAI(BFS_Node node)
+    {
+        if (!AIVisited.Contains(node.data))
+        {
+            AIFrontier.Enqueue(node);
+            AIVisited.Add(node.data);
+            AIBacktrack.Add(node);
+        }
+    }
+
     bool CheckEnemyInPos(Vector2Int pos, GameObject unit)
     {
         if (unit.GetComponent<Unit>().army == UnitArmy.CANI)
@@ -262,16 +364,27 @@ public class Pathfinding
             return MyTilemap[pos.x, -pos.y].containsCani;
     }
 
-    public bool IsInMoveRange(Unit unitScript, Vector2Int origin, BFS_Node goal)
+    public bool IsInMoveRange(uint range, Unit unitScript, Vector2Int origin, BFS_Node goal, Applicant applicant)
     {
-        //dades de la unitat
-        uint range = unitScript.movementRange;
-
         uint totalCost = 0; // el que farem servir per retornar true o false
 
         int lastParent = 0;
-        int count = backtrack.Count;
-        
+
+        List<BFS_Node> currentBacktrack = new List<BFS_Node>();
+
+        switch (applicant)
+        {
+            case Applicant.HUMAN:
+                currentBacktrack = backtrack;
+                break;
+
+            case Applicant.AI:
+                currentBacktrack = AIBacktrack;
+                break;
+        }
+
+        int count = currentBacktrack.Count;
+
         if (count > 0)
         {
             BFS_Node current = goal;
@@ -282,9 +395,9 @@ public class Pathfinding
             {
                 lastParent = i;
 
-                if (backtrack[i].data == goal.parent)
+                if (currentBacktrack[i].data == goal.parent)
                 {
-                    current = backtrack[i];
+                    current = currentBacktrack[i];
                     break;
                 }
             }
@@ -295,10 +408,10 @@ public class Pathfinding
 
                 for (int i = 0; i < lastParent; i++)
                 {
-                    if (backtrack[i].data == current.parent)
+                    if (currentBacktrack[i].data == current.parent)
                     {
                         lastParent = i;
-                        current = backtrack[i];
+                        current = currentBacktrack[i];
 
                         break;
                     }
@@ -334,7 +447,6 @@ public class Pathfinding
         }
         else if (MyTilemap[pos.x, -pos.y].type == MyTileType.CONE)
         {
-            Debug.Log("Pathfinding::AddCost - Found Cone Tile with cost " + coneCost);
             return coneCost;
         }
 
@@ -342,19 +454,31 @@ public class Pathfinding
         return 1;
     }
 
-    public List<Vector2Int> GetReversePath(Vector2Int goal)
+    public List<Vector2Int> GetReversePath(Vector2Int goal, Applicant applicant)
     {
         //aquest mètode retorna una llista de posicions ordenades des de la casella objectiu fins l'origen del pathfinding
 
         List<Vector2Int> path = new List<Vector2Int>();
+        List<BFS_Node> currentBacktrack = new List<BFS_Node>();
+
+        switch (applicant)
+        {
+            case Applicant.HUMAN:
+                currentBacktrack = backtrack;
+                break;
+
+            case Applicant.AI:
+                currentBacktrack = AIBacktrack;
+                break;
+        }
 
         int goalIndex = 0;
 
-        if (backtrack.Count > 0)
+        if (currentBacktrack.Count > 0)
         {
-            BFS_Node lastAdded = backtrack[0];
+            BFS_Node lastAdded = currentBacktrack[0];
 
-            foreach (BFS_Node node in backtrack)
+            foreach (BFS_Node node in currentBacktrack)
             {
                 if (node.data == goal)
                 {
@@ -366,9 +490,9 @@ public class Pathfinding
                 goalIndex++;
             }
 
-            while (lastAdded != backtrack[0])
+            while (lastAdded != currentBacktrack[0])
             {
-                foreach(BFS_Node node in backtrack)
+                foreach(BFS_Node node in currentBacktrack)
                 {
                     if(node.data == lastAdded.parent)
                     {
@@ -383,19 +507,31 @@ public class Pathfinding
         return path;
     }
 
-    public List<BFS_Node> GetReversePath(BFS_Node goal)
+    public List<BFS_Node> GetReversePath(BFS_Node goal, Applicant applicant)
     {
         //aquest mètode retorna una llista de posicions ordenades des de la casella objectiu fins l'origen del pathfinding
 
         List<BFS_Node> path = new List<BFS_Node>();
+        List<BFS_Node> currentBacktrack = new List<BFS_Node>();
+
+        switch (applicant)
+        {
+            case Applicant.HUMAN:
+                currentBacktrack = backtrack;
+                break;
+
+            case Applicant.AI:
+                currentBacktrack = AIBacktrack;
+                break;
+        }
 
         int goalIndex = 0;
 
-        if (backtrack.Count > 0)
+        if (currentBacktrack.Count > 0)
         {
-            BFS_Node lastAdded = backtrack[0];
+            BFS_Node lastAdded = currentBacktrack[0];
 
-            foreach (BFS_Node node in backtrack)
+            foreach (BFS_Node node in currentBacktrack)
             {
                 if (node.data == goal.data)
                 {
@@ -407,9 +543,9 @@ public class Pathfinding
                 goalIndex++;
             }
 
-            while (lastAdded != backtrack[0])
+            while (lastAdded != currentBacktrack[0])
             {
-                foreach (BFS_Node node in backtrack)
+                foreach (BFS_Node node in currentBacktrack)
                 {
                     if (node.data == lastAdded.parent)
                     {
@@ -424,11 +560,52 @@ public class Pathfinding
         return path;
     }
 
-    public List<Vector2Int> GetPath(Vector2Int goal)
+    public List<Vector2Int> GetReversePath(Vector2Int goal, List<BFS_Node> myBacktrack)
+    {
+        //aquest mètode retorna una llista de posicions ordenades des de la casella objectiu fins l'origen del pathfinding
+
+        List<Vector2Int> path = new List<Vector2Int>();
+
+        int goalIndex = 0;
+
+        if (myBacktrack.Count > 0)
+        {
+            BFS_Node lastAdded = myBacktrack[0];
+
+            foreach (BFS_Node node in myBacktrack)
+            {
+                if (node.data == goal)
+                {
+                    lastAdded = node;
+                    path.Add(node.data);
+                    break;
+                }
+
+                goalIndex++;
+            }
+
+            while (lastAdded != myBacktrack[0])
+            {
+                foreach (BFS_Node node in myBacktrack)
+                {
+                    if (node.data == lastAdded.parent)
+                    {
+                        lastAdded = node;
+                        path.Add(node.data);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return path;
+    }
+
+    public List<Vector2Int> GetPath(Vector2Int goal, Applicant applicant)
     {
         //aquest mètode retorna una llista de posicions ordenades des de l'origen fins la casella objectiu del pathfinding
 
-        List<Vector2Int> reversePath = GetReversePath(goal);
+        List<Vector2Int> reversePath = GetReversePath(goal, applicant);
         List<Vector2Int> path = new List<Vector2Int>();
 
         for (int i = reversePath.Count - 1; i >= 0; i--)
@@ -518,6 +695,96 @@ public class Pathfinding
         {
             rangedAttackRange.Add(node.data);
         }
+    }
+
+    public void PropagateAIBFS(uint range, GameObject unit) //aquest bfs no fa servir el rang de moviment de la unitat sinó qualsevol que se li passi al paràmetre
+    {
+        int safety = 0;
+
+        //agafar dades de la unitat
+        Unit unitScript = unit.GetComponent<Unit>();
+
+        while (AIFrontier.Count != 0)
+        {
+            BFS_Node popped = AIFrontier.Dequeue();
+
+            if (MyTilemap[popped.data.x, -popped.data.y] != null)
+            {
+                BFS_Node north = new BFS_Node(popped.data + new Vector2Int(0, 1), popped.data);
+                BFS_Node south = new BFS_Node(popped.data + new Vector2Int(0, -1), popped.data);
+                BFS_Node east = new BFS_Node(popped.data + new Vector2Int(1, 0), popped.data);
+                BFS_Node west = new BFS_Node(popped.data + new Vector2Int(-1, 0), popped.data);
+
+                List<BFS_Node> unorderedNodes = new List<BFS_Node>();
+
+                if (CheckMapLimits(north.data))
+                    unorderedNodes.Add(north);
+                if (CheckMapLimits(south.data))
+                    unorderedNodes.Add(south);
+                if (CheckMapLimits(east.data))
+                    unorderedNodes.Add(east);
+                if (CheckMapLimits(west.data))
+                    unorderedNodes.Add(west);
+
+                List<BFS_Node> orderedNodes = OrderBFS_Nodes(unorderedNodes);
+
+                foreach (BFS_Node node in orderedNodes)
+                {
+                    if (IsInMoveRange(range, unitScript, AIVisited[0], node, Applicant.AI))
+                    {
+                        if (unitScript.unitType != UnitType.AERIAL)
+                            CheckNodeForAI(node);
+                        else
+                            CheckNodeAerialForAI(node);
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Pathfinding::PropagateAIBFS - Found null Tile at pos: " + popped.data);
+            }
+
+            if (safety++ >= 10000)
+                break;
+        }
+    }
+
+    public Vector2Int GetIntersection(Vector2Int goal, List<BFS_Node> myBacktrack, List<Vector2Int> myVisited)
+    {
+        //retorna la primera casella d'intersecció entre un backtrack i un visited (per recórrer camins el final dels quals queda fora del rang de moviment i s'han de fer a més d'un torn vista)
+        //goal == casella de destí
+        //myBacktrack == el què farem servir per obtenir el camí llarg fins la meta (la meta ha de ser-hi dincs, lògicament)
+        //myVisited == les caselles que tenim a rang de moviment
+
+        List<Vector2Int> reversePath = GetReversePath(goal, myBacktrack);
+
+        foreach (Vector2Int tile in reversePath)
+        {
+            if (myVisited.Contains(tile))
+                return tile;
+        }
+
+        Debug.Log("Pathfinding::GetIntersection - No Intersection found");
+        return new Vector2Int(-1, -1);
+    }
+
+    public Vector2Int GetIntersection(Vector2Int goal)
+    {
+        //retorna la primera casella d'intersecció entre un backtrack i un visited (per recórrer camins el final dels quals queda fora del rang de moviment i s'han de fer a més d'un torn vista)
+        //goal == casella de destí
+        //myBacktrack == el què farem servir per obtenir el camí llarg fins la meta (la meta ha de ser-hi dincs, lògicament)
+        //myVisited == les caselles que tenim a rang de moviment
+
+        List<Vector2Int> reversePath = GetReversePath(goal, AIBacktrack);
+
+        foreach (Vector2Int tile in reversePath)
+        {
+            if (visited.Contains(tile))
+                return tile;
+        }
+
+        Debug.Log("Pathfinding::GetIntersection - No Intersection found");
+        return new Vector2Int(-1, -1);
     }
 }
 

@@ -456,6 +456,12 @@ public class GameplayController : MonoBehaviour
         Loader.Load(Loader.Scene.title);
     }
 
+    public void UnitDiedCallback()
+    {
+        FindObjectOfType<CutsceneController>().unitDied.RemoveListener(UnitDiedCallback);
+        SubscribeToEvents();
+    }
+
     public void SubscribeToEvents()
     {
         FindObjectOfType<Controls>().keyboard_o_down.AddListener(JudgeO);

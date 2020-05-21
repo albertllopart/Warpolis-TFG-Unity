@@ -1623,6 +1623,9 @@ MonoBehaviour:
   versusPressed:
     m_PersistentCalls:
       m_Calls: []
+  quitPressed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1361097730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2937,7 +2940,7 @@ MonoBehaviour:
   map6: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0, type: 3}
   map7: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5, type: 3}
   map8: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591, type: 3}
-  map9: {fileID: 1195193868761505584, guid: c3cb7020285182e4fbfb017eabe2b4dc, type: 3}
+  map9: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0, type: 3}
   minimapPrefab: {fileID: 4224932496742402740, guid: 12d40b8bf3941f3419dffd13754dc711,
     type: 3}
   neutral: {fileID: 11400000, guid: 9b1a1424d14972a43a8c42ed2e7d2b6f, type: 2}

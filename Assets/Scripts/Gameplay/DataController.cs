@@ -21,6 +21,14 @@ public class DataController : MonoBehaviour
         CANI, HIPSTER, DRAW
     }
 
+    public enum PlayerCommander
+    {
+        HUMAN, COMPUTER
+    }
+
+    public PlayerCommander caniPlayer;
+    public PlayerCommander hipsterPlayer;
+
     //to transfer
     Winner winner;
     WinCondition winCondition;
@@ -32,10 +40,18 @@ public class DataController : MonoBehaviour
     public Vector3 playerCaniPosition;
     public Vector3 playerHipsterPosition;
 
+    void Awake()
+    {
+       
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         baseCaptured = new UnityEvent();
+
+        caniPlayer = FindObjectOfType<DataTransferer>().caniPlayer;
+        hipsterPlayer = FindObjectOfType<DataTransferer>().hipsterPlayer;
     }
 
     public void AfterStart()

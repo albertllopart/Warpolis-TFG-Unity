@@ -12,6 +12,11 @@ public class MapController : MonoBehaviour
         NEUTRAL, ROAD, CROSSWALK1, CROSSWALK2, CONTAINER, LAMP, PLANTPOT, SEA, CONE1, CONE2, CONE3, CONE4, CONE5, CONE6, CONE7, CONE8
     };
 
+    public enum Pathfinder
+    {
+        MAIN, AUXILIAR
+    };
+
     public Dictionary<int, string> tilesetDictionary;
 
     [Header("Tilemaps")]
@@ -43,6 +48,7 @@ public class MapController : MonoBehaviour
     //Pathfinding
 
     public Pathfinding pathfinding;
+    public Pathfinding auxiliarPathfinding; //per buscar rutes complexes alternatives AI
 
     [Header("Pathfinding")]
     public AnimatedTile blueTile;
@@ -93,7 +99,7 @@ public class MapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+   
     }
 
     void BuildDictionary()
@@ -374,6 +380,8 @@ public class MapController : MonoBehaviour
     void InitializePathfinding()
     {
         pathfinding = new Pathfinding();
+        auxiliarPathfinding = new Pathfinding();
+
         pathfinding.MyTilemap = new MyTile[width, height];
 
         for (int i = 0; i < width; i++)
@@ -390,6 +398,8 @@ public class MapController : MonoBehaviour
                     Debug.Log("MapController::InitializePathfinding - MyTile: " + pos + ", " + isWalkable + ", " + type);*/
             }
         }
+
+        auxiliarPathfinding.MyTilemap = pathfinding.MyTilemap;
     }
 
     public bool IsWalkable(Vector2Int pos)
@@ -526,10 +536,22 @@ public class MapController : MonoBehaviour
         return false;
     }
 
-    public void DrawPathfinding(bool shouldDraw)
+    public void DrawPathfinding(bool shouldDraw, Pathfinder pathfinder)
     {
-        //draw visited
-        foreach(Vector2Int pos in pathfinding.visited)
+        Pathfinding current = new Pathfinding();
+
+        switch (pathfinder)
+        {
+            case Pathfinder.MAIN:
+                current = pathfinding;
+                break;
+
+            case Pathfinder.AUXILIAR:
+                current = auxiliarPathfinding;
+                break;
+        }
+
+        foreach(Vector2Int pos in current.visited)
         {
             if (shouldDraw)
                 tilemapPathfinding.SetTile(WorldToTilemap(new Vector3Int(pos.x, pos.y, 0)), blueTile);
@@ -562,30 +584,105 @@ public class MapController : MonoBehaviour
         }
     }
 
-    public void ExecutePathfinding(GameObject unit)
+    Pathfinding GetPathfinder(Pathfinder pathfinder)
     {
-        pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
-        pathfinding.PropagateBFS(unit);
-        DrawPathfinding(true);
-    }
-    public void ExecuteRangedPathfinding(GameObject unit)
-    {
-        pathfinding.ResetRangedBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
-        pathfinding.PropagateRangedBFS(unit);
+        switch (pathfinder)
+        {
+            case Pathfinder.MAIN:
+                return pathfinding;
+
+            case Pathfinder.AUXILIAR:
+                return auxiliarPathfinding;
+        }
+
+        return pathfinding;
     }
 
-    public void ExecutePathfindingForAttackRange(GameObject unit)
+    public void ExecutePathfinding(Pathfinder pathfinder, GameObject unit)
     {
-        pathfinding.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
-        pathfinding.PropagateBFS(unit);
-        DrawAttackRange(true);
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        current.PropagateBFS(unit);
+
+        if (!FindObjectOfType<AIController>().inControl)
+            DrawPathfinding(true, pathfinder);
     }
 
-    public void ExecuteRangedPathfindingForAttackRange(GameObject unit)
+    public void ExecutePathfinding(Pathfinder pathfinder, Vector2Int position, GameObject unit)
     {
-        pathfinding.ResetRangedBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
-        pathfinding.PropagateRangedBFS(unit);
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetBFS(new Vector2Int(position.x, position.y)); //resetegem el pathfinding a la posició manual
+        current.PropagateBFS(unit);
+
+        if (!FindObjectOfType<AIController>().inControl)
+            DrawPathfinding(true, pathfinder);
+    }
+
+    public void ExecutePathfinding(Pathfinder pathfinder, Vector2Int position, GameObject unit, uint range)
+    {
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetBFS(new Vector2Int(position.x, position.y)); //resetegem el pathfinding a la posició manual
+        current.PropagateBFS(unit, range);
+
+        if (!FindObjectOfType<AIController>().inControl)
+            DrawPathfinding(true, pathfinder);
+    }
+
+    public void ExecuteRangedPathfinding(Pathfinder pathfinder, GameObject unit)
+    {
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetRangedBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        current.PropagateRangedBFS(unit);
+    }
+
+    public void ExecutePathfindingForAttackRange(Pathfinder pathfinder, GameObject unit)
+    {
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        current.PropagateBFS(unit);
+
+        if (!FindObjectOfType<AIController>().inControl)
+            DrawAttackRange(true);
+    }
+
+    public void ExecuteRangedPathfindingForAttackRange(Pathfinder pathfinder, GameObject unit)
+    {
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetRangedBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y)); //resetegem el pathfinding a la posició de la unitat
+        current.PropagateRangedBFS(unit);
         DrawRangedAttackRange(true);
+    }
+
+    public void ExecutePathfindingForAI(Pathfinder pathfinder, uint range, GameObject unit)
+    {
+        Pathfinding current = GetPathfinder(pathfinder);
+
+        current.ResetAIBFS(new Vector2Int((int)unit.transform.position.x, (int)unit.transform.position.y));
+        current.PropagateAIBFS(range, unit);
+
+        Debug.Log("MapController::ExecutePathfindingForAI - Checked " + current.AIVisited.Count + " tiles");
+    }
+
+    public List<Vector2Int> GetTilesInCommon()
+    {
+        //retorna una llista de posicions que existeixen tant en el pathfinding MAIN com en l'AUXILIAR
+        List<Vector2Int> ret = new List<Vector2Int>();
+
+        foreach (Vector2Int tile in auxiliarPathfinding.visited)
+        {
+            if (pathfinding.visited.Contains(tile))
+            {
+                ret.Add(tile);
+            }
+        }
+
+        return ret;
     }
 
     public void DrawArrow()
@@ -598,7 +695,7 @@ public class MapController : MonoBehaviour
 
         if (pathfinding.backtrack.Count > 0 && playerPos != pathfinding.visited[0])
         {
-            List<BFS_Node> path = pathfinding.GetReversePath(playerNode);
+            List<BFS_Node> path = pathfinding.GetReversePath(playerNode, Applicant.HUMAN);
             Tile lastTile = null;
 
             //fletxa final

@@ -256,6 +256,10 @@ public class CutsceneController : MonoBehaviour
         dyingAlpha = 1.0f;
 
         FindObjectOfType<SoundController>().PlayDeath();
+
+        //per evitar inputs durant cutscene
+        FindObjectOfType<GameplayController>().UnsubscribeFromEvents();
+        unitDied.AddListener(FindObjectOfType<GameplayController>().UnitDiedCallback);
     }
 
     void UnitDeath()
@@ -769,6 +773,24 @@ public class CutsceneController : MonoBehaviour
         gameplayController.SetActive(false);
     }
 
+    void EnableCPU()
+    {
+        FindObjectOfType<UIController>().EnableMoneyInfo();
+        gameplayController.SetActive(true);
+    }
+
+    void JudgeCommander()
+    {
+        if (FindObjectOfType<AIController>().JudgeCommander())
+        {
+            EnableGameplay();
+        }
+        else
+        {
+            EnableCPU();
+        }
+    }
+
     void EnableUIInfo()
     {
         FindObjectOfType<UIController>().EnableMoneyInfo();
@@ -787,6 +809,6 @@ public class CutsceneController : MonoBehaviour
         gameplayController.GetComponent<GameplayController>().endTurnHipster.AddListener(NewTurnCaniSetup);
 
         //meus
-        finishedAllCutscenes.AddListener(EnableGameplay);
+        finishedAllCutscenes.AddListener(JudgeCommander);
     }
 }

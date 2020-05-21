@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum UnitState
 {
@@ -103,6 +104,16 @@ public class Unit : MonoBehaviour
     //wincon
     bool winCon = false;
 
+    //events
+    public UnityEvent finishedMoving;
+    public UnityEvent finishedAI;
+
+    void Awake()
+    {
+        finishedMoving = new UnityEvent();
+        finishedAI = new UnityEvent();
+    }
+
     void Start()
     {   
         transform.parent = GameObject.Find("Units Controller").transform;
@@ -125,10 +136,13 @@ public class Unit : MonoBehaviour
         EnableUIHitPoints(true);
 
         UpdateStatsBasedOnTile();
-        GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
 
-        state = UnitState.WAITING;
-        UpdateAnimator();
+        if (!FindObjectOfType<AIController>().inControl) //si és un humà qui està actuant
+        {
+            GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
+            state = UnitState.WAITING;
+            UpdateAnimator();
+        }
     }
 
     void Update()
@@ -312,7 +326,7 @@ public class Unit : MonoBehaviour
         UpdateAnimator();
 
         //mapa
-        GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfinding(gameObject);
+        GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
 
         SetMyTurn();
     }
@@ -330,15 +344,15 @@ public class Unit : MonoBehaviour
         {
             case UnitType.INFANTRY:
                 GetComponent<UnitInfantry>().EnableUICaptureSign(false);
-                GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(gameObject);
+                GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(MapController.Pathfinder.MAIN, gameObject);
                 break;
 
             case UnitType.RANGED:
-                GameObject.Find("Map Controller").GetComponent<MapController>().ExecuteRangedPathfindingForAttackRange(gameObject);
+                GameObject.Find("Map Controller").GetComponent<MapController>().ExecuteRangedPathfindingForAttackRange(MapController.Pathfinder.MAIN, gameObject);
                 break;
 
             default:
-                GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(gameObject);
+                GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfindingForAttackRange(MapController.Pathfinder.MAIN, gameObject);
                 break;
         }
 
@@ -377,7 +391,7 @@ public class Unit : MonoBehaviour
         UpdateAnimator();
 
         //mapa
-        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false, MapController.Pathfinder.MAIN);
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawAttackRange(false);
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawRangedAttackRange(false);
     }
@@ -396,7 +410,7 @@ public class Unit : MonoBehaviour
         UpdateAnimator();
 
         //mapa
-        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false, MapController.Pathfinder.MAIN);
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawAttackRange(false);
         GameObject.Find("Map Controller").GetComponent<MapController>().DrawRangedAttackRange(false);
     }
@@ -453,7 +467,7 @@ public class Unit : MonoBehaviour
         UpdateAnimator();
 
         //mapa
-        GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfinding(gameObject);
+        GameObject.Find("Map Controller").GetComponent<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
     }
 
     void ResetTargeting()
@@ -483,25 +497,44 @@ public class Unit : MonoBehaviour
 
     public void OnWait()
     {
-        Highlight(false);
+        if (!FindObjectOfType<AIController>().inControl)
+        {
+            Highlight(false);
 
-        state = UnitState.WAITING;
+            state = UnitState.WAITING;
 
-        if (unitType == (uint)UnitType.INFANTRY)
-            GetComponent<UnitInfantry>().toStopCapture = true;
+            if (unitType == (uint)UnitType.INFANTRY)
+                GetComponent<UnitInfantry>().toStopCapture = true;
 
-        UpdateTileInfo();
+            UpdateTileInfo();
 
-        lastPosition = transform.position;
+            lastPosition = transform.position;
 
-        EnableUIHitPoints(true);
-        ResetTargeting();
-        ResetDirection();
-        UpdateAnimator();
+            EnableUIHitPoints(true);
+            ResetTargeting();
+            ResetDirection();
+            UpdateAnimator();
 
-        UnsubscribeFromEvents();
+            UnsubscribeFromEvents();
 
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+        }
+        else
+        {
+            state = UnitState.WAITING;
+
+            if (unitType == (uint)UnitType.INFANTRY)
+                GetComponent<UnitInfantry>().toStopCapture = true;
+
+            lastPosition = transform.position;
+
+            EnableUIHitPoints(true);
+            ResetTargeting();
+            ResetDirection();
+            UpdateAnimator();
+
+            finishedAI.Invoke();
+        }
     }
 
     public void OnWaitWithCapture() //aquesta funció es crida per conservar la captura en comptes de OnWait que li restableix la vida màxima
@@ -530,15 +563,18 @@ public class Unit : MonoBehaviour
         //guardo la posició per si es cancel·la l'acció de moure
         lastPosition = transform.position;
 
-        GetPath(goal);
+        GetPath(goal, Applicant.HUMAN);
         state = UnitState.MOVING;
 
         //mapa
-        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false);
+        GameObject.Find("Map Controller").GetComponent<MapController>().DrawPathfinding(false, MapController.Pathfinder.MAIN);
 
-        //gameplay
-        //desactivar events de controls
-        FindObjectOfType<GameplayController>().UnsubscribeFromEvents();
+        if (!FindObjectOfType<AIController>().inControl)
+        {
+            //gameplay
+            //desactivar events de controls
+            FindObjectOfType<GameplayController>().UnsubscribeFromEvents();
+        }
     }
 
     public void OnTargeting()
@@ -582,13 +618,13 @@ public class Unit : MonoBehaviour
         animator.SetInteger("direction", (int)direction);
     }
 
-    void GetPath(Vector2Int goal)
+    void GetPath(Vector2Int goal, Applicant applicant)
     {
         if (path.Count > 0)
             path.Clear();
 
         this.goal = goal;
-        path = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.GetPath(goal);
+        path = GameObject.Find("Map Controller").GetComponent<MapController>().pathfinding.GetPath(goal, applicant);
         
         nextPosIndex = 1;
         if(path.Count > 1)
@@ -649,8 +685,16 @@ public class Unit : MonoBehaviour
 
             if (myPos == goal)
             {
-                FindObjectOfType<GameplayController>().SubscribeToEvents();
-                OnMenu();
+                if (!FindObjectOfType<AIController>().inControl)
+                {
+                    FindObjectOfType<GameplayController>().SubscribeToEvents();
+                    OnMenu();
+                }
+                else
+                {
+                    finishedMoving.Invoke();
+                    state = UnitState.WAITING;
+                }
             }
         }
     }
@@ -1072,6 +1116,178 @@ public class Unit : MonoBehaviour
                 GameObject.Find("Data Controller").GetComponent<DataController>().AddHipsterMoney(-(int)(shopValue * 0.2));
                 break;
         }
+    }
+
+    public void OnAI()
+    {
+        state = UnitState.SELECTED;
+        UpdateAnimator();
+
+        switch (unitType)
+        {
+            case UnitType.INFANTRY:
+                GetComponent<UnitInfantry>().OnAI();
+                break;
+
+            case UnitType.TRANSPORT:
+                GetComponent<UnitTransport>().OnAI();
+                break;
+        }
+    }
+
+    public List<GameObject> GetTargetsFromAttackRange()
+    {
+        List<GameObject> ret = new List<GameObject>();
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.attackRange)
+        {
+            GameObject unit = CheckTileForEnemy(new Vector3(tile.x, tile.y));
+
+            if (unit != null)
+                ret.Add(unit);
+        }
+
+        return ret;
+    }
+
+    GameObject CheckTileForEnemy(Vector3 position)
+    {
+        RaycastHit2D result;
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+                result = RayCast(position, LayerMask.GetMask("Hipster_units"));
+                if (result.collider != null)
+                {
+                    return result.collider.gameObject;
+                }
+                break;
+
+            case UnitArmy.HIPSTER:
+                result = RayCast(position, LayerMask.GetMask("Cani_units"));
+                if (result.collider != null)
+                {
+                    return result.collider.gameObject;
+                }
+                break;
+        }
+
+        //Debug.Log("Unit::CheckTileForEnemy - No Enemy found in tile: " + position);
+
+        return null;
+    }
+
+    public GameObject CheckTileForAlly(Vector3 position)
+    {
+        RaycastHit2D result;
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+                result = RayCast(position, LayerMask.GetMask("Cani_units"));
+                if (result.collider != null && result.collider.gameObject != gameObject)
+                {
+                    return result.collider.gameObject;
+                }
+                break;
+
+            case UnitArmy.HIPSTER:
+                result = RayCast(position, LayerMask.GetMask("Hipster_units"));
+                if (result.collider != null && result.collider.gameObject != gameObject)
+                {
+                    return result.collider.gameObject;
+                }
+                break;
+        }
+
+        return null;
+    }
+
+    public GameObject FindCapturingInfantry(List<GameObject> units)
+    {
+        foreach (GameObject unit in units)
+        {
+            if (unit.GetComponent<Unit>().unitType == UnitType.INFANTRY)
+            {
+                if (unit.GetComponent<UnitInfantry>().currentCapture != null)
+                    return unit;
+            }
+        }
+
+        return null;
+    }
+
+    public GameObject FindClosestAllyBuilding()
+    {
+        return null;
+    }
+
+    public GameObject FindClosestEnemyBuilding()
+    {
+        GameObject ret = null;
+        RaycastHit2D result;
+        int loops = 0;
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+                foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.AIVisited)
+                {
+                    loops++;
+
+                    result = RayCast(new Vector3(tile.x, tile.y), LayerMask.GetMask("Hipster_buildings"));
+                    if (result.collider != null)
+                    {
+                        if (CheckTileForAlly(new Vector3(tile.x, tile.y)) == null && CheckTileForEnemy(new Vector3(tile.x, tile.y)) == null)
+                            return result.collider.gameObject;
+                    }
+
+                    result = RayCast(new Vector3(tile.x, tile.y), LayerMask.GetMask("Neutral_buildings"));
+                    if (result.collider != null)
+                    {
+                        if (CheckTileForAlly(new Vector3(tile.x, tile.y)) == null && CheckTileForEnemy(new Vector3(tile.x, tile.y)) == null)
+                            return result.collider.gameObject;
+                    }
+                }
+                break;
+
+            case UnitArmy.HIPSTER:
+                foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.AIVisited)
+                {
+                    result = RayCast(new Vector3(tile.x, tile.y), LayerMask.GetMask("Cani_buildings"));
+                    if (result.collider != null)
+                    {
+                        if (CheckTileForAlly(new Vector3(tile.x, tile.y)) == null && CheckTileForEnemy(new Vector3(tile.x, tile.y)) == null)
+                            return result.collider.gameObject;
+                    }
+
+                    result = RayCast(new Vector3(tile.x, tile.y), LayerMask.GetMask("Neutral_buildings"));
+                    if (result.collider != null)
+                    {
+                        if (CheckTileForAlly(new Vector3(tile.x, tile.y)) == null && CheckTileForEnemy(new Vector3(tile.x, tile.y)) == null)
+                            return result.collider.gameObject;
+                    }
+                }
+                break;
+        }
+
+        Debug.Log("Unit::FindClosestEnemyBuilding - Loops = " + loops);
+
+        if (ret != null)
+            Debug.Log("Unit::FindClosestEnemyBuilding - Found Building: " + ret.name + " in Position: " + ret.transform.position);
+        else
+            Debug.Log("Unit::FindClosestEnemyBuilding - No Enemy Building found");
+
+        return ret;
+    }
+
+    public RaycastHit2D RayCast(Vector3 position, int layer)
+    {
+        Vector2 from = position + new Vector3(0.5f, -0.5f, 0);
+        Vector2 to = from;
+
+        return Physics2D.Linecast(from, to, layer);
     }
 
     void SubscribeToEvents()

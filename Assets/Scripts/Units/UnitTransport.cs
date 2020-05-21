@@ -205,6 +205,11 @@ public class UnitTransport : MonoBehaviour
         EnableLoadSign(false);
     }
 
+    public void OnAI()
+    {
+        FindObjectOfType<AIController>().ToIdle();
+    }
+
     void SubscribeToEvents()
     {
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_w_down.AddListener(SelectNextDropPosition);

@@ -38,7 +38,7 @@ public class UnitRanged : MonoBehaviour
     void SearchForTargets()
     {
         GameObject mapController = GameObject.Find("Map Controller");
-        mapController.GetComponent<MapController>().ExecuteRangedPathfinding(gameObject);
+        mapController.GetComponent<MapController>().ExecuteRangedPathfinding(MapController.Pathfinder.MAIN, gameObject);
 
         List<Vector2Int> nodes = mapController.GetComponent<MapController>().pathfinding.rangedAttackRange;
 

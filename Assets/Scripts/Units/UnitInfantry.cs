@@ -324,4 +324,79 @@ public class UnitInfantry : MonoBehaviour
         //transport
         SuccessfullyDropped.Invoke();
     }
+
+    public void OnAI()
+    {
+        //interrompre captura
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
+
+        //buscar infanteria enemiga capturant
+        List<GameObject> targets = GetComponent<Unit>().GetTargetsFromAttackRange();
+        GameObject target = GetComponent<Unit>().FindCapturingInfantry(targets);
+
+        if (target != null)
+        {
+            Debug.Log("UnitInfantry::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+            return;
+        }
+
+        //buscar edifici més proper per capturar a peu
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 9, gameObject);
+        GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding();
+
+        if (closestBuilding != null)
+        {
+            Debug.Log("UnitInfantry::OnAI - Found Building: " + closestBuilding.name + " in Position: " + closestBuilding.transform.position);
+            RoadToEnemyBuilding(closestBuilding);
+        }
+    }
+
+    void RoadToEnemyBuilding(GameObject building)
+    {
+        Debug.Log("UnitInfantry::RoadToEnemyBuilding");
+
+        //posar la AI en Bussy
+        FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+        Vector2Int goal = new Vector2Int((int)building.transform.position.x, (int)building.transform.position.y);
+        Vector2Int nextStep = new Vector2Int(-1, -1);
+
+        if (FindObjectOfType<MapController>().pathfinding.visited.Contains(goal) && GetComponent<Unit>().CheckTileForAlly(new Vector3(goal.x, goal.y)) == null)
+            nextStep = goal;
+        else
+        {
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 9); //executem pathfinding al revés, és a dir des de la casella objectiu
+            List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
+
+            foreach (Vector2Int intersection in intersections)
+            {
+                if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
+                {
+                    nextStep = intersection;
+                    Debug.Log("UnitInfantry::RoadToEnemyBuilding - Found Closest Available Tile to Goal at Position: " + nextStep);
+                    break;
+                }
+            }
+        }
+
+        if (nextStep != new Vector2Int(-1, -1))
+        {
+            GetComponent<Unit>().OnMove(nextStep);
+        }
+        else
+        {
+            GetComponent<Unit>().OnMove(new Vector2Int((int)transform.position.x, (int)transform.position.y));
+        }
+
+        GetComponent<Unit>().finishedMoving.AddListener(Decide);
+    }
+
+    void Decide()
+    {
+        GetComponent<Unit>().finishedMoving.RemoveListener(Decide);
+
+        //GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding();
+
+        GetComponent<Unit>().OnWait();
+    }
 }
