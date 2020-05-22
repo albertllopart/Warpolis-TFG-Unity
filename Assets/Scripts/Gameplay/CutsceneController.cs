@@ -285,7 +285,10 @@ public class CutsceneController : MonoBehaviour
                 }
                 else
                 {
-                    gameplayController.GetComponent<GameplayController>().DisableMenuUnit();
+                    if (!FindObjectOfType<AIController>().inControl)
+                        gameplayController.GetComponent<GameplayController>().DisableMenuUnit();
+                    else
+                        FindObjectOfType<AIController>().ToIdle();
                 }
             }
 

@@ -52,6 +52,16 @@ public class CameraController : MonoBehaviour
 
         if (ftwToRest)
             FtwRest();
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Vector3 mouse = Input.mousePosition;
+            mouse = Camera.main.ScreenToWorldPoint(mouse);
+            mouse.x = (int)mouse.x;
+            mouse.y = (int)mouse.y;
+            mouse.z = 0;
+            FindObjectOfType<MapController>().LogTileInfo(mouse);
+        }
     }
 
     public void CalculateCameraCorners()

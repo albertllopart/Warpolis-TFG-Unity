@@ -526,6 +526,8 @@ public class Unit : MonoBehaviour
             if (unitType == (uint)UnitType.INFANTRY)
                 GetComponent<UnitInfantry>().toStopCapture = true;
 
+            UpdateTileInfo();
+
             lastPosition = transform.position;
 
             EnableUIHitPoints(true);
@@ -539,23 +541,42 @@ public class Unit : MonoBehaviour
 
     public void OnWaitWithCapture() //aquesta funció es crida per conservar la captura en comptes de OnWait que li restableix la vida màxima
     {
-        Highlight(false);
+        if (!FindObjectOfType<AIController>().inControl)
+        {
+            Highlight(false);
 
-        state = UnitState.WAITING;
+            state = UnitState.WAITING;
 
-        UpdateTileInfo();
+            UpdateTileInfo();
 
-        lastPosition = transform.position;
+            lastPosition = transform.position;
 
-        EnableUIHitPoints(true);
-        GetComponent<UnitInfantry>().EnableUICaptureSign(true);
-        ResetTargeting();
-        ResetDirection();
-        UpdateAnimator();
+            EnableUIHitPoints(true);
+            GetComponent<UnitInfantry>().EnableUICaptureSign(true);
+            ResetTargeting();
+            ResetDirection();
+            UpdateAnimator();
 
-        UnsubscribeFromEvents();
+            UnsubscribeFromEvents();
 
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+        }
+        else
+        {
+            state = UnitState.WAITING;
+
+            UpdateTileInfo();
+
+            lastPosition = transform.position;
+
+            EnableUIHitPoints(true);
+            GetComponent<UnitInfantry>().EnableUICaptureSign(true);
+            ResetTargeting();
+            ResetDirection();
+            UpdateAnimator();
+
+            finishedAI.Invoke();
+        }
     }
 
     public void OnMove(Vector2Int goal)
@@ -603,10 +624,14 @@ public class Unit : MonoBehaviour
 
     public void OnAttack()
     {
+        //eliminar listeners de la IA
+        if (FindObjectOfType<AIController>().inControl)
+            finishedMoving.RemoveListener(OnAttack);
+
         EnableUIDamageInfo(false);
         AttackTarget();
 
-        if (hitPoints > 0 && currentTarget.GetComponent<Unit>().hitPoints > 0)
+        if (hitPoints > 4 && currentTarget.GetComponent<Unit>().hitPoints > 4)
             OnWait();
 
         Untarget();
@@ -707,6 +732,9 @@ public class Unit : MonoBehaviour
 
             map.pathfinding.MyTilemap[(int)lastPosition.x, -(int)lastPosition.y].containsCani = false;
             map.pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsCani = true;
+
+            map.auxiliarPathfinding.MyTilemap[(int)lastPosition.x, -(int)lastPosition.y].containsCani = false;
+            map.auxiliarPathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsCani = true;
         }
         
         if (army == UnitArmy.HIPSTER)
@@ -715,6 +743,9 @@ public class Unit : MonoBehaviour
 
             map.pathfinding.MyTilemap[(int)lastPosition.x, -(int)lastPosition.y].containsHipster = false;
             map.pathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsHipster = true;
+
+            map.auxiliarPathfinding.MyTilemap[(int)lastPosition.x, -(int)lastPosition.y].containsHipster = false;
+            map.auxiliarPathfinding.MyTilemap[(int)transform.position.x, -(int)transform.position.y].containsHipster = true;
         }
     }
 
@@ -940,6 +971,8 @@ public class Unit : MonoBehaviour
     {
         UITarget.transform.position = transform.position;
         UITarget.SetActive(false);
+
+        currentTarget = null;
     }
 
     void AttackTarget()
@@ -954,7 +987,7 @@ public class Unit : MonoBehaviour
         {
             case UnitType.RANGED:
 
-                if (currentTarget.GetComponent<Unit>().hitPoints > 0)
+                if (currentTarget.GetComponent<Unit>().hitPoints > 4) //4 és un nombre arbitrari (5 és el 10% de la vida màxima) és per evitar decimals ínfims que facin impossible derrotar-se un a altre
                 {
                     UpdateHitpoints(currentTarget);
                 }
@@ -968,7 +1001,7 @@ public class Unit : MonoBehaviour
 
             default:
 
-                if (currentTarget.GetComponent<Unit>().hitPoints > 0)
+                if (currentTarget.GetComponent<Unit>().hitPoints > 4)
                 {
                     UpdateHitpoints(currentTarget);
 
@@ -977,7 +1010,7 @@ public class Unit : MonoBehaviour
                         float defensiveDamage = currentTarget.GetComponent<Unit>().DamageFormula(gameObject);
                         hitPoints -= RatioToInt(defensiveDamage);
 
-                        if (hitPoints <= 0)
+                        if (hitPoints <= 4)
                         {
                             GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().attackingUnit = gameObject; //setegem attackingUnit per wincon amb suicidi
                             MyOnDestroy();
@@ -1150,6 +1183,21 @@ public class Unit : MonoBehaviour
         return ret;
     }
 
+    public List<GameObject> GetAlliesFromMoveRange()
+    {
+        List<GameObject> ret = new List<GameObject>();
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.visited)
+        {
+            GameObject unit = CheckTileForAlly(new Vector3(tile.x, tile.y));
+
+            if (unit != null)
+                ret.Add(unit);
+        }
+
+        return ret;
+    }
+
     GameObject CheckTileForEnemy(Vector3 position)
     {
         RaycastHit2D result;
@@ -1218,6 +1266,19 @@ public class Unit : MonoBehaviour
         return null;
     }
 
+    public GameObject FindClosestUnit(List<GameObject> units, UnitType type)
+    {
+        foreach (GameObject unit in units)
+        {
+            if (unit.GetComponent<Unit>().unitType == type)
+            {
+                return unit;
+            }
+        }
+
+        return null;
+    }
+
     public GameObject FindClosestAllyBuilding()
     {
         return null;
@@ -1227,15 +1288,12 @@ public class Unit : MonoBehaviour
     {
         GameObject ret = null;
         RaycastHit2D result;
-        int loops = 0;
 
         switch (army)
         {
             case UnitArmy.CANI:
                 foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.AIVisited)
                 {
-                    loops++;
-
                     result = RayCast(new Vector3(tile.x, tile.y), LayerMask.GetMask("Hipster_buildings"));
                     if (result.collider != null)
                     {
@@ -1272,14 +1330,47 @@ public class Unit : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Unit::FindClosestEnemyBuilding - Loops = " + loops);
-
         if (ret != null)
             Debug.Log("Unit::FindClosestEnemyBuilding - Found Building: " + ret.name + " in Position: " + ret.transform.position);
         else
             Debug.Log("Unit::FindClosestEnemyBuilding - No Enemy Building found");
 
         return ret;
+    }
+
+    public bool AttackEnemyInRange(GameObject enemy)
+    {
+        //retorna true si troba una casella disponible des de la qual atacar l'enemic
+        Vector2Int goal = new Vector2Int((int)enemy.transform.position.x, (int)enemy.transform.position.y);
+        Vector2Int nextStep = new Vector2Int(-1, -1);
+
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject);
+        List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
+
+        foreach (Vector2Int intersection in intersections)
+        {
+            if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
+            {
+                nextStep = intersection;
+                Debug.Log("Unit::AttackEnemyInRange - Found Closest Available Tile to Enemy at Position: " + nextStep);
+                break;
+            }
+        }
+
+        if (nextStep != new Vector2Int(-1, -1))
+        {
+            //posar la AI en Bussy
+            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+            GetComponent<Unit>().OnMove(nextStep);
+            currentTarget = enemy;
+            finishedMoving.AddListener(OnAttack);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public RaycastHit2D RayCast(Vector3 position, int layer)

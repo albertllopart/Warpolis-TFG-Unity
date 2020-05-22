@@ -89,6 +89,12 @@ public class UnitInfantry : MonoBehaviour
 
     public void OnCapture()
     {
+        //eliminem listeners de IA
+        if (FindObjectOfType<AIController>().inControl)
+        {
+            GetComponent<Unit>().finishedMoving.RemoveListener(OnCapture);
+        }
+
         //comprovem que l'edifici que volem capturar és el mateix que abans, en cas contrari resetegem l'anterior
         if (currentCapture != null && currentCapture != SearchForOtherBuilding())
             StopCapture();
@@ -231,7 +237,14 @@ public class UnitInfantry : MonoBehaviour
         GetComponent<Unit>().state = UnitState.DROPPED;
 
         gameObject.SetActive(false);
-        GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+
+        if (!FindObjectOfType<AIController>().inControl)
+            GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+        else
+        {
+            GetComponent<Unit>().finishedMoving.RemoveListener(OnLoad);
+            GetComponent<Unit>().finishedAI.Invoke();
+        }
     }
 
     public void OnDropped(Vector2Int origin, Vector2Int goal)
@@ -327,8 +340,25 @@ public class UnitInfantry : MonoBehaviour
 
     public void OnAI()
     {
-        //interrompre captura
+        if (currentCapture != null) //si ja es troba capturant seguim capturant
+        {
+            OnCapture();
+            return;
+        }
+
         FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
+
+        //buscar edifici dins de rang de moviment
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 9, gameObject);
+        GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding(); //aquest edifici no conté cap unitat garantit
+
+        if (closestBuilding != null)
+        {
+            Debug.Log("UnitInfantry::OnAI - Found Building: " + closestBuilding.name + " in Position: " + closestBuilding.transform.position);
+
+            if (EnemyBuildingInRange(closestBuilding))
+                return;
+        }
 
         //buscar infanteria enemiga capturant
         List<GameObject> targets = GetComponent<Unit>().GetTargetsFromAttackRange();
@@ -337,18 +367,105 @@ public class UnitInfantry : MonoBehaviour
         if (target != null)
         {
             Debug.Log("UnitInfantry::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+            GetComponent<Unit>().AttackEnemyInRange(target);
             return;
         }
 
-        //buscar edifici més proper per capturar a peu
-        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 9, gameObject);
-        GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding();
+        //buscar ranged enemic dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.RANGED);
 
+        if (target != null)
+        {
+            Debug.Log("UnitInfantry::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+            GetComponent<Unit>().AttackEnemyInRange(target);
+            return;
+        }
+
+        //buscar infanteria enemiga dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.INFANTRY);
+
+        if (target != null)
+        {
+            Debug.Log("UnitInfantry::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+            GetComponent<Unit>().AttackEnemyInRange(target);
+            return;
+        }
+
+        //buscar transport enemic dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.TRANSPORT);
+
+        if (target != null)
+        {
+            Debug.Log("UnitInfantry::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+            GetComponent<Unit>().AttackEnemyInRange(target);
+            return;
+        }
+
+        //buscar transport dins de rang de moviment
+        List<GameObject> allies = GetComponent<Unit>().GetAlliesFromMoveRange();
+        GameObject transport = FindAvailableTransport(allies);
+
+        if (transport != null)
+        {
+            //posar la AI en Bussy
+            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+            Debug.Log("UnitInfantry::OnAI - Found Available Transport: " + transport.name + " in Position: " + transport.transform.position);
+            GetComponent<Unit>().OnMove(new Vector2Int((int)transport.transform.position.x, (int)transport.transform.position.y));
+            GetComponent<Unit>().finishedMoving.AddListener(OnLoad);
+            return;
+        }
+
+        //buscar edifici més proper fora de rang de moviment
         if (closestBuilding != null)
         {
-            Debug.Log("UnitInfantry::OnAI - Found Building: " + closestBuilding.name + " in Position: " + closestBuilding.transform.position);
             RoadToEnemyBuilding(closestBuilding);
+            return;
         }
+
+        //si no ha trobat res per fer toca moure cap al punt d'interès més proper (el punt d'interès és una casella col·locada a dit per orientar la IA pel mapa)
+        Decide();
+    }
+
+    bool EnemyBuildingInRange(GameObject building)
+    {
+        //retorna true si troba un edifici dins del rang de moviment de la unitat
+        Vector2Int goal = new Vector2Int((int)building.transform.position.x, (int)building.transform.position.y);
+        Vector2Int nextStep = new Vector2Int(-1, -1);
+
+        if (FindObjectOfType<MapController>().pathfinding.visited.Contains(goal) && GetComponent<Unit>().CheckTileForAlly(new Vector3(goal.x, goal.y)) == null)
+            nextStep = goal;
+
+        if (nextStep != new Vector2Int(-1, -1))
+        {
+            //posar la AI en Bussy
+            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+            GetComponent<Unit>().OnMove(nextStep);
+            GetComponent<Unit>().finishedMoving.AddListener(OnCapture);
+            return true;
+        }
+        
+        return false;
+    }
+
+    GameObject FindAvailableTransport(List<GameObject> allies)
+    {
+        GameObject ret = null;
+
+        foreach (GameObject ally in allies)
+        {
+            if (ally.GetComponent<Unit>().unitType == UnitType.TRANSPORT)
+            {
+                if (ally.GetComponent<UnitTransport>().loadedUnit == null)//si no està ocupat
+                {
+                    ret = ally;
+                    break;
+                }
+            }
+        }
+
+        return ret;
     }
 
     void RoadToEnemyBuilding(GameObject building)
@@ -361,21 +478,16 @@ public class UnitInfantry : MonoBehaviour
         Vector2Int goal = new Vector2Int((int)building.transform.position.x, (int)building.transform.position.y);
         Vector2Int nextStep = new Vector2Int(-1, -1);
 
-        if (FindObjectOfType<MapController>().pathfinding.visited.Contains(goal) && GetComponent<Unit>().CheckTileForAlly(new Vector3(goal.x, goal.y)) == null)
-            nextStep = goal;
-        else
-        {
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 9); //executem pathfinding al revés, és a dir des de la casella objectiu
-            List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 9); //executem pathfinding al revés, és a dir des de la casella objectiu
+        List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
-            foreach (Vector2Int intersection in intersections)
+        foreach (Vector2Int intersection in intersections)
+        {
+            if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
             {
-                if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
-                {
-                    nextStep = intersection;
-                    Debug.Log("UnitInfantry::RoadToEnemyBuilding - Found Closest Available Tile to Goal at Position: " + nextStep);
-                    break;
-                }
+                nextStep = intersection;
+                Debug.Log("UnitInfantry::RoadToEnemyBuilding - Found Closest Available Tile to Goal at Position: " + nextStep);
+                break;
             }
         }
 

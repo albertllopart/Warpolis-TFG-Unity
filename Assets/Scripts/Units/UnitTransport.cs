@@ -207,7 +207,233 @@ public class UnitTransport : MonoBehaviour
 
     public void OnAI()
     {
-        FindObjectOfType<AIController>().ToIdle();
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 15, gameObject);
+
+        if (loadedUnit != null)
+        {
+            //buscar edifici més proper i descarregar-hi la unitat
+            GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding();
+
+            if (closestBuilding != null)
+            {
+                Debug.Log("UnitTransport::OnAI - Found Building: " + closestBuilding.name + " in Position: " + closestBuilding.transform.position);
+                RoadToBuilding(closestBuilding);
+                return;
+            }
+        }
+        else
+        {
+            //buscar una infanteria idle i amb vida màxima a la vora
+            GameObject ally = LocateAllyInfantryAI();
+
+            if (ally != null)
+            {
+                RoadToAlly(ally);
+                return;
+            }
+
+            //buscar la infanteria més propera a la base
+            GameObject myBase = FindObjectOfType<AIController>().myBase;
+            Vector2Int basePosition = new Vector2Int((int)myBase.transform.position.x, (int)myBase.transform.position.y);
+
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, basePosition, gameObject, 10);
+
+            ally = LocateAllyInfantryAuxiliar();
+
+            if (ally != null)
+            {
+                RoadToAlly(ally);
+                return;
+            }
+        }
+
+        Decide();
+    }
+
+    GameObject LocateAllyInfantryAuxiliar()
+    {
+        GameObject ret = null;
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().auxiliarPathfinding.visited)
+        {
+            GameObject ally = GetComponent<Unit>().CheckTileForAlly(new Vector3(tile.x, tile.y));
+
+            if (ally != null && ally.GetComponent<Unit>().unitType == UnitType.INFANTRY && ally.GetComponent<UnitInfantry>().currentCapture == null) //si la unitat és una infanteria i no està capturant
+            {
+                ret = ally;
+                Debug.Log("UnitTransport::LocateAllyInfantryAuxiliar - Located Idle Ally: " + ally.name + "in Position: " + ally.transform.position);
+                break;
+            }
+        }
+
+        if (ret == null)
+            Debug.Log("UnitTransport::LocateAllyInfantryAuxiliar - No Ally Infantry found");
+
+        return ret;
+    }
+
+    GameObject LocateAllyInfantryAI()
+    {
+        GameObject ret = null;
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.AIVisited)
+        {
+            GameObject ally = GetComponent<Unit>().CheckTileForAlly(new Vector3(tile.x, tile.y));
+
+            if (ally != null && ally.GetComponent<Unit>().unitType == UnitType.INFANTRY && ally.GetComponent<Unit>().hitPoints == 50 && ally.GetComponent<UnitInfantry>().currentCapture == null) //si la unitat és una infanteria, té tota la vida i no està capturant
+            {
+                ret = ally;
+                Debug.Log("UnitTransport::LocateAllyInfantryAI - Located Idle Ally: " + ally.name + "in Position: " + ally.transform.position);
+                break;
+            }
+        }
+
+        if (ret == null)
+            Debug.Log("UnitTransport::LocateAllyInfantryAI - No Ally Infantry found");
+
+        return ret;
+    }
+
+    bool RoadToAlly(GameObject ally)
+    {
+        Vector2Int goal = new Vector2Int((int)ally.transform.position.x, (int)ally.transform.position.y);
+        Vector2Int nextStep = new Vector2Int(-1, -1);
+
+        if (FindObjectOfType<MapController>().pathfinding.visited.Contains(goal))
+        {
+            //executem pathfinding des de la casella de la infanteria per col·locar-nos dins del seu rang de movimen
+            nextStep = GetFurthestTileFromAllyRange(ally);
+        }
+        else
+        {
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 15); //executem pathfinding al revés, és a dir des de la casella objectiu
+            List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
+
+            foreach (Vector2Int intersection in intersections)
+            {
+                if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
+                {
+                    nextStep = intersection;
+                    Debug.Log("UnitTransport::RoadToAlly - Found Closest Available Tile to Goal at Position: " + nextStep);
+                    break;
+                }
+            }
+        }
+
+        if (nextStep != new Vector2Int(-1, -1))
+        {
+            //posar la AI en Bussy
+            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+            GetComponent<Unit>().OnMove(nextStep);
+            GetComponent<Unit>().finishedMoving.AddListener(Decide);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool RoadToBuilding(GameObject building)
+    {
+        Vector2Int goal = new Vector2Int((int)building.transform.position.x, (int)building.transform.position.y);
+        Vector2Int nextStep = new Vector2Int(-1, -1);
+
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 4);
+        nextStep = GetClosestTileFromBuilding(building);
+
+        if (nextStep != new Vector2Int(-1, -1)) //vol dir que la casella està dins del rang del transport
+        {
+            //posar la AI en Bussy
+            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+            GetComponent<Unit>().OnMove(nextStep);
+            GetComponent<Unit>().finishedMoving.AddListener(AttemptUnload);
+            return true;
+        }
+        else
+        {
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 15); //executem pathfinding al revés, és a dir des de la casella objectiu
+            List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
+
+            foreach (Vector2Int intersection in intersections)
+            {
+                if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
+                {
+                    nextStep = intersection;
+                    Debug.Log("UnitTransport::RoadToBuilding - Found Closest Available Tile to Goal at Position: " + nextStep);
+                    break;
+                }
+            }
+        }
+
+        if (nextStep != new Vector2Int(-1, -1))
+        {
+            //posar la AI en Bussy
+            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+
+            GetComponent<Unit>().OnMove(nextStep);
+            GetComponent<Unit>().finishedMoving.AddListener(Decide);
+            return true;
+        }
+
+        return false;
+    }
+
+    Vector2Int GetFurthestTileFromAllyRange(GameObject ally)
+    {
+        Vector2Int allyPosition = new Vector2Int((int)ally.transform.position.x, (int)ally.transform.position.y);
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, ally);
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.visited)
+        {
+            if (FindObjectOfType<MapController>().auxiliarPathfinding.visited.Contains(tile))
+                return tile;
+        }
+
+        return new Vector2Int(-1, -1);
+    }
+
+    Vector2Int GetClosestTileFromBuilding(GameObject building)
+    {
+        Vector2Int buildingPosition = new Vector2Int((int)building.transform.position.x, (int)building.transform.position.y);
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.visited)
+        {
+            if (FindObjectOfType<MapController>().auxiliarPathfinding.visited.Contains(tile) && GetComponent<Unit>().CheckTileForAlly(new Vector3(tile.x, tile.y)) == null)
+                return tile;
+        }
+
+        return new Vector2Int(-1, -1);
+    }
+
+    void AttemptUnload()
+    {
+        GetComponent<Unit>().finishedMoving.RemoveListener(AttemptUnload);
+
+        Vector2Int myPos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, myPos, gameObject, 1);
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().auxiliarPathfinding.visited)
+        {
+            if (FindObjectOfType<MapController>().pathfinding.visited.Contains(tile))
+            {
+                if (tile != myPos && GetComponent<Unit>().CheckTileForAlly(new Vector3(tile.x, tile.y)) == null)
+                {
+                    currentDropPosition = tile;
+                    OnDrop();
+                }
+            }
+        }
+    }
+
+    void Decide()
+    {
+        GetComponent<Unit>().finishedMoving.RemoveListener(Decide);
+
+        //GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding();
+
+        GetComponent<Unit>().OnWait();
     }
 
     void SubscribeToEvents()

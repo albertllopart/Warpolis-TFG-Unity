@@ -807,6 +807,46 @@ public class MapController : MonoBehaviour
         tilemapPlayer.ClearAllTiles();
     }
 
+    public void LogTileInfo(Vector3 position)
+    {
+        MyTile tile = pathfinding.MyTilemap[(int)position.x, -(int)position.y];
+        string tileType = "null";
+
+        switch (tile.type)
+        {
+            case MyTileType.NEUTRAL:
+                tileType = "Neutral";
+                break;
+
+            case MyTileType.ROAD:
+                tileType = "Road";
+                break;
+
+            case MyTileType.SEA:
+                tileType = "Sea";
+                break;
+
+            case MyTileType.CONE:
+                tileType = "Cone";
+                break;
+
+            case MyTileType.PLANTPOT:
+                tileType = "Plantpot";
+                break;
+
+            case MyTileType.LAMP:
+                tileType = "Lamp";
+                break;
+
+            case MyTileType.BUILDING:
+                tileType = "Building";
+                break;
+        }
+        Debug.Log("MapController::LogTileInfo - " + position +
+                  ", Tile info: " + tileType + ", Is Walkable = " + tile.isWalkable +
+                  ", Contains Cani: " + tile.containsCani + ", Contains Hipster: " + tile.containsHipster);
+    }
+
     //events
 
     void SubscribeToEvents()

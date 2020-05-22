@@ -20,6 +20,9 @@ public class AIController : MonoBehaviour
     GameObject currentUnit;
     GameObject currentFactory;
 
+    public GameObject myBase;
+    public GameObject enemyBase;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,7 +110,8 @@ public class AIController : MonoBehaviour
             case UnitArmy.CANI:
                 foreach (GameObject unit in FindObjectOfType<UnitsController>().caniUnits)
                 {
-                    availableUnits.Add(unit);
+                    if (unit.activeSelf)
+                        availableUnits.Add(unit);
                 }
                 foreach (GameObject factory in FindObjectOfType<BuildingsController>().caniBuildings)
                 {
@@ -119,7 +123,8 @@ public class AIController : MonoBehaviour
             case UnitArmy.HIPSTER:
                 foreach (GameObject unit in FindObjectOfType<UnitsController>().hipsterUnits)
                 {
-                    availableUnits.Add(unit);
+                    if (unit.activeSelf)
+                        availableUnits.Add(unit);
                 }
                 foreach (GameObject factory in FindObjectOfType<BuildingsController>().hipsterBuildings)
                 {
@@ -140,10 +145,6 @@ public class AIController : MonoBehaviour
     {
         //ordena les fàbriques de més propera a la base enemiga a més llunyana, per d'aquesta manera construir les unitats més importants més a prop del conflicte
         availableFactories.OrderBy(availableFactories => availableFactories.transform.position.x);
-
-        //localitzar bases
-        GameObject myBase = null;
-        GameObject enemyBase = null;
 
         switch (currentArmy)
         {
@@ -244,8 +245,12 @@ public class AIController : MonoBehaviour
 
     public void ToIdle()
     {
-        currentUnit.GetComponent<Unit>().finishedAI.RemoveListener(ToIdle);
-        currentUnit = null;
+        if (currentUnit != null)
+        {
+            currentUnit.GetComponent<Unit>().finishedAI.RemoveListener(ToIdle);
+            currentUnit = null;
+        }
+
         state = AIState.IDLE;
     }
 
