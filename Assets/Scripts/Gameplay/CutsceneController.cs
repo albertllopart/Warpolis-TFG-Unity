@@ -275,6 +275,7 @@ public class CutsceneController : MonoBehaviour
             {
                 gameplayController.GetComponent<GameplayController>().DisableMenuUnit();
                 DisableGameplay();
+                DisableAI();
             }
             else
             {
@@ -774,6 +775,11 @@ public class CutsceneController : MonoBehaviour
     {
         gameplayController.GetComponent<GameplayController>().MyOnDisable();
         gameplayController.SetActive(false);
+    }
+
+    void DisableAI()
+    {
+        FindObjectOfType<AIController>().MyOnDisable();
     }
 
     void EnableCPU()

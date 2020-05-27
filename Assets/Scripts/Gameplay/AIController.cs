@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class AIController : MonoBehaviour
 {
@@ -23,10 +24,15 @@ public class AIController : MonoBehaviour
     public GameObject myBase;
     public GameObject enemyBase;
 
+    //timer
+    float time = 0.0f;
+    float timer = 0.0f;
+    public UnityEvent finishedAITimer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        finishedAITimer = new UnityEvent();
     }
 
     // Update is called once per frame
@@ -36,6 +42,11 @@ public class AIController : MonoBehaviour
         {
             Control();
         }
+    }
+
+    public void MyOnDisable()
+    {
+        inControl = false;
     }
 
     public bool JudgeCommander()
@@ -105,13 +116,21 @@ public class AIController : MonoBehaviour
         availableUnits = new List<GameObject>();
         availableFactories = new List<GameObject>();
 
+        //ordenar unitats
+        List<GameObject> availableTransports = new List<GameObject>();
+
         switch (currentArmy)
         {
             case UnitArmy.CANI:
                 foreach (GameObject unit in FindObjectOfType<UnitsController>().caniUnits)
                 {
                     if (unit.activeSelf)
-                        availableUnits.Add(unit);
+                    {
+                        if (unit.GetComponent<Unit>().unitType != UnitType.TRANSPORT)
+                            availableUnits.Add(unit);
+                        else
+                            availableTransports.Add(unit);
+                    }
                 }
                 foreach (GameObject factory in FindObjectOfType<BuildingsController>().caniBuildings)
                 {
@@ -124,7 +143,12 @@ public class AIController : MonoBehaviour
                 foreach (GameObject unit in FindObjectOfType<UnitsController>().hipsterUnits)
                 {
                     if (unit.activeSelf)
-                        availableUnits.Add(unit);
+                    {
+                        if (unit.GetComponent<Unit>().unitType != UnitType.TRANSPORT)
+                            availableUnits.Add(unit);
+                        else
+                            availableTransports.Add(unit);
+                    }
                 }
                 foreach (GameObject factory in FindObjectOfType<BuildingsController>().hipsterBuildings)
                 {
@@ -139,6 +163,9 @@ public class AIController : MonoBehaviour
 
         if (availableFactories.Count > 0)
             SortFactories();
+
+        if (availableUnits.Count > 0)
+            SortUnits(availableTransports);
     }
 
     void SortFactories()
@@ -165,6 +192,12 @@ public class AIController : MonoBehaviour
         }
     }
 
+    void SortUnits(List<GameObject> transports)
+    {
+        foreach (GameObject transport in transports)
+            availableUnits.Add(transport);
+    }
+
     void Control()
     {
         switch(state)
@@ -173,8 +206,8 @@ public class AIController : MonoBehaviour
 
                 if (SelectEntity())
                 {
+                    state = AIState.BUSSY;
                     CommandEntity();
-                    //state = AIState.BUSSY;
                 }
                 else
                 {
@@ -226,6 +259,8 @@ public class AIController : MonoBehaviour
             //mirar si hi ha unitats al damunt
             if (CheckIfAvailable(currentFactory.transform.position))
                 CommandFactory();
+
+            state = AIState.IDLE;
         }
     }
 
@@ -237,6 +272,24 @@ public class AIController : MonoBehaviour
 
     void CommandFactory()
     {
+        switch (JudgeTriangle())
+        {
+            case UnitType.TANK:
+                if (CreateTank())
+                    return;
+                break;
+
+            case UnitType.AERIAL:
+                if (CreateAerial())
+                    return;
+                break;
+
+            case UnitType.GUNNER:
+                if (CreateGunner())
+                    return;
+                break;
+        }
+
         if (JudgeInfantry())
             CreateInfantry();
         else if (JudgeTransport())
@@ -251,6 +304,18 @@ public class AIController : MonoBehaviour
             currentUnit = null;
         }
 
+        if (availableUnits.Count == 0)
+        {
+            SetAITimer(1);
+            finishedAITimer.AddListener(TestingTimer);
+        }
+        else
+            state = AIState.IDLE;
+    }
+
+    void TestingTimer()
+    {
+        finishedAITimer.RemoveListener(TestingTimer);
         state = AIState.IDLE;
     }
 
@@ -263,7 +328,7 @@ public class AIController : MonoBehaviour
         {
             return true;
         }
-        else if (transportCount > 0 && infantryCount / transportCount < 6f)
+        else if (transportCount > 0 && infantryCount / transportCount < 6f && infantryCount < 6)
         {
             return true;
         }
@@ -288,9 +353,45 @@ public class AIController : MonoBehaviour
         return false;
     }
 
+    UnitType JudgeTriangle()
+    {
+        UnitType ret = UnitType.TANK;
+
+        int money = 0;
+        UnitArmy enemy = currentArmy;
+        switch (currentArmy)
+        {
+            case UnitArmy.CANI:
+                enemy = UnitArmy.HIPSTER;
+                money = FindObjectOfType<DataController>().caniMoney;
+                break;
+
+            case UnitArmy.HIPSTER:
+                enemy = UnitArmy.CANI;
+                money = FindObjectOfType<DataController>().hipsterMoney;
+                break;
+        }
+
+        uint myTankCount = FindObjectOfType<UnitsController>().GetUnitCount(currentArmy, UnitType.TANK);
+        uint enemyTankCount = FindObjectOfType<UnitsController>().GetUnitCount(enemy, UnitType.TANK);
+        uint myAerialCount = FindObjectOfType<UnitsController>().GetUnitCount(currentArmy, UnitType.AERIAL);
+        uint enemyAerialCount = FindObjectOfType<UnitsController>().GetUnitCount(enemy, UnitType.AERIAL);
+        uint myGunnerCount = FindObjectOfType<UnitsController>().GetUnitCount(currentArmy, UnitType.GUNNER);
+        uint enemyGunnerCount = FindObjectOfType<UnitsController>().GetUnitCount(enemy, UnitType.GUNNER);
+
+        if (myTankCount < enemyGunnerCount)
+            ret = UnitType.TANK;
+        else if (myAerialCount < enemyTankCount && money >= FindObjectOfType<UnitsController>().caniAerial.GetComponent<Unit>().shopValue)
+            ret = UnitType.AERIAL;
+        else if (myGunnerCount < enemyAerialCount && money >= FindObjectOfType<UnitsController>().caniGunner.GetComponent<Unit>().shopValue)
+            ret = UnitType.GUNNER;
+
+        return ret;
+    }
+
     bool CheckIfAvailable(Vector3 position)
     {
-        //returna false si troba una unitat a la casella, true si no
+        //retorna false si troba una unitat a la casella, true si no
 
         List<RaycastHit2D> results = new List<RaycastHit2D>();
 
@@ -321,6 +422,43 @@ public class AIController : MonoBehaviour
         return Physics2D.Linecast(from, to, layer);
     }
 
+    public bool CheckRoutine(System.Diagnostics.Stopwatch st)
+    {
+        //retorna true si considera que la rutina s'ha d'interrompre
+        bool ret = false;
+
+        st.Stop();
+        if (st.ElapsedMilliseconds > 12)
+        {
+            st.Reset();
+            Debug.Log("AIController::CheckRoutine - Paused Routine");
+            ret = true;
+        }
+        st.Start();
+
+        return ret;
+    }
+
+    public void SetAITimer(float seconds)
+    {
+        timer = 0.0f;
+        time = seconds;
+
+        StartCoroutine(AITimer());
+    }
+
+    IEnumerator AITimer()
+    {
+        while (timer < time)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        finishedAITimer.Invoke();
+        yield break;
+    }
+
     bool CreateInfantry()
     {
         return FindObjectOfType<UnitsController>().InstantiateUnit(currentArmy, UnitType.INFANTRY, currentFactory.transform.position);
@@ -329,5 +467,25 @@ public class AIController : MonoBehaviour
     bool CreateTransport()
     {
         return FindObjectOfType<UnitsController>().InstantiateUnit(currentArmy, UnitType.TRANSPORT, currentFactory.transform.position);
+    }
+
+    bool CreateTank()
+    {
+        return FindObjectOfType<UnitsController>().InstantiateUnit(currentArmy, UnitType.TANK, currentFactory.transform.position);
+    }
+
+    bool CreateAerial()
+    {
+        return FindObjectOfType<UnitsController>().InstantiateUnit(currentArmy, UnitType.AERIAL, currentFactory.transform.position);
+    }
+
+    bool CreateGunner()
+    {
+        return FindObjectOfType<UnitsController>().InstantiateUnit(currentArmy, UnitType.GUNNER, currentFactory.transform.position);
+    }
+
+    bool CreateRanged()
+    {
+        return FindObjectOfType<UnitsController>().InstantiateUnit(currentArmy, UnitType.RANGED, currentFactory.transform.position);
     }
 }

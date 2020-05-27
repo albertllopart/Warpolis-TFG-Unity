@@ -622,11 +622,19 @@ public class Unit : MonoBehaviour
         SubscribeToEvents(); //necessito saber quan s'apreten les direccions
     }
 
+    public void OnTargetingAI(GameObject target)
+    {
+        TargetAI(target);
+        UITarget.SetActive(true);
+    }
+
     public void OnAttack()
     {
         //eliminar listeners de la IA
         if (FindObjectOfType<AIController>().inControl)
-            finishedMoving.RemoveListener(OnAttack);
+            FindObjectOfType<AIController>().finishedAITimer.RemoveListener(OnAttack);
+
+        UnsubscribeFromEvents();
 
         EnableUIDamageInfo(false);
         AttackTarget();
@@ -718,6 +726,7 @@ public class Unit : MonoBehaviour
                 else
                 {
                     finishedMoving.Invoke();
+                    UpdateStatsBasedOnTile();
                     state = UnitState.WAITING;
                 }
             }
@@ -967,6 +976,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    void TargetAI(GameObject target)
+    {
+        if (target != null)
+        {
+            UITarget.transform.position = target.transform.position;
+        }
+    }
+
     public void Untarget()
     {
         UITarget.transform.position = transform.position;
@@ -1159,11 +1176,23 @@ public class Unit : MonoBehaviour
         switch (unitType)
         {
             case UnitType.INFANTRY:
-                GetComponent<UnitInfantry>().OnAI();
+                StartCoroutine(GetComponent<UnitInfantry>().OnAI());
                 break;
 
             case UnitType.TRANSPORT:
-                GetComponent<UnitTransport>().OnAI();
+                StartCoroutine(GetComponent<UnitTransport>().OnAI());
+                break;
+
+            case UnitType.TANK:
+                StartCoroutine(GetComponent<UnitTank>().OnAI());
+                break;
+
+            case UnitType.AERIAL:
+                StartCoroutine(GetComponent<UnitAerial>().OnAI());
+                break;
+
+            case UnitType.GUNNER:
+                StartCoroutine(GetComponent<UnitGunner>().OnAI());
                 break;
         }
     }
@@ -1190,6 +1219,21 @@ public class Unit : MonoBehaviour
         foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.visited)
         {
             GameObject unit = CheckTileForAlly(new Vector3(tile.x, tile.y));
+
+            if (unit != null)
+                ret.Add(unit);
+        }
+
+        return ret;
+    }
+
+    public List<GameObject> GetTargetsFromAIPathfinding()
+    {
+        List<GameObject> ret = new List<GameObject>();
+
+        foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.AIVisited)
+        {
+            GameObject unit = CheckTileForEnemy(new Vector3(tile.x, tile.y));
 
             if (unit != null)
                 ret.Add(unit);
@@ -1279,6 +1323,19 @@ public class Unit : MonoBehaviour
         return null;
     }
 
+    public GameObject FindClosestUnitAndAvoid(List<GameObject> units, UnitType avoid)
+    {
+        foreach (GameObject unit in units)
+        {
+            if (unit.GetComponent<Unit>().unitType != avoid)
+            {
+                return unit;
+            }
+        }
+
+        return null;
+    }
+
     public GameObject FindClosestAllyBuilding()
     {
         return null;
@@ -1344,7 +1401,7 @@ public class Unit : MonoBehaviour
         Vector2Int goal = new Vector2Int((int)enemy.transform.position.x, (int)enemy.transform.position.y);
         Vector2Int nextStep = new Vector2Int(-1, -1);
 
-        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject);
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 1);
         List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
         foreach (Vector2Int intersection in intersections)
@@ -1364,13 +1421,57 @@ public class Unit : MonoBehaviour
 
             GetComponent<Unit>().OnMove(nextStep);
             currentTarget = enemy;
-            finishedMoving.AddListener(OnAttack);
+            finishedMoving.AddListener(TargetEnemyInRangeAI);
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    void TargetEnemyInRangeAI()
+    {
+        finishedMoving.RemoveListener(TargetEnemyInRangeAI);
+        OnTargetingAI(currentTarget);
+        FindObjectOfType<AIController>().SetAITimer(1);
+        FindObjectOfType<AIController>().finishedAITimer.AddListener(OnAttack);
+    }
+
+    public bool ClearFactory()
+    {
+        int layer = 0;
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+                layer = LayerMask.GetMask("Cani_buildings");
+                break;
+
+            case UnitArmy.HIPSTER:
+                layer = LayerMask.GetMask("Hipster_buildings");
+                break;
+        }
+
+        RaycastHit2D result = RayCast(transform.position, layer);
+
+        if (result.collider != null)
+        {
+            if (result.collider.gameObject.GetComponent<Building>().type == BuildingType.FACTORY)
+            {
+                foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.visited)
+                {
+                    if (new Vector3(tile.x, tile.y) != transform.position && CheckTileForAlly(new Vector3(tile.x, tile.y)) == null)
+                    {
+                        FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
+                        OnMove(tile);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public RaycastHit2D RayCast(Vector3 position, int layer)

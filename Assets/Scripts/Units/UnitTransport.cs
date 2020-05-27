@@ -205,10 +205,18 @@ public class UnitTransport : MonoBehaviour
         EnableLoadSign(false);
     }
 
-    public void OnAI()
+    public IEnumerator OnAI()
     {
+        System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
+        st.Start();
+
         FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
-        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 15, gameObject);
+        if (FindObjectOfType<AIController>().CheckRoutine(st))
+            yield return null;
+
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 30, gameObject);
+        if (FindObjectOfType<AIController>().CheckRoutine(st))
+            yield return null;
 
         if (loadedUnit != null)
         {
@@ -218,8 +226,8 @@ public class UnitTransport : MonoBehaviour
             if (closestBuilding != null)
             {
                 Debug.Log("UnitTransport::OnAI - Found Building: " + closestBuilding.name + " in Position: " + closestBuilding.transform.position);
-                RoadToBuilding(closestBuilding);
-                return;
+                if (RoadToBuilding(closestBuilding))
+                    yield break;
             }
         }
         else
@@ -229,23 +237,31 @@ public class UnitTransport : MonoBehaviour
 
             if (ally != null)
             {
-                RoadToAlly(ally);
-                return;
+                if (RoadToAlly(ally))
+                    yield break;
             }
 
             //buscar la infanteria més propera a la base
             GameObject myBase = FindObjectOfType<AIController>().myBase;
             Vector2Int basePosition = new Vector2Int((int)myBase.transform.position.x, (int)myBase.transform.position.y);
 
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, basePosition, gameObject, 10);
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, basePosition, gameObject, 30);
+            if (FindObjectOfType<AIController>().CheckRoutine(st))
+                yield return null;
 
             ally = LocateAllyInfantryAuxiliar();
 
             if (ally != null)
             {
-                RoadToAlly(ally);
-                return;
+                if (RoadToAlly(ally))
+                    yield break;
             }
+        }
+
+        if (GetComponent<Unit>().ClearFactory())
+        {
+            GetComponent<Unit>().finishedMoving.AddListener(Decide);
+            yield break;
         }
 
         Decide();
@@ -307,7 +323,7 @@ public class UnitTransport : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 15); //executem pathfinding al revés, és a dir des de la casella objectiu
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 30); //executem pathfinding al revés, és a dir des de la casella objectiu
             List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
             foreach (Vector2Int intersection in intersections)
@@ -323,9 +339,6 @@ public class UnitTransport : MonoBehaviour
 
         if (nextStep != new Vector2Int(-1, -1))
         {
-            //posar la AI en Bussy
-            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
-
             GetComponent<Unit>().OnMove(nextStep);
             GetComponent<Unit>().finishedMoving.AddListener(Decide);
             return true;
@@ -344,16 +357,13 @@ public class UnitTransport : MonoBehaviour
 
         if (nextStep != new Vector2Int(-1, -1)) //vol dir que la casella està dins del rang del transport
         {
-            //posar la AI en Bussy
-            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
-
             GetComponent<Unit>().OnMove(nextStep);
             GetComponent<Unit>().finishedMoving.AddListener(AttemptUnload);
             return true;
         }
         else
         {
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 15); //executem pathfinding al revés, és a dir des de la casella objectiu
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 30); //executem pathfinding al revés, és a dir des de la casella objectiu
             List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
             foreach (Vector2Int intersection in intersections)
@@ -369,9 +379,6 @@ public class UnitTransport : MonoBehaviour
 
         if (nextStep != new Vector2Int(-1, -1))
         {
-            //posar la AI en Bussy
-            FindObjectOfType<AIController>().state = AIController.AIState.BUSSY;
-
             GetComponent<Unit>().OnMove(nextStep);
             GetComponent<Unit>().finishedMoving.AddListener(Decide);
             return true;
@@ -387,7 +394,7 @@ public class UnitTransport : MonoBehaviour
 
         foreach (Vector2Int tile in FindObjectOfType<MapController>().pathfinding.visited)
         {
-            if (FindObjectOfType<MapController>().auxiliarPathfinding.visited.Contains(tile))
+            if (FindObjectOfType<MapController>().auxiliarPathfinding.visited.Contains(tile) && GetComponent<Unit>().CheckTileForAlly(new Vector3(tile.x, tile.y)) == null)
                 return tile;
         }
 
@@ -422,13 +429,18 @@ public class UnitTransport : MonoBehaviour
                 {
                     currentDropPosition = tile;
                     OnDrop();
+                    return;
                 }
             }
         }
+
+        Decide();
     }
 
     void Decide()
     {
+        Debug.Log("UnitTansport::Decide");
+
         GetComponent<Unit>().finishedMoving.RemoveListener(Decide);
 
         //GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding();

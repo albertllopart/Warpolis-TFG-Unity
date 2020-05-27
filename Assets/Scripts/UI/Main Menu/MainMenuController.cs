@@ -6,13 +6,14 @@ public class MainMenuController : MonoBehaviour
 {
     public enum MainMenuState
     {
-        MODE, MAP, OPTIONS, TUTORIAL
+        MODE, MAP, OPTIONS, TUTORIAL, BATTLE
     }
 
     public MainMenuState state = MainMenuState.MODE;
 
     GameObject mode;
     GameObject map;
+    GameObject battle;
     GameObject options;
     GameObject tutorial;
 
@@ -24,6 +25,7 @@ public class MainMenuController : MonoBehaviour
         mode = transform.Find("Mode").gameObject;
 
         map = transform.Find("Map").gameObject;
+        battle = transform.Find("Battle").gameObject;
         options = transform.Find("Options").gameObject;
         options.SetActive(false);
         tutorial = transform.Find("Tutorial").gameObject;
@@ -36,7 +38,8 @@ public class MainMenuController : MonoBehaviour
     {
         afterStart = false;
 
-        map.GetComponent<MainMenuMap>().AfterStart();
+        map.GetComponent<MainMenuMap>().AfterStart(MainMenuMap.MapMode.VERSUS);
+        battle.GetComponent<MainMenuMap>().AfterStart(MainMenuMap.MapMode.BATTLE);
     }
 
     // Update is called once per frame
@@ -57,6 +60,10 @@ public class MainMenuController : MonoBehaviour
             case MainMenuState.MAP:
                 map.GetComponent<MainMenuMap>().TransitionToNextScene();
                 break;
+
+            case MainMenuState.BATTLE:
+                battle.GetComponent<MainMenuMap>().TransitionToNextScene();
+                break;
         }
     }
 
@@ -70,6 +77,10 @@ public class MainMenuController : MonoBehaviour
 
             case MainMenuState.MAP:
                 map.GetComponent<MainMenuMap>().TransitionToMode();
+                break;
+
+            case MainMenuState.BATTLE:
+                battle.GetComponent<MainMenuMap>().TransitionToMode();
                 break;
         }
     }
@@ -136,6 +147,21 @@ public class MainMenuController : MonoBehaviour
         FindObjectOfType<FadeTo>().FadeFromSetup();
     }
 
+    void TransitionToBattle()
+    {
+        UnsubscribeFromEvents();
+        FindObjectOfType<FadeTo>().FadeToSetup();
+        FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(SwitchToBattle);
+    }
+
+    void SwitchToBattle()
+    {
+        FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(SwitchToBattle);
+        DisableMode();
+        EnableBattle();
+        FindObjectOfType<FadeTo>().FadeFromSetup();
+    }
+
     void TransitionToQuit()
     {
         UnsubscribeFromEvents();
@@ -173,6 +199,13 @@ public class MainMenuController : MonoBehaviour
         map.SetActive(false);
     }
 
+    void EnableBattle()
+    {
+        battle.SetActive(true);
+        state = MainMenuState.BATTLE;
+        battle.GetComponent<MainMenuMap>().MyOnEnable();
+    }
+
     void EnableOptions()
     {
         options.SetActive(true);
@@ -208,6 +241,7 @@ public class MainMenuController : MonoBehaviour
 
         //children
         mode.GetComponent<MainMenuMode>().versusPressed.AddListener(TransitionToMap);
+        mode.GetComponent<MainMenuMode>().battlePressed.AddListener(TransitionToBattle);
         mode.GetComponent<MainMenuMode>().quitPressed.AddListener(TransitionToQuit);
 
         Debug.Log("MainMenuController::SubscribeToEvents - Subscribed to Events");
@@ -226,6 +260,7 @@ public class MainMenuController : MonoBehaviour
 
         //children
         mode.GetComponent<MainMenuMode>().versusPressed.RemoveListener(TransitionToMap);
+        mode.GetComponent<MainMenuMode>().battlePressed.RemoveListener(TransitionToBattle);
         mode.GetComponent<MainMenuMode>().quitPressed.RemoveListener(TransitionToQuit);
 
         Debug.Log("MainMenuController::UnsubscribeFromEvents - Unsubscribed from Events");

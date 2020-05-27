@@ -5,7 +5,14 @@ using UnityEngine.Tilemaps;
 
 public class MainMenuMap : MonoBehaviour
 {
-    [Header("Maps")]
+    public enum MapMode
+    {
+        VERSUS, BATTLE
+    };
+
+    MapMode mapMode;
+
+    [Header("Versus Maps")]
     public GameObject alpha_island;
     public GameObject span_island;
     public GameObject turd_island;
@@ -45,20 +52,12 @@ public class MainMenuMap : MonoBehaviour
 
         mapList = new List<GameObject>();
         minimapList = new List<GameObject>();
-
-        mapList.Add(alpha_island);
-        mapList.Add(span_island);
-        mapList.Add(turd_island);
-        mapList.Add(map4);
-        mapList.Add(map5);
-        mapList.Add(map6);
-        mapList.Add(map7);
-        mapList.Add(map8);
-        mapList.Add(map9);
     }
 
-    public void AfterStart()
+    public void AfterStart(MapMode mode)
     {
+        BuildMapList(mode);
+
         recyclerView = transform.Find("RecyclerView").gameObject;
         mapInfo = transform.Find("MapInfo").gameObject;
 
@@ -83,6 +82,37 @@ public class MainMenuMap : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void BuildMapList(MapMode mode)
+    {
+        mapMode = mode;
+
+        switch (mode)
+        {
+            case MapMode.VERSUS:
+                mapList.Add(alpha_island);
+                mapList.Add(span_island);
+                mapList.Add(turd_island);
+                //mapList.Add(map4);
+                //mapList.Add(map5);
+                //mapList.Add(map6);
+                //mapList.Add(map7);
+                //mapList.Add(map8);
+                //mapList.Add(map9);
+                break;
+
+            case MapMode.BATTLE:
+                mapList.Add(alpha_island);
+                mapList.Add(span_island);
+                mapList.Add(turd_island);
+                mapList.Add(map4);
+                mapList.Add(map5);
+                mapList.Add(map6);
+                mapList.Add(map7);
+                mapList.Add(map8);
+                break;
+        }
     }
 
     void BuildDictionary()
@@ -163,6 +193,17 @@ public class MainMenuMap : MonoBehaviour
     {
         FindObjectOfType<DataTransferer>().TransferMap(mapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()], minimapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()]);
         minimapList[recyclerView.GetComponent<RecyclerView>().GetSelectedButtonIndex()].transform.SetParent(FindObjectOfType<DataTransferer>().transform);
+
+        switch (mapMode)
+        {
+            case MapMode.VERSUS:
+                FindObjectOfType<DataTransferer>().TransferCommanders(DataController.PlayerCommander.HUMAN, DataController.PlayerCommander.HUMAN);
+                break;
+
+            case MapMode.BATTLE:
+                FindObjectOfType<DataTransferer>().TransferCommanders(DataController.PlayerCommander.HUMAN, DataController.PlayerCommander.COMPUTER);
+                break;
+        }
 
         FindObjectOfType<SoundController>().StopTitle();
         FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(SwitchToNextScene);

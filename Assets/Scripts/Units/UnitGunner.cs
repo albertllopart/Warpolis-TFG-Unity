@@ -18,4 +18,175 @@ public class UnitGunner : MonoBehaviour
     {
         
     }
+
+    public IEnumerator OnAI()
+    {
+        System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
+        st.Start();
+
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.MAIN, gameObject);
+        if (FindObjectOfType<AIController>().CheckRoutine(st))
+            yield return null;
+
+        //buscar aerial enemic dins de rang de moviment
+        List<GameObject> targets = GetComponent<Unit>().GetTargetsFromAttackRange();
+        GameObject target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.AERIAL);
+
+        while (target != null)
+        {
+            targets.Remove(target);
+
+            if (GetComponent<Unit>().AttackEnemyInRange(target))
+            {
+                Debug.Log("UnitGunner::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+                yield break;
+            }
+
+            target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.AERIAL);
+        }
+
+        //buscar infanteria enemiga capturant
+        target = GetComponent<Unit>().FindCapturingInfantry(targets);
+
+        while (target != null)
+        {
+            targets.Remove(target);
+
+            if (GetComponent<Unit>().AttackEnemyInRange(target))
+            {
+                Debug.Log("UnitGunner::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+                yield break;
+            }
+
+            target = GetComponent<Unit>().FindCapturingInfantry(targets);
+        }
+
+        //buscar ranged enemic dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.RANGED);
+
+        while (target != null)
+        {
+            targets.Remove(target);
+
+            if (GetComponent<Unit>().AttackEnemyInRange(target))
+            {
+                Debug.Log("UnitGunner::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+                yield break;
+            }
+
+            target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.RANGED);
+        }
+
+        //buscar infanteria enemic dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.INFANTRY);
+
+        while (target != null)
+        {
+            targets.Remove(target);
+
+            if (GetComponent<Unit>().AttackEnemyInRange(target))
+            {
+                Debug.Log("UnitGunner::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+                yield break;
+            }
+
+            target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.INFANTRY);
+        }
+
+        //buscar gunner enemic dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.GUNNER);
+
+        while (target != null)
+        {
+            targets.Remove(target);
+
+            if (GetComponent<Unit>().AttackEnemyInRange(target))
+            {
+                Debug.Log("UnitGunner::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+                yield break;
+            }
+
+            target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.GUNNER);
+        }
+
+        //buscar transport enemic dins de rang de moviment
+        target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.TRANSPORT);
+
+        while (target != null)
+        {
+            targets.Remove(target);
+
+            if (GetComponent<Unit>().AttackEnemyInRange(target))
+            {
+                Debug.Log("UnitGunner::OnAI - Found Target: " + target.name + "in Position: " + target.transform.position);
+                yield break;
+            }
+
+            target = GetComponent<Unit>().FindClosestUnit(targets, UnitType.TRANSPORT);
+        }
+
+        if (FindObjectOfType<AIController>().CheckRoutine(st))
+            yield return null;
+
+        //buscar enemic més proper fora del rang de moviment
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 30, gameObject);
+        if (FindObjectOfType<AIController>().CheckRoutine(st))
+            yield return null;
+
+        targets = GetComponent<Unit>().GetTargetsFromAIPathfinding();
+        target = GetComponent<Unit>().FindClosestUnitAndAvoid(targets, UnitType.GUNNER);
+
+        if (target != null)
+        {
+            RoadToEnemy(target);
+            yield break;
+        }
+
+        if (GetComponent<Unit>().ClearFactory())
+        {
+            GetComponent<Unit>().finishedMoving.AddListener(Decide);
+            yield break;
+        }
+
+        //si no ha trobat res per fer toca moure cap al punt d'interès més proper (el punt d'interès és una casella col·locada a dit per orientar la IA pel mapa)
+        Decide();
+    }
+
+    void RoadToEnemy(GameObject target)
+    {
+        Debug.Log("UnitGunner::RoadToEnemy");
+
+        Vector2Int goal = new Vector2Int((int)target.transform.position.x, (int)target.transform.position.y);
+        Vector2Int nextStep = new Vector2Int(-1, -1);
+
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 30); //executem pathfinding al revés, és a dir des de la casella objectiu
+        List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
+
+        foreach (Vector2Int intersection in intersections)
+        {
+            if (GetComponent<Unit>().CheckTileForAlly(new Vector3(intersection.x, intersection.y)) == null)
+            {
+                nextStep = intersection;
+                Debug.Log("UnitGunner::RoadToEnemy - Found Closest Available Tile to Goal at Position: " + nextStep);
+                break;
+            }
+        }
+
+        if (nextStep != new Vector2Int(-1, -1))
+        {
+            GetComponent<Unit>().OnMove(nextStep);
+        }
+        else
+        {
+            GetComponent<Unit>().OnMove(new Vector2Int((int)transform.position.x, (int)transform.position.y));
+        }
+
+        GetComponent<Unit>().finishedMoving.AddListener(Decide);
+    }
+
+    void Decide()
+    {
+        GetComponent<Unit>().finishedMoving.RemoveListener(Decide);
+        GetComponent<Unit>().OnWait();
+    }
 }

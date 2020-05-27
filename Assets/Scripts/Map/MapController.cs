@@ -598,7 +598,7 @@ public class MapController : MonoBehaviour
         return pathfinding;
     }
 
-    public void ExecutePathfinding(Pathfinder pathfinder, GameObject unit)
+    public bool ExecutePathfinding(Pathfinder pathfinder, GameObject unit)
     {
         Pathfinding current = GetPathfinder(pathfinder);
 
@@ -607,6 +607,8 @@ public class MapController : MonoBehaviour
 
         if (!FindObjectOfType<AIController>().inControl)
             DrawPathfinding(true, pathfinder);
+
+        return true;
     }
 
     public void ExecutePathfinding(Pathfinder pathfinder, Vector2Int position, GameObject unit)

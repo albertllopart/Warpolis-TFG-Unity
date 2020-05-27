@@ -9,6 +9,7 @@ public class MainMenuMode : MonoBehaviour
     public GameObject quitButton;
     public GameObject tutorialButton;
     public GameObject optionsButton;
+    public GameObject battleButton;
 
     public Vector2 selectedButtonPosition;
     public Vector2 lowerButtonPosition;
@@ -22,6 +23,7 @@ public class MainMenuMode : MonoBehaviour
     GameObject invisibleButton;
 
     List<GameObject> mainButtons;
+    List<GameObject> waitingButtons;
     List<Vector2> wheelPositions;
     bool rotate;
     public float rotateTime;
@@ -30,18 +32,23 @@ public class MainMenuMode : MonoBehaviour
     //events
     public UnityEvent versusPressed;
     public UnityEvent quitPressed;
+    public UnityEvent battlePressed;
 
     // Start is called before the first frame update
     void Awake()
     {
         versusPressed = new UnityEvent();
         quitPressed = new UnityEvent();
+        battlePressed = new UnityEvent();
 
         mainButtons = new List<GameObject>();
         mainButtons.Add(versusButton);
-        mainButtons.Add(quitButton);
         mainButtons.Add(tutorialButton);
-        mainButtons.Add(optionsButton);
+        mainButtons.Add(battleButton);
+
+        waitingButtons = new List<GameObject>();
+        waitingButtons.Add(quitButton);
+        waitingButtons.Add(optionsButton);
 
         wheelPositions = new List<Vector2>();
         wheelPositions.Add(fadeUpButtonPosition);
@@ -64,13 +71,16 @@ public class MainMenuMode : MonoBehaviour
     {
         versusButton.transform.position = selectedButtonPosition;
         tutorialButton.transform.position = lowerButtonPosition;
-        quitButton.transform.position = fadeDownButtonPosition;
-        optionsButton.transform.position = upperButtonPosition;
+        battleButton.transform.position = upperButtonPosition;
+
+        foreach (GameObject button in waitingButtons)
+        {
+            button.transform.position = fadeDownButtonPosition;
+        }
 
         selectedButton = versusButton;
-        upperButton = optionsButton;
+        upperButton = battleButton;
         lowerButton = tutorialButton;
-        invisibleButton = quitButton;
 
         UpdateInfo();
     }
@@ -83,9 +93,38 @@ public class MainMenuMode : MonoBehaviour
         invisibleButton.transform.position = fadeDownButtonPosition;
     }
 
+    GameObject PopFirstWaitingButton()
+    {
+        GameObject ret = null;
+        ret = waitingButtons[0];
+        waitingButtons.Remove(ret);
+
+        return ret;
+    }
+
+    GameObject PopLastWaitingButton()
+    {
+        GameObject ret = null;
+        ret = waitingButtons[waitingButtons.Count - 1];
+        waitingButtons.Remove(ret);
+
+        return ret;
+    }
+
+    void AddFirstWaitingButton(GameObject button)
+    {
+        waitingButtons.Insert(0, button);
+    }
+
+    void AddLastWaitingButton(GameObject button)
+    {
+        waitingButtons.Add(button);
+    }
+
     public void RotateUp()
     {
-        GameObject oldInvisibleButton = invisibleButton;
+        GameObject oldInvisibleButton = PopFirstWaitingButton();
+        mainButtons.Add(oldInvisibleButton);
 
         invisibleButton = upperButton;
         upperButton.GetComponent<MainMenuButton>().goal = fadeUpButtonPosition;
@@ -97,12 +136,15 @@ public class MainMenuMode : MonoBehaviour
         oldInvisibleButton.transform.position = fadeDownButtonPosition;
         oldInvisibleButton.GetComponent<MainMenuButton>().goal = lowerButtonPosition;
 
+        AddLastWaitingButton(invisibleButton);
+
         RotateWheelSetup();
     }
 
     public void RotateDown()
     {
-        GameObject oldInvisibleButton = invisibleButton;
+        GameObject oldInvisibleButton = PopLastWaitingButton();
+        mainButtons.Add(oldInvisibleButton);
 
         invisibleButton = lowerButton;
         lowerButton.GetComponent<MainMenuButton>().goal = fadeDownButtonPosition;
@@ -113,6 +155,8 @@ public class MainMenuMode : MonoBehaviour
         upperButton = oldInvisibleButton;
         oldInvisibleButton.transform.position = fadeUpButtonPosition;
         oldInvisibleButton.GetComponent<MainMenuButton>().goal = upperButtonPosition;
+
+        AddFirstWaitingButton(invisibleButton);
 
         RotateWheelSetup();
     }
@@ -134,6 +178,7 @@ public class MainMenuMode : MonoBehaviour
         {
             GetComponentInParent<MainMenuController>().SubscribeToEvents();
             UpdateInfo();
+            mainButtons.Remove(invisibleButton);
         }
     }
 
@@ -198,6 +243,10 @@ public class MainMenuMode : MonoBehaviour
         {
             case "Versus":
                 versusPressed.Invoke();
+                break;
+
+            case "Battle":
+                battlePressed.Invoke();
                 break;
 
             case "Quit":

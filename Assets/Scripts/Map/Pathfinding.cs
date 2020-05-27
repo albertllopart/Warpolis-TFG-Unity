@@ -75,6 +75,9 @@ public class Pathfinding
     public List<Vector2Int> AIVisited = new List<Vector2Int>();
     public List<BFS_Node> AIBacktrack = new List<BFS_Node>();
 
+    //timer
+    System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
+
     public void ResetBFS(Vector2Int position)
     {
         frontier.Clear();
@@ -117,6 +120,7 @@ public class Pathfinding
     public void PropagateBFS(GameObject unit)
     {
         int safety = 0;
+        st.Start();
 
         //agafar dades de la unitat
         Unit unitScript = unit.GetComponent<Unit>();
@@ -163,12 +167,15 @@ public class Pathfinding
             }
             else
             {
-                Debug.Log("Pathfinding::PropagateBFS - Found null Tile at pos: " + popped.data);
+                UnityEngine.Debug.Log("Pathfinding::PropagateBFS - Found null Tile at pos: " + popped.data);
             }
 
             if (safety++ >= 10000)
                 break;
         }
+
+        st.Stop();
+        Debug.Log("Pathfinding::PropagateBFS - Total Time: " + st.ElapsedMilliseconds);
     }
 
     public void PropagateBFS(GameObject unit, uint range) //aquest serveix per establir un rang manualment mentre fa servir les restriccions de moviment de la unitat

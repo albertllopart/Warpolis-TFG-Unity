@@ -26,8 +26,7 @@ public class DataTransferer : MonoBehaviour
 
     void Awake()
     {
-        caniPlayer = DataController.PlayerCommander.COMPUTER;
-        hipsterPlayer = DataController.PlayerCommander.COMPUTER;
+        
     }
 
     void Start()

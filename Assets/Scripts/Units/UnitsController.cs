@@ -163,15 +163,39 @@ public class UnitsController : MonoBehaviour
                         break;
 
                     case UnitType.TANK:
+                        if (FindObjectOfType<DataController>().caniMoney >= caniTank.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(caniTank, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().caniMoney -= (int)caniTank.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
 
                     case UnitType.AERIAL:
+                        if (FindObjectOfType<DataController>().caniMoney >= caniAerial.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(caniAerial, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().caniMoney -= (int)caniAerial.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
 
                     case UnitType.GUNNER:
+                        if (FindObjectOfType<DataController>().caniMoney >= caniGunner.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(caniGunner, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().caniMoney -= (int)caniGunner.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
 
                     case UnitType.RANGED:
+                        if (FindObjectOfType<DataController>().caniMoney >= caniRanged.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(caniRanged, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().caniMoney -= (int)caniRanged.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
                 }
 
@@ -200,15 +224,39 @@ public class UnitsController : MonoBehaviour
                         break;
 
                     case UnitType.TANK:
+                        if (FindObjectOfType<DataController>().hipsterMoney >= hipsterTank.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(hipsterTank, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().hipsterMoney -= (int)hipsterTank.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
 
                     case UnitType.AERIAL:
+                        if (FindObjectOfType<DataController>().hipsterMoney >= hipsterAerial.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(hipsterAerial, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().hipsterMoney -= (int)hipsterAerial.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
 
                     case UnitType.GUNNER:
+                        if (FindObjectOfType<DataController>().hipsterMoney >= hipsterGunner.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(hipsterGunner, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().hipsterMoney -= (int)hipsterGunner.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
 
                     case UnitType.RANGED:
+                        if (FindObjectOfType<DataController>().hipsterMoney >= hipsterGunner.GetComponent<Unit>().shopValue)
+                        {
+                            Instantiate(hipsterGunner, position, Quaternion.identity);
+                            FindObjectOfType<DataController>().hipsterMoney -= (int)hipsterGunner.GetComponent<Unit>().shopValue;
+                            return true;
+                        }
                         break;
                 }
 
