@@ -214,7 +214,7 @@ public class UnitTransport : MonoBehaviour
         if (FindObjectOfType<AIController>().CheckRoutine(st))
             yield return null;
 
-        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 30, gameObject);
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 50, gameObject);
         if (FindObjectOfType<AIController>().CheckRoutine(st))
             yield return null;
 
@@ -245,7 +245,7 @@ public class UnitTransport : MonoBehaviour
             GameObject myBase = FindObjectOfType<AIController>().myBase;
             Vector2Int basePosition = new Vector2Int((int)myBase.transform.position.x, (int)myBase.transform.position.y);
 
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, basePosition, gameObject, 30);
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, basePosition, gameObject, 50);
             if (FindObjectOfType<AIController>().CheckRoutine(st))
                 yield return null;
 
@@ -323,7 +323,7 @@ public class UnitTransport : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 30); //executem pathfinding al revés, és a dir des de la casella objectiu
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 50); //executem pathfinding al revés, és a dir des de la casella objectiu
             List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
             foreach (Vector2Int intersection in intersections)
@@ -363,7 +363,7 @@ public class UnitTransport : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 30); //executem pathfinding al revés, és a dir des de la casella objectiu
+            FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 50); //executem pathfinding al revés, és a dir des de la casella objectiu
             List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
             foreach (Vector2Int intersection in intersections)

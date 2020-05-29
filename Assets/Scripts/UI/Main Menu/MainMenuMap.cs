@@ -13,15 +13,18 @@ public class MainMenuMap : MonoBehaviour
     MapMode mapMode;
 
     [Header("Versus Maps")]
-    public GameObject alpha_island;
-    public GameObject span_island;
-    public GameObject turd_island;
-    public GameObject map4;
-    public GameObject map5;
-    public GameObject map6;
-    public GameObject map7;
-    public GameObject map8;
-    public GameObject map9;
+    public GameObject versusMap1;
+    public GameObject versusMap2;
+    public GameObject versusMap3;
+    public GameObject versusMap4;
+
+    [Header("Battle Maps")]
+    public GameObject battleMap1;
+    public GameObject battleMap2;
+    public GameObject battleMap3;
+    public GameObject battleMap4;
+    public GameObject battleMap5;
+    public GameObject battleMap6;
 
     [Header("Minimap")]
     public GameObject minimapPrefab;
@@ -91,26 +94,19 @@ public class MainMenuMap : MonoBehaviour
         switch (mode)
         {
             case MapMode.VERSUS:
-                mapList.Add(alpha_island);
-                mapList.Add(span_island);
-                mapList.Add(turd_island);
-                //mapList.Add(map4);
-                //mapList.Add(map5);
-                //mapList.Add(map6);
-                //mapList.Add(map7);
-                //mapList.Add(map8);
-                //mapList.Add(map9);
+                mapList.Add(versusMap1);
+                mapList.Add(versusMap2);
+                mapList.Add(versusMap3);
+                mapList.Add(versusMap4);
                 break;
 
             case MapMode.BATTLE:
-                mapList.Add(alpha_island);
-                mapList.Add(span_island);
-                mapList.Add(turd_island);
-                mapList.Add(map4);
-                mapList.Add(map5);
-                mapList.Add(map6);
-                mapList.Add(map7);
-                mapList.Add(map8);
+                mapList.Add(battleMap1);
+                mapList.Add(battleMap2);
+                mapList.Add(battleMap3);
+                mapList.Add(battleMap4);
+                mapList.Add(battleMap5);
+                mapList.Add(battleMap6);
                 break;
         }
     }

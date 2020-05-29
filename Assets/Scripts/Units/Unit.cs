@@ -1170,6 +1170,7 @@ public class Unit : MonoBehaviour
 
     public void OnAI()
     {
+        FindObjectOfType<CutsceneController>().finishedCameraTargeting.RemoveListener(OnAI);
         state = UnitState.SELECTED;
         UpdateAnimator();
 

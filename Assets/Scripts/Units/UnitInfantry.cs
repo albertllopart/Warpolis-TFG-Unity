@@ -357,7 +357,7 @@ public class UnitInfantry : MonoBehaviour
             yield return null;
 
         //buscar edifici dins de rang de moviment
-        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 30, gameObject);
+        FindObjectOfType<MapController>().ExecutePathfindingForAI(MapController.Pathfinder.MAIN, 50, gameObject);
         GameObject closestBuilding = GetComponent<Unit>().FindClosestEnemyBuilding(); //aquest edifici no conté cap unitat garantit
         if (FindObjectOfType<AIController>().CheckRoutine(st))
             yield return null;
@@ -515,7 +515,7 @@ public class UnitInfantry : MonoBehaviour
         Vector2Int goal = new Vector2Int((int)building.transform.position.x, (int)building.transform.position.y);
         Vector2Int nextStep = new Vector2Int(-1, -1);
 
-        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 30); //executem pathfinding al revés, és a dir des de la casella objectiu
+        FindObjectOfType<MapController>().ExecutePathfinding(MapController.Pathfinder.AUXILIAR, goal, gameObject, 50); //executem pathfinding al revés, és a dir des de la casella objectiu
         List<Vector2Int> intersections = FindObjectOfType<MapController>().GetTilesInCommon();
 
         foreach (Vector2Int intersection in intersections)

@@ -267,27 +267,33 @@ public class AIController : MonoBehaviour
     void CommandUnit()
     {
         currentUnit.GetComponent<Unit>().finishedAI.AddListener(ToIdle);
-        currentUnit.GetComponent<Unit>().OnAI();
+        FindObjectOfType<CutsceneController>().finishedCameraTargeting.AddListener(currentUnit.GetComponent<Unit>().OnAI);
+        FindObjectOfType<CutsceneController>().TargetCameraSetup(currentUnit.transform.position);
     }
 
     void CommandFactory()
     {
-        switch (JudgeTriangle())
+        int turnCount = FindObjectOfType<DataController>().currentTurn;
+
+        if (turnCount > 2)
         {
-            case UnitType.TANK:
-                if (CreateTank())
-                    return;
-                break;
+            switch (JudgeTriangle())
+            {
+                case UnitType.TANK:
+                    if (CreateTank())
+                        return;
+                    break;
 
-            case UnitType.AERIAL:
-                if (CreateAerial())
-                    return;
-                break;
+                case UnitType.AERIAL:
+                    if (CreateAerial())
+                        return;
+                    break;
 
-            case UnitType.GUNNER:
-                if (CreateGunner())
-                    return;
-                break;
+                case UnitType.GUNNER:
+                    if (CreateGunner())
+                        return;
+                    break;
+            }
         }
 
         if (JudgeInfantry())

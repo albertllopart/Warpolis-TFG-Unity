@@ -764,18 +764,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d885f788c430f774fbcd5db0481934ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alpha_island: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5,
+  versusMap1: {fileID: 0}
+  versusMap2: {fileID: 0}
+  versusMap3: {fileID: 0}
+  versusMap4: {fileID: 0}
+  battleMap1: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591,
     type: 3}
-  span_island: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591,
+  battleMap2: {fileID: 8214419211671285593, guid: 30937ab2ecaf1864087585e5f3dabdc5,
     type: 3}
-  turd_island: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0,
+  battleMap3: {fileID: 8214419211671285593, guid: 8e18947292aeac44784d93b96db76a79,
     type: 3}
-  map4: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5, type: 3}
-  map5: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591, type: 3}
-  map6: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0, type: 3}
-  map7: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5, type: 3}
-  map8: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591, type: 3}
-  map9: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0, type: 3}
+  battleMap4: {fileID: 8214419211671285593, guid: a2f6b46e727eb8046b5650501f1188dd,
+    type: 3}
+  battleMap5: {fileID: 8214419211671285593, guid: c5688ee8f119e8b47b8cfed67ebc7ba8,
+    type: 3}
+  battleMap6: {fileID: 8214419211671285593, guid: eb006867b164f8743a9d722c13a48adc,
+    type: 3}
   minimapPrefab: {fileID: 4224932496742402740, guid: 12d40b8bf3941f3419dffd13754dc711,
     type: 3}
   neutral: {fileID: 11400000, guid: 9b1a1424d14972a43a8c42ed2e7d2b6f, type: 2}
@@ -4541,18 +4545,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d885f788c430f774fbcd5db0481934ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alpha_island: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5,
+  versusMap1: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0,
     type: 3}
-  span_island: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591,
+  versusMap2: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5,
     type: 3}
-  turd_island: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0,
+  versusMap3: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591,
     type: 3}
-  map4: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5, type: 3}
-  map5: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591, type: 3}
-  map6: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0, type: 3}
-  map7: {fileID: 8214419211671285593, guid: c669631123b864346b20b33072b4aee5, type: 3}
-  map8: {fileID: 1952441841347084092, guid: 374d07bc965e4b14fb90f875a199e591, type: 3}
-  map9: {fileID: 8214419211671285593, guid: 253c253e3646d4f428c034fcf16164e0, type: 3}
+  versusMap4: {fileID: 8214419211671285593, guid: 895b1cbe52650ef43ab2bf855aaac4d8,
+    type: 3}
+  battleMap1: {fileID: 0}
+  battleMap2: {fileID: 0}
+  battleMap3: {fileID: 0}
+  battleMap4: {fileID: 0}
+  battleMap5: {fileID: 0}
+  battleMap6: {fileID: 0}
   minimapPrefab: {fileID: 4224932496742402740, guid: 12d40b8bf3941f3419dffd13754dc711,
     type: 3}
   neutral: {fileID: 11400000, guid: 9b1a1424d14972a43a8c42ed2e7d2b6f, type: 2}

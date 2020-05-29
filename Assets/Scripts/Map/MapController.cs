@@ -206,6 +206,8 @@ public class MapController : MonoBehaviour
 
         if (tilemapBase != null)
         {
+            tilemapBase.CompressBounds();
+
             width = (uint)tilemapBase.size.x;
             height = (uint)tilemapBase.size.y;
 
