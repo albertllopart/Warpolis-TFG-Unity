@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 11
-  m_Sprite: {fileID: 6735375191383071016, guid: e65550ccca412ae4d944591d8a916c68,
+  m_Sprite: {fileID: -2050127537192182058, guid: ae715ffa1f856294cb9e7f516b528007,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22d43da88a7b7441944980ba5d79317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idle: {fileID: 6735375191383071016, guid: e65550ccca412ae4d944591d8a916c68, type: 3}
-  highlighted: {fileID: 1771688011063314169, guid: e65550ccca412ae4d944591d8a916c68,
+  idle: {fileID: -2050127537192182058, guid: ae715ffa1f856294cb9e7f516b528007, type: 3}
+  highlighted: {fileID: -6108673602146682232, guid: ae715ffa1f856294cb9e7f516b528007,
     type: 3}
   isEnabled: 0
   shopValue: 0

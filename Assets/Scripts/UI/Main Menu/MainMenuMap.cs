@@ -377,6 +377,9 @@ public class MainMenuMap : MonoBehaviour
         minimap.transform.position = minimap.transform.parent.position - new Vector3(3 / 16f, 0, 0);
         minimap.transform.position += new Vector3(-(tilemap.size.x / 2f) * (3 / 16f), (tilemap.size.y / 2f) * (3 / 16f), 0);
 
+        if (minimap.transform.position.x % 0.0625f == 0) //això és per corregir un bug visual que només passa si la posició del minimapa coincideix al pixel (té a veure amb el fet que les tiles del minimapa son de 3x3, em fa l'efecte)
+            minimap.transform.position += new Vector3(-1 / 32f, 0, 0);
+
         AllocateMinimapCorners(minimap, tilemap);
 
         minimap.SetActive(false);
