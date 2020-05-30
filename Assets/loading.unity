@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: Loading ...
+      value: '#JSONResource.UIText.loading'
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}

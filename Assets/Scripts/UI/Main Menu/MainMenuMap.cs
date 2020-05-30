@@ -68,7 +68,8 @@ public class MainMenuMap : MonoBehaviour
 
         foreach (GameObject map in mapList)
         {
-            GameObject button = recyclerView.GetComponent<RecyclerView>().InstantiateButton(map.name);
+            string mapName = GetMapName(map);
+            GameObject button = recyclerView.GetComponent<RecyclerView>().InstantiateButton(mapName);
 
             //generar minimapa
             GameObject newMinimap = GenerateMinimap(map, button.transform);
@@ -85,6 +86,12 @@ public class MainMenuMap : MonoBehaviour
     void Update()
     {
         
+    }
+
+    string GetMapName(GameObject map)
+    {
+        string resource = "JSONResource.UIText." + map.name;
+        return FindObjectOfType<JSONHandler>().RetrieveText(resource);
     }
 
     void BuildMapList(MapMode mode)

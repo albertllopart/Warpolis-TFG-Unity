@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Language
+{
+    ENGLISH, CATALA, CASTELLANO
+};
+
 public class DataTransferer : MonoBehaviour
 {
     public class ResultsInfo
@@ -18,6 +23,7 @@ public class DataTransferer : MonoBehaviour
         public int turns;
     }
 
+    public Language language;
     public GameObject map;
     public GameObject minimap;
     public ResultsInfo resultsInfo;
@@ -51,5 +57,10 @@ public class DataTransferer : MonoBehaviour
     {
         this.caniPlayer = caniPlayer;
         this.hipsterPlayer = hipsterPlayer;
+    }
+
+    public void TransferLanguage(Language language)
+    {
+        this.language = language;
     }
 }

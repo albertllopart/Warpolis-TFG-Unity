@@ -2,8 +2,8 @@
   "unitDataCollection": {
     "unitDataList": [
       {
-        "name": "infantry",
-        "description": "Infantry units have the lowest deployment cost. They can capture buildings but have low firepower and mobility.",
+        "name": "Infanteria",
+        "description": "Les unitats d'Infanteria són les més barates de desplegar. Poden capturar estructures però són febles i tenen poca mobilitat.",
         "movementRange": 3,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -21,8 +21,8 @@
         "fromRanged": 0.9
       },
       {
-        "name": "transport",
-        "description": "Transport units can transport infantry units to help them travel faster.  They are also a good road blocker for enemy units.",
+        "name": "Transport",
+        "description": "Les unitats de Transport poden transportar unitats d'infanteria per a fer-les viatjar més ràpid. També són útils a l'hora de bloquejar camins a l'enemic.",
         "movementRange": 6,
         "attackRangeFrom": 0,
         "attackRangeTo": 0,
@@ -40,8 +40,8 @@
         "fromRanged": 0.7
       },
       {
-        "name": "tank",
-        "description": "Tank units have great offense and the best defense of all units. Offensively they struggle against aerial units.",
+        "name": "Tanc",
+        "description": "Els Tancs tenen un gran poder ofensiu i el millor poder defensiu de totes les unitats. Tenen problemes a l'hora d'enfrontar-se a unitats Aèries.",
         "movementRange": 6,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -59,8 +59,8 @@
         "fromRanged": 0.7
       },
       {
-        "name": "aerial",
-        "description": "Aerial units have the highest mobility of all units and no restrictions due to terrain. They have great offense but fear gunner units the most.",
+        "name": "Aèria",
+        "description": "Les unitats Aèries tenen la millor mobilitat de totes les unitats i no pateixen cap mena de restricció per tipus de terreny. Tenen un gran poder ofensiu però perden estrepitosament contra els Artillers.",
         "movementRange": 8,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -78,8 +78,8 @@
         "fromRanged": 0.0
       },
       {
-        "name": "gunner",
-        "description": "Gunner units are especially effective against infantry and aerial units. They struggle against tanks.",
+        "name": "Artiller",
+        "description": "Els Artillers són especialment efectius contra Infanteria i unitats Aèries. Per contra, ho passen malament contra els Tancs.",
         "movementRange": 6,
         "attackRangeFrom": 1,
         "attackRangeTo": 1,
@@ -97,8 +97,8 @@
         "fromRanged": 0.75
       },
       {
-        "name": "ranged",
-        "description": "Ranged units have the best overall offense of all units. They must attack from the same position they started the turn.",
+        "name": "A distància",
+        "description": "Les unitats A distància tenen el millor poder ofensiu de totes les unitats. No obstant això, han d'atacar des de la mateixa casella on han començat el torn i no ho poden fer contra unitats Aèries.",
         "movementRange": 5,
         "attackRangeFrom": 2,
         "attackRangeTo": 4,

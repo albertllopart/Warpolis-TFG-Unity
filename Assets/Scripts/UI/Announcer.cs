@@ -74,7 +74,7 @@ public class Announcer : MonoBehaviour
         GameObject newTextDouble = Instantiate(myTextDouble);
         newTextDouble.transform.SetParent(transform);
         newTextDouble.transform.position = transform.position;
-        newTextDouble.transform.Find("Text1").GetComponent<MyText>().text = "Turn";
+        newTextDouble.transform.Find("Text1").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.turn");
         newTextDouble.transform.Find("Text2").GetComponent<MyText>().text = "/";
 
         GameObject currentTurn = Instantiate(number);
@@ -111,8 +111,8 @@ public class Announcer : MonoBehaviour
         GameObject newTextDouble = Instantiate(myTextDouble);
         newTextDouble.transform.SetParent(transform);
         newTextDouble.transform.position = transform.position;
-        newTextDouble.transform.Find("Text1").GetComponent<MyText>().text = "Turn Limit";
-        newTextDouble.transform.Find("Text2").GetComponent<MyText>().text = "has been reached!";
+        newTextDouble.transform.Find("Text1").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.turnLimitReached1");
+        newTextDouble.transform.Find("Text2").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.turnLimitReached2");
     }
 
     void Move()

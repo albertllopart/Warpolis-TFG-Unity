@@ -75,6 +75,20 @@ public class MyTextManager : MonoBehaviour
     public Sprite slash;
     public Sprite score;
 
+    //català i castellà
+    public Sprite a_acc_obert;
+    public Sprite a_acc_tancat;
+    public Sprite e_acc_obert;
+    public Sprite e_acc_tancat;
+    public Sprite i_acc;
+    public Sprite o_acc_obert;
+    public Sprite o_acc_tancat;
+    public Sprite u_acc;
+    public Sprite geminada;
+    public Sprite c_trencada;
+    public Sprite enya;
+    public Sprite apostrof;
+
     bool needToUpdate;
 
     // Start is called before the first frame update
@@ -476,6 +490,54 @@ public class MyTextManager : MonoBehaviour
 
             case "-":
                 ret = score;
+                break;
+
+            case "à":
+                ret = a_acc_obert;
+                break;
+
+            case "á":
+                ret = a_acc_tancat;
+                break;
+
+            case "è":
+                ret = e_acc_obert;
+                break;
+
+            case "é":
+                ret = e_acc_tancat;
+                break;
+
+            case "í":
+                ret = i_acc;
+                break;
+
+            case "ò":
+                ret = o_acc_obert;
+                break;
+
+            case "ó":
+                ret = o_acc_tancat;
+                break;
+
+            case "ú":
+                ret = u_acc;
+                break;
+
+            case "·":
+                ret = geminada;
+                break;
+
+            case "ç":
+                ret = c_trencada;
+                break;
+
+            case "ñ":
+                ret = enya;
+                break;
+
+            case "'":
+                ret = apostrof;
                 break;
         }
 

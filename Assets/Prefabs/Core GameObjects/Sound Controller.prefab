@@ -90,3 +90,8 @@ MonoBehaviour:
     volume: 0.2
     pitch: 1
     source: {fileID: 0}
+  - name: title
+    clip: {fileID: 8300000, guid: 191bad10ab84f0243863e1d7825b5ccc, type: 3}
+    volume: 0.2
+    pitch: 1
+    source: {fileID: 0}
