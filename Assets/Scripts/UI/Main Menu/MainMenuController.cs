@@ -110,6 +110,8 @@ public class MainMenuController : MonoBehaviour
         UnsubscribeFromEvents();
         FindObjectOfType<FadeTo>().FadeToSetup();
         FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(LoadPreviousScene);
+
+        FindObjectOfType<SoundController>().PlayBack();
     }
 
     void LoadPreviousScene()

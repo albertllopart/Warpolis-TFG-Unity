@@ -486,6 +486,39 @@ public class JSONHandler : MonoBehaviour
             {
                 ret = text.cancelExit;
             }
+            //results
+            else if (codeSegments[2] == "winner")
+            {
+                ret = text.winner;
+            }
+            else if (codeSegments[2] == "by")
+            {
+                ret = text.by;
+            }
+            else if (codeSegments[2] == "domination")
+            {
+                ret = text.domination;
+            }
+            else if (codeSegments[2] == "extermination")
+            {
+                ret = text.extermination;
+            }
+            else if (codeSegments[2] == "ocupation")
+            {
+                ret = text.ocupation;
+            }
+            else if (codeSegments[2] == "draw")
+            {
+                ret = text.draw;
+            }
+            else if (codeSegments[2] == "turns")
+            {
+                ret = text.turns;
+            }
+            else if (codeSegments[2] == "map")
+            {
+                ret = text.map;
+            }
         }
         else
         {

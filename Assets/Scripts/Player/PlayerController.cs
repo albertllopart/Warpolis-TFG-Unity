@@ -283,6 +283,8 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
 
         OnMove();
+
+        FindObjectOfType<SoundController>().PlayPlayerMove();
     }
 
     public void CheckArrow()

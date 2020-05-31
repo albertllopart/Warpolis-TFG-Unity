@@ -49,7 +49,15 @@
 	"drop": "Drop",
 	"areYouSure": "Are you sure?",
 	"confirmExit": "Confirm to exit",
-	"cancelExit": "Cancel to go back"
+	"cancelExit": "Cancel to go back",
+	"winner": "Winner:",
+	"by": "By:",
+	"domination": "DOMINATION",
+	"extermination": "EXTERMINATION",
+	"ocupation": "OCUPATION",
+	"draw": "DRAW",
+	"turns": "Turns:",
+	"map": "Map:"
       },
       {
         "language": "Català",
@@ -99,7 +107,15 @@
 	"drop": "Descarr.",
 	"areYouSure": "N'estàs segur?",
 	"confirmExit": "Confirma per sortir",
-	"cancelExit": "Cancel·la per tornar"
+	"cancelExit": "Cancel·la per tornar",
+	"winner": "Vencedor:",
+	"by": "Per:",
+	"domination": "DOMINI",
+	"extermination": "EXTERMINI",
+	"ocupation": "OCUPACIO",
+	"draw": "EMPAT",
+	"turns": "Torns:",
+	"map": "Mapa:"
       },
       {
         "language": "Castellano",
@@ -113,7 +129,7 @@
         "battleDescription1": "Juega contra la máquina",
 	"battleDescription2": "en mapas desafiantes!",
         "tutorial": "Tutorial",
-        "tutorialDescription": "Aprende lo más básico del juego!",
+        "tutorialDescription": "Aprende lo básico del juego!",
         "options": "Opciones",
         "optionsDescription": "Próximamente!",
         "quit": "Salir",
@@ -149,7 +165,15 @@
 	"drop": "Descarg.",
 	"areYouSure": "Estás seguro?",
 	"confirmExit": "Confirma para salir",
-	"cancelExit": "Cancela para regresar"
+	"cancelExit": "Cancela para regresar",
+	"winner": "Vencedor:",
+	"by": "Por:",
+	"domination": "DOMINIO",
+	"extermination": "EXTERMINIO",
+	"ocupation": "OCUPACION",
+	"draw": "EMPATE",
+	"turns": "Turnos:",
+	"map": "Mapa:"
       }
     ]
   }

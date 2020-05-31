@@ -99,24 +99,24 @@ public class ResultsController : MonoBehaviour
         {
             case DataController.WinCondition.DOMINATION: 
                 if (FindObjectOfType<DataTransferer>().resultsInfo.winner != DataController.Winner.DRAW)
-                    newText.transform.Find("Text").GetComponent<MyText>().text = "DOMINATION";
+                    newText.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.domination");
                 else
-                    newText.transform.Find("Text").GetComponent<MyText>().text = "DRAW";
+                    newText.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.draw");
                 break;
 
             case DataController.WinCondition.EXTERMINATION:
-                newText.transform.Find("Text").GetComponent<MyText>().text = "EXTERMINATION";
+                newText.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.extermination");
                 break;
 
             case DataController.WinCondition.OCUPATION:
-                newText.transform.Find("Text").GetComponent<MyText>().text = "OCUPATION";
+                newText.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.ocupation");
                 break;
         }
 
         popList.transform.Find("Number").gameObject.GetComponent<Number>().CreateNumber(FindObjectOfType<DataTransferer>().resultsInfo.turns);
 
         GameObject newText2 = Instantiate(myText);
-        newText2.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<DataTransferer>().map.name;
+        newText2.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText." + FindObjectOfType<DataTransferer>().map.name);
         newText2.transform.Find("Text").GetComponent<MyText>().color = new Color(0, 0, 0, 1);
         newText2.transform.Find("Text").GetComponent<MyText>().anchor = MyText.Anchor.CENTERED;
         newText2.transform.Find("Text").GetComponent<MyText>().layer = 12;
@@ -148,6 +148,7 @@ public class ResultsController : MonoBehaviour
     void PopListSetup()
     {
         FindObjectOfType<FadeTo>().finishedDecreasing.RemoveListener(PopListSetup);
+        FindObjectOfType<SoundController>().PlayResults();
 
         popping = true;
     }
@@ -168,6 +169,8 @@ public class ResultsController : MonoBehaviour
                 popping = false;
                 finishedPopping.Invoke();
             }
+
+            FindObjectOfType<SoundController>().PlayUnavailable();
         }
 
         //finishedPopping.Invoke();
@@ -179,11 +182,14 @@ public class ResultsController : MonoBehaviour
 
         FindObjectOfType<FadeTo>().FadeToSetup();
         FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(LoadNextScene);
+
+        FindObjectOfType<SoundController>().PlayButton();
     }
 
     void LoadNextScene()
     {
         FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(LoadNextScene);
+        FindObjectOfType<SoundController>().StopResults();
 
         Loader.Load(Loader.Scene.title);
     }

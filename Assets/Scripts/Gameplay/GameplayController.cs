@@ -218,6 +218,8 @@ public class GameplayController : MonoBehaviour
                 FindObjectOfType<FadeTo>().FadeToSetup();
                 FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(BackToTitle);
 
+                FindObjectOfType<SoundController>().PlayButton();
+
                 break;
         }
     }
@@ -311,6 +313,8 @@ public class GameplayController : MonoBehaviour
                 playerState = PlayerState.OPTIONS;
                 Destroy(GameObject.Find("ConfirmScreen(Clone)"));
 
+                FindObjectOfType<SoundController>().PlayBack();
+
                 break;
 
             case PlayerState.UNITINFO:
@@ -318,6 +322,8 @@ public class GameplayController : MonoBehaviour
                 DestroyUnitInfo();
                 EnablePlayer();
                 playerState = PlayerState.NAVIGATING;
+
+                FindObjectOfType<SoundController>().PlayBack();
 
                 break;
         }
@@ -353,6 +359,8 @@ public class GameplayController : MonoBehaviour
                     InstantiateUnitInfo(unit);
                     DisablePlayer();
                     playerState = PlayerState.UNITINFO;
+
+                    FindObjectOfType<SoundController>().PlayButton();
                 }
 
                 break;

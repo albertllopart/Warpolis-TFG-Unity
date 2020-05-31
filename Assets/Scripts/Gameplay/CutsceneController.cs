@@ -258,8 +258,11 @@ public class CutsceneController : MonoBehaviour
         FindObjectOfType<SoundController>().PlayDeath();
 
         //per evitar inputs durant cutscene
-        FindObjectOfType<GameplayController>().UnsubscribeFromEvents();
-        unitDied.AddListener(FindObjectOfType<GameplayController>().UnitDiedCallback);
+        if (!FindObjectOfType<AIController>().inControl)
+        {
+            FindObjectOfType<GameplayController>().UnsubscribeFromEvents();
+            unitDied.AddListener(FindObjectOfType<GameplayController>().UnitDiedCallback);
+        }
     }
 
     void UnitDeath()
@@ -367,7 +370,7 @@ public class CutsceneController : MonoBehaviour
         if (nextToExterminate.GetComponent<Unit>().GetState() != UnitState.DYING && !cameraTargeting)
         {
             nextToExterminate.GetComponent<Unit>().MyOnExterminate(); //cridem aquesta funcio per canviar estat de la unitat, animació etc
-            FindObjectOfType<SoundController>().PlayDeath();
+            //FindObjectOfType<SoundController>().PlayDeath();
         }
 
         if (dyingAlpha < 0)

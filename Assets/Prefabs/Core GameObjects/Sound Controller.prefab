@@ -51,7 +51,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: playerMove
     clip: {fileID: 8300000, guid: c729d0029f82ab245b3ccada8a3a0de8, type: 3}
-    volume: 0.3
+    volume: 0.45
     pitch: 1
     source: {fileID: 0}
   - name: back
@@ -81,17 +81,22 @@ MonoBehaviour:
     source: {fileID: 0}
   themes:
   - name: cani
-    clip: {fileID: 8300000, guid: 706b7fc7ca9245f4386b4ee6b42c4236, type: 3}
-    volume: 0.3
+    clip: {fileID: 8300000, guid: a5e87f8d2da329f4c8f737476200eedf, type: 3}
+    volume: 0.08
     pitch: 1
     source: {fileID: 0}
   - name: hipster
-    clip: {fileID: 8300000, guid: bceb50e97fe8b1f489a94ab835028819, type: 3}
-    volume: 0.2
+    clip: {fileID: 8300000, guid: c7c372b44ded4e142a3b1fcbead1e236, type: 3}
+    volume: 0.08
     pitch: 1
     source: {fileID: 0}
   - name: title
-    clip: {fileID: 8300000, guid: 191bad10ab84f0243863e1d7825b5ccc, type: 3}
-    volume: 0.2
+    clip: {fileID: 8300000, guid: 5f4296b6a677418409cf3957a03bd123, type: 3}
+    volume: 0.08
+    pitch: 1
+    source: {fileID: 0}
+  - name: results
+    clip: {fileID: 8300000, guid: 99ce0167969ef4d43b6f55032783c211, type: 3}
+    volume: 0.08
     pitch: 1
     source: {fileID: 0}

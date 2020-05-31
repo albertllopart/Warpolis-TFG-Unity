@@ -103,6 +103,8 @@ public class MenuController : MonoBehaviour
                 UpdateTurnLimit();
                 break;
         }
+
+        FindObjectOfType<SoundController>().PlayPlayerMove();
     }
 
     void DecreaseTurnLimit()
@@ -124,6 +126,8 @@ public class MenuController : MonoBehaviour
                 UpdateTurnLimit();
                 break;
         }
+
+        FindObjectOfType<SoundController>().PlayPlayerMove();
     }
 
     void UpdateTurnLimit()
@@ -152,6 +156,8 @@ public class MenuController : MonoBehaviour
         cameraController.GetComponent<CameraController>().fadeToWhiteEnd.AddListener(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().NewGameSetup);
 
         //startGame.Invoke(); //de moment això no crida res
+
+        FindObjectOfType<SoundController>().PlayButton();
     }
 
     void SetTurnLimit()

@@ -174,6 +174,8 @@ public class MainMenuMap : MonoBehaviour
         UnsubscribeFromEvents();
         FindObjectOfType<FadeTo>().FadeToSetup();
         FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(SwitchToMode);
+
+        FindObjectOfType<SoundController>().PlayBack();
     }
 
     void SwitchToMode()
@@ -190,6 +192,8 @@ public class MainMenuMap : MonoBehaviour
         UnsubscribeFromEvents();
         FindObjectOfType<FadeTo>().FadeToSetup();
         FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(SwitchToNextScene);
+
+        FindObjectOfType<SoundController>().PlayButton();
     }
 
     public void SwitchToNextScene()
@@ -221,6 +225,8 @@ public class MainMenuMap : MonoBehaviour
             minimapList[index + 1].SetActive(false);
 
             UpdateMapInfo(index);
+
+            FindObjectOfType<SoundController>().PlayPlayerMove();
         }
     }
 
@@ -232,6 +238,8 @@ public class MainMenuMap : MonoBehaviour
             minimapList[index - 1].SetActive(false);
 
             UpdateMapInfo(index);
+
+            FindObjectOfType<SoundController>().PlayPlayerMove();
         }
     }
 

@@ -438,7 +438,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: Press Start
+      value: '#JSONResource.UIText.pressStart'
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044127987072, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
@@ -599,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: 'Map:'
+      value: '#JSONResource.UIText.map'
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044127987072, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
@@ -690,7 +690,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: 'Winner:'
+      value: '#JSONResource.UIText.winner'
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044127987072, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
@@ -815,7 +815,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: 'By:'
+      value: '#JSONResource.UIText.by'
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044127987072, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
@@ -889,7 +889,7 @@ PrefabInstance:
     - target: {fileID: 3878031044120203563, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}
       propertyPath: text
-      value: 'Turns:'
+      value: '#JSONResource.UIText.turns'
       objectReference: {fileID: 0}
     - target: {fileID: 3878031044127987072, guid: d125fcd802ea8854fa1250381fadb088,
         type: 3}

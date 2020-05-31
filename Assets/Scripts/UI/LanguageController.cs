@@ -56,6 +56,8 @@ public class LanguageController : MonoBehaviour
             index = languages.Count - 1;
 
         UpdateCursor();
+
+        FindObjectOfType<SoundController>().PlayPlayerMove();
     }
 
     void Down()
@@ -65,6 +67,8 @@ public class LanguageController : MonoBehaviour
             index = 0;
 
         UpdateCursor();
+
+        FindObjectOfType<SoundController>().PlayPlayerMove();
     }
 
     void Confirm()
@@ -81,6 +85,8 @@ public class LanguageController : MonoBehaviour
         FindObjectOfType<DataTransferer>().TransferLanguage(language);
 
         Loader.EarlyLoad(Loader.Scene.intro);
+
+        FindObjectOfType<SoundController>().PlayButton();
     }
 
     void UpdateCursor()

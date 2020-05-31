@@ -115,5 +115,15 @@ public class UIText
     public string areYouSure;
     public string confirmExit;
     public string cancelExit;
+
+    //resultats
+    public string winner;
+    public string by;
+    public string domination;
+    public string extermination;
+    public string ocupation;
+    public string draw;
+    public string turns;
+    public string map;
 }
 

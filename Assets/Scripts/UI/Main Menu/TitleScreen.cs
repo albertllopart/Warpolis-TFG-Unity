@@ -28,6 +28,10 @@ public class TitleScreen : MonoBehaviour
     int lastCani;
     int lastHipster;
 
+    //version
+    public GameObject unit;
+    public GameObject decimal1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +53,8 @@ public class TitleScreen : MonoBehaviour
 
         FindObjectOfType<SoundController>().PlayTitle();
         FindObjectOfType<FadeTo>().finishedDecreasing.AddListener(SubscribeToEvents);
+
+        SetVersion();
     }
 
     // Update is called once per frame
@@ -61,6 +67,12 @@ public class TitleScreen : MonoBehaviour
             timer = 0.0f;
             Spawn();
         }
+    }
+
+    void SetVersion()
+    {
+        unit.GetComponent<Number>().CreateNumber(0);
+        decimal1.GetComponent<Number>().CreateNumber(8);
     }
 
     void Spawn()
@@ -112,6 +124,8 @@ public class TitleScreen : MonoBehaviour
         UnsubscribeFromEvents();
         FindObjectOfType<FadeTo>().FadeToSetup();
         FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(LoadNextScene);
+
+        FindObjectOfType<SoundController>().PlayButton();
     }
 
     void LoadNextScene()

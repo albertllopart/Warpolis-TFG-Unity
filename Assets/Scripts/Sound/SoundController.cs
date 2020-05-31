@@ -122,4 +122,18 @@ public class SoundController : MonoBehaviour
         Sound s = Array.Find(themes, sound => sound.name == "title");
         s.source.Stop();
     }
+
+    public void PlayResults()
+    {
+        StopResults();
+
+        Sound s = Array.Find(themes, sound => sound.name == "results");
+        s.source.Play();
+    }
+
+    public void StopResults()
+    {
+        Sound s = Array.Find(themes, sound => sound.name == "results");
+        s.source.Stop();
+    }
 }

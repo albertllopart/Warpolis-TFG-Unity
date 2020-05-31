@@ -36,7 +36,7 @@ public class IntroController : MonoBehaviour
                 if (timer > introTime1)
                 {
                     Instantiate(introText, new Vector3(0, 0, 0), Quaternion.identity);
-                    FindObjectOfType<SoundController>().PlayButton();
+                    //FindObjectOfType<SoundController>().PlayButton();
                     introState = IntroState.TEXT;
                     timer = 0.0f;
                 }
