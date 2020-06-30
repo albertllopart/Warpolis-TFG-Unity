@@ -8,11 +8,13 @@ public class JSONHandler : MonoBehaviour
 {
     public string unitDatafilename = "unitData";
     public string UITextfilename = "UIText";
+    public string dialoguesfilename = "dialogues";
     string extension = ".bytes";
     string path;
 
     public UnitDataCollection unitDataCollection = new UnitDataCollection();
     public UITextCollection UITextCollection = new UITextCollection();
+    public DialoguesCollection dialoguesCollection = new DialoguesCollection();
 
     void Awake()
     {
@@ -26,6 +28,7 @@ public class JSONHandler : MonoBehaviour
 
         ReadUnitData();
         ReadUIText();
+        ReadDialogues();
     }
 
     // Start is called before the first frame update
@@ -65,11 +68,13 @@ public class JSONHandler : MonoBehaviour
     void SetCatala()
     {
         unitDatafilename += "_Catala";
+        dialoguesfilename += "_Catala";
     }
 
     void SetCastellano()
     {
         unitDatafilename += "_Castellano";
+        dialoguesfilename += "_Castellano";
     }
 
     void SaveData()
@@ -162,13 +167,56 @@ public class JSONHandler : MonoBehaviour
             Debug.Log(ex.Message);
         }
 
-        Debug.Log("JSONHandler::ReadUIText - UIText loaded: " + UITextCollection.UITextList.Count + "Languages");
+        Debug.Log("JSONHandler::ReadUIText - UIText loaded: " + UITextCollection.UITextList.Count + " Languages");
+    }
+
+    void ReadDialogues()
+    {
+        try
+        {
+            if (System.IO.File.Exists(path + dialoguesfilename))
+            {
+                TextAsset textAsset = Resources.Load<TextAsset>(path + dialoguesfilename + extension);
+                string contents = System.Text.Encoding.Default.GetString(textAsset.bytes);
+
+                JSONWrapper wrapper = JsonUtility.FromJson<JSONWrapper>(contents);
+                dialoguesCollection = wrapper.dialoguesCollection;
+
+                foreach (Dialogues dialogues in dialoguesCollection.dialoguesList)
+                {
+                    Debug.Log(dialogues.mapName);
+                }
+            }
+            else //build
+            {
+                TextAsset textAsset = Resources.Load<TextAsset>(dialoguesfilename); //-> Assets/Resources/fitxer(sense extensió)
+                if (textAsset != null)
+                {
+                    string contents = System.Text.Encoding.Default.GetString(textAsset.bytes);
+                    JSONWrapper wrapper = JsonUtility.FromJson<JSONWrapper>(contents);
+                    dialoguesCollection = wrapper.dialoguesCollection;
+                }
+                else
+                {
+                    Application.Quit();
+                }
+
+                Debug.Log("JSONHandler::ReadDialogues - Read with Build Method");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+
+        Debug.Log("JSONHandler::ReadDialogues - Dialogues loaded: " + dialoguesCollection.dialoguesList.Count + " Maps");
     }
 
     public string RetrieveText(string resourceCode)
     {
         //estructura del resourceCode per unitData - #JSONResource.unitData.Index(nom d'unitat).Field
-        //estructura del resourceCode per unitData - #JSONResource.UIText.Field
+        //estructura del resourceCode per UIText - #JSONResource.UIText.Field
+        //estructura del resourceCode per dialogues - #JSONResource.dialogues.Index(nom del mapa).Field
 
         if (resourceCode == null)
             return "resourceCode format error";
@@ -186,6 +234,10 @@ public class JSONHandler : MonoBehaviour
             else if (codeSegments[1] == "UIText")
             {
                 ret = RetrieveTextFromUIText(codeSegments);
+            }
+            else if (codeSegments[1] == "dialogues")
+            {
+                ret = RetrieveTextFromDialogues(codeSegments);
             }
             else
             {
@@ -519,6 +571,75 @@ public class JSONHandler : MonoBehaviour
             {
                 ret = text.map;
             }
+            //tutorial
+            else if (codeSegments[2] == "tutorialSelector")
+            {
+                ret = text.tutorialSelector;
+            }
+            else if (codeSegments[2] == "tutorialMap1")
+            {
+                ret = text.tutorialMap1;
+            }
+            else if (codeSegments[2] == "tutorialMap1Description")
+            {
+                ret = text.tutorialMap1Description;
+            }
+            else if (codeSegments[2] == "tutorialMap2")
+            {
+                ret = text.tutorialMap2;
+            }
+            else if (codeSegments[2] == "tutorialMap2Description")
+            {
+                ret = text.tutorialMap2Description;
+            }
+            else if (codeSegments[2] == "tutorialMap3")
+            {
+                ret = text.tutorialMap3;
+            }
+            else if (codeSegments[2] == "tutorialMap3Description")
+            {
+                ret = text.tutorialMap3Description;
+            }
+            else if (codeSegments[2] == "tutorialMap4")
+            {
+                ret = text.tutorialMap4;
+            }
+            else if (codeSegments[2] == "tutorialMap4Description")
+            {
+                ret = text.tutorialMap4Description;
+            }
+            else if (codeSegments[2] == "tutorialMap5")
+            {
+                ret = text.tutorialMap5;
+            }
+            else if (codeSegments[2] == "tutorialMap5Description")
+            {
+                ret = text.tutorialMap5Description;
+            }
+            else if (codeSegments[2] == "tutorialMap6")
+            {
+                ret = text.tutorialMap6;
+            }
+            else if (codeSegments[2] == "tutorialMap6Description")
+            {
+                ret = text.tutorialMap6Description;
+            }
+            else if (codeSegments[2] == "tutorialMap7")
+            {
+                ret = text.tutorialMap7;
+            }
+            else if (codeSegments[2] == "tutorialMap7Description")
+            {
+                ret = text.tutorialMap7Description;
+            }
+            else if (codeSegments[2] == "tutorialMap8")
+            {
+                ret = text.tutorialMap8;
+            }
+            else if (codeSegments[2] == "tutorialMap8Description")
+            {
+                ret = text.tutorialMap8Description;
+            }
         }
         else
         {
@@ -544,6 +665,130 @@ public class JSONHandler : MonoBehaviour
         }
 
         return null;
+    }
+
+    string RetrieveTextFromDialogues(string[] codeSegments)
+    {
+        int index = 0;
+        string ret = " ";
+
+        if (codeSegments[2] != null) //filtrar tipus d'unitat
+        {
+            if (codeSegments[2] == "tutorialMap1")
+            {
+                index = 0;
+            }
+            else if (codeSegments[2] == "tutorialMap2")
+            {
+                index = 1;
+            }
+            else if (codeSegments[2] == "tutorialMap3")
+            {
+                index = 2;
+            }
+            else if (codeSegments[2] == "tutorialMap4")
+            {
+                index = 3;
+            }
+            else if (codeSegments[2] == "tutorialMap5")
+            {
+                index = 4;
+            }
+            else if (codeSegments[2] == "tutorialMap6")
+            {
+                index = 5;
+            }
+            else if (codeSegments[2] == "tutorialMap7")
+            {
+                index = 6;
+            }
+            else if (codeSegments[2] == "tutorialMap8")
+            {
+                index = 7;
+            }
+        }
+        else
+        {
+            Debug.LogError("JSONHandler::RetrieveTextFromUnitData - resourceCode format error");
+            return "resourceCode format error";
+        }
+
+        if (codeSegments[3] != null) //filtrar element
+        {
+            //start
+            if (codeSegments[3] == "startDialogue1")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue1;
+            }
+            else if (codeSegments[3] == "startDialogue2")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue2;
+            }
+            else if (codeSegments[3] == "startDialogue3")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue3;
+            }
+            else if (codeSegments[3] == "startDialogue4")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue4;
+            }
+            else if (codeSegments[3] == "startDialogue5")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue5;
+            }
+            else if (codeSegments[3] == "startDialogue6")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue6;
+            }
+            else if (codeSegments[3] == "startDialogue7")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue7;
+            }
+            else if (codeSegments[3] == "startDialogue8")
+            {
+                ret = dialoguesCollection.dialoguesList[index].startDialogue8;
+            }
+            //end
+            else if (codeSegments[3] == "endDialogue1")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue1;
+            }
+            else if (codeSegments[3] == "endDialogue2")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue2;
+            }
+            else if (codeSegments[3] == "endDialogue3")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue3;
+            }
+            else if (codeSegments[3] == "endDialogue4")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue4;
+            }
+            else if (codeSegments[3] == "endDialogue5")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue5;
+            }
+            else if (codeSegments[3] == "endDialogue6")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue6;
+            }
+            else if (codeSegments[3] == "endDialogue7")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue7;
+            }
+            else if (codeSegments[3] == "endDialogue8")
+            {
+                ret = dialoguesCollection.dialoguesList[index].endDialogue8;
+            }
+        }
+        else
+        {
+            Debug.LogError("JSONHandler::RetrieveTextFromUnitData - resourceCode format error");
+            return "resourceCode format error";
+        }
+
+        return ret;
     }
 }
 

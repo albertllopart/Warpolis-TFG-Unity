@@ -115,36 +115,103 @@ public class MenuShopController : MonoBehaviour
 
     void AddButtons()
     {
+        List<UnitType> allowedUnits = FindObjectOfType<DataTransferer>().allowedUnits;
+
         if (caniButtons.Count == 0 && hipsterButtons.Count == 0)
         {
             caniButtons = new List<GameObject>();
-            caniButtons.Add(buttonCaniInfantry);
-            buttonCaniInfantry.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniInfantry.GetComponent<MyButton>().shopValue);
-            caniButtons.Add(buttonCaniTransport);
-            buttonCaniTransport.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniTransport.GetComponent<MyButton>().shopValue);
-            caniButtons.Add(buttonCaniTank);
-            buttonCaniTank.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniTank.GetComponent<MyButton>().shopValue);
-            caniButtons.Add(buttonCaniAerial);
-            buttonCaniAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniAerial.GetComponent<MyButton>().shopValue);
-            caniButtons.Add(buttonCaniGunner);
-            buttonCaniGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniGunner.GetComponent<MyButton>().shopValue);
-            caniButtons.Add(buttonCaniRanged);
-            buttonCaniRanged.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniRanged.GetComponent<MyButton>().shopValue);
-
             hipsterButtons = new List<GameObject>();
-            hipsterButtons.Add(buttonHipsterInfantry);
-            buttonHipsterInfantry.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterInfantry.GetComponent<MyButton>().shopValue);
-            hipsterButtons.Add(buttonHipsterTransport);
-            buttonHipsterTransport.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterTransport.GetComponent<MyButton>().shopValue);
-            hipsterButtons.Add(buttonHipsterTank);
-            buttonHipsterTank.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterTank.GetComponent<MyButton>().shopValue);
-            hipsterButtons.Add(buttonHipsterAerial);
-            buttonHipsterAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterAerial.GetComponent<MyButton>().shopValue);
-            hipsterButtons.Add(buttonHipsterGunner);
-            buttonHipsterGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterGunner.GetComponent<MyButton>().shopValue);
-            hipsterButtons.Add(buttonHipsterRanged);
-            buttonHipsterRanged.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterRanged.GetComponent<MyButton>().shopValue);
+
+            if (allowedUnits.Contains(UnitType.INFANTRY))
+            {
+                caniButtons.Add(buttonCaniInfantry);
+                buttonCaniInfantry.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniInfantry.GetComponent<MyButton>().shopValue);
+                hipsterButtons.Add(buttonHipsterInfantry);
+                buttonHipsterInfantry.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterInfantry.GetComponent<MyButton>().shopValue);
+            }
+            if (allowedUnits.Contains(UnitType.TRANSPORT))
+            {
+                caniButtons.Add(buttonCaniTransport);
+                buttonCaniTransport.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniTransport.GetComponent<MyButton>().shopValue);
+                hipsterButtons.Add(buttonHipsterTransport);
+                buttonHipsterTransport.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterTransport.GetComponent<MyButton>().shopValue);
+            }
+            if (allowedUnits.Contains(UnitType.TANK))
+            {
+                caniButtons.Add(buttonCaniTank);
+                buttonCaniTank.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniTank.GetComponent<MyButton>().shopValue);
+                hipsterButtons.Add(buttonHipsterTank);
+                buttonHipsterTank.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterTank.GetComponent<MyButton>().shopValue);
+            }
+            if (allowedUnits.Contains(UnitType.AERIAL))
+            {
+                caniButtons.Add(buttonCaniAerial);
+                buttonCaniAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniAerial.GetComponent<MyButton>().shopValue);
+                hipsterButtons.Add(buttonHipsterAerial);
+                buttonHipsterAerial.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterAerial.GetComponent<MyButton>().shopValue);
+            }
+            if (allowedUnits.Contains(UnitType.GUNNER))
+            {
+                caniButtons.Add(buttonCaniGunner);
+                buttonCaniGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniGunner.GetComponent<MyButton>().shopValue);
+                hipsterButtons.Add(buttonHipsterGunner);
+                buttonHipsterGunner.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterGunner.GetComponent<MyButton>().shopValue);
+            }
+            if (allowedUnits.Contains(UnitType.RANGED))
+            {
+                caniButtons.Add(buttonCaniRanged);
+                buttonCaniRanged.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonCaniRanged.GetComponent<MyButton>().shopValue);
+                hipsterButtons.Add(buttonHipsterRanged);
+                buttonHipsterRanged.transform.Find("Number").GetComponent<Number>().CreateNumber(buttonHipsterRanged.GetComponent<MyButton>().shopValue);
+            }
         }
+
+        DeactivateUnusedButtons();
+    }
+
+    void DeactivateUnusedButtons()
+    {
+        //infantry
+        if (!caniButtons.Contains(buttonCaniInfantry))
+            buttonCaniInfantry.SetActive(false);
+
+        if (!hipsterButtons.Contains(buttonHipsterInfantry))
+            buttonHipsterInfantry.SetActive(false);
+
+        //transport
+        if (!caniButtons.Contains(buttonCaniTransport))
+            buttonCaniTransport.SetActive(false);
+
+        if (!hipsterButtons.Contains(buttonHipsterTransport))
+            buttonHipsterTransport.SetActive(false);
+
+        //tank
+        if (!caniButtons.Contains(buttonCaniTank))
+            buttonCaniTank.SetActive(false);
+
+        if (!hipsterButtons.Contains(buttonHipsterTank))
+            buttonHipsterTank.SetActive(false);
+
+        //aerial
+        if (!caniButtons.Contains(buttonCaniAerial))
+            buttonCaniAerial.SetActive(false);
+
+        if (!hipsterButtons.Contains(buttonHipsterAerial))
+            buttonHipsterAerial.SetActive(false);
+
+        //gunner
+        if (!caniButtons.Contains(buttonCaniGunner))
+            buttonCaniGunner.SetActive(false);
+
+        if (!hipsterButtons.Contains(buttonHipsterGunner))
+            buttonHipsterGunner.SetActive(false);
+
+        //ranged
+        if (!caniButtons.Contains(buttonCaniRanged))
+            buttonCaniRanged.SetActive(false);
+
+        if (!hipsterButtons.Contains(buttonHipsterRanged))
+            buttonHipsterRanged.SetActive(false);
     }
 
     void Collapse()

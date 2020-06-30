@@ -1,0 +1,81 @@
+{
+  "dialoguesCollection": {
+    "dialoguesList": [
+      {
+        "mapName": "tutorialMap1",
+	"startDialogue1": "Benvingut al tutorial de 'Moure'. En aquesta lliçó aprendràs com interactuar amb les teves unitats i com moure-les pel mapa. Comença movent el teu cursor damunt la unitat desitjada.",
+	"startDialogue2": "Quan el cursor sigui damunt la unitat prem el botó de 'Confirmar' per tal d'interactuar-hi. Llavors podràs moure la unitat sempre que encara no hagi dut a terme cap acció en aquest torn.",
+	"startDialogue3": "Un cop seleccionada podràs moure-la fent clic damunt d'una casella disponible. Les caselles disponibles estaran marcades d'un color blau brillant.",
+	"startDialogue4": "Quan la unitat hagi arribat a la casella desitjada apareixerà el menú d'unitat. Per ara simplement prem 'Esperar' i la unitat restarà inseleccionable fins a l'inici del següent torn.",
+	"startDialogue5": "Si totes les teves unitats han dut a terme una acció és hora d'acabar el torn. Per a fer-ho interactua amb qualsevol casella on no hi hagi elements interactuables i prem 'Acabar'.",
+	"startDialogue6": "Prou de teoria per ara. Prova d'arribar a la Base Hipster 'Edifici blau' amb qualsevol de les teves unitats!",
+
+	"endDialogue1": "Ben fet! Ha estat fàcil, oi? Les unitats d'Infanteria tenen poques restriccions de moviment per tipus de terreny però només poden moure fins a 3 caselles. Altres unitats tenen major",
+	"endDialogue2": "rang de moviment però pateixen més restriccions per culpa dels fanals o els cons, així que tingues-ho en compte."
+      },
+      {
+        "mapName": "tutorialMap2",
+	"startDialogue1": "En aquesta lliçó aprendràs com capturar estructures i expandir els teus dominis pel mapa. Has vist que cada edifici té un color diferent? Els vermells són de la teva propietat,",
+	"startDialogue2": "els blaus són del teu enemic i els grisos, neutrals. El teu objectiu serà capturar com més estructures millor, ja que per cada edifici que controlis guanyaràs 1000 unitats monetàries",
+	"startDialogue3": "al principi de cada torn. Capturar edificis enemics no només millorarà la teva economia sinó que també empitjorarà la de l'oponent, cosa que és la clau per a la victòria.",
+	"startDialogue4": "Per a capturar un edifici mou-hi una Infanteria al damunt i prem la opció 'Capturar'. Llavors la unitat entrarà en l'estat de 'Captura'. Cada cop que capturis de forma consecutiva",
+	"startDialogue5": "els 'Punts de Captura' de l'edifici minvaran 1 per cada Punt de Vida que tingui la Infanteria. Els edificis comencen amb 10 'Punts de Captura', així que en el millor dels casos capturar",
+	"startDialogue6": "un edifici costarà 2 torns, tenint en compte que totes les unitats comencen amb 5 Punts de Vida màxims. Prova de capturar 6 edificis per tal d'aprendre com funciona la mecànica.",
+
+	"endDialogue1": "Ben fet! Has vist la Info de Casella situada a la part inferior esquerra o dreta de la pantalla? Amb ella pots mirar informació útil sobre la casella on es troba el teu cursor.",
+	"endDialogue2": "Si la casella conté un edifici que està sent capturat mostrarà quants 'Punts de Captura' li resten. També mostra informació sobre unitats i tipus de terreny."
+      },
+      {
+        "mapName": "tutorialMap3",
+	"startDialogue1": "En aquesta lliçó aprendràs com carregar i descarregar Infanteries de Transports. Per a carregar una unitat mou-la damunt d'un Transport buit i prem la opció 'Carregar'.",
+	"startDialogue2": "Llavors, la Infanteria serà carregada al Transport i l'acompanyarà allà on vagi. Per a descarregar-la mou el Transport i selecciona la opció 'Descarregar'.",
+	"startDialogue3": "Aleshores selecciona a quina casella vols fer la descàrrega. Això farà servir les accions del torn d'ambdues unitats. Prova d'arribar a la Base Hipster amb una Infanteria!",
+
+	"endDialogue1": "Ben fet! Les unitats de Transport tenen el doble de moviment que les d'Infanteria. Fes servir els Transports per ajudar-les a desplaçar-se més rápidament. Serà realment útil quan",
+	"endDialogue2": "necessitis arribar a edificis llunyans. A més a més, els Transports són molt útils per blocar camins a l'enemic ja que són barats i resistents."
+      },
+      {
+        "mapName": "tutorialMap4",
+	"startDialogue1": "En aquesta lliçó aprendràs sobre el combat i els Tancs. El teu objectiu és arribar a la Base Hipster amb una Infanteria però aquest cop no serà tan fàcil, ja que hi ha 2 Artillers enemics",
+	"startDialogue2": "defensant-la. Els Artillers son molt efectius contra Infanteria i unitats Aèries, però ho passen malament contra Tancs, així que et seran realment útils. Per a atacar una unitat",
+	"startDialogue3": "mou un Tanc a una casella ubicada al costat de l'objectiu i selecciona la opció 'Atacar'. Llavors, selecciona l'objectiu i prem 'Confirmar', però abans fes un cop d'ull a la",
+	"startDialogue4": "'Info de Casella' a la part inferior de la pantalla. Indicarà el dany que infligiràs a l'objectiu abans d'atacar-lo. Recorda que les unitats tenen 5 Punts de Vida màxims.",
+
+	"endDialogue1": "Ben fet! Els Tancs tenen un bon poder ofensiu i el millor poder defensiu de totes les unitats i els Artillers no hi tenen res a fer. Tenen greus problemes contra les unitats Aèries, però.",
+	"endDialogue2": "Tingues en compte que el poder ofensiu d'una unitat és directament proporcional als seus Punts de Vida. Una unitat sana infligirà més dany que una de malmesa."
+      },
+      {
+        "mapName": "tutorialMap5",
+	"startDialogue1": "En aquesta lliçó aprendràs sobre el combat i les unitats Aèries. El teu objectiu és arribar a la Base Hipster amb una Infanteria, però aquest cop està sent defensada per 2 Tancs.",
+	"startDialogue2": "Els Tancs són especialment efectius contra unitats terrestres, però tenen problemes contra les unitats Aèries perquè amb prou feines les poden tocar, així que et seran molt útils.",
+	"startDialogue3": "Si necessites unitats extra pots fer servir les fàbriques per a fer-ne més. Mou el cursor damunt d'una d'elles i interactua-hi per a obrir el 'Menú de Botiga'.",
+
+	"endDialogue1": "Ben fet! Les unitats Aèries tenen un gran poder ofensiu i no pateixen restriccions de mobilitat. Perden estrepitosament contra els Artillers, així que guarda-hi les distàncies."
+      },
+      {
+        "mapName": "tutorialMap6",
+	"startDialogue1": "En aquesta lliçó aprendràs sobre el combat i els Artillers. El teu objectiu és arribar a la Base Hipster amb una Infanteria, i aquest cop està sent defensada per 6 unitats Aèries.",
+	"startDialogue2": "Les unitats Aèries no tenen res a fer contra els Artillers, així que fes-los servir per evitar que fereixin altres unitats. Les Infanteries ho passen malament contra qualsevol unitat",
+	"startDialogue3": "així que pots provar d'amagar-les dins d'un Transport, que són més resistents. Tingues en compte, però, que si el Transport és derrotat, ambdues unitats moriran.",
+
+	"endDialogue1": "Ben fet! Tot i que les unitats Aèries poden fer por al principi, els Artillers se n'encarreguen fàcilment. Fes-los servir per mantenir el cel clar en tot moment!"
+      },
+      {
+        "mapName": "tutorialMap7",
+	"startDialogue1": "En aquesta lliçó aprendràs sobre les mecàniques especials de les unitats A distància. El teu objectiu és arribar a la Base Hipster amb una Infanteria, i aquest cop està sent defensada",
+	"startDialogue2": "per 4 unitats terrestres. Fes servir les teves unitats A distància per a destruir les unitats que impedeixen que la teva Infanteria hi arribi.",
+	"startDialogue3": "Selecciona qualsevol unitat A distància activa i mou-la a la mateixa casella on ha començat el torn. Les unitats A distància només poden atacar si ho fan d'aquesta manera.",
+	"startDialogue4": "Pots comprovar el rang d'atac de qualsevol unitat seleccionant-la amb el botó 'Cancel·lar' en comptes de fer-ho amb el botó habitual de 'Confirmar'.",
+
+	"endDialogue1": "Ben fet! Les unitats A distància tenen un gran poder ofensiu, però són molt fràgils. Necessiten que altres unitats les protegeixin i cobreixin per a poder funcionar amb normalitat."
+      },
+      {
+        "mapName": "tutorialMap8",
+	"startDialogue1": "Ha arribat l'hora de demostrar tot el què has après! El teu objectiu és arribar a la Base Hipster amb una Infanteria, però ara l'enemic té tots els recursos disponibles. Captura",
+	"startDialogue2": "tants edificis com puguis per a millorar la teva economia i desplega unitats fent servir les fàbriques. Observa què fa el teu oponent abans de prendre decisions importants. Sort!",
+
+	"endDialogue1": "Ben fet! Has après allò bàsic del joc. A partir d'ara estaràs sol. Un munt de reptes t'esperen a la secció 'Batalla' del menú principal."
+      }
+    ]
+  }
+}

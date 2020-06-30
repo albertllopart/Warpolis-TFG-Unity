@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour
     //important
     [HideInInspector]
     public bool myTurn; // per saber si la unitat ha estat seleccionada al torn del seu exèrcit o no
+    public bool generatedByTileset;
 
     //stats
     [Header("Info")]
@@ -137,7 +138,7 @@ public class Unit : MonoBehaviour
 
         UpdateStatsBasedOnTile();
 
-        if (!FindObjectOfType<AIController>().inControl) //si és un humà qui està actuant
+        if (!FindObjectOfType<AIController>().inControl && !generatedByTileset) //si és un humà qui està actuant
         {
             GameObject.Find("Tile_info").GetComponent<TileInfo>().UpdateInfo(transform.position);
             state = UnitState.WAITING;
@@ -518,6 +519,13 @@ public class Unit : MonoBehaviour
             UnsubscribeFromEvents();
 
             GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+
+            //check tutorial
+            if (FindObjectOfType<TutorialController>() != null)
+                if (unitType == UnitType.INFANTRY)
+                {
+                    GetComponent<UnitInfantry>().CheckForEnemyBase();
+                }
         }
         else
         {
@@ -560,6 +568,13 @@ public class Unit : MonoBehaviour
             UnsubscribeFromEvents();
 
             GameObject.Find("Gameplay Controller").GetComponent<GameplayController>().DisableMenuUnit();
+
+            //check tutorial
+            if (FindObjectOfType<TutorialController>() != null)
+                if (unitType == UnitType.INFANTRY)
+                {
+                    GetComponent<UnitInfantry>().CheckForEnemyBase();
+                }
         }
         else
         {

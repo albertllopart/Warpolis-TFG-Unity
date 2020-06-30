@@ -1,0 +1,81 @@
+{
+  "dialoguesCollection": {
+    "dialoguesList": [
+      {
+        "mapName": "tutorialMap1",
+	"startDialogue1": "Welcome to the 'Move' tutorial. In this lesson you will learn how to interact with your units and how to move them around the map. Start by moving your cursor over the desired unit.",
+	"startDialogue2": "Once your cursor is over the desired unit simply press the 'Confirm' button in order to interact with it. You will then be able to move the unit as long as that unit hasn't performed",
+	"startDialogue3": "an action in the current turn already. Once in that state you can move your unit by clicking on an available tile. Available tiles will be painted in a shiny blue color.",
+	"startDialogue4": "Once the unit has reached the desired tile the unit menu will pop. For now simply press 'Wait' and the unit will remain unselectable until the next turn starts.",
+	"startDialogue5": "If all your units have already performed an action it is time to end your turn. Simply interact with any tile and select 'End Turn' for that to happen.",
+	"startDialogue6": "Enough theory for now. Try reaching the Hipster Base 'Blue building' with any of your units!",
+
+	"endDialogue1": "Well done! That was easy right? Infantry units have very low movement restrictions due to terrain, although they only have 3 tiles of movement range. Some other units have more",
+	"endDialogue2": "range but suffer from more restrictions due to Street Lights or Cones, so keep that in mind."
+      },
+      {
+        "mapName": "tutorialMap2",
+	"startDialogue1": "In this lesson you will learn how to capture structures and expand your domains across the map. Noticed how each building has a different color? Red building's are your property,",
+	"startDialogue2": "blue buildings are your enemy's and grey buildings are neutral. Your goal is to capture as many buildings as possible, as for every building in your property you will earn 1000",
+	"startDialogue3": "monetary units at the begining of each turn. Capturing enemy buildings will not only increase your economy but will also hinder your opponent's, the key to victory.",
+	"startDialogue4": "To capture a building simply move an Infantry unit over it and select the 'Capture' command. That unit then will enter the 'Capture' state. Every time you select 'Capture' consecutively",
+	"startDialogue5": "the 'Capture points' of the building will decrease 1 point per every Hit Points the Infantry has. Buildings start at 10 'Capture points', so best case scenario capturing a building",
+	"startDialogue6": "will take 2 turns, given the fact that all units spawn with 5 maximum Hit Points. Try capturing 6 buildings in order to master the mechanics of it!",
+
+	"endDialogue1": "Well done! Did you notice the Tile Info located down-right or down-left of your screen? With that you can check some useful info regarding the tile located under your cursor.",
+	"endDialogue2": "If the tile contains a building that's being captured it will show how many 'Capture Points' remain. It can also show info about units and tile types. More on that in later lessons!"
+      },
+      {
+        "mapName": "tutorialMap3",
+	"startDialogue1": "In this lesson you will learn how to load and drop Infantry units from Transport units. To load a unit simply move it over an empty Transport and select the 'Load' command.",
+	"startDialogue2": "After that, the Infantry will be loaded into the Transport and it will be carried by it. To drop the unit from the Transport simply move the loaded Transport and select the 'Drop' command.",
+	"startDialogue3": "Then, select an available tile on which you want to drop your Infantry. That will use both units actions for the turn. Try to reach the Hipster Base with your Infantry!",
+
+	"endDialogue1": "Well done! Transport units have double the movement range of the Infantry units. You can use Transports to help them travel faster. This will be really useful when you need to reach",
+	"endDialogue2": "distant buildings that would take so long to reach otherwise. Also, Transport units make really good road blockers against enemy units due to their decent defensive power."
+      },
+      {
+        "mapName": "tutorialMap4",
+	"startDialogue1": "In this lesson you will learn about combat and Tanks. Your goal is to reach the Hipster base with an Infantry, although this time it won't be so easy, as there are 2 enemy Gunners",
+	"startDialogue2": "defending it. Gunners are specially effective against Infantry and Aerial units, but they struggle against Tanks, so they will be your best bet against them. To attack an enemy unit",
+	"startDialogue3": "simply move a Tank to a tile located next to the target and select the 'Attack' command. Then select your target and press the 'confirm' button, but before that take a look at the",
+	"startDialogue4": "'Tile Info' bottom-left or bottom-right. It will indicate the damage you will inflict to your target prior to attacking it. Keep in mind that every unit has a maximum of 5 HP.",
+
+	"endDialogue1": "Well done! Tanks have a good offensive power and the best defensive power of all units and Gunners are no match for them. They stand no chance against Aerial units, though.",
+	"endDialogue2": "Keep in mind that the damage output of a unit is directly proportional to their current Hit Points. A healthy unit will always inflict more damage than an injured one."
+      },
+      {
+        "mapName": "tutorialMap5",
+	"startDialogue1": "In this lesson you will learn about combat and Aerial units. Your goal is to reach the Hipster base with an Infantry, although this time it is being defended by 2 enemy Tanks.",
+	"startDialogue2": "Tanks are specially effective against grounded units, but they struggle against Aerial units, which they can barely harm, so they will be your best bet against them.",
+	"startDialogue3": "If you need extra units you can always make use of your factories to make more of them. Simply move your cursor over one of them and press the button to open the 'Shop Menu'.",
+
+	"endDialogue1": "Well done! Aerial units have great offensive power and no mobility restrictions due to terrain. They fear Gunners the most, so keep a safe distance from them at all times."
+      },
+      {
+        "mapName": "tutorialMap6",
+	"startDialogue1": "In this lesson you will learn about combat and Gunner units. Your goal is to reach the Hipster base with an Infantry, and this time it is being defended by 6 enemy Aerial units.",
+	"startDialogue2": "Aerial units don't stand a chance at all against Gunner units, so use them to prevent them from harming other units. Infantry units don't really appreciate being attacked by any unit",
+	"startDialogue3": "so you can try to hide them into Transport units which have more defensive power. Keep in mind, though, that if a Transport carrying an Infantry is defeated, both units will die.",
+
+	"endDialogue1": "Well done! Even though Aerial units may feel overwhelming at first they can be easily shut down by Gunners. Use Gunners to keep the skies clear at all times!"
+      },
+      {
+        "mapName": "tutorialMap7",
+	"startDialogue1": "In this lesson you will learn about the special mechanics of Ranged units. Your goal is to reach the Hipster base with an Infantry, and this time it is being defended by 4 grounded units.",
+	"startDialogue2": "Use your Ranged units to destroy the units that prevent your Infantry from getting there safely. To do that simply select any active Ranged unit and move to the same tile it started",
+	"startDialogue3": "the turn at. Ranged units can only attack if they do it from the same tile they started the turn on, as they require time to properly analyze the tile they are targetting.",
+	"startDialogue4": "You can check any unit's attack range by selecting it with the 'Cancel' button instead of the 'Confirm' button.",
+
+	"endDialogue1": "Well done! Ranged units have massive offensive power, but very low defensive power. They really need to be protected and kept behind other units, otherwise they will be easily destroyed."
+      },
+      {
+        "mapName": "tutorialMap8",
+	"startDialogue1": "It's time to prove all you've learnt! Your goal is to reach the Hipster base with an Infantry one last time, but now the enemy has all resources available. Capture as many",
+	"startDialogue2": "buildings as you can to improve your economy and keep on deploying units by using your factories. Watch what your opponent is doing and deploying before making any decisions. Good luck!",
+
+	"endDialogue1": "Well done! You've mastered the basics of the game. You're on your own now. Challanges await you in the 'Battle' section of the main menu."
+      }
+    ]
+  }
+}

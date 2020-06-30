@@ -601,7 +601,7 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().repositionPlayer.AddListener(Reposition);
     }
 
-    void UnsubscribeFromEvents()
+    public void UnsubscribeFromEvents()
     {
         //controls
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_w.RemoveListener(checkEnhancedW);

@@ -265,4 +265,77 @@ public class UnitsController : MonoBehaviour
 
         return false;
     }
+
+    public void InstantiateUnitWithNoValue(UnitArmy army, UnitType type, Vector3 position)
+    {
+        GameObject newUnit = null;
+
+        switch (army)
+        {
+            case UnitArmy.CANI:
+
+                switch (type)
+                {
+                    case UnitType.INFANTRY:
+                        newUnit = Instantiate(caniInfantry, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.TRANSPORT:
+                        newUnit = Instantiate(caniTransport, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.TANK:
+                        newUnit = Instantiate(caniTank, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.AERIAL:
+                        newUnit = Instantiate(caniAerial, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.GUNNER:
+                        newUnit = Instantiate(caniGunner, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.RANGED:
+                        newUnit = Instantiate(caniRanged, position, Quaternion.identity);
+                        break;
+                }
+
+                break;
+
+            case UnitArmy.HIPSTER:
+
+                switch (type)
+                {
+                    case UnitType.INFANTRY:
+                        newUnit = Instantiate(hipsterInfantry, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.TRANSPORT:
+                        newUnit = Instantiate(hipsterTransport, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.TANK:
+                        newUnit = Instantiate(hipsterTank, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.AERIAL:
+                        newUnit = Instantiate(hipsterAerial, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.GUNNER:
+                        newUnit = Instantiate(hipsterGunner, position, Quaternion.identity);
+                        break;
+
+                    case UnitType.RANGED:
+                        newUnit = Instantiate(hipsterGunner, position, Quaternion.identity);
+                        break;
+                }
+
+                break;
+        }
+
+        if (newUnit != null)
+            newUnit.GetComponent<Unit>().generatedByTileset = true;
+    }
 }

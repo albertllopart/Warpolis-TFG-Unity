@@ -1,0 +1,81 @@
+{
+  "dialoguesCollection": {
+    "dialoguesList": [
+      {
+        "mapName": "tutorialMap1",
+	"startDialogue1": "Bienvenido al tutorial de 'Mover'. En esta lección aprenderás a interactuar con tus unidades y a moverlas por el mapa. Empieza moviendo tu cursor encima de la unidad deseada.",
+	"startDialogue2": "Cuando el cursor esté encima de la unidad pulsa el botón de 'Confirmar' para interactuar con ella. Entonces podràs moverla siempre y cuando no haya realizado ya su acción en este turno.",
+	"startDialogue3": "Una vez seleccionada podrás moverla haciendo clic en una casilla disponible. Las casillas disponibles estarán marcadas con un color azul brillante.",
+	"startDialogue4": "Cuando la unidad haya llegado a la casilla deseada aparecerá el menú de unidad. Por ahora pulsa 'Esperar' y la unidad restará inseleccionable hasta el inicio del siguiente turno.",
+	"startDialogue5": "Si todas tus unidades han realizado una acción es hora de acabar el turno. Para ello interactúa con cualquier casilla en la que no haya elementos interactuables y pulsa 'Acabar'.",
+	"startDialogue6": "Basta de teoría por ahora. Intenta llegar a la Base Hipster 'Edificio azul' con cualquiera de tus unidades!",
+
+	"endDialogue1": "Bien hecho! Ha sido fácil, verdad? las unidades de Infantería tienen pocas restricciones de movimiento por tipo de terreno pero sólo pueden mover 3 casillas. Otras unidades tienen mayor",
+	"endDialogue2": "rango de movimiento pero sufren más restricciones por culpa de farolas o conos, así que tenlo en cuenta."
+      },
+      {
+        "mapName": "tutorialMap2",
+	"startDialogue1": "En esta lección aprenderás como capturar estructuras y expandir tus dominios por el mapa. Has visto que cada edificio tiene un color distinto? Los rojos son de tu propiedad,",
+	"startDialogue2": "los azules son de tu enemigo y los grises son neutrales. Tu objetivo será capturar cuantas más estructuras mejor, ya que por cada edificio que controles recibirás 1000 unidades",
+	"startDialogue3": "monetarias al principio de cada turno. Capturar edificios enemigos no solo mejorarà tu economía sino que también empeorará la de tu oponente, cosa que es clave para la victoria.",
+	"startDialogue4": "para capturar un edificio mueve una Infantería encima del mismo y pulsa 'Capturar'. Entonces la unidad entrará en el estado 'Captura'. Cada vez que captures de forma consecutiva",
+	"startDialogue5": "los 'Puntos de Captura' del edificio bajarán 1 por cada Punto de Vida que tenga la Infantería. Los edificios empiezan con 10 'Puntos de Captura', así que en el mejor de los casos capturar",
+	"startDialogue6": "un edificio costarà 2 turnos, teniendo en cuenta que todas las unidades empiezan con 5 Puntos de Vida máximos. Intenta capturar 6 edificios para aprender como funciona la mecánica.",
+
+	"endDialogue1": "Bien hecho! has visto la Info de Casilla en la parte inferior izquierda o derecha de la pantalla? con ella puedes mirar información útil sobre la casilla donde se encuentra tu cursor.",
+	"endDialogue2": "Si la casilla contiene un edificio que está siendo capturado mostrará cuantos 'Puntos de Captura' le quedan. También muestra información sobre unidades y tipo de terreno."
+      },
+      {
+        "mapName": "tutorialMap3",
+	"startDialogue1": "En esta lección aprenderás como cargar y descargar Infanterías de Transportes. Para cargar una unidad muévela encima de un Transporte vacío y pulsa la opción 'Cargar'.",
+	"startDialogue2": "Entonces, la Infantería será cargada al Transporte y lo acompañará allá donde vaya. Para descargarla mueve el Transporte y selecciona la opción 'Descargar'.",
+	"startDialogue3": "Luego selecciona a qué casilla quieres hacer la descarga. Esto usará las acciones del turno de las dos unidades. Intenta llegar a la Base Hipster con una de tus Infanterías!",
+
+	"endDialogue1": "Bien hecho! las unidades de Transporte tienen el doble de movimiento que las Infanterías. Usa los Transportes para ayudarlas a desplazarse más rápidamente. Será realmente",
+	"endDialogue2": "útil cuando necesites llegar a edificios lejanos. Además, los Transportes son muy útiles para bloquear caminos al enemigo ya que son baratos y resistentes."
+      },
+      {
+        "mapName": "tutorialMap4",
+	"startDialogue1": "En esta lección aprenderás sobre el combate y los Tanques. Tu objetivo es llegar a la Base Hipster con una Infantería pero esta vez no será tan fácil ya que hay 2 Artilleros enemigos",
+	"startDialogue2": "defendiéndola. los Artilleros son muy efectivos contra Infantería y unidades Aéreas, pero lo pasan mal contra Tanques, así que te serán muy útiles. Para atacar a una unidad",
+	"startDialogue3": "mueve un Tanque a una casilla ubicada al lado del objetivo y selecciona la opción 'Atacar'. Entonces, selecciona el objetivo y pulsa 'Confirmar', pero antes echa un vistazo a la",
+	"startDialogue4": "'info de Casilla' en la parte inferior de la pantalla. Indicarà el daño que infligirás al objetivo antes de atacarlo. Recuerda que las unidades tienen 5 Puntos de Vida máximos.",
+
+	"endDialogue1": "Bien hecho! los Tanques tienen un buen poder ofensivo y el mejor poder defensivo y los Artilleros poco les pueden hacer. No obstante, tienen graves problemas contra las unidades Aéreas.",
+	"endDialogue2": "Ten en cuenta que el poder ofensivo de una unidad es directamente proporcional a sus Puntos de Vida. Una unidad sana infligirà más daño que una dañada."
+      },
+      {
+        "mapName": "tutorialMap5",
+	"startDialogue1": "En esta lección aprenderás sobre el combate y las unidades Aéreas. Tu objetivo es llegar a la Base Hipster con una Infantería, pero esta vez está siendo defendida por 2",
+	"startDialogue2": "Tanques. Los Tanques son realmente útiles contra unidades terrestres, pero tienen problemas contra unidades Aéreas porque apenas pueden tocarlas, así que te serán muy útiles.",
+	"startDialogue3": "Si necesitas unidades extra puedes usar las fábricas para hacer más. Mueve el cursor encima de una de ellas y interactúa con la casilla para abrir el 'Menú de Tienda'.",
+
+	"endDialogue1": "Bien hecho! las unidades Aéreas tienen un gran poder ofensivo y no sufren restricciones de movilidad. Pierden estrepitosamente contra los Artilleros, así que guarda las distancias."
+      },
+      {
+        "mapName": "tutorialMap6",
+	"startDialogue1": "En esta lección aprenderás sobre el combate y los Artilleros. Tu objetivo es llegar a la Base Hipster con una Infantería, y esta vez está siendo defendida por 6 unidades Aéreas.",
+	"startDialogue2": "Las unidades Aéreas no tienen nada que hacer contra los Artilleros, así que úsalos para evitar que hieran a otras unidades. Las Infanterías lo pasan mal contra cualquier",
+	"startDialogue3": "unidad así que puedes intentar esconderlas dentro de un Transporte, que son más resistentes. Ten en cuenta, pero, que si el Transporte és derrotado, las dos unidades morirán.",
+
+	"endDialogue1": "Bien hecho! Aunque las unidades Aéreas pueden dar miedo al principio, los Artilleros se encargan de ellas con facilidad. Utilízalos para mantener el cielo despejado en todo momento!"
+      },
+      {
+        "mapName": "tutorialMap7",
+	"startDialogue1": "En esta lección aprenderás sobre las mecánicas especiales de las unidades A distancia. Tu objetivo es llegar a la Base Hipster con una Infantería, y esta vez está siendo defendida",
+	"startDialogue2": "por 4 unidades terrestres. Usa tus unidades A distancia para destruir las unidades enemigas que impiden que tu Infantería llegue al objetivo.",
+	"startDialogue3": "Selecciona cualquier unidad A distancia activa y muévela a la misma casilla donde ha empezado el turno. Las unidades A distancia sólo pueden atacar de esta forma.",
+	"startDialogue4": "Puedes comprobar el rango de ataque de cualquier unidad seleccionándola con el botón 'Cancelar' en vez de hacerlo con el botón habitual de 'Confirmar'.",
+
+	"endDialogue1": "Bien hecho! las unidades A distancia tienen un gran poder ofensivo, pero son muy frágiles. Necesitan que otras unidades las protejan y cubran para poder funcionar con normalidad."
+      },
+      {
+        "mapName": "tutorialMap8",
+	"startDialogue1": "Ha llegado la hora de demostrar lo que has aprendido! tu objetivo es llegar a la Base Hipster con una Infantería, pero ahora el enemigo tiene todos los recursos disponibles. Captura",
+	"startDialogue2": "tantos edificios como puedas para mejorar tu economía y despliega unidades usando las fábricas. Observa qué hace tu oponente antes de tomar decisiones importantes. Suerte!",
+
+	"endDialogue1": "Bien hecho! has aprendido lo básico del juego. A partir de ahora irás por tu cuenta. Un montón de retos te esperan en la sección 'Batalla' del menú principal."
+      }
+    ]
+  }
+}

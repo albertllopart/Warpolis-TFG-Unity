@@ -21,6 +21,11 @@ public class MenuController : MonoBehaviour
     public TurnLimit turnLimit = TurnLimit.INFINITE;
     public int turnLimitAmount = 0;
 
+    public GameObject tutorialControllerPrefab;
+    public GameObject dialogueControllerPrefab;
+    public GameObject turnLimitLeft;
+    public GameObject turnLimitRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +38,20 @@ public class MenuController : MonoBehaviour
 
         turnLimitGO = transform.Find("Preparation").transform.Find("Background").transform.Find("Turn Limit").gameObject;
 
+        if (FindObjectOfType<DataTransferer>().isTutorial)
+        {
+            InstantiateTutorial();
+        }
+
         FindObjectOfType<FadeTo>().finishedDecreasing.AddListener(SubscribeToEvents);
     }
 
     public void AfterStart()
     {
         DisableGameplay();
+
+        if (FindObjectOfType<TutorialController>() != null)
+            DestroyTurnLimit();
 
         if (turnLimit == TurnLimit.INFINITE)
             turnLimitGO.transform.Find("Number").GetComponent<Number>().SetInfinite();
@@ -48,6 +61,18 @@ public class MenuController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void InstantiateTutorial()
+    {
+        Instantiate(tutorialControllerPrefab);
+        Instantiate(dialogueControllerPrefab);
+    }
+
+    void DestroyTurnLimit()
+    {
+        Destroy(turnLimitLeft);
+        Destroy(turnLimitRight);
     }
 
     public void MyOnEnable()
@@ -153,7 +178,10 @@ public class MenuController : MonoBehaviour
         cameraController.GetComponent<CameraController>().FadeToWhiteSetup(1.0f);
         cameraController.GetComponent<CameraController>().fadeToWhiteRest.AddListener(NewGame);
 
-        cameraController.GetComponent<CameraController>().fadeToWhiteEnd.AddListener(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().NewGameSetup);
+        if (FindObjectOfType<TutorialController>() != null)
+            FindObjectOfType<DialogueController>().finishedFading.AddListener(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().NewGameSetup);
+        else
+            cameraController.GetComponent<CameraController>().fadeToWhiteEnd.AddListener(GameObject.Find("Cutscene Controller").GetComponent<CutsceneController>().NewGameSetup);
 
         //startGame.Invoke(); //de moment això no crida res
 
@@ -230,14 +258,22 @@ public class MenuController : MonoBehaviour
         FindObjectOfType<FadeTo>().finishedDecreasing.RemoveListener(SubscribeToEvents);
 
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.AddListener(StartGame);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.AddListener(IncreaseTurnLimit);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.AddListener(DecreaseTurnLimit);
+        
+        if (FindObjectOfType<TutorialController>() == null)
+        {
+            GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.AddListener(IncreaseTurnLimit);
+            GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.AddListener(DecreaseTurnLimit);
+        }
     }
 
     void UnsubscribeFromEvents()
     {
         GameObject.Find("Controls").GetComponent<Controls>().keyboard_o_down.RemoveListener(StartGame);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.RemoveListener(IncreaseTurnLimit);
-        GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.RemoveListener(DecreaseTurnLimit);
+
+        if (FindObjectOfType<TutorialController>() == null)
+        {
+            GameObject.Find("Controls").GetComponent<Controls>().keyboard_d_down.RemoveListener(IncreaseTurnLimit);
+            GameObject.Find("Controls").GetComponent<Controls>().keyboard_a_down.RemoveListener(DecreaseTurnLimit);
+        }
     }
 }

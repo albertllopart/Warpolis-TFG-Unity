@@ -89,12 +89,15 @@ public class AIController : MonoBehaviour
                 break;
         }
 
-        inControl = !ret;
+        return ret;
+    }
+
+    public void SetInControl(bool set)
+    {
+        inControl = !set;
 
         if (inControl)
             GetAvailableEntities();
-
-        return ret;
     }
 
     void SetCurrentArmy()

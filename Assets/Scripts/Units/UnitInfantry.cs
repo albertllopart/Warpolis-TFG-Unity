@@ -156,6 +156,9 @@ public class UnitInfantry : MonoBehaviour
         currentCapture.GetComponent<Building>().MyOnDestroy();
 
         FindObjectOfType<SoundController>().PlayCapture();
+
+        if (FindObjectOfType<TutorialController>() != null)
+            FindObjectOfType<TutorialController>().capturedBuilding.Invoke();
     }
 
     public GameObject SearchForOtherBuilding()
@@ -192,6 +195,14 @@ public class UnitInfantry : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void CheckForEnemyBase()
+    {
+        GameObject building = SearchForOtherBuilding();
+
+        if (building != null && building.GetComponent<Building>().type == BuildingType.BASE)
+            FindObjectOfType<TutorialController>().steppedOnEnemyBase.Invoke();
     }
 
     public GameObject SearchForTransport()

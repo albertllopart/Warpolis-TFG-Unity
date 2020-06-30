@@ -28,13 +28,16 @@ public class CameraController : MonoBehaviour
     public UnityEvent fadeToWhiteEnd;
     public UnityEvent fadeToWhiteRest;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         fadeToWhiteEnd = new UnityEvent();
         fadeToWhiteRest = new UnityEvent();
         cameraMoved = new UnityEvent();
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         CalculateCameraCorners();
         CalculateCameraWidth();
     }
@@ -257,6 +260,7 @@ public class CameraController : MonoBehaviour
     {
         cameraMoved.AddListener(CalculateCameraCorners);
 
-        GameObject.Find("Menu Controller").GetComponent<MenuController>().endGame.AddListener(OnEndGame);
+        if(FindObjectOfType<MenuController>() != null)
+            FindObjectOfType<MenuController>().endGame.AddListener(OnEndGame);
     }
 }

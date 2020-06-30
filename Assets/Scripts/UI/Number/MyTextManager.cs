@@ -89,7 +89,20 @@ public class MyTextManager : MonoBehaviour
     public Sprite enya;
     public Sprite apostrof;
 
+    //nombres
+    public Sprite zero;
+    public Sprite one;
+    public Sprite two;
+    public Sprite three;
+    public Sprite four;
+    public Sprite five;
+    public Sprite six;
+    public Sprite seven;
+    public Sprite eight;
+    public Sprite nine;
+
     bool needToUpdate;
+    bool needToColor = true;
 
     // Start is called before the first frame update
     void Start()
@@ -163,7 +176,13 @@ public class MyTextManager : MonoBehaviour
             nextChar.transform.parent = myText.transform;
             nextChar.name = character;
             nextChar.GetComponent<SpriteRenderer>().sprite = GetSprite(character);
-            nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
+
+            if (needToColor)
+                nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
+            else
+                nextChar.transform.position += new Vector3(0, -9 / 16f, 0);
+            needToColor = true;
+
             nextChar.GetComponent<SpriteRenderer>().sortingOrder = myText.GetComponent<MyText>().layer;
 
             //preparar offset pel seguent character
@@ -226,11 +245,20 @@ public class MyTextManager : MonoBehaviour
 
             Vector3 nextPos = myText.transform.position + new Vector3(accumulatedOffset, (-spacing * ret), 0);
 
+            if (!needToColor)
+                nextPos += new Vector3(0, -9 / 16f, 0);
+
             GameObject nextChar = Instantiate(sprite, nextPos, Quaternion.identity);
             nextChar.transform.parent = myText.transform;
             nextChar.name = character;
             nextChar.GetComponent<SpriteRenderer>().sprite = GetSprite(character);
-            nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
+
+            if (needToColor)
+                nextChar.GetComponent<SpriteRenderer>().color = myText.GetComponent<MyText>().color;
+            else
+                nextChar.transform.position += new Vector3(0, -9 / 16f, 0);
+            needToColor = true;
+
             nextChar.GetComponent<SpriteRenderer>().sortingOrder = myText.GetComponent<MyText>().layer;
 
             if (character != " ")
@@ -538,6 +566,57 @@ public class MyTextManager : MonoBehaviour
 
             case "'":
                 ret = apostrof;
+                break;
+
+            //nombres
+            case "0":
+                ret = zero;
+                needToColor = false;
+                break;
+
+            case "1":
+                ret = one;
+                needToColor = false;
+                break;
+
+            case "2":
+                ret = two;
+                needToColor = false;
+                break;
+
+            case "3":
+                ret = three;
+                needToColor = false;
+                break;
+
+            case "4":
+                ret = four;
+                needToColor = false;
+                break;
+
+            case "5":
+                ret = five;
+                needToColor = false;
+                break;
+
+            case "6":
+                ret = six;
+                needToColor = false;
+                break;
+
+            case "7":
+                ret = seven;
+                needToColor = false;
+                break;
+
+            case "8":
+                ret = eight;
+                needToColor = false;
+                break;
+
+            case "9":
+                ret = nine;
+                needToColor = false;
                 break;
         }
 

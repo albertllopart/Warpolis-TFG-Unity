@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &523260173183622003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523260173183622001}
+  - component: {fileID: 523260173183622000}
+  m_Layer: 0
+  m_Name: Cutscene Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523260173183622001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523260173183622003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523260173183622000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523260173183622003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4a354c9c4a3f84a93d430e1b6a818f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTurn: 0
+  attackingUnit: {fileID: 0}
+  healingSignPrefab: {fileID: 8762473776784102672, guid: 0e24bf4e4f4e0d5408261191669036fb,
+    type: 3}
+  announcer: {fileID: 3192908319310451954, guid: 5afd803ed404c6c4691ad8f9d53d467a,
+    type: 3}
+  unitDied:
+    m_PersistentCalls:
+      m_Calls: []
+  repositionPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedCameraTargeting:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedAddingMoney:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedHealing:
+    m_PersistentCalls:
+      m_Calls: []
+  finishedAllCutscenes:
+    m_PersistentCalls:
+      m_Calls: []

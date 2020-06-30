@@ -53,13 +53,8 @@ public class GameplayController : MonoBehaviour
     public UnityEvent endTurnCani;
     public UnityEvent endTurnHipster;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        SubscribeToEvents();
-
-        SetControllers();
-
         //events
         //ui
         enableMenuOptions = new UnityEvent();
@@ -84,6 +79,14 @@ public class GameplayController : MonoBehaviour
         //gameplay
         endTurnCani = new UnityEvent();
         endTurnHipster = new UnityEvent();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        SubscribeToEvents();
+
+        SetControllers();
 
         playerState = PlayerState.NAVIGATING;
         turn = Turn.CANI;

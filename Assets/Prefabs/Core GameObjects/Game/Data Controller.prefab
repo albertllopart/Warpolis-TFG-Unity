@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2974959301525560566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2974959301525560560}
+  - component: {fileID: 2974959301525560567}
+  m_Layer: 0
+  m_Name: Units Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2974959301525560560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974959301525560566}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2974959301782506495}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2974959301525560567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974959301525560566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91fbaf451b8dd344a3f3c5aacb6e9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caniInfantry: {fileID: 666185830536341486, guid: 39c66174c5cc0704e80bb399d66fd2ee,
+    type: 3}
+  caniTransport: {fileID: 2082386380024262747, guid: 87524f713a47e19408be8b56910a7c61,
+    type: 3}
+  caniTank: {fileID: 2717939172646256319, guid: 107ae9589bbd07e4b8440b1c085921f3,
+    type: 3}
+  caniAerial: {fileID: 1315612378375482336, guid: b0e09c76eae185e48b444bf00d2d061f,
+    type: 3}
+  caniGunner: {fileID: 4434745426396000983, guid: 562fef72844e4a846bb6bb21dc00f583,
+    type: 3}
+  caniRanged: {fileID: 1254852491631605761, guid: 94d02254cc9f0414890004efb360a39a,
+    type: 3}
+  hipsterInfantry: {fileID: 8884597790952577896, guid: ce88d37d218e70144b3dddc979985500,
+    type: 3}
+  hipsterTransport: {fileID: 2082386380024262747, guid: 7e9f7dac9721b8246a0e6dd2c34eac16,
+    type: 3}
+  hipsterTank: {fileID: 2717939172646256319, guid: 67a9e14d661eacd41a16bc88f621dd27,
+    type: 3}
+  hipsterAerial: {fileID: 1315612378375482336, guid: 70937e131f6cf774caffef0f78de1a8b,
+    type: 3}
+  hipsterGunner: {fileID: 4434745426396000983, guid: 1ff8b26f2158d094ba961b926b663eb2,
+    type: 3}
+  hipsterRanged: {fileID: 1254852491631605761, guid: c560a4b597dd880488ae991275bd4baf,
+    type: 3}
+  caniUnits: []
+  hipsterUnits: []
+--- !u!1 &2974959301782506494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2974959301782506495}
+  - component: {fileID: 2974959301782506488}
+  m_Layer: 0
+  m_Name: Data Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2974959301782506495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974959301782506494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2974959301525560560}
+  - {fileID: 2974959303535286199}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2974959301782506488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974959301782506494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29f0adf16b65c4499a9bc5e7c988ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caniMoney: 0
+  hipsterMoney: 0
+  turnLimit: 0
+  currentTurn: 0
+  caniPlayer: 0
+  hipsterPlayer: 0
+  baseCaptured:
+    m_PersistentCalls:
+      m_Calls: []
+  playerCaniPosition: {x: 0, y: 0, z: 0}
+  playerHipsterPosition: {x: 0, y: 0, z: 0}
+--- !u!1 &2974959303535286197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2974959303535286199}
+  - component: {fileID: 2974959303535286198}
+  m_Layer: 0
+  m_Name: Buildings Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2974959303535286199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974959303535286197}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2974959301782506495}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2974959303535286198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974959303535286197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08968204b266ee74db0c0c5e3e7e8063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neutralBuildings: []
+  caniBuildings: []
+  hipsterBuildings: []
+  caniBase: {fileID: 0}
+  hipsterBase: {fileID: 0}

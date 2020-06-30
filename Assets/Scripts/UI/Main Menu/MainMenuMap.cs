@@ -212,6 +212,9 @@ public class MainMenuMap : MonoBehaviour
                 break;
         }
 
+        List<UnitType> allowedUnits = new List<UnitType>();
+        FindObjectOfType<DataTransferer>().TransferAllowedUnits(allowedUnits);
+
         FindObjectOfType<SoundController>().StopTitle();
         FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(SwitchToNextScene);
         Loader.Load(Loader.Scene.game);

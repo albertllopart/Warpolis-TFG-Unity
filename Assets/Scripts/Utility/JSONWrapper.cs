@@ -8,6 +8,7 @@ public class JSONWrapper
 {
     public UnitDataCollection unitDataCollection;
     public UITextCollection UITextCollection;
+    public DialoguesCollection dialoguesCollection;
 }
 
 //això és simplement per incloure el nom de la classe creada al json

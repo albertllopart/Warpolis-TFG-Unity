@@ -50,6 +50,8 @@ public class BuildingsController : MonoBehaviour
         neutralBuildings = new List<GameObject>();
         caniBuildings = new List<GameObject>();
         hipsterBuildings = new List<GameObject>();
+
+        Debug.Log("BuildingsController::ResetLists");
     }
 
     public List<GameObject> GetUnitsOnBuildings(UnitArmy army)

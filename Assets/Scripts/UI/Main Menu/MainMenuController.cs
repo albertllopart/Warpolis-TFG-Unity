@@ -40,6 +40,7 @@ public class MainMenuController : MonoBehaviour
 
         map.GetComponent<MainMenuMap>().AfterStart(MainMenuMap.MapMode.VERSUS);
         battle.GetComponent<MainMenuMap>().AfterStart(MainMenuMap.MapMode.BATTLE);
+        tutorial.GetComponent<MainMenuTutorial>().AfterStart();
     }
 
     // Update is called once per frame
@@ -64,6 +65,10 @@ public class MainMenuController : MonoBehaviour
             case MainMenuState.BATTLE:
                 battle.GetComponent<MainMenuMap>().TransitionToNextScene();
                 break;
+
+            case MainMenuState.TUTORIAL:
+                tutorial.GetComponent<MainMenuTutorial>().TransitionToNextScene();
+                break;
         }
     }
 
@@ -81,6 +86,10 @@ public class MainMenuController : MonoBehaviour
 
             case MainMenuState.BATTLE:
                 battle.GetComponent<MainMenuMap>().TransitionToMode();
+                break;
+
+            case MainMenuState.TUTORIAL:
+                tutorial.GetComponent<MainMenuTutorial>().TransitionToMode();
                 break;
         }
     }
@@ -164,6 +173,21 @@ public class MainMenuController : MonoBehaviour
         FindObjectOfType<FadeTo>().FadeFromSetup();
     }
 
+    void TransitionToTutorial()
+    {
+        UnsubscribeFromEvents();
+        FindObjectOfType<FadeTo>().FadeToSetup();
+        FindObjectOfType<FadeTo>().finishedIncreasing.AddListener(SwitchToTutorial);
+    }
+
+    void SwitchToTutorial()
+    {
+        FindObjectOfType<FadeTo>().finishedIncreasing.RemoveListener(SwitchToTutorial);
+        DisableMode();
+        EnableTutorial();
+        FindObjectOfType<FadeTo>().FadeFromSetup();
+    }
+
     void TransitionToQuit()
     {
         UnsubscribeFromEvents();
@@ -223,6 +247,7 @@ public class MainMenuController : MonoBehaviour
     {
         tutorial.SetActive(true);
         state = MainMenuState.TUTORIAL;
+        tutorial.GetComponent<MainMenuTutorial>().MyOnEnable();
     }
 
     void DisableTutorial()
@@ -245,6 +270,7 @@ public class MainMenuController : MonoBehaviour
         mode.GetComponent<MainMenuMode>().versusPressed.AddListener(TransitionToMap);
         mode.GetComponent<MainMenuMode>().battlePressed.AddListener(TransitionToBattle);
         mode.GetComponent<MainMenuMode>().quitPressed.AddListener(TransitionToQuit);
+        mode.GetComponent<MainMenuMode>().tutorialPressed.AddListener(TransitionToTutorial);
 
         Debug.Log("MainMenuController::SubscribeToEvents - Subscribed to Events");
     }
@@ -264,6 +290,7 @@ public class MainMenuController : MonoBehaviour
         mode.GetComponent<MainMenuMode>().versusPressed.RemoveListener(TransitionToMap);
         mode.GetComponent<MainMenuMode>().battlePressed.RemoveListener(TransitionToBattle);
         mode.GetComponent<MainMenuMode>().quitPressed.RemoveListener(TransitionToQuit);
+        mode.GetComponent<MainMenuMode>().tutorialPressed.RemoveListener(TransitionToTutorial);
 
         Debug.Log("MainMenuController::UnsubscribeFromEvents - Unsubscribed from Events");
     }

@@ -33,6 +33,7 @@ public class MainMenuMode : MonoBehaviour
     public UnityEvent versusPressed;
     public UnityEvent quitPressed;
     public UnityEvent battlePressed;
+    public UnityEvent tutorialPressed;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,6 +41,7 @@ public class MainMenuMode : MonoBehaviour
         versusPressed = new UnityEvent();
         quitPressed = new UnityEvent();
         battlePressed = new UnityEvent();
+        tutorialPressed = new UnityEvent();
 
         mainButtons = new List<GameObject>();
         mainButtons.Add(versusButton);
@@ -200,11 +202,11 @@ public class MainMenuMode : MonoBehaviour
                 {
                     Vector2 direction = button.GetComponent<MainMenuButton>().goal - currentPosition;
 
-                    if (direction.magnitude <= 0.2f)
+                    if (direction.magnitude <= 0.4f)
                         button.transform.position = button.GetComponent<MainMenuButton>().goal;
                     else
                     {
-                        direction = direction.normalized * 0.15f;
+                        direction = direction.normalized * 0.3f;
                         button.transform.position += new Vector3(direction.x, direction.y, 0);
                     }
                 }
@@ -247,6 +249,10 @@ public class MainMenuMode : MonoBehaviour
 
             case "Battle":
                 battlePressed.Invoke();
+                break;
+
+            case "Tutorial":
+                tutorialPressed.Invoke();
                 break;
 
             case "Quit":

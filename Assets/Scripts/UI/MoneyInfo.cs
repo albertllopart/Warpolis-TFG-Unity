@@ -103,6 +103,8 @@ public class MoneyInfo : MonoBehaviour
 
             UpdateLogo(false);
         }
+
+        Debug.Log("MoneyInfo::UpdatePosition");
     }
 
     void UpdateLogoPosition()

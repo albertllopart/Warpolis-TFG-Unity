@@ -79,7 +79,7 @@ public class ResultsController : MonoBehaviour
                 popList.transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().sprite = null;
                 winnerColor = drawColor;
                 GameObject auxiliarText = Instantiate(myText);
-                auxiliarText.transform.Find("Text").GetComponent<MyText>().text = "DRAW";
+                auxiliarText.transform.Find("Text").GetComponent<MyText>().text = FindObjectOfType<JSONHandler>().RetrieveText("#JSONResource.UIText.draw");
                 auxiliarText.transform.Find("Text").GetComponent<MyText>().color = winnerColor;
                 auxiliarText.transform.Find("Text").GetComponent<MyText>().anchor = MyText.Anchor.CENTERED;
                 auxiliarText.transform.Find("Text").GetComponent<MyText>().layer = 12;

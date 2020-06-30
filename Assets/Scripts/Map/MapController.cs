@@ -9,7 +9,8 @@ public class MapController : MonoBehaviour
     public enum TilesetCode
     {
         RED, BLUE, YELLOW, BASE_CANI, BASE_HIPSTER, FACTORY_CANI, FACTORY_HIPSTER, FACTORY_NEUTRAL, BUILDING_CANI, BUILDING_HIPSTER, BUILDING_NEUTRAL,
-        NEUTRAL, ROAD, CROSSWALK1, CROSSWALK2, CONTAINER, LAMP, PLANTPOT, SEA, CONE1, CONE2, CONE3, CONE4, CONE5, CONE6, CONE7, CONE8
+        NEUTRAL, ROAD, CROSSWALK1, CROSSWALK2, CONTAINER, LAMP, PLANTPOT, SEA, CONE1, CONE2, CONE3, CONE4, CONE5, CONE6, CONE7, CONE8, 
+        INFANTRY_CANI, INFANTRY_HIPSTER, TRANSPORT_CANI, TRANSPORT_HIPSTER, TANK_CANI, TANK_HIPSTER, AERIAL_CANI, AERIAL_HIPSTER, GUNNER_CANI, GUNNER_HIPSTER, RANGED_CANI, RANGED_HIPSTER
     };
 
     public enum Pathfinder
@@ -22,6 +23,8 @@ public class MapController : MonoBehaviour
     [Header("Tilemaps")]
     public Tilemap tilemapBase;
     public Tilemap tilemapBuildings;
+    public Tilemap tilemapUnits;
+    public Tilemap tilemapGoals;
     public Tilemap tilemapHazards;
     public Tilemap tilemapWalkability;
     public Tilemap tilemapPathfinding;
@@ -91,7 +94,7 @@ public class MapController : MonoBehaviour
 
         HelloWorld();
         BuildDictionary();
-        SpawnBuildings();
+        //SpawnBuildings();
         InitializePathfinding();
         SubscribeToEvents();
     }
@@ -140,6 +143,20 @@ public class MapController : MonoBehaviour
         tilesetDictionary.Add((int)TilesetCode.RED, "tileset_14");
         tilesetDictionary.Add((int)TilesetCode.BLUE, "tileset_15");
         tilesetDictionary.Add((int)TilesetCode.YELLOW, "tileset_19");
+
+        //units
+        tilesetDictionary.Add((int)TilesetCode.INFANTRY_CANI, "tileset_46");
+        tilesetDictionary.Add((int)TilesetCode.TRANSPORT_CANI, "tileset_47");
+        tilesetDictionary.Add((int)TilesetCode.TANK_CANI, "tileset_48");
+        tilesetDictionary.Add((int)TilesetCode.AERIAL_CANI, "tileset_49");
+        tilesetDictionary.Add((int)TilesetCode.GUNNER_CANI, "tileset_50");
+        tilesetDictionary.Add((int)TilesetCode.RANGED_CANI, "tileset_51");
+        tilesetDictionary.Add((int)TilesetCode.INFANTRY_HIPSTER, "tileset_52");
+        tilesetDictionary.Add((int)TilesetCode.TRANSPORT_HIPSTER, "tileset_53");
+        tilesetDictionary.Add((int)TilesetCode.TANK_HIPSTER, "tileset_54");
+        tilesetDictionary.Add((int)TilesetCode.AERIAL_HIPSTER, "tileset_55");
+        tilesetDictionary.Add((int)TilesetCode.GUNNER_HIPSTER, "tileset_56");
+        tilesetDictionary.Add((int)TilesetCode.RANGED_HIPSTER, "tileset_57");
     }
 
     public uint GetWidth()
@@ -219,6 +236,17 @@ public class MapController : MonoBehaviour
             return;
         }
 
+        //nom del mapa en cas de necessitar-lo
+        if (toLoad.GetComponent<MapInfo>() != null)
+        {
+            newMap.GetComponent<MapInfo>().mapName = toLoad.name;
+
+            tilemapUnits = newMap.transform.Find("Tilemap_units").GetComponent<Tilemap>();
+            tilemapGoals = newMap.transform.Find("Tilemap_goals").GetComponent<Tilemap>();
+
+            SpawnUnits();
+        }
+
         HelloWorld();
         SpawnBuildings();
         InitializePathfinding();
@@ -234,6 +262,8 @@ public class MapController : MonoBehaviour
         {
             tilemapBase = null;
             tilemapBuildings = null;
+            tilemapUnits = null;
+            tilemapGoals = null;
             tilemapHazards = null;
             tilemapWalkability = null;
             tilemapPathfinding = null;
@@ -281,6 +311,27 @@ public class MapController : MonoBehaviour
         }
     }
 
+    void SpawnUnits()
+    {
+        // aquest mètode itera totes les caselles del tilemapUnits i spawneja un prefab de cada unitat allà on hi troba cert tipus de tile
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j > -height; j--)
+            {
+                TileBase tile = tilemapUnits.GetTile(WorldToTilemap(new Vector3(i, j, 0)));
+
+                if (tile != null)
+                {
+                    if (tile.name != tilesetDictionary[(int)TilesetCode.RED]) // descartem les caselles vermelles perquè marquen els límits del mapa en cada tilemap
+                    {
+                        SpawnUnitByTile(tile, new Vector3(i, j, 0));
+                    }
+                }
+            }
+        }
+    }
+
     void SpawnBuildingByTile(TileBase tile, Vector3 pos)
     {
         if (tile.name == tilesetDictionary[(int)TilesetCode.BASE_CANI])
@@ -306,6 +357,75 @@ public class MapController : MonoBehaviour
 
         else if (tile.name == tilesetDictionary[(int)TilesetCode.BUILDING_NEUTRAL])
             SpawnBuildingNeutral(pos);
+    }
+
+    void SpawnUnitByTile(TileBase tile, Vector3 pos)
+    {
+        UnitArmy army = UnitArmy.CANI;
+        UnitType type = UnitType.INFANTRY;
+
+        if (tile.name == tilesetDictionary[(int)TilesetCode.INFANTRY_CANI])
+        {
+            army = UnitArmy.CANI;
+            type = UnitType.INFANTRY;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.TRANSPORT_CANI])
+        {
+            army = UnitArmy.CANI;
+            type = UnitType.TRANSPORT;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.TANK_CANI])
+        {
+            army = UnitArmy.CANI;
+            type = UnitType.TANK;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.AERIAL_CANI])
+        {
+            army = UnitArmy.CANI;
+            type = UnitType.AERIAL;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.GUNNER_CANI])
+        {
+            army = UnitArmy.CANI;
+            type = UnitType.GUNNER;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.RANGED_CANI])
+        {
+            army = UnitArmy.CANI;
+            type = UnitType.RANGED;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.INFANTRY_HIPSTER])
+        {
+            army = UnitArmy.HIPSTER;
+            type = UnitType.INFANTRY;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.TRANSPORT_HIPSTER])
+        {
+            army = UnitArmy.HIPSTER;
+            type = UnitType.TRANSPORT;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.TANK_HIPSTER])
+        {
+            army = UnitArmy.HIPSTER;
+            type = UnitType.TANK;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.AERIAL_HIPSTER])
+        {
+            army = UnitArmy.HIPSTER;
+            type = UnitType.AERIAL;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.GUNNER_HIPSTER])
+        {
+            army = UnitArmy.HIPSTER;
+            type = UnitType.GUNNER;
+        }
+        else if (tile.name == tilesetDictionary[(int)TilesetCode.RANGED_HIPSTER])
+        {
+            army = UnitArmy.HIPSTER;
+            type = UnitType.RANGED;
+        }
+
+        FindObjectOfType<UnitsController>().InstantiateUnitWithNoValue(army, type, pos);
     }
 
     void SpawnBaseCani(Vector3 pos)
@@ -364,7 +484,9 @@ public class MapController : MonoBehaviour
 
     void DestroyBuildings()
     {
-        GameObject.Find("Data Controller").transform.Find("Buildings Controller").GetComponent<BuildingsController>().DestroyAllBuildings();
+        Debug.Log("MapController::DestroyBuildings");
+
+        FindObjectOfType<BuildingsController>().DestroyAllBuildings();
     }
 
     Vector3Int WorldToTilemap(Vector3 pos)

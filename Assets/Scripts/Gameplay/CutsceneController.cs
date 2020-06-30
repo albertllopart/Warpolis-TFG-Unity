@@ -84,8 +84,12 @@ public class CutsceneController : MonoBehaviour
         SubscribeToEvents();
         //NewTurnCani(); Això s'ha de cridar quan comenci la partida
 
-        //per últim cridem l'after start del Menu Controller que s'encarregarà de desactivar tots els gameobjects necessaris, cancel·lar subscripció a events, etc
-        GameObject.Find("Menu Controller").GetComponent<MenuController>().AfterStart();
+        //per últim cridem l'after start del Menu Controller o el Tutorial Controller que s'encarregarà de desactivar tots els gameobjects necessaris, cancel·lar subscripció a events, etc
+        if (FindObjectOfType<MenuController>() != null)
+            FindObjectOfType<MenuController>().AfterStart();
+
+        if (FindObjectOfType<TutorialController>() != null)
+            FindObjectOfType<TutorialController>().AfterStart();
 
         afterStart = false;
     }
@@ -114,6 +118,9 @@ public class CutsceneController : MonoBehaviour
 
     public void NewGameSetup()
     {
+        if (FindObjectOfType<TutorialController>() != null)
+            FindObjectOfType<DialogueController>().finishedFading.RemoveListener(NewGameSetup);
+
         currentTurn = GameplayController.Turn.CANI;
 
         AnnouncementSetupNewGame(Announcer.AnnouncementType.TURN_COUNT);
@@ -129,7 +136,7 @@ public class CutsceneController : MonoBehaviour
 
         cameraController.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         cameraController.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
-        FirstTurn((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
+        FirstTurn(DetermineMoney());
 
         finishedAddingMoney.AddListener(UnitHealSetup);
     }
@@ -157,7 +164,7 @@ public class CutsceneController : MonoBehaviour
     {
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().caniMoney);
-        MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000);
+        MoneySetup(DetermineMoney());
 
         finishedAddingMoney.AddListener(UnitHealSetup);
     }
@@ -175,7 +182,7 @@ public class CutsceneController : MonoBehaviour
     {
         Camera.main.transform.Find("UI Controller").GetComponent<UIController>().EnableMoneyInfo();
         Camera.main.transform.Find("UI Controller").transform.Find("Money_info").GetComponent<MoneyInfo>().UpdateMoney((uint)dataController.GetComponent<DataController>().hipsterMoney);
-        MoneySetup((uint)dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000);
+        MoneySetup(DetermineMoney());
 
         finishedAddingMoney.AddListener(UnitHealSetup);
     }
@@ -214,6 +221,36 @@ public class CutsceneController : MonoBehaviour
         moneyTimer = 0.0f;
 
         DisableGameplay();
+    }
+
+    uint DetermineMoney()
+    {
+        int ret = 0;
+        int caniMoney = FindObjectOfType<DataController>().caniMoney;
+        int hipsterMoney = FindObjectOfType<DataController>().hipsterMoney;
+
+        switch (currentTurn)
+        {
+            case GameplayController.Turn.CANI:
+                ret = dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().caniBuildings.Count * 1000;
+
+                if (ret + caniMoney > 99999)
+                {
+                    ret = 99999 - caniMoney;
+                }
+                break;
+
+            case GameplayController.Turn.HIPSTER:
+                ret = dataController.transform.Find("Buildings Controller").GetComponent<BuildingsController>().hipsterBuildings.Count * 1000;
+
+                if (ret + hipsterMoney > 99999)
+                {
+                    ret = 99999 - hipsterMoney;
+                }
+                break;
+        }
+
+        return (uint)ret;
     }
 
     void AddMoney()
@@ -793,12 +830,15 @@ public class CutsceneController : MonoBehaviour
 
     void JudgeCommander()
     {
-        if (FindObjectOfType<AIController>().JudgeCommander())
+        bool set = FindObjectOfType<AIController>().JudgeCommander();
+
+        if (set)
         {
             EnableGameplay();
         }
         else
         {
+            FindObjectOfType<AIController>().SetInControl(set);
             EnableCPU();
         }
     }

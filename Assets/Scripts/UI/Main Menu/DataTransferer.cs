@@ -29,6 +29,8 @@ public class DataTransferer : MonoBehaviour
     public ResultsInfo resultsInfo;
     public DataController.PlayerCommander caniPlayer;
     public DataController.PlayerCommander hipsterPlayer;
+    public List<UnitType> allowedUnits;
+    public bool isTutorial;
 
     void Awake()
     {
@@ -48,6 +50,11 @@ public class DataTransferer : MonoBehaviour
         minimap.SetActive(false);
     }
 
+    public void TransferMap(GameObject map)
+    {
+        this.map = map;
+    }
+
     public void TransferResults(DataController.Winner winner, DataController.WinCondition winCondition, int turns)
     {
         resultsInfo = new ResultsInfo(winner, winCondition, turns);
@@ -62,5 +69,25 @@ public class DataTransferer : MonoBehaviour
     public void TransferLanguage(Language language)
     {
         this.language = language;
+    }
+
+    public void TransferAllowedUnits(List<UnitType> allowedUnits)
+    {
+        this.allowedUnits = allowedUnits;
+
+        if (allowedUnits.Count == 0)
+        {
+            allowedUnits.Add(UnitType.INFANTRY);
+            allowedUnits.Add(UnitType.TRANSPORT);
+            allowedUnits.Add(UnitType.TANK);
+            allowedUnits.Add(UnitType.AERIAL);
+            allowedUnits.Add(UnitType.GUNNER);
+            allowedUnits.Add(UnitType.RANGED);
+        }
+    }
+
+    public void TransferIsTutorial(bool isTutorial)
+    {
+        this.isTutorial = isTutorial;
     }
 }

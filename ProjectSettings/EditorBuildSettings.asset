@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/game.unity
     guid: 29b8ed0e676a3624facca4766fa3eaa8
   - enabled: 1
+    path: Assets/tutorial.unity
+    guid: 5d8d10a546a3a38418064c03306853da
+  - enabled: 1
     path: Assets/gym.unity
     guid: 51dc22471879edb46b2d01cf1b093d0d
   - enabled: 1

@@ -71,8 +71,8 @@ public class TitleScreen : MonoBehaviour
 
     void SetVersion()
     {
-        unit.GetComponent<Number>().CreateNumber(0);
-        decimal1.GetComponent<Number>().CreateNumber(8);
+        unit.GetComponent<Number>().CreateNumber(1);
+        decimal1.GetComponent<Number>().CreateNumber(0);
     }
 
     void Spawn()

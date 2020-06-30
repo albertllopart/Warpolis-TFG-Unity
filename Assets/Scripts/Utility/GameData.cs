@@ -16,6 +16,12 @@ public class UITextCollection
 }
 
 [Serializable]
+public class DialoguesCollection
+{
+    public List<Dialogues> dialoguesList = new List<Dialogues>();
+}
+
+[Serializable]
 public class UnitData
 {
     public string name;
@@ -125,5 +131,51 @@ public class UIText
     public string draw;
     public string turns;
     public string map;
+
+    //tutorial
+    public string tutorialSelector;
+    public string tutorialMap1;
+    public string tutorialMap1Description;
+    public string tutorialMap2;
+    public string tutorialMap2Description;
+    public string tutorialMap3;
+    public string tutorialMap3Description;
+    public string tutorialMap4;
+    public string tutorialMap4Description;
+    public string tutorialMap5;
+    public string tutorialMap5Description;
+    public string tutorialMap6;
+    public string tutorialMap6Description;
+    public string tutorialMap7;
+    public string tutorialMap7Description;
+    public string tutorialMap8;
+    public string tutorialMap8Description;
+}
+
+[Serializable]
+public class Dialogues
+{
+    //map
+    public string mapName;
+
+    //start
+    public string startDialogue1;
+    public string startDialogue2;
+    public string startDialogue3;
+    public string startDialogue4;
+    public string startDialogue5;
+    public string startDialogue6;
+    public string startDialogue7;
+    public string startDialogue8;
+
+    //end
+    public string endDialogue1;
+    public string endDialogue2;
+    public string endDialogue3;
+    public string endDialogue4;
+    public string endDialogue5;
+    public string endDialogue6;
+    public string endDialogue7;
+    public string endDialogue8;
 }
 

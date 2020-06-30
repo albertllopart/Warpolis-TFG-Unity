@@ -149,7 +149,10 @@ public class Announcer : MonoBehaviour
 
     void SubscribeToEvents()
     {
-        FindObjectOfType<Controls>().keyboard_o_down.AddListener(FadeSetup);
+        if (FindObjectOfType<AIController>().JudgeCommander())
+            FindObjectOfType<Controls>().keyboard_o_down.AddListener(FadeSetup);
+        else
+            FadeSetup();
     }
 
     void UnsubscribeFromEvents()

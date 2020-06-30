@@ -145,6 +145,9 @@ public class DataController : MonoBehaviour
 
     public bool CheckWinConOnUnitDied(UnitArmy attackingUnitArmy)
     {
+        if (FindObjectOfType<TutorialController>() != null) //durant el tutorial no es pot complic aquesta condició de victòria
+            return false;
+
         switch (attackingUnitArmy)
         {
             case UnitArmy.CANI:
@@ -267,7 +270,11 @@ public class DataController : MonoBehaviour
         baseCaptured.AddListener(CheckWinConOnBaseCaptured);
 
         //foranis
-        GameObject.Find("Menu Controller").GetComponent<MenuController>().newGame.AddListener(ResetData);
+        if (FindObjectOfType<MenuController>() != null)
+            FindObjectOfType<MenuController>().newGame.AddListener(ResetData);
+        if (FindObjectOfType<TutorialController>() != null)
+            FindObjectOfType<TutorialController>().newGame.AddListener(ResetData);
+
         GameObject.Find("Gameplay Controller").transform.Find("Player").GetComponent<PlayerController>().playerMoved.AddListener(StorePlayerPosition);
         GameObject.Find("Map Controller").GetComponent<MapController>().mapLoaded.AddListener(StoreInitialPosition);
     }

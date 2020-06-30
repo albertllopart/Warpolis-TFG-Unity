@@ -13,7 +13,7 @@ public static class Loader
 
     public enum Scene
     {
-        intro, loading, title, main_menu, game, gym, quit, results
+        intro, loading, title, main_menu, game, tutorial, gym, quit, results
     };
 
     private static Action onLoaderCallback;
