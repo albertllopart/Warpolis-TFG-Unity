@@ -1,4 +1,4 @@
-# Warpolis Alpha
+# Warpolis
 
 # Català
 
@@ -12,24 +12,12 @@ seus recursos i seguir una estratègia per tal de complir la condició de victò
 tenir més control que l’enemic sobre el mapa en haver esgotat el nombre de torns
 màxim de la partida.
 Warpolis ha estat desenvolupat amb Unity, és d’estètica pixel art i tot el què
-conté és feina original meva, excepte la banda sonora que a dia d'avui 20/04/2020 és un "placeholder".
-
-Music themes by Esteban Mendez (https://www.youtube.com/channel/UCatlMoEqORDf-uTSoMvWmew/feed)
+conté és feina original meva, exceptuant-ne la música i el disseny d'alguns mapes tribut..
 
 - Repository del projecte (https://github.com/albertllopart/Warpolis-TFG-Unity)
 - Github del creador, Albert Llopart Navarra (https://github.com/albertllopart)
 
 L'scripting del projecte està fet íntegrament amb C#.
-
-## Informació Important
-
-- Actualment el menú principal del joc és una imatge estàtica sense funcionalitat. Prement el botó 'O' del teclat o 'X' del comandament iniciarà una nova partida.
-
-- L'únic mode de joc que hi ha disponible a dia d'avui 20/04/2020 és multijugador local u contra u.
-
-- Qualsevol dubte sentiu-vos lliures de contactar amb mi per twitter @pocafeiner, o per qualsevol altre mitjà que estigui al vostre abast en cas de relació més propera.
-
-- Sou benvinguts de contribuir al projecte dissenyant mapes si ho voleu. Podreu triar el nom del mapa que creeu i apareixereu als crèdits.
 
 ## Controls
 
@@ -38,12 +26,16 @@ L'scripting del projecte està fet íntegrament amb C#.
 - WASD: moure el cursor pel mapa
 - O: confirmar acció / interactuar amb la casella actual
 - K: cancel·lar acció / comprovar rang d'atac de la unitat
+- Q: moure el cursor damunt d'una unitat disponible
+- E: veure informació d'unitat
 
 ### Comandament
 
 - Pad direccional: moure el cursor pel mapa
 - Botó Sud (X): confirmar acció / interactuar amb la casella actual
 - Botó Oest ([]): cancel·lar acció / comprovar rang d'atac de la unitat
+- Botó superior esquerra: moure el cursor damunt d'una initat disponible
+- Botó superior dret: veure informació d'unitat
 
 ## Gameplay
 
@@ -165,24 +157,12 @@ es o bien destruir por completo el ejército enemigo, conquistar la base central
 tener más control que el enemigo sobre el mapa al haber agotado el número de turnos
 máximo de la partida.
 Warpolis ha sido desarrollado con Unity, es de estética píxel arte y todo lo qué
-contiene es trabajo original mío, excepto la banda sonora que a día de hoy 20/04/2020 es un "placeholder".
-
-Music themes by Esteban Mendez (https://www.youtube.com/channel/UCatlMoEqORDf-uTSoMvWmew/feed)
+contiene es trabajo original mío, exceptuando la música y el diseño de algunos mapas tributo.
 
 - Repository del proyecto (https://github.com/albertllopart/warpolis-tfg-unity)
 - Github del creador, Albert Llopart Navarra (https://github.com/albertllopart)
 
 El scripting del proyecto está hecho íntegramente con C#.
-
-## Información Importante
-
-- Actualmente el menú principal del juego es una imagen estática sin funcionalidad. Pulsando el botón 'O' del teclado o 'X' del mando iniciará una nueva partida.
-
-- El único modo de juego que hay disponible a día de hoy 20/04/2020 es multijugador local uno contra uno.
-
-- Cualquier duda sentíos libras de contactar conmigo por twitter @pocafeiner, o por cualquier otro medio que esté a vuestro alcance en caso de relación más próxima.
-
-- Sou bienvenidos de contribuir al proyecto dissenyando mapas si lo deseais. Podreis escoger el nombre del mapa que creéis y apereceréis en los créditos.Podreu triar el nom del mapa que creeu i apareixereu als crèdits.
 
 ## Controles
 
@@ -191,12 +171,16 @@ El scripting del proyecto está hecho íntegramente con C#.
 - WASD: mover el cursor por el mapa
 - O: confirmar acción / interactuar con la casilla actual
 - K: cancelar acción / comprobar rango de ataque de la unidad
+- Q: mover el cursor a la posición de una unidad disponible
+- E: ver información de unidad
 
 ### Mando
 
 - Pad direccional: mover el cursor por el mapa
 - Botón Sur (X): confirmar acción / interactuar con la casilla actual
 - Botón Oeste ([]): cancelar acción / comprobar rango de ataque de la unidad
+- Botón superior izquierda: mover el cursor a la posición de una unidad disponible
+- Botón superior derecha: ver información de unidad
 
 ## Gameplay
 
@@ -318,22 +302,12 @@ is either destroy all enemies, conquer their base or
 have more control that the enemy over the map when having exhausted the number of maximum
 turns of the game.
 Warpolis has been developed with Unity, is made of pixel art and all of what
-contains is my original work, except for the soundtrack that as of today 20/04/2020 is a "placeholder".
-
-Music themes by Esteban Mendez (https://www.youtube.com/channel/UCatlMoEqORDf-uTSoMvWmew/feed)
+contains is my original work, except for the music and the design of some tribute maps.
 
 - Repository of the project (https://github.com/albertllopart/*Warpolis-*TFG-*Unity)
 - Github of the creator, Albert Llopart Navarra (https://github.com/albertllopart)
 
 The scripting of the project is made entirely with C#.
-
-## Important information
-
-- Currently the main menu of the game is a static image without functionality. Pressing the 'O' button on the keyboard or 'X' on the remote will start a new game.
-
-- The only game mode available today 04/20/2020 is local multiplayer one on one.
-
-- Any questions feel free to contact me on twitter @pocafeiner, or by any other means within your reach in case of a closer relationship.
 
 ## Controls
 
@@ -342,12 +316,16 @@ The scripting of the project is made entirely with C#.
 - WASD: move the cursor on the map
 - Or: confirm action / interact with current box
 - K: cancel action / check unit attack range
+- Q: move the cursor over an available unit
+- E: check unit info
 
 ### Gamepad
 
 - Directional pad: move the cursor on the map
 - South button (X): confirm action / interact with the current box
 - West Button ([]): cancel action / check unit attack range
+- Left shoulder button: move the cursor over an available unit
+- Right shoulder button: check unit info
 
 ## Gameplay
 
